@@ -16,4 +16,5 @@ Node.js + React front-end for handling the Broce Mfg. parts ordering system.
   COOKIE_SECRET=1j5F&OJGL7!s  
   ```  
   
-- Run `npm start` to start the dev server at [http://localhost:3000](localhost:3000)
+- Run `npm start` to start the dev server at [localhost:3000]
+(http://localhost:3000)
