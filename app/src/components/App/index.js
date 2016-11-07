@@ -4,7 +4,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <span>hello world</span>
+        <span>App</span>
       </div>
     );
   }
