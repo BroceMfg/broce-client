@@ -4,6 +4,7 @@ import { BrowserRouter, Match, Miss } from 'react-router';
 import App from './components/App';
 import AdminApp from './components/AdminApp';
 import NotFound from './components/NotFound';
+import './index.css';
 
 const Root = () => {
   return (
