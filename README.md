@@ -11,7 +11,7 @@ Node.js + React front-end for handling the Broce Mfg. parts ordering system.
 
   - This file should look like this:  
   ```  
-  BROCE_API_URL=http://localhost:8080
+  BROCE_API_URL=http://localhost:3001
   SESSION_SECRET=%K1TMpLqIymi
   COOKIE_SECRET=1j5F&OJGL7!s  
   ```  
