@@ -4,28 +4,47 @@ import { BrowserRouter, Match, Miss } from 'react-router';
 import Protected from './components/Protected';
 import App from './components/App';
 import AdminApp from './components/AdminApp';
-import NotFound from './components/NotFound';
 import './index.css';
 
-const ProtectedContainer = (props) => (
-  <Protected admin={props.admin}>
-    <AdminApp />
-    <App />
-  </Protected>
-)
+// // --- PRODUCTION --- //
+// // admin prop will be set on the server prior to render
+// const Root = (props) => {
+//   const admin = props.admin;
+//   return Protected({ admin, AdminApp, App })
+// }
 
+// render(
+//   <Root admin={valueFromServer}/>,
+//   document.getElementById('root')
+// );
+// // --- END OF PROD --- //
+
+// --- DEVELOPMENT --- //
 const Root = () => {
+  const NotFound = () => (
+    <div className="NotFound">
+      <span>Error 404: Page Not Found</span>
+    </div>
+  )
   return (
     <BrowserRouter>
       <div>
         <Match
           exactly
           pattern="/"
-          component={ProtectedContainer} />
+          component={() => Protected({
+            admin: false,
+            AdminApp,
+            App
+          })} />
         <Match
           exactly
           pattern="/admin"
-          component={() => ProtectedContainer({ admin: true })} />
+          component={() => Protected({
+            admin: true,
+            AdminApp,
+            App
+          })} />
         <Miss component={NotFound} />
       </div>
     </BrowserRouter>
@@ -36,3 +55,4 @@ render(
   <Root />,
   document.getElementById('root')
 );
+// --- END OF DEV --- //
