@@ -1,5 +1,6 @@
 import React from 'react';
 import Dashboard from '../Dashboard';
+import Landing from '../Landing';
 
 class App extends React.Component {
   render() {
@@ -10,6 +11,11 @@ class App extends React.Component {
           buttonTitle="Settings"
           redirect="#"
         />
+        <Landing>
+          <span>
+            HEY
+          </span>
+        </Landing>
       </div>
     );
   }
