@@ -1,5 +1,19 @@
 body {
-  background-color: #002B36;
-  color: #F0F0F0; }
+  background-color: #F0F0F0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%; }
+
+.Dashboard {
+  outline: solid 1px blue; }
+
+.Dashboard-header {
+  display: inline-block;
+  margin: 0;
+  padding: 0; }
+
+.Dashboard-anchor {
+  display: inline-block; }
 
 /*# sourceMappingURL=index.css.map */
