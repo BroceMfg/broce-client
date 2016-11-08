@@ -1,10 +1,15 @@
 import React from 'react';
+import Dashboard from '../Dashboard';
 
 class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <span>App</span>
+        <Dashboard
+          title="Broce Parts"
+          buttonTitle="Settings"
+          redirect="#"
+        />
       </div>
     );
   }
