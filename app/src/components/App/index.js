@@ -3,6 +3,7 @@ import { BrowserRouter, Match, Miss } from 'react-router';
 import Dashboard from '../Dashboard';
 import Landing from '../Landing';
 import OrderList from '../OrderList';
+import OrderDetail from '../OrderDetail';
 import Settings from '../Settings';
 import NotFound from '../NotFound';
 
@@ -10,9 +11,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.orderOnClickHandler = this.orderOnClickHandler.bind(this);
+    this.orderDetailAction = this.orderDetailAction.bind(this);
+
     this.state = {
-      orders: [
-        {
+      orders: {
+        1: {
           "id": 1,
           "shipping_address": "test address",
           "shipping_city": "test city",
@@ -48,7 +52,7 @@ class App extends React.Component {
             }
           ]
         },
-        {
+        36: {
           "id": 36,
           "shipping_address": "test_address",
           "shipping_city": "test_city",
@@ -61,8 +65,17 @@ class App extends React.Component {
           "Order_Details": [],
           "Order_Statuses": []
         }
-      ]
+      }
     }
+  }
+
+  orderOnClickHandler(orderId) {
+    console.log('App orderOnClickHandler called');
+    this.context.router.transitionTo(`/b/orders/${orderId}`);
+  }
+
+  orderDetailAction(currentStatusTypeId) {
+    console.log('App orderDetailAction called');
   }
 
   render() {
@@ -76,10 +89,15 @@ class App extends React.Component {
           redirect="/b/settings"
         />
         <Landing>
-          <OrderList orders={props.orders}/>
+          <OrderList
+            orders={props.orders}
+            orderOnClickHandler={this.orderOnClickHandler} />
         </Landing>
       </div>
     )
+
+    const order = this.state.orders[this.state.currentOrderId || 1];
+    console.log(order);
 
     return (
       <div className="App">
@@ -93,12 +111,38 @@ class App extends React.Component {
               exactly
               pattern="/b/settings"
               render={() => <Settings return="/b" />} />
+            <Match
+              exactly
+              pattern="/b/orders/:id"
+              render={
+                (matchProps) => {
+                  const order = orders[matchProps.params.id];
+                  if (order) {
+                    return (
+                      <OrderDetail
+                        order={order}
+                        actionTitle={'FOOBAR'}
+                        actionHandler={
+                          () => this.orderDetailAction()
+                        } />
+                    )
+                  } else {
+                    return (
+                      <NotFound />
+                    )
+                  }
+                }
+              } />
             <Miss component={NotFound} />
           </div>
         </BrowserRouter>
       </div>
     );
   }
+}
+
+App.contextTypes = {
+  router: React.PropTypes.object
 }
 
 export default App;
