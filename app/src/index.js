@@ -31,17 +31,17 @@ const Root = () => {
       <div>
         <Match
           exactly
-          pattern="/"
+          pattern="/a*"
           component={() => Protected({
-            admin: false,
+            admin: true,
             AdminApp,
             App
           })} />
         <Match
           exactly
-          pattern="/admin"
+          pattern="/b*"
           component={() => Protected({
-            admin: true,
+            admin: false,
             AdminApp,
             App
           })} />
