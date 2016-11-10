@@ -1,11 +1,15 @@
 import React from 'react';
+import { BrowserRouter, Match, Miss } from 'react-router';
 import Dashboard from '../Dashboard';
 import Landing from '../Landing';
 import OrderList from '../OrderList';
+import Settings from '../Settings';
+import NotFound from '../NotFound';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       orders: [
         {
@@ -60,17 +64,38 @@ class App extends React.Component {
       ]
     }
   }
+
   render() {
-    return (
-      <div className="App">
+    const orders = this.state.orders;
+
+    const Main = (props) => (
+      <div className="main-wrapper">
         <Dashboard
           title="Broce Parts"
           buttonTitle="Settings"
-          redirect="#"
+          redirect="/b/settings"
         />
         <Landing>
-          <OrderList orders={this.state.orders}/>
+          <OrderList orders={props.orders}/>
         </Landing>
+      </div>
+    )
+
+    return (
+      <div className="App">
+        <BrowserRouter>
+          <div>
+            <Match
+              exactly
+              pattern="/b"
+              render={() => Main({ orders })} />
+            <Match
+              exactly
+              pattern="/b/settings"
+              render={() => <Settings return="/b" />} />
+            <Miss component={NotFound} />
+          </div>
+        </BrowserRouter>
       </div>
     );
   }
