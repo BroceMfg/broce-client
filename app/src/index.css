@@ -19,4 +19,7 @@ body {
 .Order {
   outline: solid 1px red; }
 
+.OrderList-Order-wrapper-anchor {
+  cursor: pointer; }
+
 /*# sourceMappingURL=index.css.map */
