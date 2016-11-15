@@ -96,9 +96,6 @@ class App extends React.Component {
       </div>
     )
 
-    const order = this.state.orders[this.state.currentOrderId || 1];
-    console.log(order);
-
     return (
       <div className="App">
         <BrowserRouter>
