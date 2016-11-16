@@ -7,7 +7,7 @@ class Landing extends React.Component {
     this.newOrderClick = this.newOrderClick.bind(this);
   }
   newOrderClick() {
-    console.log("new order clicked");
+    this.context.router.transitionTo('/b/create_order');
   }
   render() {
     return (
@@ -20,6 +20,10 @@ class Landing extends React.Component {
       </div>
     )
   }
+}
+
+Landing.contextTypes = {
+  router: React.PropTypes.object
 }
 
 export default Landing;
