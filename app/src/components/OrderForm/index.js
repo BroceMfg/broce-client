@@ -8,6 +8,7 @@ class OrderForm extends React.Component {
   constructor(props) {
     super(props);
 
+    this.updateForm = this.updateForm.bind(this);
     this.addMachineNum = this.addMachineNum.bind(this);
     // this.updateItem = this.updateItem.bind(this);
     this.clear = this.clear.bind(this);
@@ -16,28 +17,29 @@ class OrderForm extends React.Component {
     // we can force re-render the component simply by updating the key
     this.state = {
       machineNumbers: {
-        'KF-453': {
-          'K12334': 0,
-          'L7723': 0,
-          'W2212': 0
-        },
-        'FR-332': {
-          'S2112': 0,
-          'F4432': 0,
-          'P9934': 0
-        },
-        'LM-499': {
-          'K3312': 0,
-          'T5541': 0,
-          'E3321': 0
-        },
-        'MJ-120': {
-          'D4098': 0,
-          'S8871': 0,
-          'N4409': 0
-        }
+        'KF-453': [
+          'K12334',
+          'L7723',
+          'W2212'
+        ],
+        'FR-332': [
+          'S2112',
+          'F4432',
+          'P9934'
+        ],
+        'LM-499': [
+          'K3312',
+          'T5541',
+          'E3321'
+        ],
+        'MJ-120': [
+          'D4098',
+          'S8871',
+          'N4409'
+        ]
       },
       machineNumberBlocks: _.clone(gnum.MACH_NUM_BLOCKS_DEFAULT),
+      form: {},
       timestamp: Date.now()
     };
   }
@@ -55,6 +57,22 @@ class OrderForm extends React.Component {
       return true;
     }
     return false;
+  }
+
+  updateForm(newValue) {
+    console.log(`Order Form updateForm with newValue = ${JSON.stringify(newValue, null, 2)}`);
+    this.setState({
+      ...this.state,
+      form: Object.assign(
+        this.state.form,
+        {},
+        newValue
+      )
+    });
+
+    console.log('this.state.form');
+    console.log(this.state.form);
+
   }
 
   addMachineNum() {
@@ -87,12 +105,13 @@ class OrderForm extends React.Component {
           ref={(input) => this.orderForm = input} 
           onSubmit={this.submit}>
           {
-            machineNumberBlocks.map((machNum, i) => (
+            machineNumberBlocks.map((machNumBlock, i) => (
               <MachineNumber
-                key={machNum}
-                id={gnum.MACH_NUM_ID_PREFIX + (machineNumberBlocks.length-1)}
-                value={machineNumberBlocks[i].machNumChoice}
+                key={i}
+                id={gnum.MACH_NUM_ID_PREFIX + i}
+                value={machNumBlock.machNumChoice}
                 machineNumbers={machineNumbers}
+                updateForm={this.updateForm}
                 />
             ))
           }

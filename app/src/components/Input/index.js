@@ -19,7 +19,8 @@ class Input extends React.Component {
     return (
     <div className="Input">
       {this.props.required ?
-        <input 
+        <input
+          id={this.props.id}
           ref={this.props.refProp}
           type={this.props.type}
           name={this.props.name}
@@ -27,7 +28,8 @@ class Input extends React.Component {
           required
           value={this.state.value}
           onChange={this.handleChange} /> :
-        <input 
+        <input
+          id={this.props.id}
           ref={this.props.refProp}
           type={this.props.type}
           name={this.props.name}
