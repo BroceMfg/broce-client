@@ -9,44 +9,86 @@ class PartNumber extends React.Component {
 
     this.quantity = 0;
     this.handleChange = this.handleChange.bind(this);
-    this.state = {};
+    this.renderSelect = this.renderSelect.bind(this);
+    this.renderQuantity = this.renderQuantity.bind(this);
+    this.state = {
+      choiceValue: _.clone(this.props.value),
+      quantity: 1,
+      timestamp: Date.now()
+    };
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log('Part Number componentWillUpdate');
+    console.log(nextState.quantity);
+    console.log(nextState.choiceValue);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    // re-render the ItemForm component with new form data
+    // check if timestamp hasn't been updated in the past
+    // .01 seconds so that infinite loop doesn't occur
+    if (Date.now() - this.state.timestamp > 10) {
+      console.log('Part Number Component updating');
+      return true;
+    }
+    return false;
   }
 
   handleChange(e) {
     const partNumber = e.target.options[e.target.selectedIndex].value;
-    console.log(`handleChange function called with value: ${partNumber}`);
     if (partNumber !== 'default') {
-      console.log(`current quantity = ${this.props.partNumbers[partNumber]}`);
+      console.log('hello world!');
+      this.setState({
+        ...this.state,
+        choiceValue: partNumber,
+        quantity: 1,
+        timestamp: Date.now()
+      });
       const q = document.getElementById(`${this.props.id}-quantity`);
       const quantity = q.value;
-      console.log(quantity);
       this.props.updateForm({ partNumber, quantity })
     }
   }
 
-  render() {
+  renderSelect(props) {
     const partNumbers = this.props.partNumbers;
     return (
-      <div className="PartNumber" style={{border: 'solid 1px red'}}>
-        <select
-          id={this.props.id}
-          selected={this.props.value}
-          onChange={this.handleChange}>
-          <option value="default">--part number--</option>
-          {
-            partNumbers.map(partNum => (
-              <option key={partNum} value={partNum}>{partNum}</option>
-            ))
-          }
-        </select>
-        <Input
-          id={`${this.props.id}-quantity`}
-          refProp={(input) => { this.quantity = input }}
-          type="number"
-          name="quantity"
-          placeholder="Quantity"
-          required={true}
-          value={1} />
+      <select
+        id={this.props.id}
+        value={this.state.choiceValue}
+        onChange={this.handleChange}>
+        <option value="default">--part number--</option>
+        {
+          partNumbers.map(partNum => (
+            <option key={partNum} value={partNum}>{partNum}</option>
+          ))
+        }
+      </select>
+    )
+  }
+
+  renderQuantity() {
+    return (
+      <Input
+        id={`${this.props.id}-quantity`}
+        refProp={(input) => { this.quantity = input }}
+        type="number"
+        name="quantity"
+        placeholder="Quantity"
+        required={true}
+        value={this.state.quantity} 
+        min={1}/>
+    )
+  }
+
+  render() {
+    console.log('this.state.choiceValue');
+    console.log(this.state.choiceValue);
+    return (
+      <div key={this.state.timestamp} className="PartNumber" style={{border: 'solid 1px red'}}>
+        {this.renderSelect()}
+        {this.state.choiceValue === 'default' ? null : this.renderQuantity()}
       </div>
     )
   }
@@ -86,9 +128,7 @@ class MachineNumber extends React.Component {
 
   handleChange(e) {
     const choiceValue = e.target.options[e.target.selectedIndex].value;
-    console.log(`handleChange function called with value: ${choiceValue}`);
     if (choiceValue !== 'default') {
-      console.log(this.props.machineNumbers[choiceValue]);
       this.setState({
         ...this.state,
         choiceValue
@@ -127,8 +167,6 @@ class MachineNumber extends React.Component {
   render() {
     const machineNumbers = this.props.machineNumbers;
     const machNumKeys = Object.keys(machineNumbers);
-    console.log(`this.props.value = ${this.props.value}`);
-    console.log(this.props.machineNumbers);
     return (
       <div className="MachineNumber" style={{border: 'solid 1px blue'}}>
         <select

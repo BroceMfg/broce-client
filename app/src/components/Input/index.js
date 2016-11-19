@@ -27,6 +27,7 @@ class Input extends React.Component {
           placeholder={this.props.placeholder}
           required
           value={this.state.value}
+          min={this.props.min}
           onChange={this.handleChange} /> :
         <input
           id={this.props.id}
@@ -35,6 +36,7 @@ class Input extends React.Component {
           name={this.props.name}
           placeholder={this.props.placeholder}
           value={this.state.value}
+          min={this.props.min}
           onChange={this.handleChange} />
       }
     </div>

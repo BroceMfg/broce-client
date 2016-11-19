@@ -60,7 +60,6 @@ class OrderForm extends React.Component {
   }
 
   updateForm(newValue) {
-    console.log(`Order Form updateForm with newValue = ${JSON.stringify(newValue, null, 2)}`);
     this.setState({
       ...this.state,
       form: Object.assign(
