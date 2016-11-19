@@ -1,7 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
 import gnum from'../../helpers/global-enum';
-import Input from '../Input';
 
 class PartNumber extends React.Component {
   constructor(props) {
@@ -104,17 +103,6 @@ class PartNumber extends React.Component {
   }
 
   renderQuantity() {
-    {/*<Input
-        id={`${this.props.id}-quantity`}
-        refProp={(input) => { this.quantity = input }}
-        type="number"
-        name="quantity"
-        placeholder="Quantity"
-        required={true}
-        value={this.state.quantity} 
-        min={1}
-        parentHandleChange={this.handleInputChange}/>
-    (*/}
     return (
       <div className="quantity">
         <span>{this.state.quantity}</span>
@@ -146,7 +134,7 @@ class MachineNumber extends React.Component {
     this.renderPartNumbers = this.renderPartNumbers.bind(this);
     this.state = {
       partNumberBlocks: _.clone(gnum.PART_NUM_BLOCKS_DEFAULT),
-      form: {}
+      // form: {}
     };
   }
 
@@ -155,13 +143,21 @@ class MachineNumber extends React.Component {
   }
 
   updateForm(newValue) {
-    console.log('######');
-    console.log('updateForm called from Machine Number component');
-    console.log(`newValue = ${JSON.stringify(newValue,null,2)}`);
-    console.log('######');
-    let formObj = {};
-    formObj[this.state.choiceValue] = newValue;
-    this.props.updateForm(formObj);
+    // console.log('######');
+    // console.log('updateForm called from Machine Number component');
+    // console.log(`newValue = ${JSON.stringify(newValue,null,2)}`);
+    // console.log('######');
+    // console.log('@@@@@@@@@@@@');
+    // console.log(`formObj = ${JSON.stringify(formObj, null, 2)}`);
+    // console.log('@@@@@@@@@@@@');
+    // this.props.updateForm(formObj);
+    let form = {};
+    form[this.state.choiceValue] = newValue;
+    this.setState({
+      ...this.state,
+      form
+    });
+    this.props.updateForm(this.props.index, form);
   }
 
   addPartNum() {
@@ -169,19 +165,20 @@ class MachineNumber extends React.Component {
   }
 
   handleChange(e) {
+    this.updateForm(undefined);
     const choiceValue = e.target.options[e.target.selectedIndex].value;
     if (choiceValue !== 'default') {
+      // clear state form from before
       this.setState({
         ...this.state,
-        choiceValue
+        choiceValue,
+        form: undefined
       });
-      let newObj = {};
-      newObj[choiceValue] = this.state.form;
-      this.props.updateForm(newObj);
     } else {
       this.setState({
         ...this.state,
-        choiceValue: undefined
+        choiceValue: undefined,
+        form: undefined
       });
     }
   }

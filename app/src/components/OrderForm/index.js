@@ -59,15 +59,20 @@ class OrderForm extends React.Component {
     return false;
   }
 
-  updateForm(newValue) {
+  updateForm(index, newValue) {
+    console.log('orderForm update Form newValue');
+    console.log(newValue);
+    let newObj = {};
+    newObj[index] = newValue;
     this.setState({
       ...this.state,
       form: Object.assign(
         this.state.form,
         {},
-        newValue
+        newObj
       )
-    });
+    }, () => console.log(`OrderForm updateForm with new state.form = ${JSON.stringify(this.state.form,
+      null, 2)}`))
 
     console.log('this.state.form');
     console.log(this.state.form);
@@ -107,6 +112,7 @@ class OrderForm extends React.Component {
             machineNumberBlocks.map((machNumBlock, i) => (
               <MachineNumber
                 key={i}
+                index={i}
                 id={gnum.MACH_NUM_ID_PREFIX + i}
                 value={machNumBlock.machNumChoice}
                 machineNumbers={machineNumbers}
