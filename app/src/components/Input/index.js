@@ -13,6 +13,7 @@ class Input extends React.Component {
     this.setState({
       value: element.target.value
     });
+    this.props.parentHandleChange(element);
   }
 
   render() {

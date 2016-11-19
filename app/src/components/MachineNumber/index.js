@@ -8,10 +8,14 @@ class PartNumber extends React.Component {
     super(props);
 
     this.quantity = 0;
-    this.handleChange = this.handleChange.bind(this);
+    this.updateForm = this.updateForm.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
     this.renderSelect = this.renderSelect.bind(this);
+    this.subtractOne = this.subtractOne.bind(this);
+    this.addOne = this.addOne.bind(this);
     this.renderQuantity = this.renderQuantity.bind(this);
     this.state = {
+      parentValue: this.props.parentValue,
       choiceValue: _.clone(this.props.value),
       quantity: 1,
       timestamp: Date.now()
@@ -22,6 +26,17 @@ class PartNumber extends React.Component {
     console.log('Part Number componentWillUpdate');
     console.log(nextState.quantity);
     console.log(nextState.choiceValue);
+    console.log('nextProps.parentValue');
+    if (this.props.parentValue !== nextProps.parentValue) {
+      this.setState({
+        ...this.state,
+        choiceValue: 'default'
+      });
+    }
+    console.log(nextProps.parentValue);
+    console.log('this.props.parentValue');
+    console.log(this.props.parentValue);
+
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -35,20 +50,14 @@ class PartNumber extends React.Component {
     return false;
   }
 
-  handleChange(e) {
+  handleSelectChange(e) {
     const partNumber = e.target.options[e.target.selectedIndex].value;
-    if (partNumber !== 'default') {
-      console.log('hello world!');
       this.setState({
         ...this.state,
         choiceValue: partNumber,
-        quantity: 1,
+        quantity: partNumber !== 'default' ? 1 : undefined,
         timestamp: Date.now()
-      });
-      const q = document.getElementById(`${this.props.id}-quantity`);
-      const quantity = q.value;
-      this.props.updateForm({ partNumber, quantity })
-    }
+      }, this.updateForm);
   }
 
   renderSelect(props) {
@@ -57,7 +66,7 @@ class PartNumber extends React.Component {
       <select
         id={this.props.id}
         value={this.state.choiceValue}
-        onChange={this.handleChange}>
+        onChange={this.handleSelectChange}>
         <option value="default">--part number--</option>
         {
           partNumbers.map(partNum => (
@@ -68,9 +77,34 @@ class PartNumber extends React.Component {
     )
   }
 
+  updateForm() {
+    if (this.state.choiceValue !== 'default') {
+      this.props.updateForm({ partNumber: this.state.choiceValue, quantity: this.state.quantity });
+    }
+  }
+
+  subtractOne(e) {
+    e.preventDefault();
+    const currentQuantity = this.state.quantity;
+    // to remove a part entirely, we'll use a remove button
+    if (currentQuantity > 1) {
+      this.setState({
+        ...this.state,
+        quantity: currentQuantity - 1
+      }, this.updateForm);
+    }
+  }
+
+  addOne(e) {
+    e.preventDefault();
+    this.setState({
+      ...this.state,
+      quantity: this.state.quantity + 1
+    }, this.updateForm);
+  }
+
   renderQuantity() {
-    return (
-      <Input
+    {/*<Input
         id={`${this.props.id}-quantity`}
         refProp={(input) => { this.quantity = input }}
         type="number"
@@ -78,7 +112,15 @@ class PartNumber extends React.Component {
         placeholder="Quantity"
         required={true}
         value={this.state.quantity} 
-        min={1}/>
+        min={1}
+        parentHandleChange={this.handleInputChange}/>
+    (*/}
+    return (
+      <div className="quantity">
+        <span>{this.state.quantity}</span>
+        <button onClick={this.subtractOne}>-</button>
+        <button onClick={this.addOne}>+</button>
+      </div>
     )
   }
 
@@ -156,6 +198,7 @@ class MachineNumber extends React.Component {
               value={partNumberBlocks[i].partNumChoice}
               partNumbers={this.props.machineNumbers[choiceValue]}
               updateForm={this.updateForm}
+              parentValue={this.state.choiceValue}
               />
           ))
         }
