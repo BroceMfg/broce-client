@@ -38,7 +38,7 @@ class OrderForm extends React.Component {
           'N4409'
         ]
       },
-      machineNumberBlocks: _.clone(gnum.MACH_NUM_BLOCKS_DEFAULT),
+      machineNumberBlocks: [_.clone(gnum.MACH_NUM_BLOCK_OBJ)],
       form: {},
       timestamp: Date.now()
     };
@@ -60,8 +60,23 @@ class OrderForm extends React.Component {
   }
 
   updateForm(index, newValue) {
-    console.log('orderForm update Form newValue');
-    console.log(newValue);
+    // console.log('orderForm update Form newValue');
+    // console.log(newValue);
+
+    const cb = () => {
+      console.log(`OrderForm updateForm with new state.form = 
+        ${JSON.stringify(this.state.form,null, 2)}`);
+      const newMachNumBlocks = Object.keys(this.state.form).map((key) => {
+        let newObj = _.clone(gnum.MACH_NUM_BLOCK_OBJ);
+        newObj.machNumChoice = Object.keys(this.state.form[key])[0] || newObj.machNumChoice;
+        return newObj;
+      });
+      this.setState({
+        ...this.state,
+        machineNumberBlocks: newMachNumBlocks
+      });
+    }
+
     let newObj = {};
     newObj[index] = newValue;
     this.setState({
@@ -71,8 +86,7 @@ class OrderForm extends React.Component {
         {},
         newObj
       )
-    }, () => console.log(`OrderForm updateForm with new state.form = ${JSON.stringify(this.state.form,
-      null, 2)}`))
+    }, cb);
 
     console.log('this.state.form');
     console.log(this.state.form);
@@ -81,13 +95,18 @@ class OrderForm extends React.Component {
 
   addMachineNum() {
     console.log('addMachineNum function called');
+    const newMachNumBlocks = this.state.machineNumberBlocks.concat(_.clone(gnum.MACH_NUM_BLOCK_OBJ));
+    this.setState({
+      ...this.state,
+      machineNumberBlocks: newMachNumBlocks
+    })
   }
 
   clear() {
     console.log('clear function called');
     this.setState({
       ...this.state,
-      machineNumberBlocks: _.clone(gnum.MACH_NUM_BLOCKS_DEFAULT),
+      machineNumberBlocks: [_.clone(gnum.MACH_NUM_BLOCK_OBJ)],
       timestamp: Date.now()
     });
   }
@@ -121,22 +140,6 @@ class OrderForm extends React.Component {
             ))
           }
           <a onClick={this.addMachineNum}>Add Machine Number</a>
-          {/*
-          <Input 
-            refProp={(input) => { this.orderObj.name = input }}
-            type="text"
-            name="name"
-            placeholder="Name"
-            required={false}
-            value={form.name} />
-          <Input 
-            refProp={(input) => { this.orderObj.cost = input }}
-            type="text"
-            name="cost"
-            placeholder="Cost"
-            required={false}
-            value={form.cost} />
-          */}
           <button className="submit" type="submit">Submit</button>
         </form>
         <button className="cancel" onClick={this.clear}>Cancel</button>

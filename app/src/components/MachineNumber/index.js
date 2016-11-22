@@ -152,11 +152,13 @@ class MachineNumber extends React.Component {
     // console.log('@@@@@@@@@@@@');
     // this.props.updateForm(formObj);
     let form = {};
-    form[this.state.choiceValue] = newValue;
-    this.setState({
-      ...this.state,
-      form
-    });
+    if (this.state.choiceValue) {
+      form[this.state.choiceValue] = newValue;
+      this.setState({
+        ...this.state,
+        form
+      });
+    }
     this.props.updateForm(this.props.index, form);
   }
 
@@ -165,7 +167,7 @@ class MachineNumber extends React.Component {
   }
 
   handleChange(e) {
-    this.updateForm(undefined);
+    const cb = () => this.updateForm({});
     const choiceValue = e.target.options[e.target.selectedIndex].value;
     if (choiceValue !== 'default') {
       // clear state form from before
@@ -173,13 +175,13 @@ class MachineNumber extends React.Component {
         ...this.state,
         choiceValue,
         form: undefined
-      });
+      }, cb);
     } else {
       this.setState({
         ...this.state,
         choiceValue: undefined,
         form: undefined
-      });
+      }, cb);
     }
   }
 
