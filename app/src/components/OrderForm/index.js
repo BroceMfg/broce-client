@@ -48,7 +48,6 @@ class OrderForm extends React.Component {
     // check if timestamp hasn't been updated in the past
     // .01 seconds so that infinite loop doesn't occur
     if (Date.now() - this.state.timestamp > 10) {
-      console.log('OrderForm Component updating');
       this.setState({
         ...this.state,
         timestamp: Date.now()
@@ -88,7 +87,6 @@ class OrderForm extends React.Component {
   }
 
   addMachineNum() {
-    console.log('addMachineNum function called');
     const newMachNumBlocks = this.state.machineNumberBlocks.concat(_.clone(gnum.MACH_NUM_BLOCK_OBJ));
     this.setState({
       ...this.state,
@@ -128,7 +126,18 @@ class OrderForm extends React.Component {
                 updateForm={this.updateForm} />
             ))
           }
-          <a onClick={this.addMachineNum}>Add Machine Number</a>
+          <div>
+            {
+              machineNumberBlocks[machineNumberBlocks.length-1]
+                .machNumChoice !== 'default'
+                ? <a
+                    className="btn" 
+                    onClick={this.addMachineNum}>
+                    Add Machine Number
+                  </a>
+                : null
+            }
+          </div>
           <button className="submit" type="submit">Submit</button>
         </form>
         <button className="cancel" onClick={this.clear}>Reset Form</button>

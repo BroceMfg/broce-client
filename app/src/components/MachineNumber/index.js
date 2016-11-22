@@ -13,39 +13,16 @@ class MachineNumber extends React.Component {
     this.renderPartNumbers = this.renderPartNumbers.bind(this);
     this.state = {
       partNumberBlocks: [_.clone(gnum.PART_NUM_BLOCK_OBJ)],
-      // form: {}
     };
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    console.log('MachineNumber componentWillUpdate called');
-  }
-
   updateForm(index, newValue) {
-    // console.log('######');
-    // console.log('updateForm called from Machine Number component');
-    // console.log(`newValue = ${JSON.stringify(newValue,null,2)}`);
-    // console.log('######');
-    // console.log('@@@@@@@@@@@@');
-    // console.log(`formObj = ${JSON.stringify(formObj, null, 2)}`);
-    // console.log('@@@@@@@@@@@@');
-    // this.props.updateForm(formObj);
-    console.log('%%%%%%%%%%');
-    console.log(this.state.form);
-    console.log('%%%%%%%%%%');
     let form = this.state.form || {};
     if (this.state.choiceValue) {
-      console.log('********');
-      console.log(form[this.state.choiceValue]);
-      console.log('********');
+      // check if there is alredy an obj corresponding to the choiceValue
       form[this.state.choiceValue] = form[this.state.choiceValue] || {};
-      console.log('########');
-      console.log(form);
-      console.log('########');
+      // set the part number's corresponding index to the new partNumber data
       form[this.state.choiceValue][index] = newValue;
-      console.log('^^^^^^^^^')
-      console.log(form);
-      console.log('^^^^^^^^^')
       this.setState({
         ...this.state,
         form
@@ -55,7 +32,6 @@ class MachineNumber extends React.Component {
   }
 
   addPartNum() {
-    console.log('addPartNum function called');
     const newPartNumBlocks = this.state.partNumberBlocks.concat(_.clone(gnum.PART_NUM_BLOCK_OBJ));
     this.setState({
       ...this.state,
@@ -64,41 +40,24 @@ class MachineNumber extends React.Component {
   }
 
   handleChange(e) {
-    
-    const cb2 = () => {
-      let temp = {};
-      temp[this.state.choiceValue] = {};
-      this.props.updateForm(this.props.index, temp);
-    }
-
-    const cb = () => this.setState({
+    let choiceValue = e.target.options[e.target.selectedIndex].value;
+    choiceValue = choiceValue !== 'default' ? choiceValue : undefined;
+    // clear state form, reset partNumberBlocks, and set the new choiceValue
+    this.setState({
       ...this.state,
-      form: undefined
-    }, cb2);
-
-    const choiceValue = e.target.options[e.target.selectedIndex].value;
-    if (choiceValue !== 'default') {
-      // clear state form from before
-      this.setState({
-        ...this.state,
-        choiceValue,
-        form: undefined,
-        partNumberBlocks: [_.clone(gnum.PART_NUM_BLOCK_OBJ)]
-      }, cb);
-    } else {
-      this.setState({
-        ...this.state,
-        choiceValue: undefined,
-        form: undefined,
-        partNumberBlocks: [_.clone(gnum.PART_NUM_BLOCK_OBJ)]
-      }, cb);
-    }
+      choiceValue,
+      form: undefined,
+      partNumberBlocks: [_.clone(gnum.PART_NUM_BLOCK_OBJ)]
+    });
+    let temp = {};
+    temp[choiceValue] = {};
+    this.props.updateForm(this.props.index, temp);
   }
 
   renderPartNumbers(choiceValue) {
     const partNumberBlocks = this.state.partNumberBlocks;
     return (
-      <div style={{border: 'solid 3px yellow'}}>
+      <div className="PartNumbers-wrapper">
         {
           partNumberBlocks.map((partNum, i) => (
             <PartNumber
@@ -108,27 +67,29 @@ class MachineNumber extends React.Component {
               value={partNumberBlocks[i].partNumChoice}
               partNumbers={this.props.machineNumbers[choiceValue]}
               updateForm={this.updateForm}
-              parentValue={this.state.choiceValue}
-              />
+              parentValue={this.state.choiceValue} />
           ))
         }
-        <a onClick={this.addPartNum}>Add Part Number</a>
+        <a
+          className="btn"
+          onClick={this.addPartNum}>
+          Add Part Number
+        </a>
       </div>
     )
   }
 
   render() {
     const machineNumbers = this.props.machineNumbers;
-    const machNumKeys = Object.keys(machineNumbers);
     return (
-      <div className="MachineNumber" style={{border: 'solid 1px blue'}}>
+      <div className="MachineNumber">
         <select
           id={this.props.id}
           selected={this.props.value}
           onChange={this.handleChange}>
           <option value="default">--machine number--</option>
           {
-            machNumKeys.map(machNum => (
+            Object.keys(machineNumbers).map(machNum => (
               <option key={machNum} value={machNum}>{machNum}</option>
             ))
           }

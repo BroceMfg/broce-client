@@ -5,7 +5,6 @@ class PartNumber extends React.Component {
   constructor(props) {
     super(props);
 
-    this.quantity = 0;
     this.updateForm = this.updateForm.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.renderSelect = this.renderSelect.bind(this);
@@ -13,7 +12,6 @@ class PartNumber extends React.Component {
     this.addOne = this.addOne.bind(this);
     this.renderQuantity = this.renderQuantity.bind(this);
     this.state = {
-      parentValue: this.props.parentValue,
       choiceValue: _.clone(this.props.value),
       quantity: 1,
       timestamp: Date.now()
@@ -21,20 +19,13 @@ class PartNumber extends React.Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    console.log('Part Number componentWillUpdate');
-    console.log(nextState.quantity);
-    console.log(nextState.choiceValue);
-    console.log('nextProps.parentValue');
+    // reset choiceValue to default if parentValue changes
     if (this.props.parentValue !== nextProps.parentValue) {
       this.setState({
         ...this.state,
         choiceValue: 'default'
       });
     }
-    console.log(nextProps.parentValue);
-    console.log('this.props.parentValue');
-    console.log(this.props.parentValue);
-
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -42,7 +33,6 @@ class PartNumber extends React.Component {
     // check if timestamp hasn't been updated in the past
     // .01 seconds so that infinite loop doesn't occur
     if (Date.now() - this.state.timestamp > 10) {
-      console.log('Part Number Component updating');
       return true;
     }
     return false;
@@ -50,12 +40,13 @@ class PartNumber extends React.Component {
 
   handleSelectChange(e) {
     const partNumber = e.target.options[e.target.selectedIndex].value;
-      this.setState({
-        ...this.state,
-        choiceValue: partNumber,
-        quantity: partNumber !== 'default' ? 1 : undefined,
-        timestamp: Date.now()
-      }, this.updateForm);
+    const quantity = partNumber !== 'default' ? 1 : undefined;
+    this.setState({
+      ...this.state,
+      choiceValue: partNumber,
+      quantity,
+      timestamp: Date.now()
+    }, () => this.updateForm(partNumber, quantity));
   }
 
   renderSelect(props) {
@@ -75,17 +66,24 @@ class PartNumber extends React.Component {
     )
   }
 
-  updateForm() {
+  updateForm(choiceVal, partQuantity) {
+    const choiceValue = choiceVal || this.state.choiceValue;
+    const quantity = partQuantity || this.state.quantity
     if (this.state.choiceValue !== 'default') {
-      this.props.updateForm(this.props.index, { partNumber: this.state.choiceValue, quantity: this.state.quantity
-      });
+      this.props.updateForm(
+        this.props.index,
+        {
+          partNumber: choiceValue,
+          quantity
+        }
+      );
     }
   }
 
   subtractOne(e) {
     e.preventDefault();
     const currentQuantity = this.state.quantity;
-    // to remove a part entirely, we'll use a remove button
+    // to remove a part entirely, we'll use a separate remove button
     if (currentQuantity > 1) {
       this.setState({
         ...this.state,
@@ -113,10 +111,8 @@ class PartNumber extends React.Component {
   }
 
   render() {
-    console.log('this.state.choiceValue');
-    console.log(this.state.choiceValue);
     return (
-      <div key={this.state.timestamp} className="PartNumber" style={{border: 'solid 1px red'}}>
+      <div key={this.state.timestamp} className="PartNumber">
         {this.renderSelect()}
         {this.state.choiceValue === 'default' ? null : this.renderQuantity()}
       </div>

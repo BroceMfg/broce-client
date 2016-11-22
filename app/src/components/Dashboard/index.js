@@ -19,7 +19,7 @@ class Dashboard extends React.Component {
         </h1>
         <a
           onClick={this.onClickHandler}
-          className="Dashboard-anchor">
+          className="btn Dashboard-anchor">
           {this.props.buttonTitle}
         </a>
       </div>

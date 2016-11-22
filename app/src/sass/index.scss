@@ -6,6 +6,10 @@ body {
   height: 100%;
 }
 
+.btn {
+  border: solid 1px black;
+}
+
 .Dashboard {
   outline: solid 1px blue;
 }
@@ -26,4 +30,21 @@ body {
 
 .OrderList-Order-wrapper-anchor {
   cursor: pointer;
+}
+
+.MachineNumber {
+  border: solid 1px black;
+  &:not(:first-child) {
+    margin-top: 1em;
+  }
+}
+
+.PartNumbers-wrapper {
+  padding: 1em;
+}
+
+.PartNumber {
+  &:not(:first-child) {
+    margin-top: 8px;
+  }
 }
