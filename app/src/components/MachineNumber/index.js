@@ -134,7 +134,7 @@ class MachineNumber extends React.Component {
     this.handleChange = this.handleChange.bind(this);    
     this.renderPartNumbers = this.renderPartNumbers.bind(this);
     this.state = {
-      partNumberBlocks: _.clone(gnum.PART_NUM_BLOCKS_DEFAULT),
+      partNumberBlocks: [_.clone(gnum.PART_NUM_BLOCK_OBJ)],
       // form: {}
     };
   }
@@ -157,6 +157,9 @@ class MachineNumber extends React.Component {
     console.log('%%%%%%%%%%');
     let form = this.state.form || {};
     if (this.state.choiceValue) {
+      console.log('********');
+      console.log(form[this.state.choiceValue]);
+      console.log('********');
       form[this.state.choiceValue] = form[this.state.choiceValue] || {};
       console.log('########');
       console.log(form);
@@ -175,23 +178,41 @@ class MachineNumber extends React.Component {
 
   addPartNum() {
     console.log('addPartNum function called');
+    const newPartNumBlocks = this.state.partNumberBlocks.concat(_.clone(gnum.PART_NUM_BLOCK_OBJ));
+    this.setState({
+      ...this.state,
+      partNumberBlocks: newPartNumBlocks
+    });
   }
 
   handleChange(e) {
-    const cb = () => this.updateForm({});
+    
+    const cb2 = () => {
+      let temp = {};
+      temp[this.state.choiceValue] = {};
+      this.props.updateForm(this.props.index, temp);
+    }
+
+    const cb = () => this.setState({
+      ...this.state,
+      form: undefined
+    }, cb2);
+
     const choiceValue = e.target.options[e.target.selectedIndex].value;
     if (choiceValue !== 'default') {
       // clear state form from before
       this.setState({
         ...this.state,
         choiceValue,
-        form: undefined
+        form: undefined,
+        partNumberBlocks: [_.clone(gnum.PART_NUM_BLOCK_OBJ)]
       }, cb);
     } else {
       this.setState({
         ...this.state,
         choiceValue: undefined,
-        form: undefined
+        form: undefined,
+        partNumberBlocks: [_.clone(gnum.PART_NUM_BLOCK_OBJ)]
       }, cb);
     }
   }

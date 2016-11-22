@@ -99,7 +99,7 @@ class OrderForm extends React.Component {
     this.setState({
       ...this.state,
       machineNumberBlocks: newMachNumBlocks
-    })
+    });
   }
 
   clear() {
