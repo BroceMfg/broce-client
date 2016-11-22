@@ -2,7 +2,6 @@ import React from 'react';
 import _ from 'lodash';
 import gnum from'../../helpers/global-enum';
 import MachineNumber from '../MachineNumber';
-// import Input from '../Input';
 
 class OrderForm extends React.Component {
   constructor(props) {
@@ -10,12 +9,12 @@ class OrderForm extends React.Component {
 
     this.updateForm = this.updateForm.bind(this);
     this.addMachineNum = this.addMachineNum.bind(this);
-    // this.updateItem = this.updateItem.bind(this);
     this.clear = this.clear.bind(this);
     this.submit = this.submit.bind(this);
-    // using a timestamp key on the ItemForm Component means
+    // using a timestamp key on the OrderForm Component means
     // we can force re-render the component simply by updating the key
     this.state = {
+      // we will retrieve this data from the server before rendering
       machineNumbers: {
         'KF-453': [
           'K12334',
@@ -60,37 +59,32 @@ class OrderForm extends React.Component {
   }
 
   updateForm(index, newValue) {
-    // console.log('orderForm update Form newValue');
-    // console.log(newValue);
-
-    const cb = () => {
-      console.log(`OrderForm updateForm with new state.form = 
-        ${JSON.stringify(this.state.form,null, 2)}`);
-      const newMachNumBlocks = Object.keys(this.state.form).map((key) => {
-        let newObj = _.clone(gnum.MACH_NUM_BLOCK_OBJ);
-        newObj.machNumChoice = Object.keys(this.state.form[key])[0] || newObj.machNumChoice;
-        return newObj;
-      });
-      this.setState({
-        ...this.state,
-        machineNumberBlocks: newMachNumBlocks
-      });
-    }
-
     let newObj = {};
     newObj[index] = newValue;
+    const form = Object.assign(
+      this.state.form,
+      {},
+      newObj
+    );
     this.setState({
       ...this.state,
-      form: Object.assign(
-        this.state.form,
-        {},
-        newObj
-      )
-    }, cb);
+      form
+    });
 
-    console.log('this.state.form');
-    console.log(this.state.form);
+    console.log(`OrderForm updateForm with new state.form = 
+      ${JSON.stringify(this.state.form,null, 2)}`);
 
+    const newMachNumBlocks = Object.keys(form).map((key) => {
+      let newObj = _.clone(gnum.MACH_NUM_BLOCK_OBJ);
+      // see if the existing mach num block has a choice already made
+      const machNumChoice = Object.keys(form[key])[0];
+      newObj.machNumChoice = machNumChoice || newObj.machNumChoice;
+      return newObj;
+    });
+    this.setState({
+      ...this.state,
+      machineNumberBlocks: newMachNumBlocks
+    });
   }
 
   addMachineNum() {
@@ -103,7 +97,6 @@ class OrderForm extends React.Component {
   }
 
   clear() {
-    console.log('clear function called');
     this.setState({
       ...this.state,
       machineNumberBlocks: [_.clone(gnum.MACH_NUM_BLOCK_OBJ)],
@@ -112,10 +105,8 @@ class OrderForm extends React.Component {
   }
 
   submit(e) {
-    e.preventDefault();
-
     console.log('submit function called')
-
+    e.preventDefault();
     this.clear();
   }
 
@@ -125,7 +116,6 @@ class OrderForm extends React.Component {
     return (
       <div key={this.state.timestamp} className="OrderForm">
         <form
-          ref={(input) => this.orderForm = input} 
           onSubmit={this.submit}>
           {
             machineNumberBlocks.map((machNumBlock, i) => (
@@ -135,18 +125,16 @@ class OrderForm extends React.Component {
                 id={gnum.MACH_NUM_ID_PREFIX + i}
                 value={machNumBlock.machNumChoice}
                 machineNumbers={machineNumbers}
-                updateForm={this.updateForm}
-                />
+                updateForm={this.updateForm} />
             ))
           }
           <a onClick={this.addMachineNum}>Add Machine Number</a>
           <button className="submit" type="submit">Submit</button>
         </form>
-        <button className="cancel" onClick={this.clear}>Cancel</button>
+        <button className="cancel" onClick={this.clear}>Reset Form</button>
       </div>
     )
   }
-
 }
 
 export default OrderForm;
