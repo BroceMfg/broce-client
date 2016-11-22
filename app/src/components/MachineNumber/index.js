@@ -12,7 +12,7 @@ class MachineNumber extends React.Component {
     this.handleChange = this.handleChange.bind(this);    
     this.renderPartNumbers = this.renderPartNumbers.bind(this);
     this.state = {
-      partNumberBlocks: [_.clone(gnum.PART_NUM_BLOCK_OBJ)],
+      partNumberBlocks: [gnum.PART_NUM_BLOCK_OBJ],
     };
   }
 
@@ -32,7 +32,7 @@ class MachineNumber extends React.Component {
   }
 
   addPartNum() {
-    const newPartNumBlocks = this.state.partNumberBlocks.concat(_.clone(gnum.PART_NUM_BLOCK_OBJ));
+    const newPartNumBlocks = this.state.partNumberBlocks.concat(gnum.PART_NUM_BLOCK_OBJ);
     this.setState({
       ...this.state,
       partNumberBlocks: newPartNumBlocks
@@ -47,7 +47,7 @@ class MachineNumber extends React.Component {
       ...this.state,
       choiceValue,
       form: undefined,
-      partNumberBlocks: [_.clone(gnum.PART_NUM_BLOCK_OBJ)]
+      partNumberBlocks: [gnum.PART_NUM_BLOCK_OBJ]
     });
     let temp = {};
     temp[choiceValue] = {};

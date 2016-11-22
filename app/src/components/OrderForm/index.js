@@ -37,7 +37,7 @@ class OrderForm extends React.Component {
           'N4409'
         ]
       },
-      machineNumberBlocks: [_.clone(gnum.MACH_NUM_BLOCK_OBJ)],
+      machineNumberBlocks: [gnum.MACH_NUM_BLOCK_OBJ],
       form: {},
       timestamp: Date.now()
     };
@@ -74,7 +74,7 @@ class OrderForm extends React.Component {
       ${JSON.stringify(this.state.form,null, 2)}`);
 
     const newMachNumBlocks = Object.keys(form).map((key) => {
-      let newObj = _.clone(gnum.MACH_NUM_BLOCK_OBJ);
+      let newObj = gnum.MACH_NUM_BLOCK_OBJ;
       // see if the existing mach num block has a choice already made
       const machNumChoice = Object.keys(form[key])[0];
       newObj.machNumChoice = machNumChoice || newObj.machNumChoice;
@@ -87,7 +87,7 @@ class OrderForm extends React.Component {
   }
 
   addMachineNum() {
-    const newMachNumBlocks = this.state.machineNumberBlocks.concat(_.clone(gnum.MACH_NUM_BLOCK_OBJ));
+    const newMachNumBlocks = this.state.machineNumberBlocks.concat(gnum.MACH_NUM_BLOCK_OBJ);
     this.setState({
       ...this.state,
       machineNumberBlocks: newMachNumBlocks
@@ -97,7 +97,7 @@ class OrderForm extends React.Component {
   clear() {
     this.setState({
       ...this.state,
-      machineNumberBlocks: [_.clone(gnum.MACH_NUM_BLOCK_OBJ)],
+      machineNumberBlocks: [gnum.MACH_NUM_BLOCK_OBJ],
       timestamp: Date.now()
     });
   }
