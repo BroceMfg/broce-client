@@ -78,7 +78,8 @@ class PartNumber extends React.Component {
 
   updateForm() {
     if (this.state.choiceValue !== 'default') {
-      this.props.updateForm({ partNumber: this.state.choiceValue, quantity: this.state.quantity });
+      this.props.updateForm(this.props.index, { partNumber: this.state.choiceValue, quantity: this.state.quantity
+      });
     }
   }
 
@@ -142,7 +143,7 @@ class MachineNumber extends React.Component {
     console.log('MachineNumber componentWillUpdate called');
   }
 
-  updateForm(newValue) {
+  updateForm(index, newValue) {
     // console.log('######');
     // console.log('updateForm called from Machine Number component');
     // console.log(`newValue = ${JSON.stringify(newValue,null,2)}`);
@@ -151,9 +152,19 @@ class MachineNumber extends React.Component {
     // console.log(`formObj = ${JSON.stringify(formObj, null, 2)}`);
     // console.log('@@@@@@@@@@@@');
     // this.props.updateForm(formObj);
-    let form = {};
+    console.log('%%%%%%%%%%');
+    console.log(this.state.form);
+    console.log('%%%%%%%%%%');
+    let form = this.state.form || {};
     if (this.state.choiceValue) {
-      form[this.state.choiceValue] = newValue;
+      form[this.state.choiceValue] = form[this.state.choiceValue] || {};
+      console.log('########');
+      console.log(form);
+      console.log('########');
+      form[this.state.choiceValue][index] = newValue;
+      console.log('^^^^^^^^^')
+      console.log(form);
+      console.log('^^^^^^^^^')
       this.setState({
         ...this.state,
         form
@@ -192,7 +203,8 @@ class MachineNumber extends React.Component {
         {
           partNumberBlocks.map((partNum, i) => (
             <PartNumber
-              key={partNum}
+              key={i}
+              index={partNumberBlocks.length-1}
               id={gnum.PART_NUM_ID_PREFIX + (partNumberBlocks.length-1)}
               value={partNumberBlocks[i].partNumChoice}
               partNumbers={this.props.machineNumbers[choiceValue]}
