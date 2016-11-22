@@ -4,6 +4,7 @@ import Dashboard from '../Dashboard';
 import Landing from '../Landing';
 import OrderList from '../OrderList';
 import OrderDetail from '../OrderDetail';
+import OrderForm from '../OrderForm';
 import Settings from '../Settings';
 import NotFound from '../NotFound';
 
@@ -13,6 +14,7 @@ class App extends React.Component {
 
     this.orderOnClickHandler = this.orderOnClickHandler.bind(this);
     this.orderDetailAction = this.orderDetailAction.bind(this);
+    this.createNewOrder = this.createNewOrder.bind(this);
 
     this.state = {
       orders: {
@@ -78,6 +80,11 @@ class App extends React.Component {
     console.log('App orderDetailAction called');
   }
 
+  createNewOrder(newOrderObj) {
+    console.log('In App Component calling createNewOrder, with newOrderObj = ');
+    console.log(newOrderObj);
+  }
+
   render() {
     const orders = this.state.orders;
 
@@ -108,6 +115,14 @@ class App extends React.Component {
               exactly
               pattern="/b/settings"
               render={() => <Settings return="/b" />} />
+            <Match
+              exactly
+              pattern="/b/create_order"
+              render={
+                () => 
+                  <OrderForm
+                    createNewOrder={this.createNewOrder}/>
+              } />
             <Match
               exactly
               pattern="/b/orders/:id"

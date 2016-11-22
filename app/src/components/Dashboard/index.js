@@ -1,14 +1,34 @@
 import React from 'react';
 
-export default (props) => (
-  <div className="Dashboard">
-    <h1 className="Dashboard-header">
-      Welcome To {props.title}
-    </h1>
-    <a
-      className="Dashboard-anchor"
-      href={props.redirect}>
-      {props.buttonTitle}
-    </a>
-  </div>
-)
+class Dashboard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onClickHandler = this.onClickHandler.bind(this);
+  }
+
+  onClickHandler(e) {
+    e.preventDefault();
+    this.context.router.transitionTo(this.props.redirect);
+  }
+
+  render() {
+    return (
+      <div className="Dashboard">
+        <h1 className="Dashboard-header">
+          Welcome To {this.props.title}
+        </h1>
+        <a
+          onClick={this.onClickHandler}
+          className="btn Dashboard-anchor">
+          {this.props.buttonTitle}
+        </a>
+      </div>
+    )
+  }
+}
+
+Dashboard.contextTypes = {
+  router: React.PropTypes.object
+}
+
+export default Dashboard;
