@@ -103,8 +103,9 @@ class OrderForm extends React.Component {
   }
 
   submit(e) {
-    console.log('submit function called')
     e.preventDefault();
+    console.log('submit function called')
+    console.log(this.state.form);
     this.clear();
   }
 
