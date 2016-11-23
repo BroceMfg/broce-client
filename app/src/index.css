@@ -39,7 +39,15 @@ body {
 .OrderForm {
   border: solid 1px black; }
 
+.QuoteForm {
+  border: solid 1px black; }
+
 .MachineNumberBlock {
-  outline: solid 1px #34C84A; }
+  outline: solid 1px #34C84A;
+  margin-left: 1em; }
+
+.PartNumberBlock {
+  outline: solid 1px #F0AB28;
+  margin-left: 2em; }
 
 /*# sourceMappingURL=index.css.map */
