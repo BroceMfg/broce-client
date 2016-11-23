@@ -39,4 +39,7 @@ body {
 .OrderForm {
   border: solid 1px black; }
 
+.MachineNumberBlock {
+  outline: solid 1px #34C84A; }
+
 /*# sourceMappingURL=index.css.map */
