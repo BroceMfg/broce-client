@@ -36,4 +36,7 @@ body {
 .PartNumber:not(:first-child) {
   margin-top: 8px; }
 
+.OrderForm {
+  border: solid 1px black; }
+
 /*# sourceMappingURL=index.css.map */

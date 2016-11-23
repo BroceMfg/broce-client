@@ -112,6 +112,8 @@ class OrderForm extends React.Component {
   render() {
     const machineNumbers = this.state.machineNumbers;
     const machineNumberBlocks = this.state.machineNumberBlocks;
+    console.log(machineNumberBlocks[machineNumberBlocks.length-1]
+      .machNumChoice);
     return (
       <div key={this.state.timestamp} className="OrderForm">
         <form

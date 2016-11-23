@@ -4,18 +4,20 @@ import Button from '../Button';
 class Landing extends React.Component {
   constructor(props) {
     super(props);
-    this.newOrderClick = this.newOrderClick.bind(this);
+    this.newQuoteClick = this.newQuoteClick.bind(this);
   }
-  newOrderClick() {
-    this.context.router.transitionTo('/b/create_order');
+
+  newQuoteClick() {
+    this.context.router.transitionTo('/b/create_quote');
   }
+  
   render() {
     return (
       <div className="Landing">
         <Button
           classTag="Button Button-create-new-order"
-          onClickHandler={this.newOrderClick}
-          text="Create New Order"/>
+          onClickHandler={this.newQuoteClick}
+          text="Create New Quote"/>
         {this.props.children}
       </div>
     )
