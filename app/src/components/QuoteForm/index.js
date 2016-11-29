@@ -105,11 +105,30 @@ class QuoteForm extends React.Component {
 
   submit(e) {
     e.preventDefault();
-    
-    /* --- TODO: API POST --- */
+    const form = this.state.form;
+
+    // console.log(`QuoteForm component => submit function called with ` +
+    //   `form = ${JSON.stringify(form, null, 2)}`);
+
+    let orderDetails = [];
+    Object.keys(form).forEach(machKey => {
+      const machNum = Object.keys(form[machKey])[0];
+      Object.keys(form[machKey][machNum]).forEach(partKey => {
+        const partNum = Object.keys(form[machKey][machNum][partKey])[0];
+        const partQty = form[machKey][machNum][partKey][partNum];
+        orderDetails = orderDetails.concat({
+          machineSerialNum: machNum,
+          partNum,
+          partQty
+        });
+      });
+    });
 
     console.log(`QuoteForm component => submit function called with ` +
-      `form = ${JSON.stringify(this.state.form, null, 2)}`);
+      `orderDetails = ${JSON.stringify(orderDetails, null, 2)}`);
+
+    /* --- TODO: API POST --- */
+
     this.reset(e);
   }
 
