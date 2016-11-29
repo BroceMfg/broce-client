@@ -23,7 +23,8 @@ class Input extends React.Component {
   render() {
     return (
     <div className="Input">
-      <input 
+      <input
+        className={this.props.className}
         ref={this.props.refProp}
         type={this.props.type}
         name={this.props.name}

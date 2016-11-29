@@ -4,7 +4,6 @@ import Dashboard from '../Dashboard';
 import Landing from '../Landing';
 import OrderList from '../OrderList';
 import OrderDetail from '../OrderDetail';
-// import OrderForm from '../OrderForm';
 import QuoteForm from '../QuoteForm';
 import Settings from '../Settings';
 import NotFound from '../NotFound';

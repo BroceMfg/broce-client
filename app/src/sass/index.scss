@@ -33,6 +33,7 @@ body {
 }
 
 .MachineNumber {
+
   border: solid 1px black;
   &:not(:first-child) {
     margin-top: 1em;
@@ -59,10 +60,25 @@ body {
 
 .MachineNumberBlock {
   outline: solid 1px #34C84A;
+  padding: 0.5em;
   margin-left: 1em;
 }
 
 .PartNumberBlock {
   outline: solid 1px #F0AB28;
+  margin-top: 0.5em;
   margin-left: 2em;
+  /* because the button is below the inputs,
+     the last input is actually nth-last-child(2) */
+  &:not(:nth-last-child(2)) {
+    margin-bottom: 1.5em;
+  }
+  /* last input element */
+  &:nth-last-child(2) {
+    margin-bottom: 1em;
+  }
+}
+
+.quantity{
+  margin-top: 0.4em;
 }

@@ -10,7 +10,15 @@ class MachineNumberBlock extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.partNumberChanged = this.partNumberChanged.bind(this);
     this.setForm = this.setForm.bind(this);
+
     this.state = {
+      // form should be structured like:
+      //  <currentChoice>: {
+      //    <partNumberBlockIndex>: {
+      //      <currentChoice>: <quantity>
+      //    }
+      //  }
+      // where there can be any number of partNumber blocks
       form: _.cloneDeep(this.props.form)
     }
   }
@@ -42,18 +50,10 @@ class MachineNumberBlock extends React.Component {
   }
 
   render() {
-    // form should be structured like:
-    //  <currentChoice>: {
-    //    <partNumberBlockIndex>: {
-    //      <currentChoice>: <quantity>
-    //    }
-    //  }
-    // where there can be any number of partNumber blocks
     const form = this.state.form;
-    console.log(form[Object.keys(form)[0]]);
     return (
       <div className="MachineNumberBlock">
-        <span>MachineNumberBlock with index = {this.props.index}</span>
+        <span>Machine Number</span>
         <Input 
           refProp={(input) => { this.choice = input }}
           type="text"
@@ -63,14 +63,16 @@ class MachineNumberBlock extends React.Component {
           parentOnChange={this.onChange}
         />
         {
-          Object.keys(form[Object.keys(form)[0]]).map(key => (
-            <PartNumberBlock
-              key={key}
-              index={key}
-              form={form[Object.keys(form)[0]][key]}
-              parentOnChange={this.partNumberChanged}
-            />
-          ))
+          Object.keys(form)[0] !== ''
+            ? Object.keys(form[Object.keys(form)[0]]).map(key => (
+                <PartNumberBlock
+                  key={key}
+                  index={key}
+                  form={form[Object.keys(form)[0]][key]}
+                  parentOnChange={this.partNumberChanged}
+                />
+              ))
+            : null
         }
         <button onClick={this.addPartNumBlock}>Add Another Part Number</button>
       </div>

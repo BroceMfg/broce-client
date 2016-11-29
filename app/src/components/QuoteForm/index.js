@@ -9,27 +9,33 @@ class QuoteForm extends React.Component {
   constructor(props) {
     super(props);
     this.form = {};
+    this.getInitialForm = this.getInitialForm.bind(this);
     this.updateForm = this.updateForm.bind(this);
     this.addMachNumBlock = this.addMachNumBlock.bind(this);
     this.addPartNumBlock = this.addPartNumBlock.bind(this);
     this.submit = this.submit.bind(this);
     this.reset = this.reset.bind(this);
-
-    // form object structure should look like this:
-    // {
-    //   <machineNumberBlockIndex>: {
-    //     <currentChoice>: {
-    //       <partNumberBlockIndex>: {
-    //         <currentChoice>: <quantity>
-    //       }
-    //     }
-    //   }
-    // }
-    // where there can be any number of machineNumber or partNumber blocks
-    
     this.state = {
-      form: this.props.form ? _.cloneDeep(this.props.form) : _.cloneDeep(gnum.INITIAL_QUOTE_FORM)
-    }
+      // form object structure should look like this:
+      // {
+      //   <machineNumberBlockIndex>: {
+      //     <currentChoice>: {
+      //       <partNumberBlockIndex>: {
+      //         <currentChoice>: <quantity>
+      //       }
+      //     }
+      //   }
+      // }
+      // where there can be any number of machineNumber or partNumber blocks
+      form: this.getInitialForm(),
+      timestamp: Date.now()
+    };
+  }
+
+  getInitialForm() {
+    return this.props.form 
+      ? _.cloneDeep(this.props.form)
+      : _.cloneDeep(gnum.INITIAL_QUOTE_FORM)
   }
 
   updateForm(i, newObj) {
@@ -48,7 +54,6 @@ class QuoteForm extends React.Component {
     const newMachNumBlock = {};
     // newMachNumBlock[parseInt(formKeys[formKeys.length - 1], 10) + 1] = _.clone(gnum.INITIAL_MACH_NUM_BLOCK);
     newMachNumBlock[parseInt(formKeys[formKeys.length - 1], 10) + 1] = _.cloneDeep(gnum.INITIAL_MACH_NUM_BLOCK);
-    console.log(`newMachNumBlock = ${JSON.stringify(newMachNumBlock, null, 2)}`);
     const newState = {
       ...this.state,
       form: Object.assign(
@@ -61,11 +66,9 @@ class QuoteForm extends React.Component {
 
   addPartNumBlock(e, machNumIndex) {
     // prevent the button default so it doesn't submit the form on us
-    console.log('QuoteForm => addPartNumBlock function called');
     e.preventDefault();
     const currentChoice = Object.keys(this.state.form[machNumIndex])[0];
     const machNumForm = this.state.form[machNumIndex][currentChoice];
-    // console.log(`machNumForm = ${JSON.stringify(machNumForm, null, 2)}`);
     const machNumFormKeys = Object.keys(machNumForm);
     const newPartNumBlock = {};
     newPartNumBlock[parseInt(machNumFormKeys[machNumFormKeys.length - 1], 10) + 1] = _.cloneDeep(gnum.INITIAL_PART_NUM_BLOCK);
@@ -76,8 +79,6 @@ class QuoteForm extends React.Component {
       newPartNumBlock
     );
     newMachNumBlock[machNumIndex] = newMachNumBlockObj;
-    console.log(`newMachNumBlock = ${JSON.stringify(newMachNumBlock, null, 2)}`);
-    // console.log(`newPartNumBlock = ${JSON.stringify(newPartNumBlock, null, 2)}`);
     const newState = {
       ...this.state,
       form: Object.assign(
@@ -89,27 +90,20 @@ class QuoteForm extends React.Component {
   }
 
   submit(e) {
-    console.log(this.form);
     e.preventDefault();
-    console.log('QuoteForm submit called');
-    let form = {};
-    Object.keys(this.form).forEach((key) => {
-      form[key] = this.form[key].value;
-    });
-    console.log(JSON.stringify(form, null, 2));
+    console.log(`QuoteForm component => submit function called with ` +
+      `form = ${JSON.stringify(this.state.form, null, 2)}`);
   }
 
   reset() {
-    console.log(gnum.INITIAL_QUOTE_FORM);
-    console.log('QuoteForm => reset function called');
-    const newState = {
-      ...this.state,
-      form: _.cloneDeep(gnum.INITIAL_QUOTE_FORM)
-    };
-    this.setState(newState);
+    this.setState({
+      form: this.getInitialForm(),
+      timestamp: Date.now()
+    });
   }
 
   render() {
+    console.log('rendered');
     const form = this.state.form;
     return (
       <div className="QuoteForm">
