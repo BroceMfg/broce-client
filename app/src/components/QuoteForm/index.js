@@ -1,64 +1,21 @@
 import React from 'react';
 import _ from 'lodash';
 import gnum from '../../helpers/global-enum';
+// import PartNumberBlock from '../PartNumberBlock';
+import MachineNumberBlock from '../MachineNumberBlock';
 // import Input from '../Input';
-
-class PartNumberBlock extends React.Component {
-  render() {
-    return (
-      <div className="PartNumberBlock">
-        <span>PartNumberBlock with index = {this.props.index}</span>
-      </div>
-    )
-  }
-}
-
-class MachineNumberBlock extends React.Component {
-  constructor(props) {
-    super(props);
-    this.addPartNumBlock = this.addPartNumBlock.bind(this);
-  }
-
-  addPartNumBlock(e) {
-    this.props.addPartNumBlock(e, this.props.index);
-  }
-
-  render() {
-    // form should be structured like:
-    //  <currentChoice>: {
-    //    <partNumberBlockIndex>: {
-    //      <currentChoice>: <quantity>
-    //    }
-    //  }
-    // where there can be any number of partNumber blocks
-    const form = this.props.form;
-    return (
-      <div className="MachineNumberBlock">
-        <span>MachineNumberBlock with index = {this.props.index}</span>
-        {
-          Object.keys(form).map(key => (
-            <PartNumberBlock
-              key={key}
-              index={key}
-            />
-          ))
-        }
-        <button onClick={this.addPartNumBlock}>Add Another Part Number</button>
-      </div>
-    )
-  }
-}
 
 class QuoteForm extends React.Component {
   constructor(props) {
     super(props);
     this.form = {};
+    this.updateForm = this.updateForm.bind(this);
     this.addMachNumBlock = this.addMachNumBlock.bind(this);
     this.addPartNumBlock = this.addPartNumBlock.bind(this);
     this.submit = this.submit.bind(this);
     this.reset = this.reset.bind(this);
 
-    // form structure should be like:
+    // form object structure should look like this:
     // {
     //   <machineNumberBlockIndex>: {
     //     <currentChoice>: {
@@ -73,6 +30,15 @@ class QuoteForm extends React.Component {
     this.state = {
       form: this.props.form ? _.cloneDeep(this.props.form) : _.cloneDeep(gnum.INITIAL_QUOTE_FORM)
     }
+  }
+
+  updateForm(i, newObj) {
+    const form = this.state.form;
+    form[i] = newObj;
+    this.setState({
+      ...this.state,
+      form
+    });
   }
 
   addMachNumBlock(e) {
@@ -123,6 +89,7 @@ class QuoteForm extends React.Component {
   }
 
   submit(e) {
+    console.log(this.form);
     e.preventDefault();
     console.log('QuoteForm submit called');
     let form = {};
@@ -148,24 +115,16 @@ class QuoteForm extends React.Component {
       <div className="QuoteForm">
         <h1>Quote Form</h1>
         <form onSubmit={this.submit}>
-          {/*<Input 
-            refProp={(input) => { this.form.name = input }}
-            type="text"
-            name="name"
-            placeholder="Name"
-            value={'Andrew'}
-          />*/}
           {
             Object.keys(form).map((key) => {
-              const currentChoice = Object.keys(form[key])[0];
-              const formObj = form[key][currentChoice];
-              // console.log(`formObj = ${JSON.stringify(formObj, null, 2)}`)
+              const formObj = form[key];
               return (
                 <MachineNumberBlock
                   key={key}
                   index={key}
                   form={formObj}
                   addPartNumBlock={this.addPartNumBlock}
+                  updateForm={this.updateForm}
                 />
               )
             })
