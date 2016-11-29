@@ -71,7 +71,7 @@ class QuoteForm extends React.Component {
     // where there can be any number of machineNumber or partNumber blocks
     
     this.state = {
-      form: this.props.form ? _.clone(this.props.form) : _.clone(gnum.INITIAL_QUOTE_FORM)
+      form: this.props.form ? _.cloneDeep(this.props.form) : _.cloneDeep(gnum.INITIAL_QUOTE_FORM)
     }
   }
 
@@ -80,7 +80,9 @@ class QuoteForm extends React.Component {
     e.preventDefault();
     const formKeys = Object.keys(this.state.form);
     const newMachNumBlock = {};
-    newMachNumBlock[parseInt(formKeys[formKeys.length - 1], 10) + 1] = _.clone(gnum.INITIAL_MACH_NUM_BLOCK);
+    // newMachNumBlock[parseInt(formKeys[formKeys.length - 1], 10) + 1] = _.clone(gnum.INITIAL_MACH_NUM_BLOCK);
+    newMachNumBlock[parseInt(formKeys[formKeys.length - 1], 10) + 1] = _.cloneDeep(gnum.INITIAL_MACH_NUM_BLOCK);
+    console.log(`newMachNumBlock = ${JSON.stringify(newMachNumBlock, null, 2)}`);
     const newState = {
       ...this.state,
       form: Object.assign(
@@ -100,7 +102,7 @@ class QuoteForm extends React.Component {
     // console.log(`machNumForm = ${JSON.stringify(machNumForm, null, 2)}`);
     const machNumFormKeys = Object.keys(machNumForm);
     const newPartNumBlock = {};
-    newPartNumBlock[parseInt(machNumFormKeys[machNumFormKeys.length - 1], 10) + 1] = _.clone(gnum.INITIAL_PART_NUM_BLOCK);
+    newPartNumBlock[parseInt(machNumFormKeys[machNumFormKeys.length - 1], 10) + 1] = _.cloneDeep(gnum.INITIAL_PART_NUM_BLOCK);
     let newMachNumBlock = {};
     let newMachNumBlockObj = {};
     newMachNumBlockObj[currentChoice] = Object.assign(
@@ -135,7 +137,7 @@ class QuoteForm extends React.Component {
     console.log('QuoteForm => reset function called');
     const newState = {
       ...this.state,
-      form: _.clone(gnum.INITIAL_QUOTE_FORM)
+      form: _.cloneDeep(gnum.INITIAL_QUOTE_FORM)
     };
     this.setState(newState);
   }
