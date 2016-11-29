@@ -22,7 +22,7 @@ class PartNumberBlock extends React.Component {
 
   onChange() {
     let form = {};
-    form[this.choice.value] = 1;
+    form[this.choice.value] = this.quantity.value;
     this.setForm(form);
   }
 
@@ -34,9 +34,17 @@ class PartNumberBlock extends React.Component {
         <Input 
           refProp={(input) => { this.choice = input }}
           type="text"
-          name={`machine_number_${this.props.index}`}
+          name={`part_number_${this.props.index}`}
           value={Object.keys(form)[0]}
-          placeholder="Machine Number"
+          placeholder="Part Number"
+          parentOnChange={this.onChange}
+        />
+        <Input 
+          refProp={(input) => { this.quantity = input }}
+          type="text"
+          name={`part_number_${this.props.index}_quantity`}
+          value={form[Object.keys(form)[0]]}
+          placeholder="Quantity"
           parentOnChange={this.onChange}
         />
       </div>
