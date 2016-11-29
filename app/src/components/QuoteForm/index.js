@@ -135,7 +135,7 @@ class QuoteForm extends React.Component {
   reset(e) {
     e.preventDefault();
     this.setState({
-      form: this.getInitialForm(),
+      form: _.cloneDeep(gnum.INITIAL_QUOTE_FORM),
       timestamp: Date.now()
     });
   }
