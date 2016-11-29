@@ -8,6 +8,8 @@ class MachineNumberBlock extends React.Component {
     super(props);
     this.addPartNumBlock = this.addPartNumBlock.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.partNumberChanged = this.partNumberChanged.bind(this);
+    this.setForm = this.setForm.bind(this);
     this.state = {
       form: _.cloneDeep(this.props.form)
     }
@@ -18,16 +20,25 @@ class MachineNumberBlock extends React.Component {
     this.props.addPartNumBlock(e, this.props.index);
   }
 
+  setForm(form) {
+    this.setState({
+      ...this.state,
+      form
+    });
+    this.props.updateForm(this.props.index, form);
+  }
+
   onChange() {
-    console.log(`choice = ${this.choice.value}`);
     const form = this.state.form;
     let formObj = {};
     formObj[this.choice.value] = form[Object.keys(form)[0]];
-    this.setState({
-      ...this.state,
-      form: formObj
-    });
-    this.props.updateForm(this.props.index, formObj);
+    this.setForm(formObj);
+  }
+
+  partNumberChanged(i, partNumObj) {
+    const form = this.state.form;
+    form[Object.keys(form)[0]][i] = partNumObj;
+    this.setForm(form);
   }
 
   render() {
@@ -38,7 +49,8 @@ class MachineNumberBlock extends React.Component {
     //    }
     //  }
     // where there can be any number of partNumber blocks
-    const form = this.props.form;
+    const form = this.state.form;
+    console.log(form[Object.keys(form)[0]]);
     return (
       <div className="MachineNumberBlock">
         <span>MachineNumberBlock with index = {this.props.index}</span>
@@ -46,15 +58,17 @@ class MachineNumberBlock extends React.Component {
           refProp={(input) => { this.choice = input }}
           type="text"
           name={`machine_number_${this.props.index}`}
-          value={Object.keys(this.state.form)[0]}
+          value={Object.keys(form)[0]}
           placeholder="Machine Number"
           parentOnChange={this.onChange}
         />
         {
-          Object.keys(form).map(key => (
+          Object.keys(form[Object.keys(form)[0]]).map(key => (
             <PartNumberBlock
               key={key}
               index={key}
+              form={form[Object.keys(form)[0]][key]}
+              parentOnChange={this.partNumberChanged}
             />
           ))
         }
