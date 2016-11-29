@@ -32,6 +32,20 @@ class QuoteForm extends React.Component {
     };
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    // re-render the ItemForm component with new form data
+    // check if timestamp hasn't been updated in the past
+    // .01 seconds so that infinite loop doesn't occur
+    if (Date.now() - this.state.timestamp > 10) {
+      this.setState({
+        ...this.state,
+        timestamp: Date.now()
+      });
+      return true;
+    }
+    return false;
+  }
+
   getInitialForm() {
     return this.props.form 
       ? _.cloneDeep(this.props.form)
@@ -95,7 +109,9 @@ class QuoteForm extends React.Component {
       `form = ${JSON.stringify(this.state.form, null, 2)}`);
   }
 
-  reset() {
+  reset(e) {
+    e.preventDefault();
+    console.log('reset function called');
     this.setState({
       form: this.getInitialForm(),
       timestamp: Date.now()
@@ -104,9 +120,12 @@ class QuoteForm extends React.Component {
 
   render() {
     console.log('rendered');
-    const form = this.state.form;
+    const {
+      form,
+      timestamp
+    } = this.state;
     return (
-      <div className="QuoteForm">
+      <div className="QuoteForm" key={timestamp}>
         <h1>Quote Form</h1>
         <form onSubmit={this.submit}>
           {
