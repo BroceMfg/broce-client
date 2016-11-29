@@ -105,13 +105,16 @@ class QuoteForm extends React.Component {
 
   submit(e) {
     e.preventDefault();
+    
+    /* --- TODO: API POST --- */
+
     console.log(`QuoteForm component => submit function called with ` +
       `form = ${JSON.stringify(this.state.form, null, 2)}`);
+    this.reset(e);
   }
 
   reset(e) {
     e.preventDefault();
-    console.log('reset function called');
     this.setState({
       form: this.getInitialForm(),
       timestamp: Date.now()
@@ -119,7 +122,6 @@ class QuoteForm extends React.Component {
   }
 
   render() {
-    console.log('rendered');
     const {
       form,
       timestamp
@@ -138,11 +140,16 @@ class QuoteForm extends React.Component {
                   form={formObj}
                   addPartNumBlock={this.addPartNumBlock}
                   updateForm={this.updateForm}
+                  submit={this.submit}
                 />
               )
             })
           }
-          <button onClick={this.addMachNumBlock}>Add Another Machine Number</button>
+          <button
+            className="add-machine-number-btn"
+            onClick={this.addMachNumBlock}>
+            Add Another Machine Number
+          </button>
           <button type="submit">Submit</button>
         </form>
         <button onClick={this.reset}>Reset Form</button>

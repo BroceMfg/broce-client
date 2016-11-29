@@ -61,6 +61,7 @@ class MachineNumberBlock extends React.Component {
           value={Object.keys(form)[0]}
           placeholder="Machine Number"
           parentOnChange={this.onChange}
+          submit={this.props.submit}
         />
         {
           Object.keys(form)[0] !== ''
@@ -70,11 +71,16 @@ class MachineNumberBlock extends React.Component {
                   index={key}
                   form={form[Object.keys(form)[0]][key]}
                   parentOnChange={this.partNumberChanged}
+                  submit={this.props.submit}
                 />
               ))
             : null
         }
-        <button onClick={this.addPartNumBlock}>Add Another Part Number</button>
+        <button
+          className="add-part-number-btn"
+          onClick={this.addPartNumBlock}>
+          Add Another Part Number
+        </button>
       </div>
     )
   }

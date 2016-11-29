@@ -4,10 +4,26 @@ import _ from 'lodash';
 class Input extends React.Component {
   constructor(props) {
     super(props);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.state = {
       value: this.props.value ? _.clone(this.props.value) : ''
     };
+  }
+
+  handleKeyPress(e) {
+    if (e.charCode === 13) {
+      e.preventDefault();
+      
+      /* TODO: decide if this is a nice feature to have
+         or if it would just get annoying becauase people
+         are submitting the form accidentally */
+
+      // if (this.props.submit) {
+      //   this.props.submit(e);
+      // }
+
+    }
   }
 
   handleChange(e) {
@@ -31,7 +47,8 @@ class Input extends React.Component {
         placeholder={this.props.placeholder}
         required
         value={this.state.value}
-        onChange={this.handleChange} />
+        onChange={this.handleChange}
+        onKeyPress={this.handleKeyPress} />
     </div>
     )
   }

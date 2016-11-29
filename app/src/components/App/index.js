@@ -112,14 +112,6 @@ class App extends React.Component {
               render={() => <Settings return="/b" />} />
             <Match
               exactly
-              pattern="/b/create_quote"
-              render={
-                () => 
-                  <QuoteForm
-                    createNewOrder={this.createNewOrder}/>
-              } />
-            <Match
-              exactly
               pattern="/b/orders/:id"
               render={
                 (matchProps) => {

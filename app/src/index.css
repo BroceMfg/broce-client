@@ -62,4 +62,13 @@ body {
 .quantity {
   margin-top: 0.4em; }
 
+.add-machine-number-btn {
+  display: block;
+  margin-bottom: 1em;
+  margin-top: 0.5em; }
+
+.add-part-number-btn {
+  display: block;
+  margin-top: 0.5em; }
+
 /*# sourceMappingURL=index.css.map */

@@ -55,6 +55,7 @@ class PartNumberBlock extends React.Component {
                   value={form[Object.keys(form)[0]]}
                   placeholder="Quantity"
                   parentOnChange={this.onChange}
+                  submit={this.props.submit}
                 />
               </div>
             : null
