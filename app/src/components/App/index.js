@@ -13,7 +13,6 @@ class App extends React.Component {
     super(props);
 
     this.orderOnClickHandler = this.orderOnClickHandler.bind(this);
-    this.orderDetailAction = this.orderDetailAction.bind(this);
 
     this.state = {
       orders: {
@@ -71,12 +70,7 @@ class App extends React.Component {
   }
 
   orderOnClickHandler(orderId) {
-    console.log('App orderOnClickHandler called');
     this.context.router.transitionTo(`/b/orders/${orderId}`);
-  }
-
-  orderDetailAction(currentStatusTypeId) {
-    console.log('App orderDetailAction called');
   }
 
   render() {
