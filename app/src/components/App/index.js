@@ -7,14 +7,17 @@ import OrderDetail from '../OrderDetail';
 import QuoteForm from '../QuoteForm';
 import Settings from '../Settings';
 import NotFound from '../NotFound';
+import SignIn from '../SignIn';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.orderOnClickHandler = this.orderOnClickHandler.bind(this);
+    this.setToken = this.setToken.bind(this);
 
     this.state = {
+      apiUrl: 'http://localhost:3001',
       orders: {
         1: {
           "id": 1,
@@ -73,8 +76,18 @@ class App extends React.Component {
     this.context.router.transitionTo(`/b/orders/${orderId}`);
   }
 
+  setToken(token) {
+    this.setState({
+      ...this.state,
+      token
+    });
+  }
+
   render() {
-    const orders = this.state.orders;
+    const {
+      orders,
+      apiUrl
+    } = this.state;
 
     const Main = (props) => (
       <div className="main-wrapper">
@@ -96,10 +109,19 @@ class App extends React.Component {
       <div className="App">
         <BrowserRouter>
           <div>
-            <Match
-              exactly
-              pattern="/b"
-              render={() => Main({ orders })} />
+            {
+              this.state.jwt 
+                ? <Match
+                    exactly
+                    pattern="/b"
+                    render={() => Main({ orders })}
+                  />
+                : <Match
+                    exactly
+                    pattern="/b"
+                    render={() => <SignIn apiUrl={apiUrl} setToken={this.setToken}/>}
+                  />
+            }
             <Match
               exactly
               pattern="/b/settings"
