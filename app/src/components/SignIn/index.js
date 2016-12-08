@@ -29,7 +29,8 @@ class SignIn extends React.Component {
         console.log(JSON.parse(response));
         this.props.setUser(JSON.parse(response).user);
       },
-      (errorResponse) => console.log(errorResponse));
+      (errorResponse) => console.log(errorResponse)
+    );
   }
 
   render() {

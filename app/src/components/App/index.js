@@ -107,7 +107,7 @@ class App extends React.Component {
           <OrderList
             orders={props.orders}
             orderOnClickHandler={this.orderOnClickHandler} />
-          <QuoteForm />
+          <QuoteForm apiUrl={this.state.apiUrl} />
         </Landing>
       </div>
     )

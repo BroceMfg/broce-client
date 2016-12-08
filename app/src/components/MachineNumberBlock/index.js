@@ -56,7 +56,7 @@ class MachineNumberBlock extends React.Component {
         <span>Machine Number</span>
         <Input 
           refProp={(input) => { this.choice = input }}
-          type="text"
+          type="number"
           name={`machine_number_${this.props.index}`}
           value={Object.keys(form)[0]}
           placeholder="Machine Number"
