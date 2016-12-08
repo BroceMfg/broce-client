@@ -134,6 +134,7 @@ class QuoteForm extends React.Component {
       shipping_state: 'NY',
       shipping_zip: 10001,
       po_number: '678',
+      status: 'quote'
     }
 
     let formData = `orderDetails=${JSON.stringify(orderDetails)}&`;
