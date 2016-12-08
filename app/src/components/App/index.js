@@ -14,7 +14,7 @@ class App extends React.Component {
     super(props);
 
     this.orderOnClickHandler = this.orderOnClickHandler.bind(this);
-    this.setToken = this.setToken.bind(this);
+    this.setUser = this.setUser.bind(this);
 
     this.state = {
       apiUrl: 'http://localhost:3001',
@@ -68,25 +68,32 @@ class App extends React.Component {
           "Order_Details": [],
           "Order_Statuses": []
         }
-      }
+      },
+      user: undefined
     }
+  }
+
+  componentWillUnmount() {
+    console.log('App componentWillUnmount');
+    console.log(this.state);
   }
 
   orderOnClickHandler(orderId) {
     this.context.router.transitionTo(`/b/orders/${orderId}`);
   }
 
-  setToken(token) {
+  setUser(user) {
     this.setState({
       ...this.state,
-      token
+      user
     });
   }
 
   render() {
     const {
       orders,
-      apiUrl
+      apiUrl,
+      user
     } = this.state;
 
     const Main = (props) => (
@@ -110,44 +117,50 @@ class App extends React.Component {
         <BrowserRouter>
           <div>
             {
-              this.state.jwt 
-                ? <Match
+              user 
+                ? 
+                <div>
+                  <Match
                     exactly
                     pattern="/b"
                     render={() => Main({ orders })}
                   />
-                : <Match
+                  <Match
                     exactly
-                    pattern="/b"
-                    render={() => <SignIn apiUrl={apiUrl} setToken={this.setToken}/>}
+                    pattern="/b/settings"
+                    render={() => <Settings return="/b" />}
                   />
+                  <Match
+                    exactly
+                    pattern="/b/orders/:id"
+                    render={
+                      (matchProps) => {
+                        const order = orders[matchProps.params.id];
+                        if (order) {
+                          return (
+                            <OrderDetail
+                              order={order}
+                              actionTitle={'FOOBAR'}
+                              actionHandler={
+                                () => this.orderDetailAction()
+                              } />
+                          )
+                        } else {
+                          return (
+                            <NotFound />
+                          )
+                        }
+                      }
+                    }
+                  />
+                </div>
+                : 
+                <Match
+                  exactly
+                  pattern="/b"
+                  render={ () => <SignIn apiUrl={apiUrl} setUser={this.setUser}/> }
+                />
             }
-            <Match
-              exactly
-              pattern="/b/settings"
-              render={() => <Settings return="/b" />} />
-            <Match
-              exactly
-              pattern="/b/orders/:id"
-              render={
-                (matchProps) => {
-                  const order = orders[matchProps.params.id];
-                  if (order) {
-                    return (
-                      <OrderDetail
-                        order={order}
-                        actionTitle={'FOOBAR'}
-                        actionHandler={
-                          () => this.orderDetailAction()
-                        } />
-                    )
-                  } else {
-                    return (
-                      <NotFound />
-                    )
-                  }
-                }
-              } />
             <Miss component={NotFound} />
           </div>
         </BrowserRouter>

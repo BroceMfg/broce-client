@@ -1,6 +1,6 @@
 import React from 'react';
-import fetch from 'isomorphic-fetch';
 import Input from '../Input';
+import { post } from '../../middleware/XMLHTTP';
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -9,44 +9,27 @@ class SignIn extends React.Component {
   }
 
   postAction(e) {
+    const apiUrl = this.props.apiUrl;
     e.preventDefault();
     const email = this.email.value;
     const password = this.password.value;
 
-    fetch(`${this.props.apiUrl}/users/login`, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      credentials: 'include',
-      method: 'POST',
-      body: JSON.stringify({
-        email,
-        password
-      })
-    })
-    .then((res) => {
-      console.log(res);
-      console.log(res.headers._headers['set-cookie'][0].split(';')[0]);
-    })
-    .then((data) => {
-      if (!data.success || !data.user) {
-        console.log('error');
-      }
-      console.log(data);
+    const data = { email, password };
+
+    let formData = ''
+    Object.keys(data).forEach(key => {
+      formData += `${key}=${data[key]}&`;
     });
 
-    // axios.post(`${this.props.apiUrl}/users/login`, {
-    //   email,
-    //   password
-    // })
-    // .then(function (response) {
-    //   console.log(response);
-    //   console.log(response.headers._headers['set-cookie'][0].split(';')[0])
-    // })
-    // .catch(function (error) {
-    //   console.log(error);
-    // });
+    // just testing post and get out
+    post(
+      `${apiUrl}/users/login`,
+      formData,
+      (response) => {
+        console.log(JSON.parse(response));
+        this.props.setUser(JSON.parse(response).user);
+      },
+      (errorResponse) => console.log(errorResponse));
   }
 
   render() {
@@ -80,6 +63,10 @@ class SignIn extends React.Component {
       </div>
     )
   }
+}
+
+SignIn.contextTypes = {
+  router: React.PropTypes.object
 }
 
 export default SignIn;
