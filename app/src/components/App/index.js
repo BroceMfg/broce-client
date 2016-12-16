@@ -1,11 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Match, Miss } from 'react-router';
-import Dashboard from '../Dashboard';
 import Landing from '../Landing';
-import OrderList from '../OrderList';
-import OrderDetail from '../OrderDetail';
-import QuoteForm from '../QuoteForm';
 import Settings from '../Settings';
+import OrderDetail from '../OrderDetail';
 import NotFound from '../NotFound';
 import SignIn from '../SignIn';
 
@@ -79,7 +76,8 @@ class App extends React.Component {
   }
 
   orderOnClickHandler(orderId) {
-    this.context.router.transitionTo(`/orders/${orderId}`);
+    history.pushState(this.state, `/orders/${orderId}`);
+    // this.context.router.transitionTo(`/orders/${orderId}`);
   }
 
   setUser(user) {
@@ -96,22 +94,6 @@ class App extends React.Component {
       user
     } = this.state;
 
-    const Main = (props) => (
-      <div className="main-wrapper">
-        <Dashboard
-          title="Broce Parts"
-          buttonTitle="Settings"
-          redirect="/settings"
-        />
-        <Landing>
-          <OrderList
-            orders={props.orders}
-            orderOnClickHandler={this.orderOnClickHandler} />
-          <QuoteForm apiUrl={this.state.apiUrl} />
-        </Landing>
-      </div>
-    )
-
     return (
       <div className="App">
         <BrowserRouter>
@@ -123,7 +105,7 @@ class App extends React.Component {
                   <Match
                     exactly
                     pattern="/"
-                    render={() => Main({ orders })}
+                    render={() => <Landing orders={orders} apiUrl={apiUrl} />}
                   />
                   <Match
                     exactly
@@ -136,6 +118,7 @@ class App extends React.Component {
                     render={
                       (matchProps) => {
                         const order = orders[matchProps.params.id];
+                        console.log(matchProps.params.id);
                         if (order) {
                           return (
                             <OrderDetail
@@ -167,10 +150,6 @@ class App extends React.Component {
       </div>
     );
   }
-}
-
-App.contextTypes = {
-  router: React.PropTypes.object
 }
 
 export default App;
