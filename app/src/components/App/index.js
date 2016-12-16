@@ -10,7 +10,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.orderOnClickHandler = this.orderOnClickHandler.bind(this);
     this.setUser = this.setUser.bind(this);
 
     this.state = {
@@ -66,7 +65,7 @@ class App extends React.Component {
           "Order_Statuses": []
         }
       },
-      user: undefined
+      user: localStorage.getItem('user')
     }
   }
 
@@ -75,12 +74,8 @@ class App extends React.Component {
     console.log(this.state);
   }
 
-  orderOnClickHandler(orderId) {
-    history.pushState(this.state, `/orders/${orderId}`);
-    // this.context.router.transitionTo(`/orders/${orderId}`);
-  }
-
   setUser(user) {
+    localStorage.setItem('user', user);
     this.setState({
       ...this.state,
       user
