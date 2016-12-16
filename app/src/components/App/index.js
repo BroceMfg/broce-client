@@ -11,61 +11,21 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.setOrders = this.setOrders.bind(this);
     this.setUser = this.setUser.bind(this);
     this.logout = this.logout.bind(this);
 
     this.state = {
       apiUrl: 'http://localhost:3001',
-      orders: {
-        1: {
-          "id": 1,
-          "shipping_address": "test address",
-          "shipping_city": "test city",
-          "shipping_state": "test sate",
-          "shipping_zip": 11111,
-          "po_number": "6789",
-          "createdAt": "2000-12-16T17:21:13.000Z",
-          "updatedAt": "2000-12-16T17:21:13.000Z",
-          "UserId": 27,
-          "Order_Details": [
-            {
-              "machine_serial_num": 77,
-              "quantity": 1,
-              "price": 18.99,
-              "createdAt": "2000-12-16T17:21:13.000Z",
-              "updatedAt": "2000-12-16T17:21:13.000Z",
-              "Part": {
-                "number": "FX-22-LS-3",
-                "description": "descip",
-                "cost": 20.99,
-                "image_url": "http://google.com/images/photo",
-                "createdAt": "2000-12-16T17:21:13.000Z",
-                "updatedAt": "2000-12-16T17:21:13.000Z"
-              }
-            }
-          ],
-          "Order_Statuses": [
-            {
-              "current": true,
-              "createdAt": "2000-12-16T17:21:13.000Z",
-              "updatedAt": "2000-12-16T17:21:13.000Z",
-              "StatusTypeId": 1
-            }
-          ]
-        },
-        36: {
-          "id": 36,
-          "shipping_address": "test_address",
-          "shipping_city": "test_city",
-          "shipping_state": "test_state",
-          "shipping_zip": 11111,
-          "po_number": "654",
-          "createdAt": "2016-10-20T00:22:48.419Z",
-          "updatedAt": "2016-10-20T00:22:48.419Z",
-          "UserId": 1,
-          "Order_Details": [],
-          "Order_Statuses": []
-        }
+      orders: {},
+      statusTypes: {
+        0: 'unknown',
+        1: 'quote',
+        2: 'priced',
+        3: 'ordered',
+        4: 'shipped',
+        5: 'archived',
+        6: 'abandoned'
       },
       user: localStorage.getItem('user')
     }
@@ -74,6 +34,13 @@ class App extends React.Component {
   componentWillUnmount() {
     console.log('App componentWillUnmount');
     console.log(this.state);
+  }
+
+  setOrders(orders) {
+    this.setState({
+      ...this.state,
+      orders
+    });
   }
 
   setUser(user) {
@@ -94,11 +61,8 @@ class App extends React.Component {
       },
       (errorResponse) => console.log(errorResponse)
     );
-
-    this.setState({
-      ...this.state,
-      user: undefined
-    });
+    // refresh the broswer to unmount/remount our component
+    window.location.reload(false);
   }
 
   render() {
@@ -119,7 +83,15 @@ class App extends React.Component {
                   <Match
                     exactly
                     pattern="/"
-                    render={() => <Landing orders={orders} apiUrl={apiUrl} logout={this.logout} />}
+                    render={
+                      () => <Landing
+                              orders={orders}
+                              apiUrl={apiUrl}
+                              logout={this.logout}
+                              setOrders={this.setOrders}
+                              statusTypes={this.state.statusTypes}
+                            />
+                    }
                   />
                   <Match
                     exactly
