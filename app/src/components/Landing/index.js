@@ -17,11 +17,7 @@ class Landing extends React.Component {
   render() {
     return (
       <div className="main-wrapper">
-        <Dashboard
-          title="Broce Parts"
-          buttonTitle="Settings"
-          redirect="/settings"
-        />
+        <Dashboard />
         <div className="Landing">
           <OrderList
             orders={this.props.orders}
