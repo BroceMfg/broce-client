@@ -3,10 +3,10 @@ import React from 'react';
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
-    this.onClickHandler = this.onClickHandler.bind(this);
+    this.settingsOnClickHandler = this.settingsOnClickHandler.bind(this);
   }
 
-  onClickHandler(e) {
+  settingsOnClickHandler(e) {
     e.preventDefault();
     this.context.router.transitionTo('/settings');
   }
@@ -18,9 +18,14 @@ class Dashboard extends React.Component {
           Welcome To Broce Parts
         </h1>
         <a
-          onClick={this.onClickHandler}
+          onClick={this.settingsOnClickHandler}
           className="btn Dashboard-anchor">
           Settings
+        </a>
+        <a
+          onClick={this.props.logout}
+          className="btn Dashboard-anchor">
+          Log Out
         </a>
       </div>
     )

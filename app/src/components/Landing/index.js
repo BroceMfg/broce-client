@@ -17,7 +17,7 @@ class Landing extends React.Component {
   render() {
     return (
       <div className="main-wrapper">
-        <Dashboard />
+        <Dashboard logout={this.props.logout} />
         <div className="Landing">
           <OrderList
             orders={this.props.orders}

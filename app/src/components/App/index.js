@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Match, Miss } from 'react-router';
+import { post } from '../../middleware/XMLHTTP';
 import Landing from '../Landing';
 import Settings from '../Settings';
 import OrderDetail from '../OrderDetail';
@@ -11,6 +12,7 @@ class App extends React.Component {
     super(props);
 
     this.setUser = this.setUser.bind(this);
+    this.logout = this.logout.bind(this);
 
     this.state = {
       apiUrl: 'http://localhost:3001',
@@ -82,6 +84,23 @@ class App extends React.Component {
     });
   }
 
+  logout() {
+    localStorage.clear();
+
+    post(
+      `${this.state.apiUrl}/users/logout`,
+      (response) => {
+        console.log(JSON.parse(response));
+      },
+      (errorResponse) => console.log(errorResponse)
+    );
+
+    this.setState({
+      ...this.state,
+      user: undefined
+    });
+  }
+
   render() {
     const {
       orders,
@@ -100,7 +119,7 @@ class App extends React.Component {
                   <Match
                     exactly
                     pattern="/"
-                    render={() => <Landing orders={orders} apiUrl={apiUrl} />}
+                    render={() => <Landing orders={orders} apiUrl={apiUrl} logout={this.logout} />}
                   />
                   <Match
                     exactly
