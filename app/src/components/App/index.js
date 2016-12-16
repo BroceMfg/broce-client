@@ -79,7 +79,7 @@ class App extends React.Component {
   }
 
   orderOnClickHandler(orderId) {
-    this.context.router.transitionTo(`/b/orders/${orderId}`);
+    this.context.router.transitionTo(`/orders/${orderId}`);
   }
 
   setUser(user) {
@@ -101,7 +101,7 @@ class App extends React.Component {
         <Dashboard
           title="Broce Parts"
           buttonTitle="Settings"
-          redirect="/b/settings"
+          redirect="/settings"
         />
         <Landing>
           <OrderList
@@ -122,17 +122,17 @@ class App extends React.Component {
                 <div>
                   <Match
                     exactly
-                    pattern="/b"
+                    pattern="/"
                     render={() => Main({ orders })}
                   />
                   <Match
                     exactly
-                    pattern="/b/settings"
-                    render={() => <Settings return="/b" />}
+                    pattern="/settings"
+                    render={() => <Settings return="/" />}
                   />
                   <Match
                     exactly
-                    pattern="/b/orders/:id"
+                    pattern="/orders/:id"
                     render={
                       (matchProps) => {
                         const order = orders[matchProps.params.id];
@@ -157,7 +157,7 @@ class App extends React.Component {
                 : 
                 <Match
                   exactly
-                  pattern="/b"
+                  pattern="/"
                   render={ () => <SignIn apiUrl={apiUrl} setUser={this.setUser}/> }
                 />
             }
