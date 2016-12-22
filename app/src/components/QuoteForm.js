@@ -1,9 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
-import gnum from '../../helpers/global-enum';
-// import PartNumberBlock from '../PartNumberBlock';
-import MachineNumberBlock from '../MachineNumberBlock';
-// import Input from '../Input';
+import gnum from '../helpers/global-enum';
+import MachineNumberBlock from './MachineNumberBlock';
+import { post } from '../middleware/XMLHTTP';
 
 class QuoteForm extends React.Component {
   constructor(props) {
@@ -126,6 +125,30 @@ class QuoteForm extends React.Component {
 
     console.log(`QuoteForm component => submit function called with ` +
       `orderDetails = ${JSON.stringify(orderDetails, null, 2)}`);
+
+    const dummyForm = {
+      shipping_address: '1 main street',
+      shipping_city: 'Manhattan',
+      shipping_state: 'NY',
+      shipping_zip: 10001,
+      po_number: '678',
+      status: 'quote'
+    }
+
+    let formData = `orderDetails=${JSON.stringify(orderDetails)}&`;
+    Object.keys(dummyForm).forEach(key => {
+      formData += `${key}=${dummyForm[key]}&`;
+    });
+
+    console.log(formData);
+
+    // just testing post and get out
+    post(
+      `${this.props.apiUrl}/orders`,
+      formData,
+      (response) => console.log(JSON.parse(response)),
+      (errorResponse) => console.log(errorResponse)
+    );
 
     /* --- TODO: API POST --- */
 

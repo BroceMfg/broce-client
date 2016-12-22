@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import Input from '../Input';
+import Input from './Input';
 
 class PartNumberBlock extends React.Component {
   constructor(props) {
