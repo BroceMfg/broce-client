@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
-import Input from '../Input';
-import PartNumberBlock from '../PartNumberBlock';
+import Input from './Input';
+import PartNumberBlock from './PartNumberBlock';
 
 class MachineNumberBlock extends React.Component {
   constructor(props) {

@@ -1,10 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
-import gnum from '../../helpers/global-enum';
-// import PartNumberBlock from '../PartNumberBlock';
-import MachineNumberBlock from '../MachineNumberBlock';
-// import Input from '../Input';
-import { post } from '../../middleware/XMLHTTP';
+import gnum from '../helpers/global-enum';
+import MachineNumberBlock from './MachineNumberBlock';
+import { post } from '../middleware/XMLHTTP';
 
 class QuoteForm extends React.Component {
   constructor(props) {

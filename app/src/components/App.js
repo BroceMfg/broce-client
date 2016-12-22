@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Match, Miss } from 'react-router';
-import { post } from '../../middleware/XMLHTTP';
-import Landing from '../Landing';
-import Settings from '../Settings';
-import OrderDetail from '../OrderDetail';
-import NotFound from '../NotFound';
-import SignIn from '../SignIn';
+import { post } from '../middleware/XMLHTTP';
+import Landing from './Landing';
+import Settings from './Settings';
+import OrderDetail from './OrderDetail';
+import NotFound from './NotFound';
+import SignIn from './SignIn';
 
 class App extends React.Component {
   constructor(props) {

@@ -1,6 +1,6 @@
 import React from 'react';
-import Input from '../Input';
-import { post } from '../../middleware/XMLHTTP';
+import Input from './Input';
+import { post } from '../middleware/XMLHTTP';
 
 class SignIn extends React.Component {
   constructor(props) {

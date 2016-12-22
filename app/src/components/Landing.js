@@ -1,8 +1,8 @@
 import React from 'react';
-import { get } from '../../middleware/XMLHTTP';
-import Dashboard from '../Dashboard';
-import OrderList from '../OrderList';
-import QuoteForm from '../QuoteForm';
+import { get } from '../middleware/XMLHTTP';
+import Dashboard from './Dashboard';
+import OrderList from './OrderList';
+import QuoteForm from './QuoteForm';
 
 class Landing extends React.Component {
 
