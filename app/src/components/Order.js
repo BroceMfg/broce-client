@@ -1,11 +1,21 @@
 import React from 'react';
+import OrderAction from './OrderAction';
 
-export default (props) => (
-  <div className="Order">
-    <span>Machine Serial Number: {props.order.id}</span>
-    <br/>
-    <span>Quanitity: {props.order.po_number}</span>
-    <br/>
-    <span>Price: {props.order.shipping_city}</span>
-  </div>
-)
+class Order extends React.Component {
+  render() {
+    const {
+      order
+    } = this.props;
+    console.log(order);
+    return (
+      <div className="Order">
+        <div>id: {order.id}</div>
+        <div>UserId: {order.UserId}</div>
+        <div>StatusTypeId: {order.Order_Statuses[0].StatusTypeId}</div>
+        <OrderAction />
+      </div>
+    )
+  }
+}
+
+export default Order;
