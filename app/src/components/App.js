@@ -30,13 +30,13 @@ class App extends React.Component {
         5: 'archived',
         6: 'abandoned'
       },
-      user: undefined
+      userRoleTypes: {
+        0: 'client',
+        1: 'admin'
+      },
+      user: undefined,
+      admin: undefined
     }
-  }
-
-  componentWillUnmount() {
-    console.log('App componentWillUnmount');
-    console.log(this.state);
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -53,7 +53,8 @@ class App extends React.Component {
   setUser(user) {
     this.setState({
       ...this.state,
-      user
+      user,
+      admin: this.state.userRoleTypes[user.role || 0] === 'admin'
     });
   }
 
@@ -73,6 +74,7 @@ class App extends React.Component {
 
   render() {
     const {
+      admin,
       orders,
       apiUrl,
       user
@@ -91,6 +93,7 @@ class App extends React.Component {
                     pattern="/"
                     render={
                       () => <Landing
+                              admin={admin}
                               orders={orders}
                               apiUrl={apiUrl}
                               logout={this.logout}

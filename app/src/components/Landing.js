@@ -43,6 +43,7 @@ class Landing extends React.Component {
         <Dashboard logout={this.props.logout} />
         <div className="Landing">
           <OrderList
+            admin={this.props.admin}
             orders={this.props.orders}
             orderOnClickHandler={this.orderOnClickHandler} />
           <QuoteForm apiUrl={this.props.apiUrl} />

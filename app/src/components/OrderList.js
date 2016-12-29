@@ -6,17 +6,22 @@ class OrderList extends React.Component {
 
     const subList = (props) => (
       <div key={props.key || Math.random()} className="Order-wrapper">
-        <h1>{props.title}</h1>
+        <h1>{props.statusType}</h1>
         <ul>
         {
           Object.values(props.orders).map(order => (
-
-            <a
+            <Order
+              admin={this.props.admin}
               key={order.id || Math.random()}
-              className="OrderList-Order-wrapper-anchor"
-              onClick={() => this.props.orderOnClickHandler(order.id)}>
-              <Order order={order}/>
-            </a>
+              order={order}
+              statusType={props.statusType}
+            />
+            // <div
+            //   key={order.id || Math.random()}
+            //   className="OrderList-Order-wrapper-anchor"
+            //   onClick={() => this.props.orderOnClickHandler(order.id)}>
+            //   <Order order={order}/>
+            // </div>
 
           ))
         }
@@ -30,7 +35,7 @@ class OrderList extends React.Component {
       {
         Object.values(this.props.orders).map((statusTypeOrders, i) => subList({
           key: keyCount++,
-          title: Object.keys(this.props.orders)[i],
+          statusType: Object.keys(this.props.orders)[i],
           orders: statusTypeOrders
         }))
       }
