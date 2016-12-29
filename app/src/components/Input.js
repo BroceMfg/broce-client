@@ -24,6 +24,14 @@ class Input extends React.Component {
       // }
 
     }
+    // prevents the 'e' character within a number input
+    // but still allows for decimals
+    if (this.props.type === 'number') {
+      if (e.charCode !== 46 && e.charCode > 31 
+        && (e.charCode < 48 || e.charCode > 57)) {
+        e.preventDefault();
+      }
+    }
   }
 
   handleChange(e) {
@@ -47,6 +55,8 @@ class Input extends React.Component {
         placeholder={this.props.placeholder}
         required
         value={this.state.value}
+        min={this.props.min}
+        max={this.props.max}
         onChange={this.handleChange}
         onKeyPress={this.handleKeyPress} />
     </div>

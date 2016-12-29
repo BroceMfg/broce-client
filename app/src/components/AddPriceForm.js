@@ -29,7 +29,7 @@ class AddPriceForm extends React.Component {
           refProp={(input) => { this.price = input }}
           type="number"
           name={`order_detail_${orderDetail.id}_price`}
-          value={undefined}
+          min={0}
           placeholder="Price"
           parentOnChange={this.onChange}
           submit={this.submit}
