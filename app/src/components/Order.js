@@ -4,7 +4,6 @@ import OrderPart from './OrderPart';
 class Order extends React.Component {
   render() {
     const order = this.props.order;
-    console.log('hello');
     return (
       <div className="Order">
         <div>id: {order.id}</div>
