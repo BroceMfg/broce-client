@@ -3,20 +3,15 @@ import React from 'react';
 class AddPriceForm extends React.Component {
   render() {
     const {
-      parts
+      orderDetail
     } = this.props;
     return (
-      <div className="AddPriceForm">
-        <span>add price form</span>
-        <ul>
-          {
-            parts.map((part) => (
-              <div key={Math.random()}>
-                <div>number: {part.number}</div>
-              </div>
-            ))
-          }
-        </ul>
+      <div className="AddPriceForm" style={{marginLeft: '2em'}}>
+        <div>machine_serial_num: {orderDetail.machine_serial_num}</div>
+        <div>part_num: {orderDetail.Part.number}</div>
+        <div>quantity: {orderDetail.quantity}</div>
+        <div>price: INPUT HERE</div>
+        <button>submit</button>
       </div>
     )
   }
