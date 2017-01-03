@@ -21,8 +21,12 @@ class OrderPart extends React.Component {
     };
 
     if (this.props.admin) {
-      if (this.props.statusType === 'quote') {
+      if (this.props.statusType === 'quote'
+        && this.props.orderDetail.price === null) {
         obj.buttonTitle = this.state.showAddPriceForm ? 'Cancel' : 'Add Price';
+        obj.func = this.toggleAddPriceForm;
+      } else if (this.props.statusType === 'quote' && this.props.orderDetail.price !== null) {
+        obj.buttonTitle = this.state.showAddPriceForm ? 'Cancel' : 'Change Price';
         obj.func = this.toggleAddPriceForm;
       } else if (this.props.statusType === 'priced') {
         obj.alertTitle = 'pending client approval';
@@ -69,7 +73,10 @@ class OrderPart extends React.Component {
         />
         {
           showAddPriceForm
-            ? <AddPriceForm orderDetail={orderDetail}/>
+            ? <AddPriceForm
+                apiUrl={this.props.apiUrl}
+                orderDetail={orderDetail}
+              />
             : null
         }
       </div>

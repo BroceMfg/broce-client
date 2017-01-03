@@ -12,6 +12,7 @@ class OrderList extends React.Component {
           Object.values(props.orders).map(order => (
             <Order
               admin={this.props.admin}
+              apiUrl={this.props.apiUrl}
               key={order.id || Math.random()}
               order={order}
               statusType={props.statusType}

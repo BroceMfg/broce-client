@@ -14,6 +14,7 @@ class Order extends React.Component {
             <OrderPart 
               key={orderDetail.id}
               admin={this.props.admin}
+              apiUrl={this.props.apiUrl}
               statusType={this.props.statusType}
               orderDetail={orderDetail}
             />
