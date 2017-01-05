@@ -16,7 +16,8 @@ class App extends React.Component {
     this.logout = this.logout.bind(this);
 
     const retrievedObj = localStorage.getItem('state');
-    const storedState = retrievedObj ? JSON.parse(retrievedObj) : undefined;
+    let storedState = retrievedObj ? JSON.parse(retrievedObj) : undefined;
+    if (storedState) storedState = { ...storedState, orders: {} }; // force reload orders
 
     this.state = storedState || {
       apiUrl: 'http://localhost:3001',

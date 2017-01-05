@@ -7,6 +7,22 @@ class AddPriceForm extends React.Component {
     super(props);
     this.onChange = this.onChange.bind(this);
     this.submit = this.submit.bind(this);
+    this.reset = this.reset.bind(this);
+    this.state = { timestamp: Date.now() }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    // re-render the ItemForm component with new form data
+    // check if timestamp hasn't been updated in the past
+    // .01 seconds so that infinite loop doesn't occur
+    if (Date.now() - this.state.timestamp > 10) {
+      this.setState({
+        ...this.state,
+        timestamp: Date.now()
+      });
+      return true;
+    }
+    return false;
   }
 
   onChange() {
@@ -14,23 +30,47 @@ class AddPriceForm extends React.Component {
   }
 
   submit() {
+    const price = this.price.value;
     console.log(this.props.orderDetail);
-    console.log(`submitted price: ${this.price.value}`);
+    console.log(`submitted price: ${price}`);
     // TODO: regex check the input as it is being input and
     // disable the submit button until the input matches is valid
-    if (this.price.value > 0.00) {
+    if (price > 0.00) {
       put(
         `${this.props.apiUrl}/orders/details/${this.props.orderDetail.id}`,
-        `price=${this.price.value}`,
+        `price=${price}`,
         (response) => {
-          console.log(JSON.parse(response));
+          if (JSON.parse(response).success) {
+            console.log(this.props.orderDetail);
+            console.log(this.props.index);
+            this.props.updateOrderDetail({
+              ...this.props.orderDetail,
+              price: parseFloat(price)
+            }, this.props.index);
+            this.props.toggleMessage('Price Submission Successful.');
+            setTimeout(this.props.toggleMessage, 3000);
+          } else {
+            // handle error
+            console.log('error: response contained an error.');
+            this.props.toggleMessage('Error: Please try again.');
+            setTimeout(() => this.props.toggleMessage, 3000);
+          }
         },
         (errorResponse) => console.log(errorResponse)
       );
     } else {
       // handle error
       console.log('error: input not valid');
+      this.props.toggleMessage('Error: Invalid Price.');
+      setTimeout(() => this.props.toggleMessage, 3000);
     }
+    this.reset();
+  }
+
+  reset() {
+    this.setState({
+      timestamp: Date.now()
+    });
   }
 
   render() {
@@ -38,7 +78,7 @@ class AddPriceForm extends React.Component {
       orderDetail
     } = this.props;
     return (
-      <div className="AddPriceForm">
+      <div className="AddPriceForm" key={this.state.timestamp}>
         <Input 
           refProp={(input) => { this.price = input }}
           type="number"

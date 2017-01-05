@@ -7,9 +7,11 @@ class OrderPart extends React.Component {
     super(props);
     this.getOrderAction = this.getOrderAction.bind(this);
     this.toggleAddPriceForm = this.toggleAddPriceForm.bind(this);
+    this.toggleMessage = this.toggleMessage.bind(this);
     this.state = {
-      orderDetail: this.props.orderDetail,
-      showAddPriceForm: false
+      showAddPriceForm: false,
+      showMessage: false,
+      message: undefined
     }
   }
 
@@ -46,14 +48,31 @@ class OrderPart extends React.Component {
     });
   }
 
+  toggleMessage(message) {
+    this.setState({
+      ...this.state,
+      showMessage: !this.state.showMessage,
+      message
+    });
+  }
+
   render() {
-    const {
-      orderDetail,
-      showAddPriceForm
-    } = this.state;
+    const showAddPriceForm = this.state.showAddPriceForm;
+    const orderDetail = this.props.orderDetail;
     const orderAction = this.getOrderAction();
+    console.log('inside OrderPart component');
+    console.log(orderDetail);
+    console.log('----------------');
     return (
       <div className="OrderPart">
+        {
+          this.state.showMessage && this.state.message
+            ? 
+              <div className="OrderPart-message">
+                <span>{this.state.message}</span>
+              </div>
+            : null
+        }
         <div>
           <div>machine_serial_num: {orderDetail.machine_serial_num}</div>
           <div>part_num: {orderDetail.Part.number}</div>
@@ -75,7 +94,10 @@ class OrderPart extends React.Component {
           showAddPriceForm
             ? <AddPriceForm
                 apiUrl={this.props.apiUrl}
+                index={this.props.index}
                 orderDetail={orderDetail}
+                updateOrderDetail={this.props.updateOrderDetail}
+                toggleMessage={this.toggleMessage}
               />
             : null
         }

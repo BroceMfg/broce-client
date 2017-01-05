@@ -46,6 +46,7 @@ class Landing extends React.Component {
             admin={this.props.admin}
             apiUrl={this.props.apiUrl}
             orders={this.props.orders}
+            setOrders={this.props.setOrders}
             orderOnClickHandler={this.orderOnClickHandler} />
           <QuoteForm apiUrl={this.props.apiUrl} />
         </div>

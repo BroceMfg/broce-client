@@ -1,44 +1,37 @@
 import React from 'react';
-import Order from './Order';
+import OrderSubList from './OrderSubList';
 
 class OrderList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.updateOrder = this.updateOrder.bind(this);
+  }
+
+  updateOrder(order) {
+    let newQuotes = this.props.orders.quote;
+    newQuotes[order.id] = order;
+    this.props.setOrders({
+      ...this.props.orders,
+      quote: newQuotes
+    });
+  }
+
   render() {
-
-    const subList = (props) => (
-      <div key={props.key || Math.random()} className="Order-wrapper">
-        <h1>{props.statusType}</h1>
-        <ul>
-        {
-          Object.values(props.orders).map(order => (
-            <Order
-              admin={this.props.admin}
-              apiUrl={this.props.apiUrl}
-              key={order.id || Math.random()}
-              order={order}
-              statusType={props.statusType}
-            />
-            // <div
-            //   key={order.id || Math.random()}
-            //   className="OrderList-Order-wrapper-anchor"
-            //   onClick={() => this.props.orderOnClickHandler(order.id)}>
-            //   <Order order={order}/>
-            // </div>
-
-          ))
-        }
-        </ul>
-      </div>
-    )
 
     let keyCount = 1;
     return (
       <div className="OrderList">
       {
-        Object.values(this.props.orders).map((statusTypeOrders, i) => subList({
-          key: keyCount++,
-          statusType: Object.keys(this.props.orders)[i],
-          orders: statusTypeOrders
-        }))
+        Object.values(this.props.orders).map((statusTypeOrders, i) => (
+          <OrderSubList
+            key={keyCount++}
+            admin={this.props.admin}
+            apiUrl={this.props.apiUrl}
+            orders={statusTypeOrders}
+            updateOrder={this.updateOrder}
+            statusType={Object.keys(this.props.orders)[i]}
+          />
+        ))
       }
       </div>
     )
