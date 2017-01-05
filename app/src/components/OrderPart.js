@@ -31,12 +31,13 @@ class OrderPart extends React.Component {
         obj.buttonTitle = this.state.showAddPriceForm ? 'Cancel' : 'Change Price';
         obj.func = this.toggleAddPriceForm;
       } else if (this.props.statusType === 'priced') {
-        obj.alertTitle = 'pending client approval';
+        // do nothing
       }
     } else {
-      if (this.props.statusType === 'priced') {
-        obj.buttonTitle = 'Accept Price';
-      }
+      // accepting price is now accepting order... happens in the Order component
+      // if (this.props.statusType === 'priced') {
+      //   obj.buttonTitle = 'Accept Price';
+      // }
     }
     return obj;
   }
