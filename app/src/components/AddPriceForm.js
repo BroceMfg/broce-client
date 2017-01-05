@@ -26,13 +26,13 @@ class AddPriceForm extends React.Component {
   }
 
   onChange() {
-    console.log(`price: ${this.price.value}`);
+    // console.log(`price: ${this.price.value}`);
   }
 
   submit() {
     const price = this.price.value;
-    console.log(this.props.orderDetail);
-    console.log(`submitted price: ${price}`);
+    // console.log(this.props.orderDetail);
+    // console.log(`submitted price: ${price}`);
     // TODO: regex check the input as it is being input and
     // disable the submit button until the input matches is valid
     if (price > 0.00) {
@@ -41,8 +41,8 @@ class AddPriceForm extends React.Component {
         `price=${price}`,
         (response) => {
           if (JSON.parse(response).success) {
-            console.log(this.props.orderDetail);
-            console.log(this.props.index);
+            // console.log(this.props.orderDetail);
+            // console.log(this.props.index);
             this.props.updateOrderDetail({
               ...this.props.orderDetail,
               price: parseFloat(price)

@@ -61,9 +61,6 @@ class OrderPart extends React.Component {
     const showAddPriceForm = this.state.showAddPriceForm;
     const orderDetail = this.props.orderDetail;
     const orderAction = this.getOrderAction();
-    console.log('inside OrderPart component');
-    console.log(orderDetail);
-    console.log('----------------');
     return (
       <div className="OrderPart">
         {

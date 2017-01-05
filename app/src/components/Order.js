@@ -78,9 +78,6 @@ class Order extends React.Component {
         <div>StatusTypeId: {order.Order_Statuses[0].StatusTypeId}</div>
         {
           order.Order_Details.map((orderDetail, i) => {
-            console.log('inside Order map func');
-            console.log(orderDetail);
-            console.log('-----------------');
             return (<OrderPart
               key={orderDetail.id}
               index={i}
