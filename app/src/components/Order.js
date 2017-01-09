@@ -1,6 +1,7 @@
 import React from 'react';
 import OrderPart from './OrderPart';
 import { put } from '../middleware/XMLHTTP';
+import httpError from '../middleware/httpError';
 
 class Order extends React.Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class Order extends React.Component {
     this.props.updateOrder({
       ...order,
       Order_Details: newOrderDetails
-    });
+    }, this.props.statusType);
   }
 
   renderAdminFinalizeControls() {
@@ -49,21 +50,23 @@ class Order extends React.Component {
   // admin function to promote order to the "priced" OrderStatus
   // only available after pricing each item in an order
   finalizeOrder() {
+    console.log(this.props.statusType);
     
     put(
       `${this.props.apiUrl}/orders/${this.props.order.id}/status?type=priced`,
       (response) => {
         if (JSON.parse(response).success) {
           // success
+
+          // update App state's orders
+
           console.log(JSON.parse(response));
         } else {
           // handle error
-          console.log('error: response contained an error.');
-          this.props.toggleMessage('Error: Please try again.');
-          setTimeout(() => this.props.toggleMessage, 3000);
+          httpError(this.props.toggleMessage);
         }
       },
-      (errorResponse) => console.log(errorResponse)
+      (errorResponse) => httpError(this.props.toggleMessage)
     );
 
   }

@@ -7,13 +7,15 @@ class OrderList extends React.Component {
     this.updateOrder = this.updateOrder.bind(this);
   }
 
-  updateOrder(order) {
-    let newQuotes = this.props.orders.quote;
-    newQuotes[order.id] = order;
-    this.props.setOrders({
-      ...this.props.orders,
-      quote: newQuotes
-    });
+  updateOrder(order, statusType) {
+    let newList = this.props.orders[statusType];
+    newList[order.id] = order;
+    let newStatusTypeList = {};
+    newStatusTypeList[statusType] = newList;
+    this.props.setOrders(Object.assign(
+      this.props.orders,
+      newStatusTypeList
+    ));
   }
 
   render() {
