@@ -1,5 +1,6 @@
 import React from 'react';
 import OrderPart from './OrderPart';
+import { put } from '../middleware/XMLHTTP';
 
 class Order extends React.Component {
   constructor(props) {
@@ -48,7 +49,23 @@ class Order extends React.Component {
   // admin function to promote order to the "priced" OrderStatus
   // only available after pricing each item in an order
   finalizeOrder() {
-    console.log(`admin finalizing order ${this.props.order.id}`);
+    
+    put(
+      `${this.props.apiUrl}/orders/${this.props.order.id}/status?type=priced`,
+      (response) => {
+        if (JSON.parse(response).success) {
+          // success
+          console.log(JSON.parse(response));
+        } else {
+          // handle error
+          console.log('error: response contained an error.');
+          this.props.toggleMessage('Error: Please try again.');
+          setTimeout(() => this.props.toggleMessage, 3000);
+        }
+      },
+      (errorResponse) => console.log(errorResponse)
+    );
+
   }
 
   // client order for accepting a "priced" order

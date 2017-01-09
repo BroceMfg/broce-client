@@ -16,7 +16,8 @@ class Landing extends React.Component {
       let orders = {};
       JSON.parse(data).orders.forEach((order) => {
 
-        const orderStatusType = this.props.statusTypes[order.Order_Statuses[0].StatusTypeId || 0];
+        const orderStatusType = this.props.statusTypes[order.Order_Statuses
+          .filter((status) => status.current)[0].StatusTypeId || 0];
         const statusType = (orderStatusType !== undefined) ? orderStatusType : 'unknown';
 
         orders[statusType] = orders[statusType] || {};
