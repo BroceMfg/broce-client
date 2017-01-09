@@ -31,7 +31,10 @@ class Order extends React.Component {
     )
 
     if (allPriced) {
-      const total = orderDetails.map((od) => od.price).reduce((a, b) => a + b);
+      // collect total by adding all OrderDetail prices and
+      // round down to 2 decimal places
+      const total = Math.round(orderDetails
+        .map((od) => od.price).reduce((a, b) => a + b) * 100) / 100;
       block = (
         <div className="finalize-controls">
           <span>Total OrderPrice: {total}</span>
