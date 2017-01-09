@@ -84,7 +84,9 @@ class Order extends React.Component {
               ?
                 this.props.statusType === 'quote'
                   ? this.renderAdminFinalizeControls()
-                  : <span>Pending Client Approval.</span>
+                  : this.props.statusType === 'priced'
+                    ? <span>Pending Client Approval.</span>
+                    : null
               :
                 this.props.statusType === 'quote'
                   ? <span>Waiting for admin to finalize prices.</span>
