@@ -15,7 +15,11 @@ class App extends React.Component {
     this.setUser = this.setUser.bind(this);
     this.logout = this.logout.bind(this);
 
-    this.state = {
+    const retrievedObj = localStorage.getItem('state');
+    let storedState = retrievedObj ? JSON.parse(retrievedObj) : undefined;
+    if (storedState) storedState = { ...storedState, orders: {} }; // force reload orders
+
+    this.state = storedState || {
       apiUrl: 'http://localhost:3001',
       orders: {},
       statusTypes: {
@@ -27,13 +31,17 @@ class App extends React.Component {
         5: 'archived',
         6: 'abandoned'
       },
-      user: localStorage.getItem('user')
+      userRoleTypes: {
+        0: 'client',
+        1: 'admin'
+      },
+      user: undefined,
+      admin: undefined
     }
   }
 
-  componentWillUnmount() {
-    console.log('App componentWillUnmount');
-    console.log(this.state);
+  componentWillUpdate(nextProps, nextState) {
+    localStorage.setItem('state', JSON.stringify(nextState));
   }
 
   setOrders(orders) {
@@ -44,10 +52,10 @@ class App extends React.Component {
   }
 
   setUser(user) {
-    localStorage.setItem('user', user);
     this.setState({
       ...this.state,
-      user
+      user,
+      admin: this.state.userRoleTypes[user.role || 0] === 'admin'
     });
   }
 
@@ -67,6 +75,7 @@ class App extends React.Component {
 
   render() {
     const {
+      admin,
       orders,
       apiUrl,
       user
@@ -85,6 +94,7 @@ class App extends React.Component {
                     pattern="/"
                     render={
                       () => <Landing
+                              admin={admin}
                               orders={orders}
                               apiUrl={apiUrl}
                               logout={this.logout}

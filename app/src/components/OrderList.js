@@ -1,38 +1,53 @@
 import React from 'react';
-import Order from './Order';
+import OrderSubList from './OrderSubList';
 
 class OrderList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.updateOrder = this.updateOrder.bind(this);
+    this.promoteOrder = this.promoteOrder.bind(this);
+  }
+
+  updateOrder(order, statusType) {
+    let newList = this.props.orders[statusType];
+    newList[order.id] = order;
+    let newStatusTypeList = {};
+    newStatusTypeList[statusType] = newList;
+    this.props.setOrders(Object.assign(
+      this.props.orders,
+      newStatusTypeList
+    ));
+  }
+
+  promoteOrder(order, currentStatusType) {
+    const statusTypes = Object.values(this.props.statusTypes);
+    const nextStatusType = statusTypes[statusTypes.indexOf(currentStatusType) + 1];
+    const orders = this.props.orders;
+    delete orders[currentStatusType][order.id];
+    if (orders[nextStatusType] === undefined){
+      orders[nextStatusType] = {};
+    }
+    orders[nextStatusType][order.id] = order;
+    this.props.setOrders(orders);
+  }
+
   render() {
-
-    const subList = (props) => (
-      <div key={props.key || Math.random()} className="Order-wrapper">
-        <h1>{props.title}</h1>
-        <ul>
-        {
-          Object.values(props.orders).map(order => (
-
-            <a
-              key={order.id || Math.random()}
-              className="OrderList-Order-wrapper-anchor"
-              onClick={() => this.props.orderOnClickHandler(order.id)}>
-              <Order order={order}/>
-            </a>
-
-          ))
-        }
-        </ul>
-      </div>
-    )
 
     let keyCount = 1;
     return (
       <div className="OrderList">
       {
-        Object.values(this.props.orders).map((statusTypeOrders, i) => subList({
-          key: keyCount++,
-          title: Object.keys(this.props.orders)[i],
-          orders: statusTypeOrders
-        }))
+        Object.values(this.props.orders).map((statusTypeOrders, i) => (
+          <OrderSubList
+            key={keyCount++}
+            admin={this.props.admin}
+            apiUrl={this.props.apiUrl}
+            orders={statusTypeOrders}
+            updateOrder={this.updateOrder}
+            promoteOrder={this.promoteOrder}
+            statusType={Object.keys(this.props.orders)[i]}
+          />
+        ))
       }
       </div>
     )

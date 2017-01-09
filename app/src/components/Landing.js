@@ -16,7 +16,8 @@ class Landing extends React.Component {
       let orders = {};
       JSON.parse(data).orders.forEach((order) => {
 
-        const orderStatusType = this.props.statusTypes[order.Order_Statuses[0].StatusTypeId || 0];
+        const orderStatusType = this.props.statusTypes[order.Order_Statuses
+          .filter((status) => status.current)[0].StatusTypeId || 0];
         const statusType = (orderStatusType !== undefined) ? orderStatusType : 'unknown';
 
         orders[statusType] = orders[statusType] || {};
@@ -43,7 +44,11 @@ class Landing extends React.Component {
         <Dashboard logout={this.props.logout} />
         <div className="Landing">
           <OrderList
+            admin={this.props.admin}
+            apiUrl={this.props.apiUrl}
             orders={this.props.orders}
+            setOrders={this.props.setOrders}
+            statusTypes={this.props.statusTypes}
             orderOnClickHandler={this.orderOnClickHandler} />
           <QuoteForm apiUrl={this.props.apiUrl} />
         </div>

@@ -14,9 +14,9 @@ export function get(theUrl, callback, errorCallback) {
   xmlHttp.send(null);
 }
 
-export function post(theUrl, formData, callback, errorCallback) {
+function putPost(method, theUrl, formData, callback, errorCallback) {
   var xmlHttp = new XMLHttpRequest();
-  xmlHttp.open("POST", theUrl, true); // true for asynchronous 
+  xmlHttp.open(method, theUrl, true); // true for asynchronous 
   xmlHttp.withCredentials = true;
   xmlHttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
@@ -30,3 +30,8 @@ export function post(theUrl, formData, callback, errorCallback) {
 
   xmlHttp.send(formData);
 }
+
+export const post = (theUrl, formData, callback, errorCallback) => putPost("POST",
+  theUrl, formData, callback, errorCallback);
+export const put = (theUrl, formData, callback, errorCallback) => putPost("PUT",
+  theUrl, formData, callback, errorCallback);

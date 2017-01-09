@@ -32,6 +32,15 @@ body {
   cursor: pointer;
 }
 
+.OrderPart {
+  outline: solid 1px blue;
+  margin: 1em;
+}
+
+.OrderPart-message {
+  border: solid 2px #F0AB28;
+}
+
 .MachineNumber {
 
   border: solid 1px black;
