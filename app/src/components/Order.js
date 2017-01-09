@@ -69,7 +69,20 @@ class Order extends React.Component {
   // client order for accepting a "priced" order
   // this will promote the order's OrderStatus to "ordered"
   acceptOrder() {
-    console.log(`client accepting order ${this.props.order.id}`);
+    put(
+      `${this.props.apiUrl}/orders/${this.props.order.id}/status?type=ordered`,
+      null,
+      (response) => {
+        if (JSON.parse(response).success) {
+          // success
+          this.props.promoteOrder(this.props.order, this.props.statusType);
+        } else {
+          // handle error
+          console.log('internal server error');
+        }
+      },
+      (errorResponse) => console.log(errorResponse)
+    );
   }
 
   render() {

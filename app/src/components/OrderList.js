@@ -24,6 +24,9 @@ class OrderList extends React.Component {
     const nextStatusType = statusTypes[statusTypes.indexOf(currentStatusType) + 1];
     const orders = this.props.orders;
     delete orders[currentStatusType][order.id];
+    if (orders[nextStatusType] === undefined){
+      orders[nextStatusType] = {};
+    }
     orders[nextStatusType][order.id] = order;
     this.props.setOrders(orders);
   }
