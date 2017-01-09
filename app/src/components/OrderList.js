@@ -5,6 +5,7 @@ class OrderList extends React.Component {
   constructor(props) {
     super(props);
     this.updateOrder = this.updateOrder.bind(this);
+    this.promoteOrder = this.promoteOrder.bind(this);
   }
 
   updateOrder(order, statusType) {
@@ -16,6 +17,15 @@ class OrderList extends React.Component {
       this.props.orders,
       newStatusTypeList
     ));
+  }
+
+  promoteOrder(order, currentStatusType) {
+    const statusTypes = Object.values(this.props.statusTypes);
+    const nextStatusType = statusTypes[statusTypes.indexOf(currentStatusType) + 1];
+    const orders = this.props.orders;
+    delete orders[currentStatusType][order.id];
+    orders[nextStatusType][order.id] = order;
+    this.props.setOrders(orders);
   }
 
   render() {
@@ -31,6 +41,7 @@ class OrderList extends React.Component {
             apiUrl={this.props.apiUrl}
             orders={statusTypeOrders}
             updateOrder={this.updateOrder}
+            promoteOrder={this.promoteOrder}
             statusType={Object.keys(this.props.orders)[i]}
           />
         ))

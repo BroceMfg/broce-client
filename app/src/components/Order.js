@@ -1,7 +1,6 @@
 import React from 'react';
 import OrderPart from './OrderPart';
 import { put } from '../middleware/XMLHTTP';
-import httpError from '../middleware/httpError';
 
 class Order extends React.Component {
   constructor(props) {
@@ -50,23 +49,19 @@ class Order extends React.Component {
   // admin function to promote order to the "priced" OrderStatus
   // only available after pricing each item in an order
   finalizeOrder() {
-    console.log(this.props.statusType);
-    
     put(
       `${this.props.apiUrl}/orders/${this.props.order.id}/status?type=priced`,
+      null,
       (response) => {
         if (JSON.parse(response).success) {
           // success
-
-          // update App state's orders
-
-          console.log(JSON.parse(response));
+          this.props.promoteOrder(this.props.order, this.props.statusType);
         } else {
           // handle error
-          httpError(this.props.toggleMessage);
+          console.log('internal server error');
         }
       },
-      (errorResponse) => httpError(this.props.toggleMessage)
+      (errorResponse) => console.log(errorResponse)
     );
 
   }
