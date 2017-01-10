@@ -7,8 +7,13 @@ class Order extends React.Component {
     super(props);
     this.updateOrderDetail = this.updateOrderDetail.bind(this);
     this.renderAdminFinalizeControls = this.renderAdminFinalizeControls.bind(this);
+    this.toggleShippingAddressForm = this.toggleShippingAddressForm.bind(this);
+    this.renderClientAcceptControls = this.renderClientAcceptControls.bind(this);
     this.finalizeOrder = this.finalizeOrder.bind(this);
     this.acceptOrder = this.acceptOrder.bind(this);
+    this.state = {
+      showShippingAddressForm: false
+    };
   }
 
   updateOrderDetail(newOrderDetail, index) {
@@ -26,7 +31,7 @@ class Order extends React.Component {
     const allPriced = orderDetails.filter((od) => od.price).length === orderDetails.length;
 
     let block = (
-      <div className="finalize-controls-wrapper">
+      <div className="finalize-controls">
         <span>All items must be priced before proceeding.</span>
       </div>
     )
@@ -42,6 +47,32 @@ class Order extends React.Component {
           <button onClick={this.finalizeOrder}>Finalize Order</button>
         </div>
       )
+    }
+    return block;
+  }
+
+  toggleShippingAddressForm() {
+    this.setState({
+      ...this.state,
+      showShippingAddressForm: !this.state.showShippingAddressForm
+    });
+  }
+
+  renderClientAcceptControls() {
+    let block;
+    if (this.state.showShippingAddressForm) {
+      block = (
+        <div className="accept-controls">
+          <button onClick={this.toggleShippingAddressForm}>Cancel</button>
+          <span>hello world hello</span>
+        </div>
+      );
+    } else {
+      block = (
+        <div className="accept-controls">
+          <button onClick={this.toggleShippingAddressForm}>Accept Order</button>
+        </div>
+      );
     }
     return block;
   }
@@ -69,6 +100,9 @@ class Order extends React.Component {
   // client order for accepting a "priced" order
   // this will promote the order's OrderStatus to "ordered"
   acceptOrder() {
+
+    // we need to add shipping address info AND promote the order status
+
     put(
       `${this.props.apiUrl}/orders/${this.props.order.id}/status?type=ordered`,
       null,
@@ -102,7 +136,7 @@ class Order extends React.Component {
                 this.props.statusType === 'quote'
                   ? <span>Waiting for admin to finalize prices.</span>
                   : this.props.statusType === 'priced'
-                    ? <button onClick={this.acceptOrder}>Accept Order</button>
+                    ? this.renderClientAcceptControls()
                     : null
           }
         </div>
