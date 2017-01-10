@@ -1,5 +1,6 @@
 import React from 'react';
 import OrderPart from './OrderPart';
+import ShippingAddressForm from './ShippingAddressForm';
 import { put } from '../middleware/XMLHTTP';
 
 class Order extends React.Component {
@@ -64,7 +65,7 @@ class Order extends React.Component {
       block = (
         <div className="accept-controls">
           <button onClick={this.toggleShippingAddressForm}>Cancel</button>
-          <span>hello world hello</span>
+          <ShippingAddressForm />
         </div>
       );
     } else {
