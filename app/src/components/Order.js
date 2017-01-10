@@ -1,7 +1,7 @@
 import React from 'react';
 import OrderPart from './OrderPart';
 import ShippingAddressForm from './ShippingAddressForm';
-import { put } from '../middleware/XMLHTTP';
+import { post, put } from '../middleware/XMLHTTP';
 
 class Order extends React.Component {
   constructor(props) {
@@ -65,7 +65,7 @@ class Order extends React.Component {
       block = (
         <div className="accept-controls">
           <button onClick={this.toggleShippingAddressForm}>Cancel</button>
-          <ShippingAddressForm />
+          <ShippingAddressForm submit={this.acceptOrder} />
         </div>
       );
     } else {
@@ -100,13 +100,21 @@ class Order extends React.Component {
 
   // client order for accepting a "priced" order
   // this will promote the order's OrderStatus to "ordered"
-  acceptOrder() {
+  acceptOrder(form) {
+    let formData = ''
+    Object.keys(form).forEach(key => {
+      formData += `${key}=${form[key]}&`;
+    });
 
-    // we need to add shipping address info AND promote the order status
+    const orderDetailIds = this.props.order.Order_Details
+      .map((orderDetail) => orderDetail.id);
 
-    put(
-      `${this.props.apiUrl}/orders/${this.props.order.id}/status?type=ordered`,
-      null,
+    const statusType = this.props.getNextStatusType(this.props.statusType);
+
+    post(
+      `${this.props.apiUrl}/orders/details/${orderDetailIds.join(',')}` + 
+        `/shippingaddress?statusType=${statusType}`,
+      formData,
       (response) => {
         if (JSON.parse(response).success) {
           // success

@@ -21,6 +21,7 @@ class OrderSubList extends React.Component {
                       updateOrder={this.props.updateOrder}
                       promoteOrder={this.props.promoteOrder}
                       statusType={this.props.statusType}
+                      getNextStatusType={this.props.getNextStatusType}
                     />
                   ))
                 }
