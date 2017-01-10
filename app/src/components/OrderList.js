@@ -5,6 +5,7 @@ class OrderList extends React.Component {
   constructor(props) {
     super(props);
     this.updateOrder = this.updateOrder.bind(this);
+    this.getNextStatusType = this.getNextStatusType.bind(this);
     this.promoteOrder = this.promoteOrder.bind(this);
   }
 
@@ -19,9 +20,13 @@ class OrderList extends React.Component {
     ));
   }
 
-  promoteOrder(order, currentStatusType) {
+  getNextStatusType(currentStatusType){
     const statusTypes = Object.values(this.props.statusTypes);
-    const nextStatusType = statusTypes[statusTypes.indexOf(currentStatusType) + 1];
+    return statusTypes[statusTypes.indexOf(currentStatusType) + 1];
+  }
+
+  promoteOrder(order, currentStatusType) {
+    const nextStatusType = this.getNextStatusType();
     const orders = this.props.orders;
     delete orders[currentStatusType][order.id];
     if (orders[nextStatusType] === undefined){
@@ -46,6 +51,7 @@ class OrderList extends React.Component {
             updateOrder={this.updateOrder}
             promoteOrder={this.promoteOrder}
             statusType={Object.keys(this.props.orders)[i]}
+            getNextStatusType={this.getNextStatusType}
           />
         ))
       }
