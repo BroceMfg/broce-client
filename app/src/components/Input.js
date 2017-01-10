@@ -6,6 +6,7 @@ class Input extends React.Component {
     super(props);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.renderInput = this.renderInput.bind(this);
     this.state = {
       value: this.props.value ? _.clone(this.props.value) : ''
     };
@@ -31,6 +32,11 @@ class Input extends React.Component {
         && (e.charCode < 48 || e.charCode > 57)) {
         e.preventDefault();
       }
+      if (this.props.maxCharLength !== undefined) {
+        if (e.target.value.length >= this.props.maxCharLength) {
+          e.preventDefault();
+        }
+      }
     }
   }
 
@@ -44,21 +50,48 @@ class Input extends React.Component {
     }
   }
 
+  renderInput() {
+    let block;
+    const required = this.props.required;
+    if (required === undefined || required) {
+      // is required
+      block = (
+        <input
+          className={this.props.className}
+          ref={this.props.refProp}
+          type={this.props.type}
+          name={this.props.name}
+          placeholder={this.props.placeholder}
+          required
+          value={this.state.value}
+          min={this.props.min}
+          max={this.props.max}
+          onChange={this.handleChange}
+          onKeyPress={this.handleKeyPress} />
+      );
+    } else {
+      // not required
+      block = (
+        <input
+          className={this.props.className}
+          ref={this.props.refProp}
+          type={this.props.type}
+          name={this.props.name}
+          placeholder={this.props.placeholder}
+          value={this.state.value}
+          min={this.props.min}
+          max={this.props.max}
+          onChange={this.handleChange}
+          onKeyPress={this.handleKeyPress} />
+      );
+    }
+    return block;
+  }
+
   render() {
     return (
     <div className="Input">
-      <input
-        className={this.props.className}
-        ref={this.props.refProp}
-        type={this.props.type}
-        name={this.props.name}
-        placeholder={this.props.placeholder}
-        required
-        value={this.state.value}
-        min={this.props.min}
-        max={this.props.max}
-        onChange={this.handleChange}
-        onKeyPress={this.handleKeyPress} />
+      {this.renderInput()}
     </div>
     )
   }

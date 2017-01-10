@@ -43,8 +43,9 @@ body {
 .PartNumber:not(:first-child) {
   margin-top: 8px; }
 
-.OrderForm {
-  border: solid 1px black; }
+.ShippingAddressForm {
+  outline: solid 1px blue;
+  margin: 1em; }
 
 .QuoteForm {
   border: solid 1px black; }
