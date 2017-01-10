@@ -106,10 +106,14 @@ class Order extends React.Component {
       formData += `${key}=${form[key]}&`;
     });
 
-    const orderDetailIds = this.props.order.Order_Details.map((orderDetail) => orderDetail.id);
+    const orderDetailIds = this.props.order.Order_Details
+      .map((orderDetail) => orderDetail.id);
+
+    const statusType = this.props.getNextStatusType(this.props.statusType);
 
     post(
-      `${this.props.apiUrl}/orders/details/${orderDetailIds.join(',')}/shippingaddress?statusType=${this.props.getNextStatusType(this.props.statusType)}`,
+      `${this.props.apiUrl}/orders/details/${orderDetailIds.join(',')}` + 
+        `/shippingaddress?statusType=${statusType}`,
       formData,
       (response) => {
         if (JSON.parse(response).success) {

@@ -26,7 +26,7 @@ class OrderList extends React.Component {
   }
 
   promoteOrder(order, currentStatusType) {
-    const nextStatusType = this.getNextStatusType();
+    const nextStatusType = this.getNextStatusType(currentStatusType);
     const orders = this.props.orders;
     delete orders[currentStatusType][order.id];
     if (orders[nextStatusType] === undefined){
