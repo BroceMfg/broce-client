@@ -1,5 +1,6 @@
 import React from 'react';
 import OrderAction from './OrderAction';
+import ShippingDetail from './ShippingDetail';
 import AddPriceForm from './AddPriceForm';
 
 class OrderPart extends React.Component {
@@ -61,6 +62,7 @@ class OrderPart extends React.Component {
     const showAddPriceForm = this.state.showAddPriceForm;
     const orderDetail = this.props.orderDetail;
     const orderAction = this.getOrderAction();
+    const shippingDetail = orderDetail.Shipping_Detail;
     return (
       <div className="OrderPart">
         {
@@ -88,6 +90,11 @@ class OrderPart extends React.Component {
           alertTitle={orderAction.alertTitle}
           action={orderAction.func}
         />
+        {
+          shippingDetail
+            ? <ShippingDetail shippingDetail={shippingDetail} />
+            : null
+        }
         {
           showAddPriceForm
             ? <AddPriceForm
