@@ -40,22 +40,24 @@ class SignIn extends React.Component {
           <legend>Log In</legend>
           <div className="form-group">
             <label htmlFor="email">Email</label>
-            <Input 
+            <Input
               refProp={(input) => { this.email = input }}
               type="email"
               name={'email'}
               value={this.props.email}
               placeholder="Email"
+              submitOnEnter={true}
             />
           </div>
           <div className="form-group">
             <label htmlFor="password">Password</label>
-            <Input 
+            <Input
               refProp={(input) => { this.password = input }}
               type="password"
               name={'password'}
               value={this.props.password}
               placeholder="Password"
+              submitOnEnter={true}
             />
           </div>
           <button className="btn btn-primary" type="submit">Log In</button>
