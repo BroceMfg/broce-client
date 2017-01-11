@@ -14,21 +14,19 @@ class Input extends React.Component {
 
   handleKeyPress(e) {
     if (e.charCode === 13) {
-      e.preventDefault();
-      
-      /* TODO: decide if this is a nice feature to have
-         or if it would just get annoying becauase people
-         are submitting the form accidentally */
-
-      // if (this.props.submit) {
-      //   this.props.submit(e);
-      // }
-
+      if (this.props.submitOnEnter) {
+        if (this.props.submit) {
+          e.preventDefault();
+          this.props.submit(e);
+        }
+      } else {
+        e.preventDefault();
+      }
     }
     // prevents the 'e' character within a number input
     // but still allows for decimals
     if (this.props.type === 'number') {
-      if (e.charCode !== 46 && e.charCode > 31 
+      if (e.charCode !== 46 && e.charCode > 31
         && (e.charCode < 48 || e.charCode > 57)) {
         e.preventDefault();
       }
