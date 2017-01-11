@@ -49,12 +49,7 @@ class ShippingAddressForm extends React.Component {
 
   submit(e) {
     e.preventDefault();
-    console.log(this.state.form);
-
-    // TODO: send data to API, and promote Order_Status to `ordered`
     this.props.submit(this.state.form);
-    
-
     this.reset();
   }
 
