@@ -162,8 +162,21 @@ class Order extends React.Component {
 
     const statusType = this.props.getNextStatusType(this.props.statusType);
 
-    // TODO: send to API
-
+    put(
+      `${this.props.apiUrl}/orders/details/${orderDetailIds.join(',')}` + 
+        `?statusType=${statusType}`,
+      formData,
+      (response) => {
+        if (JSON.parse(response).success) {
+          // success
+          this.props.promoteOrder(this.props.order, this.props.statusType);
+        } else {
+          // handle error
+          console.log('internal server error');
+        }
+      },
+      (errorResponse) => console.log(errorResponse)
+    );
   }
 
   render() {
