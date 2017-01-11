@@ -15,6 +15,7 @@ class Order extends React.Component {
     this.acceptControls = this.acceptControls.bind(this);
     this.finalizeOrder = this.finalizeOrder.bind(this);
     this.acceptOrder = this.acceptOrder.bind(this);
+    this.addShippingDetail = this.addShippingDetail.bind(this);
     this.state = {
       showControls: false
     };
@@ -88,7 +89,7 @@ class Order extends React.Component {
     return this.renderControls(
       this.state.showControls,
       'Mark Shipped',
-      <ShippingDetailForm />
+      <ShippingDetailForm submit={this.addShippingDetail} />
     );
   }
 
@@ -148,6 +149,21 @@ class Order extends React.Component {
       },
       (errorResponse) => console.log(errorResponse)
     );
+  }
+
+  addShippingDetail(form) {
+    let formData = ''
+    Object.keys(form).forEach(key => {
+      formData += `${key}=${form[key]}&`;
+    });
+
+    const orderDetailIds = this.props.order.Order_Details
+      .map((orderDetail) => orderDetail.id);
+
+    const statusType = this.props.getNextStatusType(this.props.statusType);
+
+    // TODO: send to API
+
   }
 
   render() {

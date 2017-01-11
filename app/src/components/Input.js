@@ -63,6 +63,7 @@ class Input extends React.Component {
           name={this.props.name}
           placeholder={this.props.placeholder}
           required
+          step="any"
           value={this.state.value}
           min={this.props.min}
           max={this.props.max}
@@ -78,6 +79,7 @@ class Input extends React.Component {
           type={this.props.type}
           name={this.props.name}
           placeholder={this.props.placeholder}
+          step="any"
           value={this.state.value}
           min={this.props.min}
           max={this.props.max}
