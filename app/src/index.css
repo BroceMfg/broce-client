@@ -32,6 +32,10 @@ body {
 .OrderPart-message {
   border: solid 2px #F0AB28; }
 
+.ShippingDetail {
+  outline: solid 1px black;
+  margin: 1em; }
+
 .MachineNumber {
   border: solid 1px black; }
   .MachineNumber:not(:first-child) {
