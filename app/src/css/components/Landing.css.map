@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA;;IAEI;AAEJ,gBAAgB;AAUhB,sBAAsB;AAKtB,oBAAoB;AAMpB,2BAA2B;AAE3B;;IAEI;AAEJ,4BAA4B;AAK5B,0BAA0B;AAI1B,2BAA2B;AAE3B;;IAEI;AC1CJ,QAAS;EACP,gBAAgB,EDcC,OAAG",
+"sources": ["../../sass/partials/_variables.scss","../../sass/components/Landing.scss"],
+"names": [],
+"file": "Landing.css"
+}

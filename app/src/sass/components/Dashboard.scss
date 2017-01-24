@@ -1,0 +1,72 @@
+@import '../partials/variables';
+@import '../mixins/micro-clearfix';
+
+.Dashboard {
+  background-color: $Dashboard_bg_color;
+  height: 100%;
+  width: calc(100% - (2 * #{$Dashboard_padding}));
+  position: relative;
+  padding: $Dashboard_padding;
+  @include micro-clearfix();
+}
+
+.Dashboard-header {
+  float: left;
+  width: $Dashboard_header_width;
+  height: 100%;
+}
+
+.button-container {
+  display: inline-block;
+  float: right;
+  width: calc(100% - #{$Dashboard_header_width} - (#{$Dashboard_padding}/2));
+  height: calc(100% - (2 * #{$Dashboard_padding}));
+  position: absolute;
+}
+
+.button {
+  background-color: $button_bg_color;
+  border: solid $button_border_size;
+  border-color: $button_border_color;
+  border-radius: $button_border_radius;
+  cursor: pointer;
+  display: table;
+  height: 100%;
+  float: left;
+  width: calc(50% - (#{$button_border_size}*2) - 0.7em);
+  margin-left: 0.2em;
+  margin-right: 1em;
+  &:last-child {
+    margin-left: 0;
+    margin-right: 0.2em;
+  }
+  span {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+  }
+  &:hover {
+    background-color: $button_bg_hov_color;
+    border-color: $button_border_hov_color;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .Dashboard-header {
+    font-size: 150%;
+    font-size: 6.4vw;
+    clear: both;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  .button-container {
+    position: relative;
+    float: left;
+    clear: both;
+    display: block;
+    margin-top: 0.7em;
+    width: 100%;
+    height: 2em;
+  }
+}

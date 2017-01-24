@@ -4,6 +4,8 @@ import Dashboard from './Dashboard';
 import OrderList from './OrderList';
 import QuoteForm from './QuoteForm';
 
+import '../css/components/Landing.css';
+
 class Landing extends React.Component {
 
   constructor(props) {

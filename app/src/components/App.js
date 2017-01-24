@@ -7,6 +7,8 @@ import OrderDetail from './OrderDetail';
 import NotFound from './NotFound';
 import SignIn from './SignIn';
 
+import '../css/components/App.css';
+
 class App extends React.Component {
   constructor(props) {
     super(props);

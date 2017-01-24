@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../css/components/Dashboard.css';
+
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
@@ -17,16 +19,18 @@ class Dashboard extends React.Component {
         <h1 className="Dashboard-header">
           Welcome To Broce Parts
         </h1>
-        <a
-          onClick={this.settingsOnClickHandler}
-          className="btn Dashboard-anchor">
-          Settings
-        </a>
-        <a
-          onClick={this.props.logout}
-          className="btn Dashboard-anchor">
-          Log Out
-        </a>
+        <div className="button-container">
+          <a
+            onClick={this.settingsOnClickHandler}
+            className="button">
+            <span>Settings</span>
+          </a>
+          <a
+            onClick={this.props.logout}
+            className="button">
+            <span>Log Out</span>
+          </a>
+        </div>
       </div>
     )
   }

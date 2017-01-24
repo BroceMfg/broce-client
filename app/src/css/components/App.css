@@ -1,0 +1,36 @@
+/***
+  COLOR PALLETTE
+***/
+/* Grey scale */
+/* Container colors */
+/* Element colors */
+/* --------------------- */
+/***
+  MEASUREMENTS
+***/
+/* Container measurements */
+/* Element measurements */
+/* --------------------- */
+/***
+  FONTS
+***/
+html, body {
+  background-color: #F6F6F6;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: sans-serif; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0; }
+
+.App {
+  background-color: #F6F6F6;
+  width: 100%;
+  max-width: 1600px;
+  height: 100%;
+  margin: auto; }
+
+/*# sourceMappingURL=App.css.map */

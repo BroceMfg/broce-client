@@ -1,0 +1,23 @@
+@import '../partials/variables';
+
+html, body {
+  background-color: $App_bg_color;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: $main_font_family;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  background-color: $App_bg_color;
+  width: 100%;
+  max-width: $App_max_width;
+  height: 100%;
+  margin: auto;
+}
