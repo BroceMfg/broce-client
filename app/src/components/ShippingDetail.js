@@ -5,7 +5,7 @@ class ShippingDetail extends React.Component {
     const shippingDetail = this.props.shippingDetail;
     return (
       <div className="ShippingDetail">
-        <h4>Shippign Details</h4>
+        <h4>Shipping Details</h4>
         <div>Tracking Number: {shippingDetail.tracking_number}</div>
         <div>Cost: {shippingDetail.cost}</div>
       </div>
