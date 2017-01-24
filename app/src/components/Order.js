@@ -70,7 +70,7 @@ class Order extends React.Component {
       .filter((od) => od.price).length === orderDetails.length;
 
     const total = Math.round(orderDetails
-      .map((od) => od.price).reduce((a, b) => a + b) * 100) / 100;
+      .map((od) => (od.price * od.quantity)).reduce((a, b) => a + b) * 100) / 100;
 
     return this.renderControls(
       allPriced,
