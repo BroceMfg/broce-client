@@ -10,30 +10,56 @@ class Landing extends React.Component {
 
   constructor(props) {
     super(props);
+    this.getStatusTypeId = this.getStatusTypeId.bind(this);
     this.orderOnClickHandler = this.orderOnClickHandler.bind(this);
   }
 
   componentWillMount() {
+    const {
+      admin,
+      statusTypes,
+      getStatusType,
+      setOrders,
+      apiUrl
+    } = this.props;
+
     const cb = (data) => {
       let orders = {};
-      JSON.parse(data).orders.forEach((order) => {
+      JSON.parse(data).orders
+        .sort((a, b) => {
+          const statusTypeValues = Object.values(statusTypes);
+          if (admin) {
+            return statusTypeValues.indexOf(this.getStatusTypeId(a))
+              - statusTypeValues.indexOf(this.getStatusTypeId(b));
+          } else {
+            return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+          }
+        })
+        .forEach((order) => {
+          // if (this.props.admin) {
+          if (admin) {
+            const orderStatusType = getStatusType(this.getStatusTypeId(order));
+            const statusType = (orderStatusType !== undefined) ? orderStatusType : 'unknown';
 
-        const orderStatusType = this.props.statusTypes[order.Order_Statuses
-          .filter((status) => status.current)[0].StatusTypeId || 0];
-        const statusType = (orderStatusType !== undefined) ? orderStatusType : 'unknown';
-
-        orders[statusType] = orders[statusType] || {};
-        orders[statusType][order.id] = order;
-
-      });
-      this.props.setOrders(orders);
+            orders[statusType] = orders[statusType] || {};
+            orders[statusType][order.id] = order;
+          } else {
+            orders[order.id] = order;
+          }
+        });
+      console.log(orders);
+      setOrders(orders);
     }
 
     get(
-      `${this.props.apiUrl}/orders?status=quote,priced`,
+      `${apiUrl}/orders?status=quote,priced`,
       (data) => cb(data),
       (err) => console.log(err)
     );
+  }
+
+  getStatusTypeId(order) {
+    return order.Order_Statuses.filter((status) => status.current)[0].StatusTypeId || 0;
   }
 
   orderOnClickHandler(orderId) {
@@ -51,6 +77,7 @@ class Landing extends React.Component {
             orders={this.props.orders}
             setOrders={this.props.setOrders}
             statusTypes={this.props.statusTypes}
+            getStatusType={(order) => this.props.getStatusType(this.getStatusTypeId(order))}
             orderOnClickHandler={this.orderOnClickHandler} />
           <QuoteForm apiUrl={this.props.apiUrl} />
         </div>

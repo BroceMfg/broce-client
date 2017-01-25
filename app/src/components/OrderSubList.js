@@ -3,13 +3,18 @@ import Order from './Order';
 
 class OrderSubList extends React.Component {
   render() {
+    console.log(this.props.statusType);
     return (
       <div className="Order-wrapper">
         {
           this.props.orders && Object.keys(this.props.orders).length > 0
             ?
               <div>
-                <h1>{this.props.statusType}</h1>
+                {
+                  this.props.admin
+                    ? <h1>{this.props.statusType}</h1>
+                    : null
+                }
                 <ul>
                 {
                   Object.values(this.props.orders).map((order) => (
@@ -20,7 +25,7 @@ class OrderSubList extends React.Component {
                       order={order}
                       updateOrder={this.props.updateOrder}
                       promoteOrder={this.props.promoteOrder}
-                      statusType={this.props.statusType}
+                      statusType={this.props.statusType || this.props.getStatusType(order)}
                       getNextStatusType={this.props.getNextStatusType}
                     />
                   ))

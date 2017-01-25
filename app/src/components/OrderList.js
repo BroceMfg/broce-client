@@ -9,6 +9,7 @@ class OrderList extends React.Component {
     this.updateOrder = this.updateOrder.bind(this);
     this.getNextStatusType = this.getNextStatusType.bind(this);
     this.promoteOrder = this.promoteOrder.bind(this);
+    this.renderSubLists = this.renderSubLists.bind(this);
   }
 
   updateOrder(order, statusType) {
@@ -38,25 +39,43 @@ class OrderList extends React.Component {
     this.props.setOrders(orders);
   }
 
-  render() {
-
+  renderSubLists() {
+    let list;
+    let getStatusType;
+    if (this.props.admin) {
+      list = Object.values(this.props.orders);
+      getStatusType = (orders, i) => Object.keys(orders)[i];
+    } else {
+      list = [this.props.orders];
+      getStatusType = () => null;
+    }
+    console.log(list);
     let keyCount = 1;
     return (
+      <div>
+        {
+          list.map((orders, i) => (
+            <OrderSubList
+              key={keyCount++}
+              admin={this.props.admin}
+              apiUrl={this.props.apiUrl}
+              orders={orders}
+              updateOrder={this.updateOrder}
+              promoteOrder={this.promoteOrder}
+              statusType={getStatusType(this.props.orders, i)}
+              getStatusType={this.props.getStatusType}
+              getNextStatusType={this.getNextStatusType}
+            />
+          ))
+        }
+      </div>
+    );
+  }
+
+  render() {
+    return (
       <div className="OrderList">
-      {
-        Object.values(this.props.orders).map((statusTypeOrders, i) => (
-          <OrderSubList
-            key={keyCount++}
-            admin={this.props.admin}
-            apiUrl={this.props.apiUrl}
-            orders={statusTypeOrders}
-            updateOrder={this.updateOrder}
-            promoteOrder={this.promoteOrder}
-            statusType={Object.keys(this.props.orders)[i]}
-            getNextStatusType={this.getNextStatusType}
-          />
-        ))
-      }
+        {this.renderSubLists()}
       </div>
     )
   }

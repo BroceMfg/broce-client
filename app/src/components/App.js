@@ -14,6 +14,7 @@ class App extends React.Component {
     super(props);
 
     this.setOrders = this.setOrders.bind(this);
+    this.getStatusType = this.getStatusType.bind(this);
     this.setUser = this.setUser.bind(this);
     this.logout = this.logout.bind(this);
 
@@ -51,6 +52,10 @@ class App extends React.Component {
       ...this.state,
       orders
     });
+  }
+
+  getStatusType(statusTypeId) {
+    return this.state.statusTypes[statusTypeId];
   }
 
   setUser(user) {
@@ -102,6 +107,7 @@ class App extends React.Component {
                               logout={this.logout}
                               setOrders={this.setOrders}
                               statusTypes={this.state.statusTypes}
+                              getStatusType={this.getStatusType}
                             />
                     }
                   />
