@@ -1,0 +1,26 @@
+/***
+  COLOR PALLETTE
+***/
+/* Grey scale */
+/* Container colors */
+/* Element colors */
+/* --------------------- */
+/***
+  MEASUREMENTS
+***/
+/* Container measurements */
+/* Element measurements */
+/* --------------------- */
+/***
+  FONTS
+***/
+.OrderList {
+  background-color: #F6F6F6; }
+
+@media screen and (min-width: 768px) {
+  .OrderList {
+    float: left;
+    width: 50%;
+    height: 100%; } }
+
+/*# sourceMappingURL=OrderList.css.map */

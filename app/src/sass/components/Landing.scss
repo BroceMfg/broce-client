@@ -1,5 +1,9 @@
 @import '../partials/variables';
+@import '../mixins/micro-clearfix';
 
 .Landing {
+  @include micro-clearfix();
   background-color: $Landing_bg_color;
+  height: 100%;
+  position: relative;
 }

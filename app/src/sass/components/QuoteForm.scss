@@ -1,0 +1,16 @@
+@import '../partials/variables';
+
+.QuoteForm {
+  background-color: $QuoteForm_bg_color;
+}
+
+@media screen and (min-width: 768px) {
+  .QuoteForm {
+    position: absolute;
+    top: 0;
+    right: 0;
+    float: left;
+    width: 50%;
+    height: 100%;
+  }
+}

@@ -4,6 +4,8 @@ import gnum from '../helpers/global-enum';
 import MachineNumberBlock from './MachineNumberBlock';
 import { post } from '../middleware/XMLHTTP';
 
+import '../css/components/QuoteForm.css';
+
 class QuoteForm extends React.Component {
   constructor(props) {
     super(props);

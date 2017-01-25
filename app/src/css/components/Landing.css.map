@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "AAAA;;IAEI;AAEJ,gBAAgB;AAUhB,sBAAsB;AAKtB,oBAAoB;AAMpB,2BAA2B;AAE3B;;IAEI;AAEJ,4BAA4B;AAK5B,0BAA0B;AAI1B,2BAA2B;AAE3B;;IAEI;AC1CJ,QAAS;EACP,gBAAgB,EDcC,OAAG",
-"sources": ["../../sass/partials/_variables.scss","../../sass/components/Landing.scss"],
+"mappings": "AAAA;;IAEI;AAEJ,gBAAgB;AAUhB,sBAAsB;AAOtB,oBAAoB;AAMpB,2BAA2B;AAE3B;;IAEI;AAEJ,4BAA4B;AAK5B,0BAA0B;AAI1B,2BAA2B;AAE3B;;IAEI;AC3CJ,QAAS;EAEP,gBAAgB,EDcG,OAAG;ECbtB,MAAM,EAAE,IAAI;EACZ,QAAQ,EAAE,QAAQ;ECNhB,QAAE;IACE,KAAK,EAAE,CAAC;EAEZ,+BACQ;IACJ,OAAO,EAAE,EAAE;IACX,OAAO,EAAE,KAAK;EAElB,cAAQ;IACJ,KAAK,EAAE,IAAI",
+"sources": ["../../sass/partials/_variables.scss","../../sass/components/Landing.scss","../../sass/mixins/_micro-clearfix.scss"],
 "names": [],
 "file": "Landing.css"
 }

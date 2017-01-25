@@ -1,0 +1,29 @@
+/***
+  COLOR PALLETTE
+***/
+/* Grey scale */
+/* Container colors */
+/* Element colors */
+/* --------------------- */
+/***
+  MEASUREMENTS
+***/
+/* Container measurements */
+/* Element measurements */
+/* --------------------- */
+/***
+  FONTS
+***/
+.QuoteForm {
+  background-color: #F6F6F6; }
+
+@media screen and (min-width: 768px) {
+  .QuoteForm {
+    position: absolute;
+    top: 0;
+    right: 0;
+    float: left;
+    width: 50%;
+    height: 100%; } }
+
+/*# sourceMappingURL=QuoteForm.css.map */

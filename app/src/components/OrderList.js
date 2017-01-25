@@ -1,6 +1,8 @@
 import React from 'react';
 import OrderSubList from './OrderSubList';
 
+import '../css/components/OrderList.css';
+
 class OrderList extends React.Component {
   constructor(props) {
     super(props);

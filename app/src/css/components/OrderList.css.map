@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA;;IAEI;AAEJ,gBAAgB;AAUhB,sBAAsB;AAOtB,oBAAoB;AAMpB,2BAA2B;AAE3B;;IAEI;AAEJ,4BAA4B;AAK5B,0BAA0B;AAI1B,2BAA2B;AAE3B;;IAEI;AC5CJ,UAAW;EACT,gBAAgB,EDgBG,OAAG;;ACbxB,oCAAqC;EACnC,UAAW;IACT,KAAK,EAAE,IAAI;IACX,KAAK,EAAE,GAAG;IACV,MAAM,EAAE,IAAI",
+"sources": ["../../sass/partials/_variables.scss","../../sass/components/OrderList.scss"],
+"names": [],
+"file": "OrderList.css"
+}

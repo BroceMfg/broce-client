@@ -1,0 +1,13 @@
+@import '../partials/variables';
+
+.OrderList {
+  background-color: $OrderList_bg_color;
+}
+
+@media screen and (min-width: 768px) {
+  .OrderList {
+    float: left;
+    width: 50%;
+    height: 100%;
+  }
+}
