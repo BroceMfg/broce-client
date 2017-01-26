@@ -14,6 +14,10 @@ $c7: #3D3D3D;
 $c8: #1F1F1F;
 $c9: #000000;
 
+/* Other Colors */
+$success_green: #39D900;
+$error_red: #C80000;
+
 /* Container colors */
 $App_bg_color: $c1;
 $Dashboard_bg_color: $c2;
@@ -21,6 +25,9 @@ $Landing_bg_color: $c1;
 $OrderList_bg_color: $c1;
 $OrderSubList_bg_color: $c1;
 $QuoteForm_bg_color: $c1;
+$ToggledMessage_default_bg_color: $c4;
+$ToggledMessage_success_bg_color: $success_green;
+$ToggledMessage_error_bg_color: $error_red;
 
 /* Element colors */
 $button_border_color: $c8;

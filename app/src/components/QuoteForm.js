@@ -148,7 +148,12 @@ class QuoteForm extends React.Component {
     post(
       `${this.props.apiUrl}/orders`,
       formData,
-      (response) => console.log(JSON.parse(response)),
+      (response) => {
+        console.log(JSON.parse(response))
+        if (response) {
+          this.props.toggleMessage('New Quote Created. Thank you!', 'success');
+        }
+      },
       (errorResponse) => console.log(errorResponse)
     );
 

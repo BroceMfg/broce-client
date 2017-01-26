@@ -17,6 +17,7 @@ class App extends React.Component {
     this.getStatusType = this.getStatusType.bind(this);
     this.setUser = this.setUser.bind(this);
     this.logout = this.logout.bind(this);
+    this.toggleMessage = this.toggleMessage.bind(this);
 
     const retrievedObj = localStorage.getItem('state');
     let storedState = retrievedObj ? JSON.parse(retrievedObj) : undefined;
@@ -80,12 +81,30 @@ class App extends React.Component {
     window.location.reload(false);
   }
 
+  toggleMessage(message, statusCode) {
+    let msgStatCode;
+    if (statusCode === 'success' || statusCode === 'error') {
+      msgStatCode = statusCode;
+    }
+    const toggle = (msg, msgStatCode) => this.setState({
+      ...this.state,
+      showMessage: msg !== undefined,
+      message: msg,
+      messageStatusCode: msgStatCode
+    });
+    toggle(message, msgStatCode);
+    setTimeout(toggle, 3000);
+  }
+
   render() {
     const {
       admin,
       orders,
       apiUrl,
-      user
+      user,
+      showMessage,
+      message,
+      messageStatusCode
     } = this.state;
 
     return (
@@ -108,6 +127,10 @@ class App extends React.Component {
                               setOrders={this.setOrders}
                               statusTypes={this.state.statusTypes}
                               getStatusType={this.getStatusType}
+                              showMessage={showMessage}
+                              message={message}
+                              messageStatusCode={messageStatusCode}
+                              toggleMessage={this.toggleMessage}
                             />
                     }
                   />

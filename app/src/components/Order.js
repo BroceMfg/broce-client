@@ -217,6 +217,7 @@ class Order extends React.Component {
               statusType={this.props.statusType}
               orderDetail={orderDetail}
               updateOrderDetail={this.updateOrderDetail}
+              toggleMessage={this.props.toggleMessage}
             />
           )})
         }

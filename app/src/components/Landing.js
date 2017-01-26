@@ -3,6 +3,7 @@ import { get } from '../middleware/XMLHTTP';
 import Dashboard from './Dashboard';
 import OrderList from './OrderList';
 import QuoteForm from './QuoteForm';
+import ToggledMessage from './ToggledMessage';
 
 import '../css/components/Landing.css';
 
@@ -22,6 +23,9 @@ class Landing extends React.Component {
       setOrders,
       apiUrl
     } = this.props;
+
+    // clear out whatever message was being displayed
+    this.props.toggleMessage();
 
     const cb = (data) => {
       let orders = {};
@@ -50,7 +54,6 @@ class Landing extends React.Component {
       console.log(orders);
       setOrders(orders);
     }
-
     get(
       `${apiUrl}/orders?status=quote,priced`,
       (data) => cb(data),
@@ -67,8 +70,24 @@ class Landing extends React.Component {
   }
 
   render() {
+    const {
+      showMessage,
+      message,
+      messageStatusCode,
+      toggleMessage
+    } = this.props;
     return (
       <div className="main-wrapper">
+        {
+          showMessage && message
+            ? 
+              <ToggledMessage
+                message={message}
+                messageStatusCode={messageStatusCode}
+                dismiss={() => toggleMessage()}
+              />
+            : null
+        }
         <Dashboard logout={this.props.logout} />
         <div className="Landing">
           <OrderList
@@ -78,10 +97,15 @@ class Landing extends React.Component {
             setOrders={this.props.setOrders}
             statusTypes={this.props.statusTypes}
             getStatusType={(order) => this.props.getStatusType(this.getStatusTypeId(order))}
-            orderOnClickHandler={this.orderOnClickHandler} />
+            orderOnClickHandler={this.orderOnClickHandler}
+            toggleMessage={toggleMessage}
+          />
           {
             !this.props.admin
-              ? <QuoteForm apiUrl={this.props.apiUrl} />
+              ? <QuoteForm
+                  apiUrl={this.props.apiUrl}
+                  toggleMessage={toggleMessage}
+                />
               : null
           }
         </div>

@@ -9,8 +9,7 @@ class OrderPart extends React.Component {
   constructor(props) {
     super(props);
     this.getOrderAction = this.getOrderAction.bind(this);
-    this.toggleAddPriceForm = this.toggleAddPriceForm.bind(this);
-    this.toggleMessage = this.toggleMessage.bind(this);
+    this.toggleAddPriceForm = this.toggleAddPriceForm.bind(this);    
     this.state = {
       showAddPriceForm: false,
       showMessage: false,
@@ -52,14 +51,6 @@ class OrderPart extends React.Component {
     });
   }
 
-  toggleMessage(message) {
-    this.setState({
-      ...this.state,
-      showMessage: !this.state.showMessage,
-      message
-    });
-  }
-
   render() {
     const showAddPriceForm = this.state.showAddPriceForm;
     const orderDetail = this.props.orderDetail;
@@ -67,14 +58,6 @@ class OrderPart extends React.Component {
     const shippingDetail = orderDetail.Shipping_Detail;
     return (
       <div className="OrderPart">
-        {
-          this.state.showMessage && this.state.message
-            ? 
-              <div className="OrderPart-message">
-                <span>{this.state.message}</span>
-              </div>
-            : null
-        }
         <div>
           <div>machine_serial_num: {orderDetail.machine_serial_num}</div>
           <div>part_num: {orderDetail.Part.number}</div>
@@ -104,7 +87,7 @@ class OrderPart extends React.Component {
                 index={this.props.index}
                 orderDetail={orderDetail}
                 updateOrderDetail={this.props.updateOrderDetail}
-                toggleMessage={this.toggleMessage}
+                toggleMessage={this.props.toggleMessage}
               />
             : null
         }

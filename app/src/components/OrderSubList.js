@@ -33,6 +33,7 @@ class OrderSubList extends React.Component {
                       promoteOrder={this.props.promoteOrder}
                       statusType={this.props.statusType || this.props.getStatusType(order)}
                       getNextStatusType={this.props.getNextStatusType}
+                      toggleMessage={this.props.toggleMessage}
                     />
                   ))
                 }

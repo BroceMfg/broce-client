@@ -63,6 +63,7 @@ class OrderList extends React.Component {
           statusType={getStatusType(this.props.orders, i)}
           getStatusType={this.props.getStatusType}
           getNextStatusType={this.getNextStatusType}
+          toggleMessage={this.props.toggleMessage}
         />
       ))
     );

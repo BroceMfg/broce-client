@@ -47,13 +47,11 @@ class AddPriceForm extends React.Component {
               ...this.props.orderDetail,
               price: parseFloat(price)
             }, this.props.index);
-            this.props.toggleMessage('Price Submission Successful.');
-            setTimeout(this.props.toggleMessage, 3000);
+            this.props.toggleMessage('Price Submission Successful.', 'success');
           } else {
             // handle error
             console.log('error: response contained an error.');
-            this.props.toggleMessage('Error: Please try again.');
-            setTimeout(() => this.props.toggleMessage, 3000);
+            this.props.toggleMessage('Error: Please try again.', 'error');
           }
         },
         (errorResponse) => console.log(errorResponse)
@@ -61,8 +59,7 @@ class AddPriceForm extends React.Component {
     } else {
       // handle error
       console.log('error: input not valid');
-      this.props.toggleMessage('Error: Invalid Price.');
-      setTimeout(() => this.props.toggleMessage, 3000);
+      this.props.toggleMessage('Error: Invalid Price.', 'error');
     }
     this.reset();
   }
