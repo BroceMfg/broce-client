@@ -51,7 +51,7 @@ class OrderList extends React.Component {
     }
     console.log(list);
     let keyCount = 1;
-    return Object.keys(list) > 0
+    return list.length > 0
       ? (
           list.map((orders, i) => (
             <OrderSubList
