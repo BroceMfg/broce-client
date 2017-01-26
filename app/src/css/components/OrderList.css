@@ -8,6 +8,7 @@
 /***
   MEASUREMENTS
 ***/
+/* Media query breakpoints */
 /* Container measurements */
 /* Element measurements */
 /* --------------------- */
@@ -20,7 +21,7 @@
   max-width: 1000px;
   margin: auto; }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 900px) {
   .OrderList:not(.admin) {
     float: left;
     width: 50%;

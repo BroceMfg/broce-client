@@ -8,9 +8,9 @@
     border-radius: $OrderSubList_border_radius;
     width: 96%;
     margin: 0.5em auto;
-    margin-top: 1.5em;
+    // margin-top: 1.5em;
     .header {
-      font-size: 1.6em;
+      font-size: 1.2em;
       background-color: $OrderSubList_header_bg_color;
       border-top-right-radius: $OrderSubList_border_radius;
       border-top-left-radius: $OrderSubList_border_radius;
@@ -31,7 +31,7 @@
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 900px) {
   .QuoteForm {
     position: absolute;
     top: 0;
@@ -40,8 +40,10 @@
     width: 50%;
     height: 100%;
     .content-wrapper {
-      margin-top: 0;
-      margin: 0.5em auto;
+      width: 94%;
+      .header {
+        font-size: 1.6em;
+      }
     }
   }
 }

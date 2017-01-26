@@ -8,6 +8,7 @@
 /***
   MEASUREMENTS
 ***/
+/* Media query breakpoints */
 /* Container measurements */
 /* Element measurements */
 /* --------------------- */
@@ -21,10 +22,9 @@
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.16);
     border-radius: 4px;
     width: 96%;
-    margin: 0.5em auto;
-    margin-top: 1.5em; }
+    margin: 0.5em auto; }
     .QuoteForm .content-wrapper .header {
-      font-size: 1.6em;
+      font-size: 1.2em;
       background-color: #D7D7D7;
       border-top-right-radius: 4px;
       border-top-left-radius: 4px;
@@ -41,7 +41,7 @@
         border-bottom: solid 1px #000000;
         text-transform: uppercase; }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 900px) {
   .QuoteForm {
     position: absolute;
     top: 0;
@@ -50,7 +50,8 @@
     width: 50%;
     height: 100%; }
     .QuoteForm .content-wrapper {
-      margin-top: 0;
-      margin: 0.5em auto; } }
+      width: 94%; }
+      .QuoteForm .content-wrapper .header {
+        font-size: 1.6em; } }
 
 /*# sourceMappingURL=QuoteForm.css.map */

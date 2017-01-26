@@ -7,7 +7,7 @@
   width: 96%;
   margin: 0.5em auto;
   .header {
-    font-size: 1.6em;
+    font-size: 1.2em;
     background-color: $OrderSubList_header_bg_color;
     border-top-right-radius: $OrderSubList_border_radius;
     border-top-left-radius: $OrderSubList_border_radius;
@@ -28,8 +28,11 @@
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 900px) {
   .OrderSubList {
     width: 94%;
+    .header {
+      font-size: 1.6em;
+    }
   }
 }
