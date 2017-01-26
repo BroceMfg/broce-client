@@ -18,8 +18,8 @@
   background-color: #D7D7D7;
   height: 100%;
   width: calc(100% - (2 * 0.7em));
-  position: relative;
-  padding: 0.7em; }
+  padding: 0.7em;
+  position: relative; }
   .Dashboard {
     *zoom: 1; }
   .Dashboard:before, .Dashboard:after {
@@ -27,6 +27,11 @@
     display: table; }
   .Dashboard:after {
     clear: both; }
+  .Dashboard .content-wrapper {
+    width: 100%;
+    height: 100%;
+    max-width: 1600px;
+    margin: auto; }
 
 .Dashboard-header {
   float: left;
@@ -37,6 +42,8 @@
   display: inline-block;
   float: right;
   width: calc(100% - 70% - (0.7em/2));
+  max-width: 32em;
+  margin: auto;
   height: calc(100% - (2 * 0.7em));
   position: absolute; }
 
@@ -74,10 +81,11 @@
 
   .button-container {
     position: relative;
-    float: left;
+    float: none;
     clear: both;
     display: block;
-    margin-top: 0.7em;
+    margin: auto;
+    padding-top: 0.8em;
     width: 100%;
     height: 2em; } }
 @media screen and (min-width: 468px) and (max-width: 768px) {

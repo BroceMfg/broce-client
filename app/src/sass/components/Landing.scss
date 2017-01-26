@@ -5,5 +5,8 @@
   @include micro-clearfix();
   background-color: $Landing_bg_color;
   height: 100%;
+  width: 100%;
+  max-width: $App_max_width;
+  margin: auto;
   position: relative;
 }

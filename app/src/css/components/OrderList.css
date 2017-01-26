@@ -15,10 +15,13 @@
   FONTS
 ***/
 .OrderList {
-  background-color: #F6F6F6; }
+  background-color: #F6F6F6;
+  width: 100%;
+  max-width: 1000px;
+  margin: auto; }
 
 @media screen and (min-width: 768px) {
-  .OrderList {
+  .OrderList:not(.admin) {
     float: left;
     width: 50%;
     height: 100%; } }

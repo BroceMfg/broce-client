@@ -79,7 +79,11 @@ class Landing extends React.Component {
             statusTypes={this.props.statusTypes}
             getStatusType={(order) => this.props.getStatusType(this.getStatusTypeId(order))}
             orderOnClickHandler={this.orderOnClickHandler} />
-          <QuoteForm apiUrl={this.props.apiUrl} />
+          {
+            !this.props.admin
+              ? <QuoteForm apiUrl={this.props.apiUrl} />
+              : null
+          }
         </div>
       </div>
     )

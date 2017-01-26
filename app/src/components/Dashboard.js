@@ -16,20 +16,22 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div className="Dashboard">
-        <h1 className="Dashboard-header">
-          Welcome To Broce Parts
-        </h1>
-        <div className="button-container">
-          <a
-            onClick={this.settingsOnClickHandler}
-            className="button">
-            <span>Settings</span>
-          </a>
-          <a
-            onClick={this.props.logout}
-            className="button">
-            <span>Log Out</span>
-          </a>
+        <div className="content-wrapper">
+          <h1 className="Dashboard-header">
+            Welcome To Broce Parts
+          </h1>
+          <div className="button-container">
+            <a
+              onClick={this.settingsOnClickHandler}
+              className="button">
+              <span>Settings</span>
+            </a>
+            <a
+              onClick={this.props.logout}
+              className="button">
+              <span>Log Out</span>
+            </a>
+          </div>
         </div>
       </div>
     )

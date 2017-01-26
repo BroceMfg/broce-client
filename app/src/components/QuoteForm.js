@@ -172,31 +172,35 @@ class QuoteForm extends React.Component {
     } = this.state;
     return (
       <div className="QuoteForm" key={timestamp}>
-        <h1>Quote Form</h1>
-        <form onSubmit={this.submit}>
-          {
-            Object.keys(form).map((key) => {
-              const formObj = form[key];
-              return (
-                <MachineNumberBlock
-                  key={key}
-                  index={key}
-                  form={formObj}
-                  addPartNumBlock={this.addPartNumBlock}
-                  updateForm={this.updateForm}
-                  submit={this.submit}
-                />
-              )
-            })
-          }
-          <button
-            className="add-machine-number-btn"
-            onClick={this.addMachNumBlock}>
-            Add Another Machine Number
-          </button>
-          <button type="submit">Submit</button>
-        </form>
-        <button onClick={this.reset}>Reset Form</button>
+        <div className="content-wrapper">
+          <h1 className="header">
+            <span>New Quote Request</span>
+          </h1>
+          <form onSubmit={this.submit}>
+            {
+              Object.keys(form).map((key) => {
+                const formObj = form[key];
+                return (
+                  <MachineNumberBlock
+                    key={key}
+                    index={key}
+                    form={formObj}
+                    addPartNumBlock={this.addPartNumBlock}
+                    updateForm={this.updateForm}
+                    submit={this.submit}
+                  />
+                )
+              })
+            }
+            <button
+              className="add-machine-number-btn"
+              onClick={this.addMachNumBlock}>
+              Add Another Machine Number
+            </button>
+            <button type="submit">Submit</button>
+          </form>
+          <button onClick={this.reset}>Reset Form</button>
+        </div>
       </div>
     )
   }

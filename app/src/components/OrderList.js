@@ -52,29 +52,25 @@ class OrderList extends React.Component {
     console.log(list);
     let keyCount = 1;
     return (
-      <div>
-        {
-          list.map((orders, i) => (
-            <OrderSubList
-              key={keyCount++}
-              admin={this.props.admin}
-              apiUrl={this.props.apiUrl}
-              orders={orders}
-              updateOrder={this.updateOrder}
-              promoteOrder={this.promoteOrder}
-              statusType={getStatusType(this.props.orders, i)}
-              getStatusType={this.props.getStatusType}
-              getNextStatusType={this.getNextStatusType}
-            />
-          ))
-        }
-      </div>
+      list.map((orders, i) => (
+        <OrderSubList
+          key={keyCount++}
+          admin={this.props.admin}
+          apiUrl={this.props.apiUrl}
+          orders={orders}
+          updateOrder={this.updateOrder}
+          promoteOrder={this.promoteOrder}
+          statusType={getStatusType(this.props.orders, i)}
+          getStatusType={this.props.getStatusType}
+          getNextStatusType={this.getNextStatusType}
+        />
+      ))
     );
   }
 
   render() {
     return (
-      <div className="OrderList">
+      <div className={`OrderList${this.props.admin ? ' admin' : ''}`}>
         {this.renderSubLists()}
       </div>
     )

@@ -33,8 +33,8 @@ ul, ol {
 .App {
   background-color: #F6F6F6;
   width: 100%;
-  max-width: 1600px;
   height: 100%;
-  margin: auto; }
+  margin: auto;
+  margin-bottom: 1.5em; }
 
 /*# sourceMappingURL=App.css.map */
