@@ -1,5 +1,6 @@
 import React from 'react';
 import Input from './Input';
+import ToggledMessage from './ToggledMessage';
 import { post } from '../middleware/XMLHTTP';
 
 class SignIn extends React.Component {
@@ -29,13 +30,31 @@ class SignIn extends React.Component {
         console.log(JSON.parse(response));
         this.props.setUser(JSON.parse(response).user);
       },
-      (errorResponse) => console.log(errorResponse)
+      (err) => {
+        console.log(err)
+        this.props.toggleMessage('Invalid username or password.', 'error');
+      }
     );
   }
 
   render() {
+    const {
+      message,
+      messageStatusCode,
+      toggleMessage
+    } = this.props;
     return (
       <div className="SignIn">
+        {
+          message
+            ? 
+              <ToggledMessage
+                message={message}
+                messageStatusCode={messageStatusCode}
+                dismiss={() => toggleMessage()}
+              />
+            : null
+        }
         <form onSubmit={this.postAction}>
           <legend>Log In</legend>
           <div className="form-group">

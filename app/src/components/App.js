@@ -88,7 +88,6 @@ class App extends React.Component {
     }
     const toggle = (msg, msgStatCode) => this.setState({
       ...this.state,
-      showMessage: msg !== undefined,
       message: msg,
       messageStatusCode: msgStatCode
     });
@@ -127,10 +126,10 @@ class App extends React.Component {
                               setOrders={this.setOrders}
                               statusTypes={this.state.statusTypes}
                               getStatusType={this.getStatusType}
-                              showMessage={showMessage}
                               message={message}
                               messageStatusCode={messageStatusCode}
                               toggleMessage={this.toggleMessage}
+                              logout={this.logout}
                             />
                     }
                   />
@@ -168,7 +167,14 @@ class App extends React.Component {
                 <Match
                   exactly
                   pattern="/"
-                  render={ () => <SignIn apiUrl={apiUrl} setUser={this.setUser}/> }
+                  render={() => <SignIn
+                                  apiUrl={apiUrl}
+                                  setUser={this.setUser}
+                                  message={message}
+                                  messageStatusCode={messageStatusCode}
+                                  toggleMessage={this.toggleMessage}
+                                />
+                  }
                 />
             }
             <Miss component={NotFound} />

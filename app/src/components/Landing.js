@@ -57,7 +57,12 @@ class Landing extends React.Component {
     get(
       `${apiUrl}/orders?status=quote,priced`,
       (data) => cb(data),
-      (err) => console.log(err)
+      (err) => {
+        console.log(`err = ${err}`);
+        // session expired or possible security vulnerability.
+        // log user out and reload
+        this.props.logout();
+      }
     );
   }
 
@@ -71,7 +76,6 @@ class Landing extends React.Component {
 
   render() {
     const {
-      showMessage,
       message,
       messageStatusCode,
       toggleMessage
@@ -79,7 +83,7 @@ class Landing extends React.Component {
     return (
       <div className="main-wrapper">
         {
-          showMessage && message
+          message
             ? 
               <ToggledMessage
                 message={message}
