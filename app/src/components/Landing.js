@@ -12,7 +12,6 @@ class Landing extends React.Component {
   constructor(props) {
     super(props);
     this.getStatusTypeId = this.getStatusTypeId.bind(this);
-    this.orderOnClickHandler = this.orderOnClickHandler.bind(this);
   }
 
   componentWillMount() {
@@ -67,11 +66,10 @@ class Landing extends React.Component {
   }
 
   getStatusTypeId(order) {
-    return order.Order_Statuses.filter((status) => status.current)[0].StatusTypeId || 0;
-  }
-
-  orderOnClickHandler(orderId) {
-    this.context.router.transitionTo(`/orders/${orderId}`);
+    return order.Order_Statuses
+      .filter(
+        status => status.current
+      )[0].StatusTypeId || 0;
   }
 
   render() {
@@ -100,8 +98,9 @@ class Landing extends React.Component {
             orders={this.props.orders}
             setOrders={this.props.setOrders}
             statusTypes={this.props.statusTypes}
-            getStatusType={(order) => this.props.getStatusType(this.getStatusTypeId(order))}
-            orderOnClickHandler={this.orderOnClickHandler}
+            getStatusType={
+              (order) => this.props.getStatusType(this.getStatusTypeId(order))
+            }
             toggleMessage={toggleMessage}
           />
           {
