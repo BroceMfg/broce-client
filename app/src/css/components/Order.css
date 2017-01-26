@@ -1,0 +1,41 @@
+/***
+  COLOR PALLETTE
+***/
+/* Grey scale */
+/* Container colors */
+/* Element colors */
+/* --------------------- */
+/***
+  MEASUREMENTS
+***/
+/* Media query breakpoints */
+/* Container measurements */
+/* Element measurements */
+/* --------------------- */
+/***
+  FONTS
+***/
+.Order {
+  outline: solid 2px #B9B9B9;
+  margin: 0.5em 0.3em;
+  padding: 0.3em; }
+  .Order button {
+    background-color: #9A9A9A;
+    border: solid 1px;
+    border-color: #1F1F1F;
+    border-radius: 4px;
+    cursor: pointer;
+    display: table;
+    height: 100%;
+    width: 30%;
+    text-align: center; }
+    .Order button span {
+      display: table-cell;
+      vertical-align: middle;
+      width: 30%;
+      text-align: center; }
+    .Order button:hover {
+      background-color: #7B7B7B;
+      border-color: #3D3D3D; }
+
+/*# sourceMappingURL=Order.css.map */

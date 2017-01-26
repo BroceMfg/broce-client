@@ -1,5 +1,6 @@
 @import '../partials/variables';
 @import '../mixins/micro-clearfix';
+@import '../mixins/button';
 
 .Dashboard {
   background-color: $Dashboard_bg_color;
@@ -34,29 +35,13 @@
 }
 
 .button {
-  background-color: $button_bg_color;
-  border: solid $button_border_size;
-  border-color: $button_border_color;
-  border-radius: $button_border_radius;
-  cursor: pointer;
-  display: table;
-  height: 100%;
-  float: left;
-  width: calc(50% - (#{$button_border_size}*2) - 0.7em);
+  @include button(calc(50% - (#{$button_border_size}*2) - 0.7em));
   margin-left: 0.2em;
   margin-right: 1em;
+  float: left;
   &:last-child {
     margin-left: 0;
     margin-right: 0.2em;
-  }
-  span {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-  }
-  &:hover {
-    background-color: $button_bg_hov_color;
-    border-color: $button_border_hov_color;
   }
 }
 

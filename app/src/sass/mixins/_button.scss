@@ -1,0 +1,23 @@
+@mixin button($width) {
+  & {
+    background-color: $button_bg_color;
+    border: solid $button_border_size;
+    border-color: $button_border_color;
+    border-radius: $button_border_radius;
+    cursor: pointer;
+    display: table;
+    height: 100%;
+    width: $width;
+    text-align: center;
+    span {
+      display: table-cell;
+      vertical-align: middle;
+      width: $width;
+      text-align: center;
+    }
+    &:hover {
+      background-color: $button_bg_hov_color;
+      border-color: $button_border_hov_color;
+    }
+  }
+}

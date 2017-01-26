@@ -4,6 +4,8 @@ import ShippingDetailForm from './ShippingDetailForm';
 import ShippingAddressForm from './ShippingAddressForm';
 import { post, put } from '../middleware/XMLHTTP';
 
+import '../css/components/Order.css';
+
 class Order extends React.Component {
   constructor(props) {
     super(props);
@@ -48,7 +50,7 @@ class Order extends React.Component {
           {
             message
               ? null
-              : <button onClick={this.toggleControls}>Cancel</button>
+              : <button onClick={this.toggleControls}><span>Cancel</span></button>
           }
           {toggledBlock}
         </div>
@@ -57,7 +59,7 @@ class Order extends React.Component {
       if (message) {
         content = <span>{message}</span>;
       } else {
-        content = <button onClick={this.toggleControls}>{buttonTitle}</button>;
+        content = <button onClick={this.toggleControls}><span>{buttonTitle}</span></button>;
       }
     }
     return <div className="controls">{content}</div>;
@@ -77,7 +79,7 @@ class Order extends React.Component {
       null,
       (
         <div>
-          <button onClick={this.finalizeOrder}>Finalize Order</button>
+          <button onClick={this.finalizeOrder}><span>Finalize Order</span></button>
           <span>Total OrderPrice: {total}</span>
         </div>
       ),

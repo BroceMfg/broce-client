@@ -49,27 +49,30 @@
   position: absolute; }
 
 .button {
-  background-color: #9A9A9A;
-  border: solid 1px;
-  border-color: #1F1F1F;
-  border-radius: 4px;
-  cursor: pointer;
-  display: table;
-  height: 100%;
-  float: left;
-  width: calc(50% - (1px*2) - 0.7em);
   margin-left: 0.2em;
-  margin-right: 1em; }
+  margin-right: 1em;
+  float: left; }
+  .button {
+    background-color: #9A9A9A;
+    border: solid 1px;
+    border-color: #1F1F1F;
+    border-radius: 4px;
+    cursor: pointer;
+    display: table;
+    height: 100%;
+    width: calc(50% - (1px*2) - 0.7em);
+    text-align: center; }
+    .button span {
+      display: table-cell;
+      vertical-align: middle;
+      width: calc(50% - (1px*2) - 0.7em);
+      text-align: center; }
+    .button:hover {
+      background-color: #7B7B7B;
+      border-color: #3D3D3D; }
   .button:last-child {
     margin-left: 0;
     margin-right: 0.2em; }
-  .button span {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center; }
-  .button:hover {
-    background-color: #7B7B7B;
-    border-color: #3D3D3D; }
 
 @media screen and (max-width: 768px) {
   .Dashboard-header {

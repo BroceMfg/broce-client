@@ -1,0 +1,11 @@
+@import '../partials/variables';
+@import '../mixins/button';
+
+.Order {
+  outline: solid 2px $c3;
+  margin: 0.5em 0.3em;
+  padding: 0.3em;
+  button {
+    @include button(30%);
+  }
+}
