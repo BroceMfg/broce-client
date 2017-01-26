@@ -9,6 +9,9 @@
     width: 96%;
     margin: 0.5em auto;
     // margin-top: 1.5em;
+    >form, >button {
+      margin: 1rem;
+    }
     .header {
       font-size: 1.2em;
       background-color: $OrderSubList_header_bg_color;

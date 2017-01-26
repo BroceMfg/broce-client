@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../css/components/ShippingDetail.css';
+
 class ShippingDetail extends React.Component {
   render() {
     const shippingDetail = this.props.shippingDetail;

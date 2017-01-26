@@ -1,0 +1,8 @@
+@import '../partials/variables';
+
+.OrderPart {
+  outline: solid 1px $c2;
+  margin: 0.5em;
+  line-height: 1.4em;
+  padding: 0.4em;
+}

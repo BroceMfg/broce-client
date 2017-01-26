@@ -1,0 +1,24 @@
+/***
+  COLOR PALLETTE
+***/
+/* Grey scale */
+/* Container colors */
+/* Element colors */
+/* --------------------- */
+/***
+  MEASUREMENTS
+***/
+/* Media query breakpoints */
+/* Container measurements */
+/* Element measurements */
+/* --------------------- */
+/***
+  FONTS
+***/
+.OrderPart {
+  outline: solid 1px #D7D7D7;
+  margin: 0.5em;
+  line-height: 1.4em;
+  padding: 0.4em; }
+
+/*# sourceMappingURL=OrderPart.css.map */

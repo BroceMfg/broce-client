@@ -3,6 +3,8 @@ import OrderAction from './OrderAction';
 import ShippingDetail from './ShippingDetail';
 import AddPriceForm from './AddPriceForm';
 
+import '../css/components/OrderPart.css';
+
 class OrderPart extends React.Component {
   constructor(props) {
     super(props);

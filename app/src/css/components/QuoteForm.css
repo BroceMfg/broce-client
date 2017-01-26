@@ -23,6 +23,8 @@
     border-radius: 4px;
     width: 96%;
     margin: 0.5em auto; }
+    .QuoteForm .content-wrapper > form, .QuoteForm .content-wrapper > button {
+      margin: 1rem; }
     .QuoteForm .content-wrapper .header {
       font-size: 1.2em;
       background-color: #D7D7D7;
