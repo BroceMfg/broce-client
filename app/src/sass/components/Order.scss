@@ -15,3 +15,12 @@
     @include outline();
   }
 }
+
+.OrderPart-wrapper {
+  &.show {
+    display: block;
+  }
+  &.hide {
+    display: none;
+  }
+}

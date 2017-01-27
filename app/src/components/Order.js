@@ -11,6 +11,7 @@ class Order extends React.Component {
     super(props);
     this.updateOrderDetail = this.updateOrderDetail.bind(this);
     this.renderStatusMessage = this.renderStatusMessage.bind(this);
+    this.toggleDetails = this.toggleDetails.bind(this);
     this.toggleControls = this.toggleControls.bind(this);
     this.renderControls = this.renderControls.bind(this);
     this.finalizeControls = this.finalizeControls.bind(this);
@@ -20,6 +21,7 @@ class Order extends React.Component {
     this.acceptOrder = this.acceptOrder.bind(this);
     this.addShippingDetail = this.addShippingDetail.bind(this);
     this.state = {
+      showDetails: false,
       showControls: false
     };
   }
@@ -70,6 +72,18 @@ class Order extends React.Component {
     return content ? renderBlock(content, sClass) : null;
   }
 
+  toggleDetails(show) {
+    let showDetails;
+    if (show !== undefined && typeof show === 'boolean') {
+      showDetails = show;
+    } else {
+      showDetails = !this.state.showDetails;
+    }
+    this.setState({
+      ...this.state,
+      showDetails
+    });
+  }
 
   toggleControls() {
     this.setState({
@@ -229,20 +243,34 @@ class Order extends React.Component {
         <div>id: {order.id}</div>
         <div>UserId: {order.UserId}</div>
         <div>StatusTypeId: {order.Order_Statuses[0].StatusTypeId}</div>
-        {
-          order.Order_Details.map((orderDetail, i) => {
-            return (<OrderPart
-              key={orderDetail.id}
-              index={i}
-              admin={this.props.admin}
-              apiUrl={this.props.apiUrl}
-              statusType={this.props.statusType}
-              orderDetail={orderDetail}
-              updateOrderDetail={this.updateOrderDetail}
-              toggleMessage={this.props.toggleMessage}
-            />
-          )})
-        }
+        <button onClick={this.toggleDetails}>
+          {
+            this.state.showDetails
+              ? <span>Hide Details</span>
+              : <span>Show Details</span>
+          }
+        </button>
+        <div
+          className={
+            `OrderPart-wrapper ` + 
+            `${this.state.showDetails ? 'show' : 'hide'}`
+          }
+        >
+          {
+            order.Order_Details.map((orderDetail, i) =>
+              <OrderPart
+                key={orderDetail.id}
+                index={i}
+                admin={this.props.admin}
+                apiUrl={this.props.apiUrl}
+                statusType={this.props.statusType}
+                orderDetail={orderDetail}
+                updateOrderDetail={this.updateOrderDetail}
+                toggleMessage={this.props.toggleMessage}
+              />
+            )
+          }
+        </div>
       </div>
     )
   }

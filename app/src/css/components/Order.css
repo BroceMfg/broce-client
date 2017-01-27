@@ -42,4 +42,9 @@
   .Order .status-message {
     outline: dotted 1px blue; }
 
+.OrderPart-wrapper.show {
+  display: block; }
+.OrderPart-wrapper.hide {
+  display: none; }
+
 /*# sourceMappingURL=Order.css.map */
