@@ -1,11 +1,17 @@
 @import '../partials/variables';
 @import '../mixins/button';
+@import '../mixins/outline';
 
 .Order {
-  outline: solid 2px $c3;
+  // @include outline(red, 2px);
+  border: solid 1px $Order_border_color;
+  border-radius: $Order_border_radius;
   margin: 0.5em 0.3em;
   padding: 0.3em;
   button {
     @include button(30%);
+  }
+  .status-message {
+    @include outline();
   }
 }

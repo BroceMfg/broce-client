@@ -10,6 +10,7 @@ class Order extends React.Component {
   constructor(props) {
     super(props);
     this.updateOrderDetail = this.updateOrderDetail.bind(this);
+    this.renderStatusMessage = this.renderStatusMessage.bind(this);
     this.toggleControls = this.toggleControls.bind(this);
     this.renderControls = this.renderControls.bind(this);
     this.finalizeControls = this.finalizeControls.bind(this);
@@ -32,6 +33,43 @@ class Order extends React.Component {
       Order_Details: newOrderDetails
     }, this.props.statusType);
   }
+
+  renderStatusMessage() {
+    const renderBlock = (content, sClass) => (
+      <div className={`status-message ${sClass}`}>
+        {content}
+      </div>
+    );
+    let sClass;
+    let content = null;
+
+    if (this.props.admin) {
+      if (this.props.statusType === 'quote') {
+        this.finalizeControls();
+      } else if (this.props.statusType === 'priced') {
+        sClass = 'pending';
+        content = (
+          <span>Pending Client Approval.</span>
+        );
+      } else if (this.props.statusType === 'ordered') {
+        sClass = 'controls-wrapper';
+        content = this.shippingControls();
+      }
+    } else {
+      if (this.props.statusType === 'quote') {
+        sClass = 'pending';
+        content = (
+          <span>Waiting for admin to finalize prices.</span>
+        );
+      } else if (this.props.statusType === 'priced') {
+        sClass = 'controls-wrapper';
+        content = this.acceptControls();
+      }
+    }
+        
+    return content ? renderBlock(content, sClass) : null;
+  }
+
 
   toggleControls() {
     this.setState({
@@ -185,25 +223,9 @@ class Order extends React.Component {
     const order = this.props.order;
     return (
       <div className="Order">
-        <div className="status-message">
-          {
-            this.props.admin
-              ?
-                this.props.statusType === 'quote'
-                  ? this.finalizeControls()
-                  : this.props.statusType === 'priced'
-                    ? <span>Pending Client Approval.</span>
-                    : this.props.statusType === 'ordered'
-                      ? this.shippingControls()
-                      : null
-              :
-                this.props.statusType === 'quote'
-                  ? <span>Waiting for admin to finalize prices.</span>
-                  : this.props.statusType === 'priced'
-                    ? this.acceptControls()
-                    : null
-          }
-        </div>
+        { 
+          this.renderStatusMessage()
+        }
         <div>id: {order.id}</div>
         <div>UserId: {order.UserId}</div>
         <div>StatusTypeId: {order.Order_Statuses[0].StatusTypeId}</div>

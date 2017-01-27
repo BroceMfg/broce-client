@@ -23,6 +23,8 @@
   width: 96%;
   margin: 0.5em auto;
   padding-bottom: 0.2em; }
+  .OrderSubList {
+    outline: dotted 1px blue; }
   .OrderSubList .header {
     font-size: 1.2em;
     background-color: #D7D7D7;

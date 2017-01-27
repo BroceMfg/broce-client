@@ -17,7 +17,8 @@
   FONTS
 ***/
 .Order {
-  outline: solid 2px #B9B9B9;
+  border: solid 1px #D7D7D7;
+  border-radius: 4px;
   margin: 0.5em 0.3em;
   padding: 0.3em; }
   .Order button {
@@ -38,5 +39,7 @@
     .Order button:hover {
       background-color: #7B7B7B;
       border-color: #3D3D3D; }
+  .Order .status-message {
+    outline: dotted 1px blue; }
 
 /*# sourceMappingURL=Order.css.map */
