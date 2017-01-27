@@ -18,7 +18,7 @@ class Dashboard extends React.Component {
       <div className="Dashboard">
         <div className="content-wrapper">
           <h1 className="Dashboard-header">
-            Welcome To Broce Parts
+            Broce Parts
           </h1>
           <div className="button-container">
             <a

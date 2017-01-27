@@ -35,7 +35,16 @@ class Landing extends React.Component {
             return statusTypeValues.indexOf(this.getStatusTypeId(a))
               - statusTypeValues.indexOf(this.getStatusTypeId(b));
           } else {
-            return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+            console.log(new Date(a.createdAt).getTime())
+            console.log(new Date(b.createdAt).getTime())
+            console.log(
+              new Date(b.createdAt).getTime()
+                - new Date(a.createdAt).getTime()
+            );
+            return (
+              new Date(b.createdAt).getTime()
+                - new Date(a.createdAt).getTime()
+            );
           }
         })
         .forEach((order) => {
@@ -47,7 +56,7 @@ class Landing extends React.Component {
             orders[statusType] = orders[statusType] || {};
             orders[statusType][order.id] = order;
           } else {
-            orders[order.id] = order;
+            orders[new Date(order.createdAt).getTime()] = order;
           }
         });
       console.log(orders);

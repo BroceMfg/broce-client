@@ -101,7 +101,6 @@ class App extends React.Component {
       orders,
       apiUrl,
       user,
-      showMessage,
       message,
       messageStatusCode
     } = this.state;
@@ -129,7 +128,6 @@ class App extends React.Component {
                               message={message}
                               messageStatusCode={messageStatusCode}
                               toggleMessage={this.toggleMessage}
-                              logout={this.logout}
                             />
                     }
                   />
