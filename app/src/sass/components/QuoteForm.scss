@@ -2,6 +2,8 @@
 
 .QuoteForm {
   background-color: $QuoteForm_bg_color;
+  max-width: $OrderList_max_width;
+  margin: auto;
   .content-wrapper {
     background-color: $QuoteForm_bg_color;
     box-shadow: 0px 1px 2px rgba(0,0,0,.16);
@@ -34,7 +36,7 @@
   }
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 1150px) {
   .QuoteForm {
     position: absolute;
     top: 0;

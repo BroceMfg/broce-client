@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AAAA;;IAEI;AAEJ,gBAAgB;AAYhB,kBAAkB;AAIlB,sBAAsB;AAWtB,oBAAoB;AASpB,2BAA2B;AAE3B;;IAEI;AAEJ,6BAA6B;AAG7B,4BAA4B;AAM5B,0BAA0B;AAM1B,2BAA2B;AAE3B;;IAEI;AC/DJ,eAAgB;EACd,OAAO,EAAE,iBAAa;EACtB,MAAM,EAAE,KAAK",
+"mappings": "AAAA;;IAEI;AAEJ,gBAAgB;AAYhB,kBAAkB;AAIlB,sBAAsB;AAWtB,oBAAoB;AAWpB,2BAA2B;AAE3B;;IAEI;AAEJ,6BAA6B;AAG7B,4BAA4B;AAM5B,0BAA0B;AAO1B,2BAA2B;AAE3B;;IAEI;AClEJ,eAAgB;EACd,OAAO,EAAE,iBAAa;EACtB,MAAM,EAAE,KAAK",
 "sources": ["../../sass/partials/_variables.scss","../../sass/components/ShippingDetail.scss"],
 "names": [],
 "file": "ShippingDetail.css"

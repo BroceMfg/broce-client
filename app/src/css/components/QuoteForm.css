@@ -17,7 +17,9 @@
   FONTS
 ***/
 .QuoteForm {
-  background-color: #F6F6F6; }
+  background-color: #F6F6F6;
+  max-width: 1000px;
+  margin: auto; }
   .QuoteForm .content-wrapper {
     background-color: #F6F6F6;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.16);
@@ -44,7 +46,7 @@
         border-bottom: solid 1px #000000;
         text-transform: uppercase; }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 1150px) {
   .QuoteForm {
     position: absolute;
     top: 0;

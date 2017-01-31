@@ -40,7 +40,9 @@ class Order extends React.Component {
   renderStatusMessage() {
     const renderBlock = (content, sClass) => (
       <div className={`status-message ${sClass}`}>
-        {content}
+        <div>
+          {content}
+        </div>
       </div>
     );
     let sClass;
@@ -241,42 +243,44 @@ class Order extends React.Component {
         { 
           this.renderStatusMessage()
         }
-        <div>id: {order.id}</div>
-        <div>UserId: {order.UserId}</div>
-        <div>StatusTypeId: {order.Order_Statuses[0].StatusTypeId}</div>
-        <button onClick={this.toggleDetails}>
-          {
-            this.state.showDetails
-              ? <span>Hide Details</span>
-              : <span>Show Details</span>
-          }
-        </button>
-        <ReactCSSTransitionGroup
-          className={
-            `OrderPart-wrapper ${this.state.showDetails ? 'show' : 'hide'}`
-          }
-          component="div"
-          transitionName="OrderPart-wrapper-transition"
-          transitionEnterTimeout={350}
-          transitionLeaveTimeout={350}
-        >
-          {
-            this.state.showDetails
-              ? order.Order_Details.map((orderDetail, i) =>
-                  <OrderPart
-                    key={orderDetail.id}
-                    index={i}
-                    admin={this.props.admin}
-                    apiUrl={this.props.apiUrl}
-                    statusType={this.props.statusType}
-                    orderDetail={orderDetail}
-                    updateOrderDetail={this.updateOrderDetail}
-                    toggleMessage={this.props.toggleMessage}
-                  />
-                )
-              : null
-          }
-        </ReactCSSTransitionGroup>
+        <div className="content">
+          <div>id: {order.id}</div>
+          <div>UserId: {order.UserId}</div>
+          <div>StatusTypeId: {order.Order_Statuses[0].StatusTypeId}</div>
+          <button className="reveal-details" onClick={this.toggleDetails}>
+            {
+              this.state.showDetails
+                ? <span>Hide Details</span>
+                : <span>Show Details</span>
+            }
+          </button>
+          <ReactCSSTransitionGroup
+            className={
+              `OrderPart-wrapper ${this.state.showDetails ? 'show' : 'hide'}`
+            }
+            component="div"
+            transitionName="OrderPart-wrapper-transition"
+            transitionEnterTimeout={350}
+            transitionLeaveTimeout={350}
+          >
+            {
+              this.state.showDetails
+                ? order.Order_Details.map((orderDetail, i) =>
+                    <OrderPart
+                      key={orderDetail.id}
+                      index={i}
+                      admin={this.props.admin}
+                      apiUrl={this.props.apiUrl}
+                      statusType={this.props.statusType}
+                      orderDetail={orderDetail}
+                      updateOrderDetail={this.updateOrderDetail}
+                      toggleMessage={this.props.toggleMessage}
+                    />
+                  )
+                : null
+            }
+          </ReactCSSTransitionGroup>
+        </div>
       </div>
     )
   }
