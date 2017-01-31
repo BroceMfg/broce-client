@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import OrderPart from './OrderPart';
 import ShippingDetailForm from './ShippingDetailForm';
 import ShippingAddressForm from './ShippingAddressForm';
@@ -250,27 +251,32 @@ class Order extends React.Component {
               : <span>Show Details</span>
           }
         </button>
-        <div
+        <ReactCSSTransitionGroup
           className={
-            `OrderPart-wrapper ` + 
-            `${this.state.showDetails ? 'show' : 'hide'}`
+            `OrderPart-wrapper ${this.state.showDetails ? 'show' : 'hide'}`
           }
+          component="div"
+          transitionName="OrderPart-wrapper-transition"
+          transitionEnterTimeout={350}
+          transitionLeaveTimeout={350}
         >
           {
-            order.Order_Details.map((orderDetail, i) =>
-              <OrderPart
-                key={orderDetail.id}
-                index={i}
-                admin={this.props.admin}
-                apiUrl={this.props.apiUrl}
-                statusType={this.props.statusType}
-                orderDetail={orderDetail}
-                updateOrderDetail={this.updateOrderDetail}
-                toggleMessage={this.props.toggleMessage}
-              />
-            )
+            this.state.showDetails
+              ? order.Order_Details.map((orderDetail, i) =>
+                  <OrderPart
+                    key={orderDetail.id}
+                    index={i}
+                    admin={this.props.admin}
+                    apiUrl={this.props.apiUrl}
+                    statusType={this.props.statusType}
+                    orderDetail={orderDetail}
+                    updateOrderDetail={this.updateOrderDetail}
+                    toggleMessage={this.props.toggleMessage}
+                  />
+                )
+              : null
           }
-        </div>
+        </ReactCSSTransitionGroup>
       </div>
     )
   }

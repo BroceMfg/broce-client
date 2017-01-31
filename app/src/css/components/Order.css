@@ -42,9 +42,22 @@
   .Order .status-message {
     outline: dotted 1px blue; }
 
-.OrderPart-wrapper.show {
-  display: block; }
-.OrderPart-wrapper.hide {
-  display: none; }
+.OrderPart-wrapper-transition-enter {
+  transition: all 350ms ease-in-out;
+  max-height: 0;
+  opacity: 0.01; }
+
+.OrderPart-wrapper-transition-enter-active {
+  max-height: 100px;
+  opacity: 1; }
+
+.OrderPart-wrapper-transition-leave {
+  transition: all 350ms ease-in-out;
+  opacity: 1;
+  max-height: 100px; }
+
+.OrderPart-wrapper-transition-leave-active {
+  max-height: 0;
+  opacity: 0.01; }
 
 /*# sourceMappingURL=Order.css.map */
