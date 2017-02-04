@@ -10,7 +10,7 @@ class ShippingDetail extends React.Component {
         <button id="ShippingDetailHide" onClick={this.props.hide}><span>X</span></button>
         <h4>Shipping Details</h4>
         <div>Tracking Number: {shippingDetail.tracking_number}</div>
-        <div>Cost: {shippingDetail.cost}</div>
+        <div>Cost: ${shippingDetail.cost}</div>
       </div>
     );
   }

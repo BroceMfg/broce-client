@@ -50,7 +50,7 @@ class Order extends React.Component {
 
     if (this.props.admin) {
       if (this.props.statusType === 'quote') {
-        this.finalizeControls();
+        content = this.finalizeControls();
       } else if (this.props.statusType === 'priced') {
         sClass = 'pending';
         content = (

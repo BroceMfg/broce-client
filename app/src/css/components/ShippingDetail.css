@@ -17,13 +17,16 @@
   FONTS
 ***/
 .ShippingDetail {
-  outline: solid 2px #D7D7D7;
+  border: solid 1px #D7D7D7;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
   margin: 0.5em;
-  position: relative; }
+  position: relative;
+  padding: 0.4em 0.6em; }
   .ShippingDetail #ShippingDetailHide {
     position: absolute;
-    top: 0.125rem;
-    right: 0.3rem; }
+    top: 0.2rem;
+    right: 0.4rem; }
     .ShippingDetail #ShippingDetailHide {
       background-color: #9A9A9A;
       border: solid 1px;
