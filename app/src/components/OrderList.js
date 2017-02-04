@@ -49,9 +49,8 @@ class OrderList extends React.Component {
       list = [this.props.orders];
       getStatusType = () => null;
     }
-    console.log(list);
     let keyCount = 1;
-    return list.length > 0
+    return list.length > 0 && Object.keys(list[0]).length > 0
       ? (
           list.map((orders, i) => (
             <OrderSubList
