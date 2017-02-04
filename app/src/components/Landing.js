@@ -27,25 +27,26 @@ class Landing extends React.Component {
     this.props.toggleMessage();
 
     const cb = (data) => {
-      let orders = {};
-      JSON.parse(data).orders
+      console.log('jello');
+      const orders = {};
+      console.log('$$$$$');
+      console.log(data);
+      console.log('$$$$$');
+      const json = JSON.parse(data);
+      if (!json.orders) {
+        console.log('oops');
+      }
+      json.orders
         .sort((a, b) => {
           const statusTypeValues = Object.values(statusTypes);
           if (admin) {
             return statusTypeValues.indexOf(this.getStatusTypeId(a))
               - statusTypeValues.indexOf(this.getStatusTypeId(b));
-          } else {
-            console.log(new Date(a.createdAt).getTime())
-            console.log(new Date(b.createdAt).getTime())
-            console.log(
-              new Date(b.createdAt).getTime()
-                - new Date(a.createdAt).getTime()
-            );
-            return (
-              new Date(b.createdAt).getTime()
-                - new Date(a.createdAt).getTime()
-            );
           }
+          return (
+            new Date(b.createdAt).getTime()
+              - new Date(a.createdAt).getTime()
+          );
         })
         .forEach((order) => {
           // if (this.props.admin) {
@@ -59,7 +60,9 @@ class Landing extends React.Component {
             orders[new Date(order.createdAt).getTime()] = order;
           }
         });
+      console.log('#####');
       console.log(orders);
+      console.log('#####');
       setOrders(orders);
     }
     get(
