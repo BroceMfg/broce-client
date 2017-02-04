@@ -66,6 +66,18 @@
       border-bottom: solid 1px #9A9A9A; }
       .OrderPart .content-wrapper .details div.shipped {
         width: calc(11% - 3px); }
+        .OrderPart .content-wrapper .details div.shipped a {
+          display: block;
+          width: 100%;
+          cursor: pointer; }
+        .OrderPart .content-wrapper .details div.shipped .done {
+          color: transparent;
+          background-image: url("../../img/done.png");
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center;
+          height: 100%;
+          border-bottom: none; }
       .OrderPart .content-wrapper .details div.machine_serial_num {
         width: calc(28% - 3px); }
       .OrderPart .content-wrapper .details div.quantity {

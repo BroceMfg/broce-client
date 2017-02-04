@@ -3,6 +3,8 @@ import Input from './Input';
 import ToggledMessage from './ToggledMessage';
 import { post } from '../middleware/XMLHTTP';
 
+import '../css/components/SignIn.css';
+
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
@@ -56,7 +58,8 @@ class SignIn extends React.Component {
             : null
         }
         <form onSubmit={this.postAction}>
-          <legend>Log In</legend>
+          <h1>Welcome to Broce Parts</h1>
+          <h3>Log In</h3>
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <Input

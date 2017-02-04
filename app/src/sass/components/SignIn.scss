@@ -1,0 +1,11 @@
+@import '../partials/variables';
+@import '../mixins/button';
+@import '../mixins/outline';
+
+.SignIn {
+  @include outline();
+  text-align: center;
+  form {
+    @include outline(red);
+  }
+}

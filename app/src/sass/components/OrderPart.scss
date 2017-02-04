@@ -64,6 +64,20 @@
         width: calc(23% - 3px);
         &.shipped {
           width: calc(11% - 3px);
+          a {
+            display: block;
+            width: 100%;
+            cursor: pointer;
+          }
+          .done {
+            color: transparent;
+            background-image: url('../../img/done.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100%;
+            border-bottom: none;
+          }
         }
         &.machine_serial_num {
           width: calc(28% - 3px);

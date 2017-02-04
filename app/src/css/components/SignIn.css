@@ -1,0 +1,26 @@
+/***
+  COLOR PALLETTE
+***/
+/* Grey scale */
+/* Other Colors */
+/* Container colors */
+/* Element colors */
+/* --------------------- */
+/***
+  MEASUREMENTS
+***/
+/* Media query breakpoints */
+/* Container measurements */
+/* Element measurements */
+/* --------------------- */
+/***
+  FONTS
+***/
+.SignIn {
+  text-align: center; }
+  .SignIn {
+    outline: dotted 1px blue; }
+  .SignIn form {
+    outline: dotted 1px red; }
+
+/*# sourceMappingURL=SignIn.css.map */

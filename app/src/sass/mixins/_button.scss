@@ -1,4 +1,4 @@
-@mixin button($width, $height: 100%) {
+@mixin button($width: 30%, $height: 100%) {
   & {
     background-color: $button_bg_color;
     border: solid $button_border_size;

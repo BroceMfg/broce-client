@@ -1,6 +1,14 @@
 @import '../partials/variables';
+@import '../mixins/button';
 
 .ShippingDetail {
   outline: solid 2px $c2;
   margin: 0.5em;
+  position: relative;
+  #ShippingDetailHide {
+    @include button(2em, 2em);
+    position: absolute;
+    top: 0.125rem;
+    right: 0.3rem;
+  }
 }

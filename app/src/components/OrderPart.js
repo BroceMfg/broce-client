@@ -9,9 +9,11 @@ class OrderPart extends React.Component {
   constructor(props) {
     super(props);
     this.getOrderAction = this.getOrderAction.bind(this);
-    this.toggleAddPriceForm = this.toggleAddPriceForm.bind(this);    
+    this.toggleShowShippingDetail = this.toggleShowShippingDetail.bind(this);
+    this.toggleAddPriceForm = this.toggleAddPriceForm.bind(this);
     this.state = {
       showAddPriceForm: false,
+      showShippingDetail: false,
       showMessage: false,
       message: undefined
     }
@@ -44,6 +46,13 @@ class OrderPart extends React.Component {
     return obj;
   }
 
+  toggleShowShippingDetail() {
+    this.setState({
+      ...this.state,
+      showShippingDetail: !this.state.showShippingDetail
+    });
+  }
+
   toggleAddPriceForm() {
     this.setState({
       ...this.state,
@@ -60,7 +69,19 @@ class OrderPart extends React.Component {
       <div className="OrderPart">
         <div className="content-wrapper">
           <div className="details">
-            <div className="shipped" title="View shipping details">--</div>
+            <div className={`shipped${shippingDetail ? ' done' : ''}`}>
+              {
+                shippingDetail
+                  ?
+                    <a
+                      onClick={this.toggleShowShippingDetail}
+                      title="View shipping details"
+                    >
+                      <div className="done">--</div>
+                    </a>
+                  : '--'
+              }
+            </div>
             <div className="machine_serial_num">{orderDetail.machine_serial_num}</div>
             <div className="part_num">{orderDetail.Part.number}</div>
             <div className="quantity">{orderDetail.quantity}</div>
@@ -76,8 +97,12 @@ class OrderPart extends React.Component {
             action={orderAction.func}
           />
           {
-            shippingDetail
-              ? <ShippingDetail shippingDetail={shippingDetail} />
+            shippingDetail && this.state.showShippingDetail
+              ?
+                <ShippingDetail
+                  shippingDetail={shippingDetail}
+                  hide={this.toggleShowShippingDetail}
+                />
               : null
           }
           {

@@ -18,6 +18,29 @@
 ***/
 .ShippingDetail {
   outline: solid 2px #D7D7D7;
-  margin: 0.5em; }
+  margin: 0.5em;
+  position: relative; }
+  .ShippingDetail #ShippingDetailHide {
+    position: absolute;
+    top: 0.125rem;
+    right: 0.3rem; }
+    .ShippingDetail #ShippingDetailHide {
+      background-color: #9A9A9A;
+      border: solid 1px;
+      border-color: #1F1F1F;
+      border-radius: 4px;
+      cursor: pointer;
+      display: table;
+      height: 2em;
+      width: 2em;
+      text-align: center; }
+      .ShippingDetail #ShippingDetailHide span {
+        display: table-cell;
+        vertical-align: middle;
+        width: 2em;
+        text-align: center; }
+      .ShippingDetail #ShippingDetailHide:hover {
+        background-color: #7B7B7B;
+        border-color: #3D3D3D; }
 
 /*# sourceMappingURL=ShippingDetail.css.map */
