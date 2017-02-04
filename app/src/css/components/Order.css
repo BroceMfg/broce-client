@@ -53,27 +53,9 @@
       left: 0.3em;
       height: 2em; }
   .Order .content {
-    width: 68%; }
-  .Order .status-message.pending {
-    background: #5C5C5C;
-    position: absolute;
-    top: -0.06em;
-    right: -0.03em;
-    width: 24%;
-    min-width: 160px;
-    max-width: 190px;
-    height: calc(100% + 0.05em);
-    text-align: center;
-    color: #F6F6F6;
-    border-radius: 4px;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0; }
-    .Order .status-message.pending div {
-      height: 100%;
-      display: table; }
-      .Order .status-message.pending div span {
-        display: table-cell;
-        vertical-align: middle; }
+    width: 100%; }
+  .Order .status-message {
+    outline: dotted 1px blue; }
 
 .OrderPart-wrapper-transition-enter {
   transition: all 350ms ease-in-out;
@@ -81,13 +63,13 @@
   opacity: 0.01; }
 
 .OrderPart-wrapper-transition-enter-active {
-  max-height: 100px;
+  max-height: 300px;
   opacity: 1; }
 
 .OrderPart-wrapper-transition-leave {
   transition: all 350ms ease-in-out;
   opacity: 1;
-  max-height: 100px; }
+  max-height: 300px; }
 
 .OrderPart-wrapper-transition-leave-active {
   max-height: 0;

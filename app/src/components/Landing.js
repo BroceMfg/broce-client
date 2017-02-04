@@ -27,14 +27,10 @@ class Landing extends React.Component {
     this.props.toggleMessage();
 
     const cb = (data) => {
-      console.log('jello');
       const orders = {};
-      console.log('$$$$$');
-      console.log(data);
-      console.log('$$$$$');
       const json = JSON.parse(data);
       if (!json.orders) {
-        console.log('oops');
+        this.props.logout();
       }
       json.orders
         .sort((a, b) => {
@@ -50,19 +46,21 @@ class Landing extends React.Component {
         })
         .forEach((order) => {
           // if (this.props.admin) {
+          const orderStatusType = getStatusType(this.getStatusTypeId(order));
+          const statusType = (orderStatusType !== undefined) ? orderStatusType : 'unknown';
+          const newOrder = Object.assign(
+            order,
+            {
+              status: statusType
+            }
+          );
           if (admin) {
-            const orderStatusType = getStatusType(this.getStatusTypeId(order));
-            const statusType = (orderStatusType !== undefined) ? orderStatusType : 'unknown';
-
             orders[statusType] = orders[statusType] || {};
-            orders[statusType][order.id] = order;
+            orders[statusType][order.id] = newOrder;
           } else {
-            orders[new Date(order.createdAt).getTime()] = order;
+            orders[new Date(order.createdAt).getTime()] = newOrder;
           }
         });
-      console.log('#####');
-      console.log(orders);
-      console.log('#####');
       setOrders(orders);
     }
     get(

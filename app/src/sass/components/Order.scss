@@ -25,35 +25,41 @@
     }
   }
   .content {
-    width: 68%;
+    width: 100%;
   }
   .status-message {
-    // @include outline();
-    &.pending {
-      background: $Order_status_message_bg_color;
-      // box-shadow: 0px 1px 2px rgba(0,0,0,.16);
-      position: absolute;
-      top: -0.06em;
-      right: -0.03em;
-      width: 24%;
-      min-width: 160px;
-      max-width: 190px;
-      height: calc(100% + 0.05em);
-      text-align: center;
-      color: $Order_status_message_color;
-      // border: solid 1px $Order_status_message_bg_color;
-      border-radius: $Order_status_message_border_radius;
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-      div {
-        height: 100%;
-        display: table;
-        span {
-          display: table-cell;
-          vertical-align: middle;
-        }
-      }
-    }
+    @include outline();
+    // position: absolute;
+    // top: -0.06em;
+    // right: -0.03em;
+    // width: 24%;
+    // min-width: 160px;
+    // max-width: 190px;
+    // height: calc(100% + 0.05em);
+    // text-align: center;
+    // &.pending {
+    //   background: $Order_status_message_bg_color;
+    //   color: $Order_status_message_color;
+    //   // border: solid 1px $Order_status_message_bg_color;
+    //   border-radius: $Order_status_message_border_radius;
+    //   border-top-left-radius: 0;
+    //   border-bottom-left-radius: 0;
+    //   div {
+    //     height: 100%;
+    //     display: table;
+    //     span {
+    //       display: table-cell;
+    //       vertical-align: middle;
+    //     }
+    //   }
+    // }
+    // &.controls-wrapper {
+    //   @include outline(red);
+    //   .controls {
+    //     width: 100%;
+    //     @include outline(blue);
+    //   }
+    // }
   }
 }
 
@@ -64,14 +70,14 @@
 }
 
 .OrderPart-wrapper-transition-enter-active {
-  max-height: 100px;
+  max-height: 300px;
   opacity: 1;
 }
 
 .OrderPart-wrapper-transition-leave {
   transition: all 350ms ease-in-out;
   opacity: 1;
-  max-height: 100px;
+  max-height: 300px;
 }
 
 .OrderPart-wrapper-transition-leave-active {

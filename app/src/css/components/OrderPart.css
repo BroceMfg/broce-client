@@ -16,8 +16,61 @@
 /***
   FONTS
 ***/
+.OrderParts-wrapper {
+  border: solid 1px transparent; }
+  .OrderParts-wrapper .OrderParts-titles {
+    padding-top: 1em;
+    display: inline-block;
+    width: 100%; }
+    .OrderParts-wrapper .OrderParts-titles div {
+      width: calc(23% - 3px);
+      display: inline-block;
+      text-align: center;
+      border-bottom: solid 1px black; }
+      .OrderParts-wrapper .OrderParts-titles div.shipped {
+        width: calc(11% - 3px);
+        font-size: 1em; }
+      .OrderParts-wrapper .OrderParts-titles div.machine_serial_num {
+        width: calc(28% - 3px); }
+      .OrderParts-wrapper .OrderParts-titles div.quantity {
+        width: calc(15% - 3px); }
+      .OrderParts-wrapper .OrderParts-titles div:not(:last-child) {
+        border-right: solid 1px black; }
+  .OrderParts-wrapper .OrderParts-final {
+    padding-bottom: 1em;
+    width: 100%;
+    display: inline-block; }
+    .OrderParts-wrapper .OrderParts-final div {
+      display: inline-block;
+      text-align: center; }
+    .OrderParts-wrapper .OrderParts-final .spacer {
+      width: calc(19.25% - 3px);
+      border-right: solid 1px black; }
+    .OrderParts-wrapper .OrderParts-final #spacer4 {
+      border-right: 0; }
+    .OrderParts-wrapper .OrderParts-final .price {
+      width: calc(23% - 3px);
+      border-left: solid 1px black; }
+
 .OrderPart {
-  outline: solid 1px #D7D7D7;
-  line-height: 1.4em; }
+  outline: solid 1px transparent;
+  line-height: 1.4em;
+  height: calc(auto + 100px); }
+  .OrderPart .content-wrapper .details {
+    display: inline-block;
+    width: 100%; }
+    .OrderPart .content-wrapper .details div {
+      display: inline-block;
+      width: calc(23% - 3px);
+      text-align: center;
+      border-bottom: solid 1px #9A9A9A; }
+      .OrderPart .content-wrapper .details div.shipped {
+        width: calc(11% - 3px); }
+      .OrderPart .content-wrapper .details div.machine_serial_num {
+        width: calc(28% - 3px); }
+      .OrderPart .content-wrapper .details div.quantity {
+        width: calc(15% - 3px); }
+      .OrderPart .content-wrapper .details div:not(:last-child) {
+        border-right: solid 1px black; }
 
 /*# sourceMappingURL=OrderPart.css.map */

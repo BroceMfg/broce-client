@@ -238,15 +238,17 @@ class Order extends React.Component {
 
   render() {
     const order = this.props.order;
+    const totalPrice = order.Order_Details
+      .map(od => (od.price || 0) * od.quantity)
+      .reduce((a, b) => a + b);
     return (
       <div className="Order">
         { 
           this.renderStatusMessage()
         }
         <div className="content">
-          <div>id: {order.id}</div>
-          <div>UserId: {order.UserId}</div>
-          <div>StatusTypeId: {order.Order_Statuses[0].StatusTypeId}</div>
+          <div><h3>{order.status}</h3></div>
+          <div><h4>Order created on: {new Date(order.createdAt).toLocaleDateString("en-US")}</h4></div>
           <button className="reveal-details" onClick={this.toggleDetails}>
             {
               this.state.showDetails
@@ -265,18 +267,39 @@ class Order extends React.Component {
           >
             {
               this.state.showDetails
-                ? order.Order_Details.map((orderDetail, i) =>
-                    <OrderPart
-                      key={orderDetail.id}
-                      index={i}
-                      admin={this.props.admin}
-                      apiUrl={this.props.apiUrl}
-                      statusType={this.props.statusType}
-                      orderDetail={orderDetail}
-                      updateOrderDetail={this.updateOrderDetail}
-                      toggleMessage={this.props.toggleMessage}
-                    />
-                  )
+                ? 
+                  <div className="OrderParts-wrapper">
+                    <div className="OrderParts-titles">
+                      <div className="shipped">ship</div>
+                      <div className="machine_serial_num">mach serial #</div>
+                      <div className="part_num">part #</div>
+                      <div className="quantity">quantity</div>
+                      <div className="price">price ($)</div>
+                    </div>
+                    {
+                      order.Order_Details.map((orderDetail, i) =>
+                        <OrderPart
+                          key={orderDetail.id}
+                          index={i}
+                          admin={this.props.admin}
+                          apiUrl={this.props.apiUrl}
+                          statusType={this.props.statusType}
+                          orderDetail={orderDetail}
+                          updateOrderDetail={this.updateOrderDetail}
+                          toggleMessage={this.props.toggleMessage}
+                        />
+                      )
+                    }
+                    <div className="OrderParts-final">
+                      <div className="spacer" id="spacer1"></div>
+                      <div className="spacer" id="spacer2"></div>
+                      <div className="spacer" id="spacer3"></div>
+                      <div className="spacer" id="spacer4"></div>
+                      <div className="price">
+                        {totalPrice !== 0 ? totalPrice.toFixed(2) : '--'}
+                      </div>
+                    </div>
+                  </div>
                 : null
             }
           </ReactCSSTransitionGroup>

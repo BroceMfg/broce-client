@@ -58,39 +58,40 @@ class OrderPart extends React.Component {
     const shippingDetail = orderDetail.Shipping_Detail;
     return (
       <div className="OrderPart">
-        <div>
-          <div>machine_serial_num: {orderDetail.machine_serial_num}</div>
-          <div>part_num: {orderDetail.Part.number}</div>
-          <div>quantity: {orderDetail.quantity}</div>
+        <div className="content-wrapper">
+          <div className="details">
+            <div className="shipped" title="View shipping details">--</div>
+            <div className="machine_serial_num">{orderDetail.machine_serial_num}</div>
+            <div className="part_num">{orderDetail.Part.number}</div>
+            <div className="quantity">{orderDetail.quantity}</div>
+            <div className="price">
+              {orderDetail.price ? (orderDetail.price * orderDetail.quantity).toFixed(2) : '--'}
+            </div>
+          </div>
+          <OrderAction
+            admin={this.props.admin}
+            statusType={this.props.statusType}
+            buttonTitle={orderAction.buttonTitle}
+            alertTitle={orderAction.alertTitle}
+            action={orderAction.func}
+          />
           {
-            orderDetail.price
-              ? <div>price: {orderDetail.price}</div>
+            shippingDetail
+              ? <ShippingDetail shippingDetail={shippingDetail} />
+              : null
+          }
+          {
+            showAddPriceForm
+              ? <AddPriceForm
+                  apiUrl={this.props.apiUrl}
+                  index={this.props.index}
+                  orderDetail={orderDetail}
+                  updateOrderDetail={this.props.updateOrderDetail}
+                  toggleMessage={this.props.toggleMessage}
+                />
               : null
           }
         </div>
-        <OrderAction
-          admin={this.props.admin}
-          statusType={this.props.statusType}
-          buttonTitle={orderAction.buttonTitle}
-          alertTitle={orderAction.alertTitle}
-          action={orderAction.func}
-        />
-        {
-          shippingDetail
-            ? <ShippingDetail shippingDetail={shippingDetail} />
-            : null
-        }
-        {
-          showAddPriceForm
-            ? <AddPriceForm
-                apiUrl={this.props.apiUrl}
-                index={this.props.index}
-                orderDetail={orderDetail}
-                updateOrderDetail={this.props.updateOrderDetail}
-                toggleMessage={this.props.toggleMessage}
-              />
-            : null
-        }
       </div>
     )
   }
