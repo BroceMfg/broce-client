@@ -154,12 +154,21 @@ class QuoteForm extends React.Component {
           this.props.toggleMessage('New Quote Created. Thank you!', 'success');
         }
       },
-      (errorResponse) => console.log(errorResponse)
+      (errorResponse) => {
+        // console.log(errorResponse)
+        this.props.toggleMessage('Error: Please try again.', 'error');
+      }
     );
 
     /* --- TODO: API POST --- */
 
-    this.reset(e);
+    this.setState({
+      ...this.state,
+      form: undefined
+    });
+    setTimeout(() => {
+      this.reset(e);
+    }, 50);
   }
 
   reset(e) {

@@ -19,7 +19,7 @@ class SignIn extends React.Component {
 
     const data = { email, password };
 
-    let formData = ''
+    let formData = '';
     Object.keys(data).forEach(key => {
       formData += `${key}=${data[key]}&`;
     });

@@ -40,6 +40,8 @@
       text-align: center;
       font-size: 1.2em; }
     .ToggledMessage .content-wrapper button {
+      width: auto;
+      height: 60%;
       position: absolute;
       top: 0.56rem;
       left: 0.56rem;
@@ -51,13 +53,10 @@
         border-radius: 4px;
         cursor: pointer;
         display: table;
-        height: 60%;
-        width: auto;
         text-align: center; }
         .ToggledMessage .content-wrapper button span {
           display: table-cell;
           vertical-align: middle;
-          width: auto;
           text-align: center; }
         .ToggledMessage .content-wrapper button:hover {
           background-color: #7B7B7B;
@@ -66,8 +65,8 @@
         display: table-cell;
         vertical-align: center; }
   .ToggledMessage.success .content-wrapper {
-    background-color: #39D900; }
+    background-color: #5BDA9B; }
   .ToggledMessage.error .content-wrapper {
-    background-color: #D23427; }
+    background-color: #DF6C6C; }
 
 /*# sourceMappingURL=ToggledMessage.css.map */

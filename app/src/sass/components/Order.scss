@@ -1,6 +1,7 @@
 @import '../partials/variables';
 @import '../mixins/button';
 @import '../mixins/outline';
+@import '../mixins/micro-clearfix';
 
 .Order {
   // @include outline(red, 2px);
@@ -12,6 +13,7 @@
   padding: 0.3em;
   padding-bottom: 2.2em;
   position: relative;
+  min-height: 2.875em;
   button {
     @include button(30%);
     margin-top: 0.3em;
@@ -26,40 +28,278 @@
   }
   .content {
     width: 100%;
+    .oStatus {
+      font-weight: bold;
+      font-size: 20px;
+      right: 0;
+    }
   }
   .status-message {
-    @include outline();
-    // position: absolute;
-    // top: -0.06em;
-    // right: -0.03em;
-    // width: 24%;
-    // min-width: 160px;
-    // max-width: 190px;
-    // height: calc(100% + 0.05em);
-    // text-align: center;
-    // &.pending {
-    //   background: $Order_status_message_bg_color;
-    //   color: $Order_status_message_color;
-    //   // border: solid 1px $Order_status_message_bg_color;
-    //   border-radius: $Order_status_message_border_radius;
-    //   border-top-left-radius: 0;
-    //   border-bottom-left-radius: 0;
-    //   div {
-    //     height: 100%;
-    //     display: table;
-    //     span {
-    //       display: table-cell;
-    //       vertical-align: middle;
-    //     }
-    //   }
-    // }
-    // &.controls-wrapper {
-    //   @include outline(red);
-    //   .controls {
-    //     width: 100%;
-    //     @include outline(blue);
-    //   }
-    // }
+    // @include outline();
+    // border: solid 1px #D23427;
+    position: absolute;
+    top: 0.4em;
+    right: 0.4em;
+    border-radius: 4px;
+    background-color: #EC7056;
+    padding: 0.6em;
+    width: 18%;
+    min-width: 12em;
+    max-width: 14em;
+    height: 2.875em;
+    margin-top: 0.3em;
+    display: table;
+    &.controls-wrapper {
+      top: 0;
+      right: 0;
+      background-color: transparent;
+      div {
+        // @include outline();
+        .controls {
+          position: relative;
+          button {
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 10;
+          }
+        }
+      }
+      &.accept-controls {
+        height: 2.875em;
+        button {
+          width: 80%;
+          background-color: $success_green;
+          border-color: $c1;
+          height: 3em;
+          font-size: 16px;
+          font-weight: 500;
+          span {
+            display: block;
+            width: 100%;
+          }
+          &:hover {
+          background-color: $success_green_highlight;
+          }
+        }
+        .ShippingAddressForm {
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: 500;
+          background-color: $c1;
+          outline: solid 1px blue;
+          width: 100%;
+          height: 100%;
+          text-align: center;
+          .form-wrapper {
+            max-width: 800px;
+            margin: auto;
+            position: relative;
+            // outline: solid 1px red;
+            h4 {
+              margin-top: 2em;
+              font-size: 26px;
+            }
+            form {
+              margin-top: 2em;
+              div {
+                margin: 0.4em 0;
+                @include micro-clearfix();
+                .span-wrapper, .Input {
+                  display: block;
+                  float: left;
+                  width: 50%;
+                  height: 3em;
+                }
+                .span-wrapper {
+                  @include micro-clearfix();
+                  margin-top: 1.375em;
+                  height: 100%;
+                  text-align: right;
+                  span {
+                    float: right;
+                    margin-right: 1em;
+                    display: block;
+                    width: 44%;
+                  }
+                }
+                .Input {
+                  @include micro-clearfix();
+                  input {
+                    float: left;
+                    margin-left: 0.5em;
+                    border: none;
+                    width: 50%;
+                    height: 100%;
+                    font-size: 16px;
+                  }
+                }
+              }
+            }
+            button {
+              height: 3.5em;
+              font-size: 14px;
+              width: 10em;
+              span {
+                display: block;
+                width: 100%;
+              }
+            }
+            .submit {
+              top: calc(100% + 1em);
+              right: calc(50% - 10.5em);
+              background-color: $success_green;
+              border-color: $c1;
+              &:hover {
+                background-color: $success_green_highlight;
+              }
+            }
+            .reset {
+              position: absolute;
+              display: block;
+              top: calc(100% + 1em);
+              left: calc(50% - 10.5em);
+              background-color: $primary_blue;
+              border-color: $c1;
+              &:hover {
+                background-color: $primary_blue_highlight;
+              }
+            }
+            .cancel {
+              position: fixed;
+              top: 1em;
+              left: 1em;
+              width: 2.25em;
+              height: 2.25em;
+              background-color: $error_red;
+              border-color: $c1;
+              &:hover {
+                background-color: $error_red_highlight;
+              }
+            }
+          }
+        }
+      }
+      &.shipping-controls {
+        height: 2.875em;
+        button {
+          width: 80%;
+          background-color: $success_green;
+          border-color: $c1;
+          height: 3em;
+          font-size: 16px;
+          font-weight: 500;
+          span {
+            display: block;
+            width: 100%;
+          }
+          &:hover {
+          background-color: $success_green_highlight;
+          }
+        }
+        .ShippingDetailForm {
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: 500;
+          background-color: $c1;
+          outline: solid 1px blue;
+          width: 100%;
+          height: 100%;
+          text-align: center;
+        }
+        .form-wrapper {
+          max-width: 800px;
+          margin: auto;
+          position: relative;
+          h4 {
+            margin-top: 2em;
+            font-size: 26px;
+          }
+          form {
+            margin-top: 2em;
+            div {
+              margin: 0.4em 0;
+              @include micro-clearfix();
+              .span-wrapper, .Input {
+                display: block;
+                float: left;
+                width: 50%;
+                height: 3em;
+              }
+              .span-wrapper {
+                @include micro-clearfix();
+                margin-top: 1.375em;
+                height: 100%;
+                text-align: right;
+                span {
+                  float: right;
+                  margin-right: 1em;
+                  display: block;
+                  width: 44%;
+                }
+              }
+              .Input {
+                @include micro-clearfix();
+                input {
+                  float: left;
+                  margin-left: 0.5em;
+                  border: none;
+                  width: 50%;
+                  height: 100%;
+                  font-size: 16px;
+                }
+              }
+            }
+          }
+          button {
+            height: 3.5em;
+            font-size: 14px;
+            width: 10em;
+            span {
+              display: block;
+              width: 100%;
+            }
+          }
+          .submit {
+            top: calc(100% + 1em);
+            right: calc(50% - 10.5em);
+            background-color: $success_green;
+            border-color: $c1;
+            &:hover {
+              background-color: $success_green_highlight;
+            }
+          }
+          .reset {
+            position: absolute;
+            display: block;
+            top: calc(100% + 1em);
+            left: calc(50% - 10.5em);
+            background-color: $primary_blue;
+            border-color: $c1;
+            &:hover {
+              background-color: $primary_blue_highlight;
+            }
+          }
+          .cancel {
+            position: fixed;
+            top: 1em;
+            left: 1em;
+            width: 2.25em;
+            height: 2.25em;
+            background-color: $error_red;
+            border-color: $c1;
+            &:hover {
+              background-color: $error_red_highlight;
+            }
+          }
+        }
+      }
+    }
+    &.finalize {
+      background-color: $warning_yellow;
+    }
   }
 }
 

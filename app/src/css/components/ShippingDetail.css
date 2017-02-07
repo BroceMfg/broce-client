@@ -34,13 +34,10 @@
       border-radius: 4px;
       cursor: pointer;
       display: table;
-      height: 2em;
-      width: 2em;
       text-align: center; }
       .ShippingDetail #ShippingDetailHide span {
         display: table-cell;
         vertical-align: middle;
-        width: 2em;
         text-align: center; }
       .ShippingDetail #ShippingDetailHide:hover {
         background-color: #7B7B7B;

@@ -15,8 +15,14 @@ $c8: #1F1F1F;
 $c9: #000000;
 
 /* Other Colors */
-$success_green: #39D900;
-$error_red: #D23427;
+$success_green: #5BDA9B;
+$success_green_highlight: #1DBF6E;
+$error_red: #DF6C6C;
+$error_red_highlight: #DB3030;
+$primary_blue: #72C3F1;
+$primary_blue_highlight: #2AAAF3;
+$warning_yellow: #FADA59;
+$warning_yellow_highlight: #F0C412;
 
 /* Container colors */
 $App_bg_color: $c1;
@@ -70,3 +76,4 @@ $ShippingDetail_border_radius: 4px;
   FONTS
 ***/
 $main_font_family: sans-serif;
+$raleway: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;

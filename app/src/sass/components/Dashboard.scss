@@ -45,7 +45,9 @@
 }
 
 .button {
-  @include button(calc(50% - (#{$button_border_size}*2) - 0.7em));
+  @include button();
+  width: calc(50% - (#{$button_border_size}*2) - 0.7em);
+  height: 100%;
   margin-left: 0.2em;
   margin-right: 1em;
   float: left;

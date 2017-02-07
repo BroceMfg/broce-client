@@ -50,6 +50,7 @@ class Order extends React.Component {
 
     if (this.props.admin) {
       if (this.props.statusType === 'quote') {
+        sClass = 'finalize';
         content = this.finalizeControls();
       } else if (this.props.statusType === 'priced') {
         sClass = 'pending';
@@ -57,7 +58,7 @@ class Order extends React.Component {
           <span>Pending Client Approval.</span>
         );
       } else if (this.props.statusType === 'ordered') {
-        sClass = 'controls-wrapper';
+        sClass = 'controls-wrapper shipping-controls';
         content = this.shippingControls();
       }
     } else {
@@ -67,11 +68,16 @@ class Order extends React.Component {
           <span>Waiting for admin to finalize prices.</span>
         );
       } else if (this.props.statusType === 'priced') {
-        sClass = 'controls-wrapper';
+        sClass = 'controls-wrapper accept-controls';
         content = this.acceptControls();
+      } else if (this.props.statusType === 'ordered') {
+        sClass = 'pending';
+        content = (
+          <span>Pending Shipment.</span>
+        );
       }
     }
-        
+
     return content ? renderBlock(content, sClass) : null;
   }
 
@@ -104,8 +110,12 @@ class Order extends React.Component {
         <div>
           {
             message
-              ? null
-              : <button onClick={this.toggleControls}><span>Cancel</span></button>
+              ?
+                null
+              :
+                <button onClick={this.toggleControls}>
+                  <span>Cancel</span>
+                </button>
           }
           {toggledBlock}
         </div>
@@ -135,7 +145,7 @@ class Order extends React.Component {
       (
         <div>
           <button onClick={this.finalizeOrder}><span>Finalize Order</span></button>
-          <span>Total OrderPrice: {total}</span>
+          <span>Total: ${total}</span>
         </div>
       ),
       'All items must be priced before proceeding.'
@@ -146,7 +156,7 @@ class Order extends React.Component {
     return this.renderControls(
       this.state.showControls,
       'Mark Shipped',
-      <ShippingDetailForm submit={this.addShippingDetail} />
+      <ShippingDetailForm submit={this.addShippingDetail} cancel={this.toggleControls} />
     );
   }
 
@@ -154,7 +164,7 @@ class Order extends React.Component {
     return this.renderControls(
       this.state.showControls,
       'Accept Order',
-      <ShippingAddressForm submit={this.acceptOrder} />
+      <ShippingAddressForm submit={this.acceptOrder} cancel={this.toggleControls} />
     );
   }
 
@@ -168,12 +178,16 @@ class Order extends React.Component {
         if (JSON.parse(response).success) {
           // success
           this.props.promoteOrder(this.props.order, this.props.statusType);
+          this.props.toggleMessage('Prices Submitted Successfully.', 'success');
         } else {
           // handle error
           console.log('internal server error');
         }
       },
-      (errorResponse) => console.log(errorResponse)
+      (errorResponse) => {
+        console.log(errorResponse);
+        this.props.toggleMessage('Error: Please try again.', 'error');
+      }
     );
 
   }
@@ -199,12 +213,16 @@ class Order extends React.Component {
         if (JSON.parse(response).success) {
           // success
           this.props.promoteOrder(this.props.order, this.props.statusType);
+          this.props.toggleMessage('Thank You', 'success');
         } else {
           // handle error
           console.log('internal server error');
         }
       },
-      (errorResponse) => console.log(errorResponse)
+      (errorResponse) => {
+        // console.log(errorResponse)
+        this.props.toggleMessage('Error: Please try again.', 'error');
+      }
     );
   }
 
@@ -227,12 +245,16 @@ class Order extends React.Component {
         if (JSON.parse(response).success) {
           // success
           this.props.promoteOrder(this.props.order, this.props.statusType);
+          this.props.toggleMessage('Added Shipping Details.', 'success');
         } else {
           // handle error
           console.log('internal server error');
         }
       },
-      (errorResponse) => console.log(errorResponse)
+      (errorResponse) => {
+        console.log(errorResponse)
+        this.props.toggleMessage('Error: Please try again.', 'error');
+      }
     );
   }
 
@@ -247,7 +269,7 @@ class Order extends React.Component {
           this.renderStatusMessage()
         }
         <div className="content">
-          <div><h3>{order.status}</h3></div>
+          <div className={'oStatus'}><h3>{order.status}</h3></div>
           <div><h4>Order created on: {new Date(order.createdAt).toLocaleDateString("en-US")}</h4></div>
           <button className="reveal-details" onClick={this.toggleDetails}>
             {

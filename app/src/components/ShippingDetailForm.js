@@ -63,36 +63,39 @@ class ShippingDetailForm extends React.Component {
     } = this.state;
     return (
       <div className="ShippingDetailForm" key={timestamp}>
-        <h4>Please add Shipping Details</h4>
-        <form onSubmit={this.submit}>
-          <div className="tracking_number-wrapper">
-            <span>Tracking Number</span>
-            <Input
-              refProp={(input) => { this.tracking_number = input }}
-              type="text"
-              name="shipping_details_tracking_number"
-              value={form.tracking_number}
-              placeholder="Tracking Number"
-              parentOnChange={this.onChange}
-              submit={this.submit}
-            />
-          </div>
-          <div className="cost-wrapper">
-            <span>Cost</span>
-            <Input
-              refProp={(input) => { this.cost = input }}
-              type="number"
-              min={0.01}
-              name="shipping_details_cost"
-              value={form.cost}
-              placeholder="Cost"
-              parentOnChange={this.onChange}
-              submit={this.submit}
-            />
-          </div>
-          <button type="submit">Submit</button>
-        </form>
-        <button onClick={this.reset}>Reset Form</button>
+        <div className="form-wrapper">
+          <h4>Please add Shipping Details</h4>
+          <form onSubmit={this.submit}>
+            <div className="tracking_number-wrapper">
+              <div className="span-wrapper"><span>Tracking Number</span></div>
+              <Input
+                refProp={(input) => { this.tracking_number = input }}
+                type="text"
+                name="shipping_details_tracking_number"
+                value={form.tracking_number}
+                placeholder="Tracking Number"
+                parentOnChange={this.onChange}
+                submit={this.submit}
+              />
+            </div>
+            <div className="cost-wrapper">
+              <div className="span-wrapper"><span>Cost</span></div>
+              <Input
+                refProp={(input) => { this.cost = input }}
+                type="number"
+                min={0.01}
+                name="shipping_details_cost"
+                value={form.cost}
+                placeholder="Cost"
+                parentOnChange={this.onChange}
+                submit={this.submit}
+              />
+            </div>
+            <button className="submit" type="submit">Submit</button>
+          </form>
+          <button className="reset" onClick={this.reset}>Reset Form</button>
+          <button className="cancel" onClick={this.props.cancel}>X</button>
+        </div>
       </div>
     );
   }

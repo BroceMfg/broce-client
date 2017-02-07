@@ -60,6 +60,8 @@
   margin-left: -0.925em; }
 
 .button {
+  width: calc(50% - (1px*2) - 0.7em);
+  height: 100%;
   margin-left: 0.2em;
   margin-right: 1em;
   float: left; }
@@ -70,13 +72,10 @@
     border-radius: 4px;
     cursor: pointer;
     display: table;
-    height: 100%;
-    width: calc(50% - (1px*2) - 0.7em);
     text-align: center; }
     .button span {
       display: table-cell;
       vertical-align: middle;
-      width: calc(50% - (1px*2) - 0.7em);
       text-align: center; }
     .button:hover {
       background-color: #7B7B7B;

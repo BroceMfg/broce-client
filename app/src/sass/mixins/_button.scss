@@ -6,13 +6,10 @@
     border-radius: $button_border_radius;
     cursor: pointer;
     display: table;
-    height: $height;
-    width: $width;
     text-align: center;
     span {
       display: table-cell;
       vertical-align: middle;
-      width: $width;
       text-align: center;
     }
     &:hover {

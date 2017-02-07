@@ -4,7 +4,7 @@
 .OrderParts-wrapper {
   border: solid 1px transparent;
   .OrderParts-titles {
-    padding-top: 1em;
+    padding-top: 2.25em;
     // @include outline(blue, 3px);
     display: inline-block;
     width: 100%;
@@ -62,6 +62,7 @@
       div {
         display: inline-block;
         width: calc(23% - 3px);
+        // height: 2.2em;
         &.shipped {
           width: calc(11% - 3px);
           a {
@@ -85,14 +86,62 @@
         &.quantity {
           width: calc(15% - 3px);
         }
+        &.price {
+          // @include outline(red);
+          position: relative;
+          .status {
+            // @include outline(blue);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            div {
+              border: none;
+            }
+            button {
+              margin: 0.1em 0;
+              float: right;
+              margin-right: 0.5em;
+            }
+          }
+          .AddPriceForm {
+            position: absolute;
+            display: inline-block;
+            top: 1.4em;
+            left: 0;
+            width: 100%;
+            height: 4em;
+            z-index: 100;
+            .input-button-wrapper {
+              position: relative;
+              background-color: $c2;
+              width: 100%;
+              height: 100%;
+              border: none;
+              button {
+                position: absolute;
+                bottom: 0.2em;
+                right: 0.4em;
+              }
+              .Input {
+                border: none;
+                display: block;
+                position: absolute;
+                top: 0.4em;
+                left: 0;
+                right: 0;
+                width: 100%;
+              }
+            }
+          }
+        }
         text-align: center;
         &:not(:last-child) {
           border-right: solid 1px black;
         }
-        border-bottom: solid 1px $c4;
-      }
-      .machine_serial_num {
-        
+        border-bottom: solid 1px $c3;
       }
     }
   }

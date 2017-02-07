@@ -29,13 +29,21 @@ class OrderList extends React.Component {
   }
 
   promoteOrder(order, currentStatusType) {
-    const nextStatusType = this.getNextStatusType(currentStatusType);
     const orders = this.props.orders;
-    delete orders[currentStatusType][order.id];
-    if (orders[nextStatusType] === undefined){
-      orders[nextStatusType] = {};
+    const updatedOrder = order;
+    if (this.props.admin) {
+      const nextStatusType = this.getNextStatusType(currentStatusType);
+      delete orders[currentStatusType][order.id];
+      if (orders[nextStatusType] === undefined){
+        orders[nextStatusType] = {};
+      }
+      updatedOrder.status = nextStatusType;
+      orders[nextStatusType][order.id] = order;
+    } else {
+      updatedOrder.status = this.getNextStatusType(order.status)
+      orders[new Date(order.createdAt).getTime()] = updatedOrder;
     }
-    orders[nextStatusType][order.id] = order;
+    console.log(orders);
     this.props.setOrders(orders);
   }
 
