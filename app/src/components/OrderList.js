@@ -34,11 +34,12 @@ class OrderList extends React.Component {
     if (this.props.admin) {
       const nextStatusType = this.getNextStatusType(currentStatusType);
       delete orders[currentStatusType][order.id];
-      if (orders[nextStatusType] === undefined){
-        orders[nextStatusType] = {};
+      if (orders[currentStatusType][0] === undefined) {
+        delete orders[currentStatusType];
       }
+      orders[nextStatusType] = orders[nextStatusType] || {};
       updatedOrder.status = nextStatusType;
-      orders[nextStatusType][order.id] = order;
+      orders[nextStatusType][order.id] = updatedOrder;
     } else {
       updatedOrder.status = this.getNextStatusType(order.status)
       orders[new Date(order.createdAt).getTime()] = updatedOrder;
@@ -85,6 +86,9 @@ class OrderList extends React.Component {
   }
 
   render() {
+    console.log('@@@@@@@');
+    console.log(this.props.orders);
+    console.log('@@@@@@@');
     return (
       <div className={`OrderList${this.props.admin ? ' admin' : ''}`}>
         {this.renderSubLists()}
