@@ -36,7 +36,7 @@ class PartNumberBlock extends React.Component {
     return (
       <div className="PartNumberBlock">
         <div className="part-wrapper">
-          <div className="span-wrapper"><span>PartNumber</span></div>
+          <div className="span-wrapper"><span>Part Number</span></div>
           <Input 
             refProp={(input) => { this.choice = input }}
             type="text"
