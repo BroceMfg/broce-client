@@ -98,7 +98,8 @@
     width: 10em;
     left: 50%;
     margin-left: -5em;
-    margin-top: 4em;
+    margin-top: 3em;
+    font-size: 18px;
     background-color: #5BDA9B;
     border-color: #F6F6F6; }
     .SignIn form .submit span {
@@ -109,6 +110,6 @@
       background-color: #1DBF6E; }
   .SignIn .forgot {
     display: block;
-    margin-top: 11em; }
+    margin-top: 11.4em; }
 
 /*# sourceMappingURL=SignIn.css.map */
