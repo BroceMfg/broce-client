@@ -58,15 +58,15 @@
   max-width: 32em;
   margin: auto;
   height: 100%;
-  position: absolute;
-  margin-left: -0.925em; }
+  position: absolute; }
 
 .button {
-  width: calc(50% - (1px*2) - 0.7em);
+  width: calc(45% - (1px*2) - 0.7em);
   height: 100%;
   margin-left: 0.2em;
-  margin-right: 1em;
-  float: left; }
+  margin-right: 0.4em;
+  float: left;
+  height: 35px; }
   .button {
     background-color: #9A9A9A;
     border: solid 1px;
@@ -85,6 +85,19 @@
   .button:last-child {
     margin-left: 0;
     margin-right: 0.2em; }
+  .button.refresh {
+    background-image: url("../../img/refresh.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: calc(26% - (1px*2) - 0.7em); }
+  .button.settings {
+    background-image: url("../../img/settings.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: calc(26% - (1px*2) - 0.7em);
+    margin-right: 1em; }
 
 @media screen and (max-width: 768px) {
   .Dashboard {

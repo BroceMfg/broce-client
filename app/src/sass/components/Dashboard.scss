@@ -42,20 +42,35 @@
   margin: auto;
   height: 100%;
   position: absolute;
-  margin-left: -0.925em;
   // right: 0;
 }
 
 .button {
   @include button();
-  width: calc(50% - (#{$button_border_size}*2) - 0.7em);
+  width: calc(45% - (#{$button_border_size}*2) - 0.7em);
   height: 100%;
   margin-left: 0.2em;
-  margin-right: 1em;
+  margin-right: 0.4em;
   float: left;
+  height: 35px;
   &:last-child {
     margin-left: 0;
     margin-right: 0.2em;
+  }
+  &.refresh {
+    background-image: url('../../img/refresh.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: calc(26% - (#{$button_border_size}*2) - 0.7em);
+  }
+  &.settings {
+    background-image: url('../../img/settings.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: calc(26% - (#{$button_border_size}*2) - 0.7em);
+    margin-right: 1em;
   }
 }
 

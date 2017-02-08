@@ -162,13 +162,7 @@ class QuoteForm extends React.Component {
 
     /* --- TODO: API POST --- */
 
-    this.setState({
-      ...this.state,
-      form: undefined
-    });
-    setTimeout(() => {
-      this.reset(e);
-    }, 50);
+    this.reset(e);
   }
 
   reset(e) {

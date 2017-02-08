@@ -21,11 +21,20 @@ class Dashboard extends React.Component {
             Broce Parts
           </h1>
           <div className="button-container">
-            <a
-              onClick={this.settingsOnClickHandler}
-              className="button">
-              <span>Settings</span>
-            </a>
+            <div className="icon-buttons-wrapper">
+              <a
+                onClick={() => {
+                  window.location.reload(true);
+                }}
+                className="button refresh">
+                <span></span>
+              </a>
+              <a
+                onClick={this.settingsOnClickHandler}
+                className="button settings">
+                <span></span>
+              </a>
+            </div>
             <a
               onClick={this.props.logout}
               className="button">
