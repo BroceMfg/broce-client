@@ -86,12 +86,14 @@
     margin-left: 0;
     margin-right: 0.2em; }
   .button.refresh {
+    margin-top: 0;
     background-image: url("../../img/refresh.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     width: calc(26% - (1px*2) - 0.7em); }
   .button.settings {
+    margin-top: 0;
     background-image: url("../../img/settings.png");
     background-size: contain;
     background-repeat: no-repeat;
