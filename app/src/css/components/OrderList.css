@@ -1,0 +1,31 @@
+/***
+  COLOR PALLETTE
+***/
+/* Grey scale */
+/* Other Colors */
+/* Container colors */
+/* Element colors */
+/* --------------------- */
+/***
+  MEASUREMENTS
+***/
+/* Media query breakpoints */
+/* Container measurements */
+/* Element measurements */
+/* --------------------- */
+/***
+  FONTS
+***/
+.OrderList {
+  background-color: #F6F6F6;
+  width: 100%;
+  max-width: 1000px;
+  margin: auto; }
+
+@media screen and (min-width: 1150px) {
+  .OrderList:not(.admin) {
+    float: left;
+    width: 50%;
+    height: 100%; } }
+
+/*# sourceMappingURL=OrderList.css.map */

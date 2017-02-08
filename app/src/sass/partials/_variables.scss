@@ -1,0 +1,80 @@
+/***
+  COLOR PALLETTE
+***/
+
+/* Grey scale */
+$c0: #FFFFFF;
+$c1: #F6F6F6;
+$c2: #D7D7D7;
+$c3: #B9B9B9;
+$c4: #9A9A9A;
+$c5: #7B7B7B;
+$c6: #5C5C5C;
+$c7: #3D3D3D;
+$c8: #1F1F1F;
+$c9: #000000;
+
+/* Other Colors */
+$success_green: #5BDA9B;
+$success_green_highlight: #1DBF6E;
+$error_red: #DF6C6C;
+$error_red_highlight: #DB3030;
+$primary_blue: #72C3F1;
+$primary_blue_highlight: #2AAAF3;
+$warning_yellow: #FADA59;
+$warning_yellow_highlight: #F0C412;
+
+/* Container colors */
+$App_bg_color: $c1;
+$Dashboard_bg_color: $c2;
+$Landing_bg_color: $c1;
+$OrderList_bg_color: $c1;
+$OrderSubList_bg_color: $c1;
+$QuoteForm_bg_color: $c1;
+$ToggledMessage_default_bg_color: $c4;
+$ToggledMessage_success_bg_color: $success_green;
+$ToggledMessage_error_bg_color: $error_red;
+
+/* Element colors */
+$button_border_color: $c8;
+$button_bg_color: $c4;
+$button_border_hov_color: $c7;
+$button_bg_hov_color: $c5;
+$OrderSubList_header_bg_color: $c2;
+$OrderSubList_header_color: $c9;
+$Order_border_color: $c2;
+$Order_status_message_bg_color: $c6;
+$Order_status_message_color: $c1;
+
+/* --------------------- */
+
+/***
+  MEASUREMENTS
+***/
+
+/* Media query breakpoints */
+$medium_screen_width: 768px;
+
+/* Container measurements */
+$App_max_width: 1600px;
+$App_min_width: 600px;
+$Dashboard_padding: 0.7em;
+$Dashboard_header_width: 70%;
+$Landing_padding_top: 4.5em;
+$OrderList_max_width: 1000px;
+
+/* Element measurements */
+$button_border_size: 1px;
+$button_border_radius: 4px;
+$OrderSubList_border_radius: 4px;
+$Order_border_radius: 4px;
+$Order_status_message_border_radius: 4px;
+$ShippingDetail_border_radius: 4px;
+
+/* --------------------- */
+
+/***
+  FONTS
+***/
+$main_font_family: sans-serif;
+$raleway: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;

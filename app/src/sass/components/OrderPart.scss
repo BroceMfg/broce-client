@@ -1,0 +1,153 @@
+@import '../partials/variables';
+@import '../mixins/outline';
+
+.OrderParts-wrapper {
+  border: solid 1px transparent;
+  .OrderParts-titles {
+    padding-top: 2.25em;
+    // @include outline(blue, 3px);
+    display: inline-block;
+    width: 100%;
+    div {
+      width: calc(23% - 3px);
+      &.shipped {
+        width: calc(11% - 3px);
+        font-size: 1em;
+      }
+      &.machine_serial_num {
+        width: calc(28% - 3px);
+      }
+      &.quantity {
+        width: calc(15% - 3px);
+      }
+      display: inline-block;
+      text-align: center;
+      &:not(:last-child) {
+        border-right: solid 1px black;
+      }
+      border-bottom: solid 1px black;
+    }
+  }
+  .OrderParts-final {
+    padding-bottom: 1em;
+    width: 100%;
+    display: inline-block;
+    div {
+      display: inline-block;
+      text-align: center;
+    }
+    .spacer {
+      width: calc(19.25% - 3px);
+      border-right: solid 1px black;
+    }
+    #spacer4 {
+      border-right: 0;
+    }
+    .price {
+      width: calc(23% - 3px);
+      // border-top: solid 1px black;
+      border-left: solid 1px black;
+      // margin-top: 0.3em;
+      // padding-top: 0.3em;
+    }
+  }
+}
+
+.OrderPart {
+  outline: solid 1px transparent;
+  line-height: 1.4em;
+  height: calc(auto + 100px);
+  .content-wrapper {
+    .details {
+      // @include outline(blue, 3px);
+      display: inline-block;
+      width: 100%;
+      div {
+        display: inline-block;
+        width: calc(23% - 3px);
+        // height: 10px;
+        // background-color: red;
+        &.shipped {
+          width: calc(11% - 3px);
+          a {
+            display: block;
+            width: 100%;
+            cursor: pointer;
+          }
+          .done {
+            color: transparent;
+            background-image: url('../../img/done.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100%;
+            min-width: 14px;
+            border-bottom: none;
+          }
+        }
+        &.machine_serial_num {
+          width: calc(28% - 3px);
+        }
+        &.quantity {
+          width: calc(15% - 3px);
+        }
+        &.price {
+          // @include outline(red);
+          position: relative;
+          .status {
+            // @include outline(blue);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            div {
+              border: none;
+            }
+            button {
+              margin: 0.1em 0;
+              float: right;
+              margin-right: 0.5em;
+            }
+          }
+          .AddPriceForm {
+            position: absolute;
+            display: inline-block;
+            top: 1.4em;
+            left: 0;
+            width: 100%;
+            height: 4em;
+            z-index: 100;
+            .input-button-wrapper {
+              position: relative;
+              background-color: $c2;
+              width: 100%;
+              height: 100%;
+              border: none;
+              button {
+                position: absolute;
+                bottom: 0.2em;
+                right: 0.4em;
+              }
+              .Input {
+                border: none;
+                display: block;
+                position: absolute;
+                top: 0.4em;
+                left: 0;
+                right: 0;
+                width: 100%;
+              }
+            }
+          }
+        }
+        text-align: center;
+        &:not(:last-child) {
+          border-right: solid 1px black;
+        }
+        border-bottom: solid 1px $c3;
+      }
+    }
+  }
+}

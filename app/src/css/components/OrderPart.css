@@ -1,0 +1,130 @@
+/***
+  COLOR PALLETTE
+***/
+/* Grey scale */
+/* Other Colors */
+/* Container colors */
+/* Element colors */
+/* --------------------- */
+/***
+  MEASUREMENTS
+***/
+/* Media query breakpoints */
+/* Container measurements */
+/* Element measurements */
+/* --------------------- */
+/***
+  FONTS
+***/
+.OrderParts-wrapper {
+  border: solid 1px transparent; }
+  .OrderParts-wrapper .OrderParts-titles {
+    padding-top: 2.25em;
+    display: inline-block;
+    width: 100%; }
+    .OrderParts-wrapper .OrderParts-titles div {
+      width: calc(23% - 3px);
+      display: inline-block;
+      text-align: center;
+      border-bottom: solid 1px black; }
+      .OrderParts-wrapper .OrderParts-titles div.shipped {
+        width: calc(11% - 3px);
+        font-size: 1em; }
+      .OrderParts-wrapper .OrderParts-titles div.machine_serial_num {
+        width: calc(28% - 3px); }
+      .OrderParts-wrapper .OrderParts-titles div.quantity {
+        width: calc(15% - 3px); }
+      .OrderParts-wrapper .OrderParts-titles div:not(:last-child) {
+        border-right: solid 1px black; }
+  .OrderParts-wrapper .OrderParts-final {
+    padding-bottom: 1em;
+    width: 100%;
+    display: inline-block; }
+    .OrderParts-wrapper .OrderParts-final div {
+      display: inline-block;
+      text-align: center; }
+    .OrderParts-wrapper .OrderParts-final .spacer {
+      width: calc(19.25% - 3px);
+      border-right: solid 1px black; }
+    .OrderParts-wrapper .OrderParts-final #spacer4 {
+      border-right: 0; }
+    .OrderParts-wrapper .OrderParts-final .price {
+      width: calc(23% - 3px);
+      border-left: solid 1px black; }
+
+.OrderPart {
+  outline: solid 1px transparent;
+  line-height: 1.4em;
+  height: calc(auto + 100px); }
+  .OrderPart .content-wrapper .details {
+    display: inline-block;
+    width: 100%; }
+    .OrderPart .content-wrapper .details div {
+      display: inline-block;
+      width: calc(23% - 3px);
+      text-align: center;
+      border-bottom: solid 1px #B9B9B9; }
+      .OrderPart .content-wrapper .details div.shipped {
+        width: calc(11% - 3px); }
+        .OrderPart .content-wrapper .details div.shipped a {
+          display: block;
+          width: 100%;
+          cursor: pointer; }
+        .OrderPart .content-wrapper .details div.shipped .done {
+          color: transparent;
+          background-image: url("../../img/done.png");
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center;
+          height: 100%;
+          min-width: 14px;
+          border-bottom: none; }
+      .OrderPart .content-wrapper .details div.machine_serial_num {
+        width: calc(28% - 3px); }
+      .OrderPart .content-wrapper .details div.quantity {
+        width: calc(15% - 3px); }
+      .OrderPart .content-wrapper .details div.price {
+        position: relative; }
+        .OrderPart .content-wrapper .details div.price .status {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border: none; }
+          .OrderPart .content-wrapper .details div.price .status div {
+            border: none; }
+          .OrderPart .content-wrapper .details div.price .status button {
+            margin: 0.1em 0;
+            float: right;
+            margin-right: 0.5em; }
+        .OrderPart .content-wrapper .details div.price .AddPriceForm {
+          position: absolute;
+          display: inline-block;
+          top: 1.4em;
+          left: 0;
+          width: 100%;
+          height: 4em;
+          z-index: 100; }
+          .OrderPart .content-wrapper .details div.price .AddPriceForm .input-button-wrapper {
+            position: relative;
+            background-color: #D7D7D7;
+            width: 100%;
+            height: 100%;
+            border: none; }
+            .OrderPart .content-wrapper .details div.price .AddPriceForm .input-button-wrapper button {
+              position: absolute;
+              bottom: 0.2em;
+              right: 0.4em; }
+            .OrderPart .content-wrapper .details div.price .AddPriceForm .input-button-wrapper .Input {
+              border: none;
+              display: block;
+              position: absolute;
+              top: 0.4em;
+              left: 0;
+              right: 0;
+              width: 100%; }
+      .OrderPart .content-wrapper .details div:not(:last-child) {
+        border-right: solid 1px black; }
+
+/*# sourceMappingURL=OrderPart.css.map */

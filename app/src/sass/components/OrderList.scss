@@ -1,0 +1,20 @@
+@import '../partials/variables';
+@import '../mixins/outline';
+
+.OrderList {
+  // @include outline(red);
+  background-color: $OrderList_bg_color;
+  width: 100%;
+  max-width: $OrderList_max_width;
+  margin: auto;
+}
+
+@media screen and (min-width: 1150px) {
+  .OrderList {
+    &:not(.admin) {
+      float: left;
+      width: 50%;
+      height: 100%;
+    }
+  }
+}

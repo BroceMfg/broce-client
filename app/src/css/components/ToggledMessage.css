@@ -1,0 +1,72 @@
+/***
+  COLOR PALLETTE
+***/
+/* Grey scale */
+/* Other Colors */
+/* Container colors */
+/* Element colors */
+/* --------------------- */
+/***
+  MEASUREMENTS
+***/
+/* Media query breakpoints */
+/* Container measurements */
+/* Element measurements */
+/* --------------------- */
+/***
+  FONTS
+***/
+.ToggledMessage {
+  position: fixed;
+  top: 0.45rem;
+  left: 0;
+  background-color: transparent;
+  width: 100%;
+  height: 2.8rem;
+  z-index: 100; }
+  .ToggledMessage .content-wrapper {
+    position: relative;
+    display: table;
+    background-color: #9A9A9A;
+    width: 99%;
+    max-width: calc(1600px - 1600px*.01);
+    margin: auto;
+    height: 100%;
+    border-radius: 4px; }
+    .ToggledMessage .content-wrapper span {
+      display: table-cell;
+      vertical-align: middle;
+      width: 100%;
+      text-align: center;
+      font-size: 1.2em; }
+    .ToggledMessage .content-wrapper button {
+      width: auto;
+      height: 60%;
+      position: absolute;
+      top: 0.56rem;
+      left: 0.56rem;
+      display: table; }
+      .ToggledMessage .content-wrapper button {
+        background-color: #9A9A9A;
+        border: solid 1px;
+        border-color: #1F1F1F;
+        border-radius: 4px;
+        cursor: pointer;
+        display: table;
+        text-align: center; }
+        .ToggledMessage .content-wrapper button span {
+          display: table-cell;
+          vertical-align: middle;
+          text-align: center; }
+        .ToggledMessage .content-wrapper button:hover {
+          background-color: #7B7B7B;
+          border-color: #3D3D3D; }
+      .ToggledMessage .content-wrapper button span {
+        display: table-cell;
+        vertical-align: center; }
+  .ToggledMessage.success .content-wrapper {
+    background-color: #5BDA9B; }
+  .ToggledMessage.error .content-wrapper {
+    background-color: #DF6C6C; }
+
+/*# sourceMappingURL=ToggledMessage.css.map */
