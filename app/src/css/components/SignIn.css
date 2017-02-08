@@ -110,6 +110,8 @@
       background-color: #1DBF6E; }
   .SignIn .forgot {
     display: block;
+    width: 12em;
+    margin: auto;
     margin-top: 11.4em; }
 
 /*# sourceMappingURL=SignIn.css.map */
