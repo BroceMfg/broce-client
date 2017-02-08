@@ -184,6 +184,10 @@ class QuoteForm extends React.Component {
       form,
       timestamp
     } = this.state;
+    console.log('$$$$');
+    console.log(form);
+    console.log('$$$$');
+    const machNums = Object.keys(form);
     return (
       <div className="QuoteForm" key={timestamp}>
         <div className="content-wrapper">
@@ -192,7 +196,7 @@ class QuoteForm extends React.Component {
           </h1>
           <form onSubmit={this.submit}>
             {
-              Object.keys(form).map((key) => {
+              machNums.map((key, i) => {
                 const formObj = form[key];
                 return (
                   <MachineNumberBlock
@@ -200,20 +204,24 @@ class QuoteForm extends React.Component {
                     index={key}
                     form={formObj}
                     addPartNumBlock={this.addPartNumBlock}
+                    addMachNumBlock={this.addMachNumBlock}
                     updateForm={this.updateForm}
                     submit={this.submit}
+                    lastOne={(machNums.length - 1) === i}
                   />
                 )
               })
             }
-            <button
-              className="add-machine-number-btn"
-              onClick={this.addMachNumBlock}>
-              Add Another Machine Number
-            </button>
-            <button type="submit">Submit</button>
+            {
+              Object.keys(form[0])[0] !== ''
+                ?
+                  <div>
+                    <button className="submit" type="submit">Submit</button>
+                    <button className="reset" onClick={this.reset}>Reset Form</button>
+                  </div>
+                : null
+            }
           </form>
-          <button onClick={this.reset}>Reset Form</button>
         </div>
       </div>
     )

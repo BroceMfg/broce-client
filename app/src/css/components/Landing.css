@@ -21,6 +21,7 @@
   height: 600px;
   width: 100%;
   max-width: 1600px;
+  min-width: 600px;
   margin: auto;
   position: relative;
   margin-top: 4.5em; }

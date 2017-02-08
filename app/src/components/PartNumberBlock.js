@@ -35,19 +35,21 @@ class PartNumberBlock extends React.Component {
     const form = this.state.form;
     return (
       <div className="PartNumberBlock">
-        <span>PartNumber</span>
-        <Input 
-          refProp={(input) => { this.choice = input }}
-          type="text"
-          name={`part_number_${this.props.index}`}
-          value={Object.keys(form)[0]}
-          placeholder="Part Number"
-          parentOnChange={this.onChange}
-        />
+        <div className="part-wrapper">
+          <div className="span-wrapper"><span>PartNumber</span></div>
+          <Input 
+            refProp={(input) => { this.choice = input }}
+            type="text"
+            name={`part_number_${this.props.index}`}
+            value={Object.keys(form)[0]}
+            placeholder="Part Number"
+            parentOnChange={this.onChange}
+          />
+        </div>
         {
           Object.keys(this.state.form)[0] !== ''
             ? <div className="quantity">
-                <span>Quantity</span>
+                <div className="span-wrapper"><span>x</span></div>
                 <Input
                   refProp={(input) => { this.quantity = input }}
                   type="number"
@@ -60,6 +62,17 @@ class PartNumberBlock extends React.Component {
               </div>
             : null
         }
+        <div>
+          {
+            this.props.lastOne && Object.keys(this.state.form)[0] !== ''
+              ?
+                <button
+                  className="add-part-number-btn"
+                  onClick={this.props.addPartNumBlock}
+                >+</button>
+              : null
+          }
+        </div>
       </div>
     )
   }

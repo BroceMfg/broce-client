@@ -21,11 +21,13 @@
   max-width: 1000px;
   margin: auto; }
   .QuoteForm .content-wrapper {
+    position: relative;
     background-color: #F6F6F6;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.16);
     border-radius: 4px;
     width: 96%;
-    margin: 0.5em auto; }
+    margin: 0.5em auto;
+    padding-bottom: 3em; }
     .QuoteForm .content-wrapper > form, .QuoteForm .content-wrapper > button {
       margin: 1rem; }
     .QuoteForm .content-wrapper .header {
@@ -45,6 +47,46 @@
         padding-bottom: 0.15em;
         border-bottom: solid 1px #000000;
         text-transform: uppercase; }
+    .QuoteForm .content-wrapper .submit, .QuoteForm .content-wrapper .reset {
+      height: 3.5em;
+      font-size: 14px;
+      width: 10em; }
+      .QuoteForm .content-wrapper .submit, .QuoteForm .content-wrapper .reset {
+        background-color: #9A9A9A;
+        border: solid 1px;
+        border-color: #1F1F1F;
+        border-radius: 4px;
+        cursor: pointer;
+        display: table;
+        text-align: center; }
+        .QuoteForm .content-wrapper .submit span, .QuoteForm .content-wrapper .reset span {
+          display: table-cell;
+          vertical-align: middle;
+          text-align: center; }
+        .QuoteForm .content-wrapper .submit:hover, .QuoteForm .content-wrapper .reset:hover {
+          background-color: #7B7B7B;
+          border-color: #3D3D3D; }
+      .QuoteForm .content-wrapper .submit span, .QuoteForm .content-wrapper .reset span {
+        display: block;
+        width: 100%; }
+    .QuoteForm .content-wrapper .submit {
+      position: absolute;
+      bottom: 0.4em;
+      right: calc(50% - 10.5em);
+      background-color: #5BDA9B;
+      border-color: #F6F6F6; }
+      .QuoteForm .content-wrapper .submit:hover {
+        border-color: #F6F6F6;
+        background-color: #1DBF6E; }
+    .QuoteForm .content-wrapper .reset {
+      position: absolute;
+      bottom: 0.4em;
+      left: calc(50% - 10.5em);
+      background-color: #72C3F1;
+      border-color: #F6F6F6; }
+      .QuoteForm .content-wrapper .reset:hover {
+        background-color: #2AAAF3;
+        border-color: #F6F6F6; }
 
 @media screen and (min-width: 1150px) {
   .QuoteForm {
