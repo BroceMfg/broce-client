@@ -107,6 +107,10 @@ class QuoteForm extends React.Component {
   submit(e) {
     e.preventDefault();
     const form = this.state.form;
+    this.setState({
+      ...this.state,
+      form: _.cloneDeep(gnum.INITIAL_QUOTE_FORM)
+    });
 
     // console.log(`QuoteForm component => submit function called with ` +
     //   `form = ${JSON.stringify(form, null, 2)}`);
@@ -142,7 +146,6 @@ class QuoteForm extends React.Component {
       formData += `${key}=${dummyForm[key]}&`;
     });
 
-    console.log(formData);
 
     // just testing post and get out
     post(
@@ -162,7 +165,9 @@ class QuoteForm extends React.Component {
 
     /* --- TODO: API POST --- */
 
-    this.reset(e);
+    setTimeout(() => {
+      this.reset(e);
+    }, 50);
   }
 
   reset(e) {

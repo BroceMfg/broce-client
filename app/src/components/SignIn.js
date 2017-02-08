@@ -59,9 +59,8 @@ class SignIn extends React.Component {
         }
         <form onSubmit={this.postAction}>
           <h1>Welcome to Broce Parts</h1>
-          <h3>Log In</h3>
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <div className="label-wrapper"><label htmlFor="email">Email</label></div>
             <Input
               refProp={(input) => { this.email = input }}
               type="email"
@@ -72,7 +71,7 @@ class SignIn extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Password</label>
+            <div className="label-wrapper"><label htmlFor="password">Password</label></div>
             <Input
               refProp={(input) => { this.password = input }}
               type="password"
@@ -82,9 +81,9 @@ class SignIn extends React.Component {
               submitOnEnter={true}
             />
           </div>
-          <button className="btn btn-primary" type="submit">Log In</button>
+          <button className="submit" type="submit">Log In</button>
         </form>
-        <a href="/forgot">Forgot your password?</a>
+        <a className="forgot" href="/forgot">Forgot your password?</a>
       </div>
     )
   }

@@ -4,39 +4,82 @@
 @import '../mixins/outline';
 
 .SignIn {
-  @include outline();
+  margin: 1em;
   text-align: center;
-  form {
-    @include outline(red);
-    .form-group {
-      @include outline(green);
-      margin-top: 1em;
-    }
-    button {
-      
-    }
+  position: relative;
+  h1 {
+    width: 100%;
+    margin-top: 3em;
+    margin-bottom: 1.6em;
+    font-size: 38px;
   }
-}
-
-@media screen and (min-width: 542px) {
-  .SignIn {
-    form {
+  form {
+    .form-group {
+      &:not(:last-child) {
+        margin-top: 1em;
+      }
       @include micro-clearfix();
-      width: 100%;
-      label, input {
+      margin: 0.4em 0;
+      .label-wrapper, .Input {
         display: block;
         float: left;
         width: 50%;
-        margin: 0.5em 0;
+        height: 3em;
       }
-      label {
+      .label-wrapper {
+        @include micro-clearfix();
+        margin-top: 0.975em;
+        height: 100%;
         text-align: right;
-        padding-right: 1em;
+        label {
+          float: right;
+          margin-right: 0.6em;
+          display: block;
+          width: 44%;
+          min-width: 176px;
+          font-size: 18px;
+        }
       }
-      input {
-        max-width: 13em;
-        padding-left: 1em;
+      .Input {
+        @include micro-clearfix();
+        input {
+          float: left;
+          margin-left: 0.5em;
+          border: none;
+          border-radius: 4px;
+          width: 30%;
+          min-width: 160px;
+          height: 100%;
+          font-size: 16px;
+          padding-left: 0.8em;
+        }
       }
     }
+    button {
+      @include button();
+    }
+    .submit {
+      position: absolute;
+      height: 3.5em;
+      font-size: 14px;
+      width: 10em;
+      left: 50%;
+      margin-left: -5em;
+      margin-top: 4em;
+      span {
+        display: block;
+        width: 100%;
+      }
+      background-color: $success_green;
+      border-color: $c1;
+      &:hover {
+        border-color: $c1;
+        background-color: $success_green_highlight;
+      }
+    }
+  }
+  .forgot {
+    display: block;
+    margin-top: 11em;
   }
 }

@@ -161,7 +161,8 @@
                   width: 50%;
                   min-width: 200px;
                   height: 100%;
-                  font-size: 16px; }
+                  font-size: 16px;
+                  padding-left: 0.8em; }
             .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper button {
               height: 3.5em;
               font-size: 14px;
@@ -274,7 +275,8 @@
                 width: 50%;
                 min-width: 200px;
                 height: 100%;
-                font-size: 16px; }
+                font-size: 16px;
+                padding-left: 0.8em; }
           .Order .status-message.controls-wrapper.shipping-controls .form-wrapper button {
             height: 3.5em;
             font-size: 14px;
