@@ -29,12 +29,29 @@ class SignIn extends React.Component {
       `${apiUrl}/users/login`,
       formData,
       (response) => {
-        console.log(JSON.parse(response));
-        this.props.setUser(JSON.parse(response).user);
+        const resp = JSON.parse(response);
+        if (!resp.success) {
+          if (resp.message.includes('wrong')) {
+            this.props.toggleMessage(
+              'Invalid username or password.',
+              'error'
+            );
+          } else {
+            this.props.toggleMessage(
+              'An unexpected error occurred.',
+              'error'
+            );
+          }
+        } else {
+          this.props.setUser(resp.user);
+        }
       },
       (err) => {
         console.log(err)
-        this.props.toggleMessage('Invalid username or password.', 'error');
+        this.props.toggleMessage(
+          'An unexpected error occurred.',
+          'error'
+        );
       }
     );
   }
