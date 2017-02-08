@@ -3,44 +3,103 @@ import { get } from '../middleware/XMLHTTP';
 import Dashboard from './Dashboard';
 import OrderList from './OrderList';
 import QuoteForm from './QuoteForm';
+import ToggledMessage from './ToggledMessage';
+
+import '../css/components/Landing.css';
 
 class Landing extends React.Component {
 
   constructor(props) {
     super(props);
-    this.orderOnClickHandler = this.orderOnClickHandler.bind(this);
+    this.getStatusTypeId = this.getStatusTypeId.bind(this);
   }
 
   componentWillMount() {
+    const {
+      admin,
+      statusTypes,
+      getStatusType,
+      setOrders,
+      apiUrl
+    } = this.props;
+
+    // clear out whatever message was being displayed
+    this.props.toggleMessage();
+
     const cb = (data) => {
-      let orders = {};
-      JSON.parse(data).orders.forEach((order) => {
-
-        const orderStatusType = this.props.statusTypes[order.Order_Statuses
-          .filter((status) => status.current)[0].StatusTypeId || 0];
-        const statusType = (orderStatusType !== undefined) ? orderStatusType : 'unknown';
-
-        orders[statusType] = orders[statusType] || {};
-        orders[statusType][order.id] = order;
-
-      });
-      this.props.setOrders(orders);
+      const orders = {};
+      const json = JSON.parse(data);
+      if (!json.orders) {
+        this.props.logout();
+      }
+      json.orders
+        .sort((a, b) => {
+          const statusTypeValues = Object.values(statusTypes);
+          if (admin) {
+            return statusTypeValues.indexOf(this.getStatusTypeId(a))
+              - statusTypeValues.indexOf(this.getStatusTypeId(b));
+          }
+          return (
+            new Date(b.createdAt).getTime()
+              - new Date(a.createdAt).getTime()
+          );
+        })
+        .forEach((order) => {
+          // if (this.props.admin) {
+          const orderStatusType = getStatusType(this.getStatusTypeId(order));
+          const statusType = (orderStatusType !== undefined) ? orderStatusType : 'unknown';
+          const newOrder = Object.assign(
+            order,
+            {
+              status: statusType
+            }
+          );
+          if (admin) {
+            orders[statusType] = orders[statusType] || {};
+            orders[statusType][order.id] = newOrder;
+          } else {
+            orders[new Date(order.createdAt).getTime()] = newOrder;
+          }
+        });
+      setOrders(orders);
     }
-
     get(
-      `${this.props.apiUrl}/orders?status=quote,priced`,
+      `${apiUrl}/orders?status=quote,priced`,
       (data) => cb(data),
-      (err) => console.log(err)
+      (err) => {
+        console.log(`err = ${err}`);
+        // session expired or possible security vulnerability.
+        // log user out and reload
+        this.props.logout();
+      }
     );
   }
 
-  orderOnClickHandler(orderId) {
-    this.context.router.transitionTo(`/orders/${orderId}`);
+  getStatusTypeId(order) {
+    return order.Order_Statuses
+      .filter(
+        status => status.current
+      )[0].StatusTypeId || 0;
   }
 
   render() {
+    const {
+      message,
+      messageStatusCode,
+      toggleMessage
+    } = this.props;
     return (
       <div className="main-wrapper">
+        {
+          message
+            ? 
+              <ToggledMessage
+                message={message}
+                messageStatusCode={messageStatusCode}
+                dismiss={() => toggleMessage()}
+              />
+            : null
+        }
         <Dashboard logout={this.props.logout} />
         <div className="Landing">
           <OrderList
@@ -49,8 +108,19 @@ class Landing extends React.Component {
             orders={this.props.orders}
             setOrders={this.props.setOrders}
             statusTypes={this.props.statusTypes}
-            orderOnClickHandler={this.orderOnClickHandler} />
-          <QuoteForm apiUrl={this.props.apiUrl} />
+            getStatusType={
+              (order) => this.props.getStatusType(this.getStatusTypeId(order))
+            }
+            toggleMessage={toggleMessage}
+          />
+          {
+            !this.props.admin
+              ? <QuoteForm
+                  apiUrl={this.props.apiUrl}
+                  toggleMessage={toggleMessage}
+                />
+              : null
+          }
         </div>
       </div>
     )

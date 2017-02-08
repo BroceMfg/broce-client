@@ -1,0 +1,42 @@
+/***
+  COLOR PALLETTE
+***/
+/* Grey scale */
+/* Other Colors */
+/* Container colors */
+/* Element colors */
+/* --------------------- */
+/***
+  MEASUREMENTS
+***/
+/* Media query breakpoints */
+/* Container measurements */
+/* Element measurements */
+/* --------------------- */
+/***
+  FONTS
+***/
+html, body {
+  background-color: #F6F6F6;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: calc(100% - 4.5em);
+  font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0; }
+
+ul, ol {
+  margin: 0;
+  padding: 0; }
+
+.App {
+  background-color: #F6F6F6;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  margin-bottom: 1.5em; }
+
+/*# sourceMappingURL=App.css.map */

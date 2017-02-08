@@ -1,0 +1,5 @@
+@mixin outline($color: blue, $size: 1px, $style: dotted) {
+  & {
+    outline: $style $size $color;
+  }
+}

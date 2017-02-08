@@ -1,0 +1,117 @@
+/***
+  COLOR PALLETTE
+***/
+/* Grey scale */
+/* Other Colors */
+/* Container colors */
+/* Element colors */
+/* --------------------- */
+/***
+  MEASUREMENTS
+***/
+/* Media query breakpoints */
+/* Container measurements */
+/* Element measurements */
+/* --------------------- */
+/***
+  FONTS
+***/
+.SignIn {
+  margin: 1em;
+  text-align: center;
+  position: relative; }
+  .SignIn h1 {
+    width: 100%;
+    margin-top: 3em;
+    margin-bottom: 1.6em;
+    font-size: 38px; }
+  .SignIn form .form-group {
+    margin: 0.4em 0; }
+    .SignIn form .form-group:not(:last-child) {
+      margin-top: 1em; }
+    .SignIn form .form-group {
+      *zoom: 1; }
+    .SignIn form .form-group:before, .SignIn form .form-group:after {
+      content: "";
+      display: table; }
+    .SignIn form .form-group:after {
+      clear: both; }
+    .SignIn form .form-group .label-wrapper, .SignIn form .form-group .Input {
+      display: block;
+      float: left;
+      width: 50%;
+      height: 3em; }
+    .SignIn form .form-group .label-wrapper {
+      margin-top: 0.975em;
+      height: 100%;
+      text-align: right; }
+      .SignIn form .form-group .label-wrapper {
+        *zoom: 1; }
+      .SignIn form .form-group .label-wrapper:before, .SignIn form .form-group .label-wrapper:after {
+        content: "";
+        display: table; }
+      .SignIn form .form-group .label-wrapper:after {
+        clear: both; }
+      .SignIn form .form-group .label-wrapper label {
+        float: right;
+        margin-right: 0.6em;
+        display: block;
+        width: 44%;
+        min-width: 176px;
+        font-size: 18px; }
+    .SignIn form .form-group .Input {
+      *zoom: 1; }
+    .SignIn form .form-group .Input:before, .SignIn form .form-group .Input:after {
+      content: "";
+      display: table; }
+    .SignIn form .form-group .Input:after {
+      clear: both; }
+    .SignIn form .form-group .Input input {
+      float: left;
+      margin-left: 0.5em;
+      border: none;
+      border-radius: 4px;
+      width: 30%;
+      min-width: 160px;
+      height: 100%;
+      font-size: 16px;
+      padding-left: 0.8em; }
+  .SignIn form button {
+    background-color: #9A9A9A;
+    border: solid 1px;
+    border-color: #1F1F1F;
+    border-radius: 4px;
+    cursor: pointer;
+    display: table;
+    text-align: center; }
+    .SignIn form button span {
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center; }
+    .SignIn form button:hover {
+      background-color: #7B7B7B;
+      border-color: #3D3D3D; }
+  .SignIn form .submit {
+    position: absolute;
+    height: 3.5em;
+    font-size: 14px;
+    width: 10em;
+    left: 50%;
+    margin-left: -5em;
+    margin-top: 3em;
+    font-size: 18px;
+    background-color: #5BDA9B;
+    border-color: #F6F6F6; }
+    .SignIn form .submit span {
+      display: block;
+      width: 100%; }
+    .SignIn form .submit:hover {
+      border-color: #F6F6F6;
+      background-color: #1DBF6E; }
+  .SignIn .forgot {
+    display: block;
+    width: 12em;
+    margin: auto;
+    margin-top: 11.4em; }
+
+/*# sourceMappingURL=SignIn.css.map */

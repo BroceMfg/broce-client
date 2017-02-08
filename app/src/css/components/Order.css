@@ -1,0 +1,334 @@
+/***
+  COLOR PALLETTE
+***/
+/* Grey scale */
+/* Other Colors */
+/* Container colors */
+/* Element colors */
+/* --------------------- */
+/***
+  MEASUREMENTS
+***/
+/* Media query breakpoints */
+/* Container measurements */
+/* Element measurements */
+/* --------------------- */
+/***
+  FONTS
+***/
+.Order {
+  border: solid 1px #D7D7D7;
+  border-radius: 4px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.16);
+  margin: auto;
+  margin: 0.5em 0.8em;
+  padding: 0.3em;
+  padding-bottom: 2.2em;
+  position: relative;
+  min-height: 2.875em; }
+  .Order button {
+    margin-top: 0.3em;
+    margin-bottom: 0.4em; }
+    .Order button {
+      background-color: #9A9A9A;
+      border: solid 1px;
+      border-color: #1F1F1F;
+      border-radius: 4px;
+      cursor: pointer;
+      display: table;
+      text-align: center; }
+      .Order button span {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center; }
+      .Order button:hover {
+        background-color: #7B7B7B;
+        border-color: #3D3D3D; }
+    .Order button.reveal-details {
+      margin-top: 0.5em;
+      position: absolute;
+      bottom: 0.3em;
+      left: 0.3em;
+      height: 2em; }
+  .Order .content {
+    width: 100%; }
+    .Order .content .oStatus {
+      font-weight: bold;
+      font-size: 20px;
+      right: 0; }
+      .Order .content .oStatus .oId {
+        font-size: 19px; }
+  .Order .status-message {
+    position: absolute;
+    top: 0.4em;
+    right: 0.4em;
+    border-radius: 4px;
+    background-color: #EC7056;
+    padding: 0.6em;
+    width: 18%;
+    min-width: 12em;
+    max-width: 14em;
+    height: 2.875em;
+    margin-top: 0.3em;
+    display: table; }
+    .Order .status-message.controls-wrapper {
+      top: 0;
+      right: 0;
+      background-color: transparent; }
+      .Order .status-message.controls-wrapper div .controls {
+        position: relative; }
+        .Order .status-message.controls-wrapper div .controls button {
+          position: absolute;
+          top: 0;
+          right: 0;
+          z-index: 10; }
+      .Order .status-message.controls-wrapper.accept-controls {
+        height: 2.875em; }
+        .Order .status-message.controls-wrapper.accept-controls button {
+          width: 80%;
+          background-color: #5BDA9B;
+          border-color: #F6F6F6;
+          height: 3em;
+          font-size: 16px;
+          font-weight: 500; }
+          .Order .status-message.controls-wrapper.accept-controls button span {
+            display: block;
+            width: 100%; }
+          .Order .status-message.controls-wrapper.accept-controls button:hover {
+            background-color: #1DBF6E; }
+        .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm {
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: 500;
+          background-color: #F6F6F6;
+          outline: solid 1px blue;
+          width: 100%;
+          height: 100%;
+          text-align: center; }
+          .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper {
+            max-width: 800px;
+            margin: auto;
+            position: relative; }
+            .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper h4 {
+              margin-top: 2em;
+              font-size: 26px; }
+            .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form {
+              margin-top: 2em; }
+              .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div {
+                margin: 0.4em 0; }
+                .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div {
+                  *zoom: 1; }
+                .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div:before, .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div:after {
+                  content: "";
+                  display: table; }
+                .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div:after {
+                  clear: both; }
+                .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div .span-wrapper, .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div .Input {
+                  display: block;
+                  float: left;
+                  width: 50%;
+                  height: 3em; }
+                .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div .span-wrapper {
+                  margin-top: 1.375em;
+                  height: 100%;
+                  text-align: right; }
+                  .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div .span-wrapper {
+                    *zoom: 1; }
+                  .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div .span-wrapper:before, .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div .span-wrapper:after {
+                    content: "";
+                    display: table; }
+                  .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div .span-wrapper:after {
+                    clear: both; }
+                  .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div .span-wrapper span {
+                    float: right;
+                    margin-right: 1em;
+                    display: block;
+                    width: 44%;
+                    min-width: 176px; }
+                .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div .Input {
+                  *zoom: 1; }
+                .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div .Input:before, .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div .Input:after {
+                  content: "";
+                  display: table; }
+                .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div .Input:after {
+                  clear: both; }
+                .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div .Input input {
+                  float: left;
+                  margin-left: 0.5em;
+                  border: none;
+                  border-radius: 4px;
+                  width: 50%;
+                  min-width: 200px;
+                  height: 100%;
+                  font-size: 16px;
+                  padding-left: 0.8em; }
+            .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper button {
+              height: 3.5em;
+              font-size: 14px;
+              width: 10em; }
+              .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper button span {
+                display: block;
+                width: 100%; }
+            .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper .submit {
+              top: calc(100% + 1em);
+              right: calc(50% - 10.5em);
+              background-color: #5BDA9B;
+              border-color: #F6F6F6; }
+              .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper .submit:hover {
+                background-color: #1DBF6E; }
+            .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper .reset {
+              position: absolute;
+              display: block;
+              top: calc(100% + 1em);
+              left: calc(50% - 10.5em);
+              background-color: #72C3F1;
+              border-color: #F6F6F6; }
+              .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper .reset:hover {
+                background-color: #2AAAF3; }
+            .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper .cancel {
+              position: fixed;
+              top: 1em;
+              left: 1em;
+              width: 2.25em;
+              height: 2.25em;
+              background-color: #DF6C6C;
+              border-color: #F6F6F6; }
+              .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper .cancel:hover {
+                background-color: #DB3030; }
+      .Order .status-message.controls-wrapper.shipping-controls {
+        height: 2.875em; }
+        .Order .status-message.controls-wrapper.shipping-controls button {
+          width: 80%;
+          background-color: #5BDA9B;
+          border-color: #F6F6F6;
+          height: 3em;
+          font-size: 16px;
+          font-weight: 500; }
+          .Order .status-message.controls-wrapper.shipping-controls button span {
+            display: block;
+            width: 100%; }
+          .Order .status-message.controls-wrapper.shipping-controls button:hover {
+            background-color: #1DBF6E; }
+        .Order .status-message.controls-wrapper.shipping-controls .ShippingDetailForm {
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: 500;
+          background-color: #F6F6F6;
+          outline: solid 1px blue;
+          width: 100%;
+          height: 100%;
+          text-align: center; }
+        .Order .status-message.controls-wrapper.shipping-controls .form-wrapper {
+          max-width: 800px;
+          margin: auto;
+          position: relative; }
+          .Order .status-message.controls-wrapper.shipping-controls .form-wrapper h4 {
+            margin-top: 2em;
+            font-size: 26px; }
+          .Order .status-message.controls-wrapper.shipping-controls .form-wrapper form {
+            margin-top: 2em; }
+            .Order .status-message.controls-wrapper.shipping-controls .form-wrapper form div {
+              margin: 0.4em 0; }
+              .Order .status-message.controls-wrapper.shipping-controls .form-wrapper form div {
+                *zoom: 1; }
+              .Order .status-message.controls-wrapper.shipping-controls .form-wrapper form div:before, .Order .status-message.controls-wrapper.shipping-controls .form-wrapper form div:after {
+                content: "";
+                display: table; }
+              .Order .status-message.controls-wrapper.shipping-controls .form-wrapper form div:after {
+                clear: both; }
+              .Order .status-message.controls-wrapper.shipping-controls .form-wrapper form div .span-wrapper, .Order .status-message.controls-wrapper.shipping-controls .form-wrapper form div .Input {
+                display: block;
+                float: left;
+                width: 50%;
+                height: 3em; }
+              .Order .status-message.controls-wrapper.shipping-controls .form-wrapper form div .span-wrapper {
+                margin-top: 1.375em;
+                height: 100%;
+                text-align: right; }
+                .Order .status-message.controls-wrapper.shipping-controls .form-wrapper form div .span-wrapper {
+                  *zoom: 1; }
+                .Order .status-message.controls-wrapper.shipping-controls .form-wrapper form div .span-wrapper:before, .Order .status-message.controls-wrapper.shipping-controls .form-wrapper form div .span-wrapper:after {
+                  content: "";
+                  display: table; }
+                .Order .status-message.controls-wrapper.shipping-controls .form-wrapper form div .span-wrapper:after {
+                  clear: both; }
+                .Order .status-message.controls-wrapper.shipping-controls .form-wrapper form div .span-wrapper span {
+                  float: right;
+                  margin-right: 1em;
+                  display: block;
+                  width: 44%;
+                  min-width: 176px; }
+              .Order .status-message.controls-wrapper.shipping-controls .form-wrapper form div .Input {
+                *zoom: 1; }
+              .Order .status-message.controls-wrapper.shipping-controls .form-wrapper form div .Input:before, .Order .status-message.controls-wrapper.shipping-controls .form-wrapper form div .Input:after {
+                content: "";
+                display: table; }
+              .Order .status-message.controls-wrapper.shipping-controls .form-wrapper form div .Input:after {
+                clear: both; }
+              .Order .status-message.controls-wrapper.shipping-controls .form-wrapper form div .Input input {
+                float: left;
+                margin-left: 0.5em;
+                border: none;
+                border-radius: 4px;
+                width: 50%;
+                min-width: 200px;
+                height: 100%;
+                font-size: 16px;
+                padding-left: 0.8em; }
+          .Order .status-message.controls-wrapper.shipping-controls .form-wrapper button {
+            height: 3.5em;
+            font-size: 14px;
+            width: 10em; }
+            .Order .status-message.controls-wrapper.shipping-controls .form-wrapper button span {
+              display: block;
+              width: 100%; }
+          .Order .status-message.controls-wrapper.shipping-controls .form-wrapper .submit {
+            top: calc(100% + 1em);
+            right: calc(50% - 10.5em);
+            background-color: #5BDA9B;
+            border-color: #F6F6F6; }
+            .Order .status-message.controls-wrapper.shipping-controls .form-wrapper .submit:hover {
+              background-color: #1DBF6E; }
+          .Order .status-message.controls-wrapper.shipping-controls .form-wrapper .reset {
+            position: absolute;
+            display: block;
+            top: calc(100% + 1em);
+            left: calc(50% - 10.5em);
+            background-color: #72C3F1;
+            border-color: #F6F6F6; }
+            .Order .status-message.controls-wrapper.shipping-controls .form-wrapper .reset:hover {
+              background-color: #2AAAF3; }
+          .Order .status-message.controls-wrapper.shipping-controls .form-wrapper .cancel {
+            position: fixed;
+            top: 1em;
+            left: 1em;
+            width: 2.25em;
+            height: 2.25em;
+            background-color: #DF6C6C;
+            border-color: #F6F6F6; }
+            .Order .status-message.controls-wrapper.shipping-controls .form-wrapper .cancel:hover {
+              background-color: #DB3030; }
+    .Order .status-message.finalize {
+      background-color: #FADA59; }
+
+.OrderPart-wrapper-transition-enter {
+  transition: all 350ms ease-in-out;
+  max-height: 0;
+  opacity: 0.01; }
+
+.OrderPart-wrapper-transition-enter-active {
+  max-height: 300px;
+  opacity: 1; }
+
+.OrderPart-wrapper-transition-leave {
+  transition: all 350ms ease-in-out;
+  opacity: 1;
+  max-height: 300px; }
+
+.OrderPart-wrapper-transition-leave-active {
+  max-height: 0;
+  opacity: 0.01; }
+
+/*# sourceMappingURL=Order.css.map */

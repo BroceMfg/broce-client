@@ -1,0 +1,46 @@
+/***
+  COLOR PALLETTE
+***/
+/* Grey scale */
+/* Other Colors */
+/* Container colors */
+/* Element colors */
+/* --------------------- */
+/***
+  MEASUREMENTS
+***/
+/* Media query breakpoints */
+/* Container measurements */
+/* Element measurements */
+/* --------------------- */
+/***
+  FONTS
+***/
+.ShippingDetail {
+  border: solid 1px #D7D7D7;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  margin: 0.5em;
+  position: relative;
+  padding: 0.4em 0.6em; }
+  .ShippingDetail #ShippingDetailHide {
+    position: absolute;
+    top: 0.2rem;
+    right: 0.4rem; }
+    .ShippingDetail #ShippingDetailHide {
+      background-color: #9A9A9A;
+      border: solid 1px;
+      border-color: #1F1F1F;
+      border-radius: 4px;
+      cursor: pointer;
+      display: table;
+      text-align: center; }
+      .ShippingDetail #ShippingDetailHide span {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center; }
+      .ShippingDetail #ShippingDetailHide:hover {
+        background-color: #7B7B7B;
+        border-color: #3D3D3D; }
+
+/*# sourceMappingURL=ShippingDetail.css.map */

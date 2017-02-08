@@ -4,6 +4,8 @@ import gnum from '../helpers/global-enum';
 import MachineNumberBlock from './MachineNumberBlock';
 import { post } from '../middleware/XMLHTTP';
 
+import '../css/components/QuoteForm.css';
+
 class QuoteForm extends React.Component {
   constructor(props) {
     super(props);
@@ -105,6 +107,10 @@ class QuoteForm extends React.Component {
   submit(e) {
     e.preventDefault();
     const form = this.state.form;
+    this.setState({
+      ...this.state,
+      form: _.cloneDeep(gnum.INITIAL_QUOTE_FORM)
+    });
 
     // console.log(`QuoteForm component => submit function called with ` +
     //   `form = ${JSON.stringify(form, null, 2)}`);
@@ -140,19 +146,28 @@ class QuoteForm extends React.Component {
       formData += `${key}=${dummyForm[key]}&`;
     });
 
-    console.log(formData);
 
     // just testing post and get out
     post(
       `${this.props.apiUrl}/orders`,
       formData,
-      (response) => console.log(JSON.parse(response)),
-      (errorResponse) => console.log(errorResponse)
+      (response) => {
+        console.log(JSON.parse(response))
+        if (response) {
+          this.props.toggleMessage('New Quote Created. Thank you!', 'success');
+        }
+      },
+      (errorResponse) => {
+        // console.log(errorResponse)
+        this.props.toggleMessage('Error: Please try again.', 'error');
+      }
     );
 
     /* --- TODO: API POST --- */
 
-    this.reset(e);
+    setTimeout(() => {
+      this.reset(e);
+    }, 50);
   }
 
   reset(e) {
@@ -168,33 +183,45 @@ class QuoteForm extends React.Component {
       form,
       timestamp
     } = this.state;
+    console.log('$$$$');
+    console.log(form);
+    console.log('$$$$');
+    const machNums = Object.keys(form);
     return (
       <div className="QuoteForm" key={timestamp}>
-        <h1>Quote Form</h1>
-        <form onSubmit={this.submit}>
-          {
-            Object.keys(form).map((key) => {
-              const formObj = form[key];
-              return (
-                <MachineNumberBlock
-                  key={key}
-                  index={key}
-                  form={formObj}
-                  addPartNumBlock={this.addPartNumBlock}
-                  updateForm={this.updateForm}
-                  submit={this.submit}
-                />
-              )
-            })
-          }
-          <button
-            className="add-machine-number-btn"
-            onClick={this.addMachNumBlock}>
-            Add Another Machine Number
-          </button>
-          <button type="submit">Submit</button>
-        </form>
-        <button onClick={this.reset}>Reset Form</button>
+        <div className="content-wrapper">
+          <h1 className="header">
+            <span>New Quote Request</span>
+          </h1>
+          <form onSubmit={this.submit}>
+            {
+              machNums.map((key, i) => {
+                const formObj = form[key];
+                return (
+                  <MachineNumberBlock
+                    key={key}
+                    index={key}
+                    form={formObj}
+                    addPartNumBlock={this.addPartNumBlock}
+                    addMachNumBlock={this.addMachNumBlock}
+                    updateForm={this.updateForm}
+                    submit={this.submit}
+                    lastOne={(machNums.length - 1) === i}
+                  />
+                )
+              })
+            }
+            {
+              Object.keys(form[0])[0] !== ''
+                ?
+                  <div>
+                    <button className="submit" type="submit">Submit</button>
+                    <button className="reset" onClick={this.reset}>Reset Form</button>
+                  </div>
+                : null
+            }
+          </form>
+        </div>
       </div>
     )
   }

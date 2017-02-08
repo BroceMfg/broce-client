@@ -1,12 +1,15 @@
 import React from 'react';
 import OrderSubList from './OrderSubList';
 
+import '../css/components/OrderList.css';
+
 class OrderList extends React.Component {
   constructor(props) {
     super(props);
     this.updateOrder = this.updateOrder.bind(this);
     this.getNextStatusType = this.getNextStatusType.bind(this);
     this.promoteOrder = this.promoteOrder.bind(this);
+    this.renderSubLists = this.renderSubLists.bind(this);
   }
 
   updateOrder(order, statusType) {
@@ -26,35 +29,69 @@ class OrderList extends React.Component {
   }
 
   promoteOrder(order, currentStatusType) {
-    const nextStatusType = this.getNextStatusType(currentStatusType);
     const orders = this.props.orders;
-    delete orders[currentStatusType][order.id];
-    if (orders[nextStatusType] === undefined){
-      orders[nextStatusType] = {};
+    const updatedOrder = order;
+    if (this.props.admin) {
+      const nextStatusType = this.getNextStatusType(currentStatusType);
+      delete orders[currentStatusType][order.id];
+      if (orders[currentStatusType][0] === undefined) {
+        delete orders[currentStatusType];
+      }
+      orders[nextStatusType] = orders[nextStatusType] || {};
+      updatedOrder.status = nextStatusType;
+      orders[nextStatusType][order.id] = updatedOrder;
+    } else {
+      updatedOrder.status = this.getNextStatusType(order.status)
+      orders[new Date(order.createdAt).getTime()] = updatedOrder;
     }
-    orders[nextStatusType][order.id] = order;
+    console.log(orders);
     this.props.setOrders(orders);
   }
 
-  render() {
-
+  renderSubLists() {
+    let list;
+    let getStatusType;
+    if (this.props.admin) {
+      list = Object.values(this.props.orders);
+      getStatusType = (orders, i) => Object.keys(orders)[i];
+    } else {
+      list = [this.props.orders];
+      getStatusType = () => null;
+    }
     let keyCount = 1;
+    return list.length > 0 && Object.keys(list[0]).length > 0
+      ? (
+          list.map((orders, i) => (
+            <OrderSubList
+              key={keyCount++}
+              admin={this.props.admin}
+              apiUrl={this.props.apiUrl}
+              orders={orders}
+              updateOrder={this.updateOrder}
+              promoteOrder={this.promoteOrder}
+              statusType={getStatusType(this.props.orders, i)}
+              getStatusType={this.props.getStatusType}
+              getNextStatusType={this.getNextStatusType}
+              toggleMessage={this.props.toggleMessage}
+            />
+          ))
+        )
+    : (
+      <div className="OrderSubList">
+        <div>
+          <h3>Currently, there are no orders to display.</h3>
+        </div>
+      </div>
+    )
+  }
+
+  render() {
+    console.log('@@@@@@@');
+    console.log(this.props.orders);
+    console.log('@@@@@@@');
     return (
-      <div className="OrderList">
-      {
-        Object.values(this.props.orders).map((statusTypeOrders, i) => (
-          <OrderSubList
-            key={keyCount++}
-            admin={this.props.admin}
-            apiUrl={this.props.apiUrl}
-            orders={statusTypeOrders}
-            updateOrder={this.updateOrder}
-            promoteOrder={this.promoteOrder}
-            statusType={Object.keys(this.props.orders)[i]}
-            getNextStatusType={this.getNextStatusType}
-          />
-        ))
-      }
+      <div className={`OrderList${this.props.admin ? ' admin' : ''}`}>
+        {this.renderSubLists()}
       </div>
     )
   }

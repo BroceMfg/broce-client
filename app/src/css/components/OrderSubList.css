@@ -1,0 +1,50 @@
+/***
+  COLOR PALLETTE
+***/
+/* Grey scale */
+/* Other Colors */
+/* Container colors */
+/* Element colors */
+/* --------------------- */
+/***
+  MEASUREMENTS
+***/
+/* Media query breakpoints */
+/* Container measurements */
+/* Element measurements */
+/* --------------------- */
+/***
+  FONTS
+***/
+.OrderSubList {
+  background-color: #F6F6F6;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.16);
+  border-radius: 4px;
+  width: 96%;
+  margin: 0.5em auto;
+  padding-bottom: 0.2em; }
+  .OrderSubList .header {
+    font-size: 1.2em;
+    background-color: #D7D7D7;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    color: #000000;
+    text-align: center;
+    padding-top: 0.45em;
+    padding-bottom: 0.45em;
+    width: 100%; }
+    .OrderSubList .header span {
+      display: inline-block;
+      margin: auto;
+      width: 54%;
+      padding-bottom: 0.15em;
+      border-bottom: solid 1px #000000;
+      text-transform: uppercase; }
+
+@media screen and (min-width: 1150px) {
+  .OrderSubList {
+    width: 94%; }
+    .OrderSubList .header {
+      font-size: 1.6em; } }
+
+/*# sourceMappingURL=OrderSubList.css.map */

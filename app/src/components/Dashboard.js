@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../css/components/Dashboard.css';
+
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
@@ -14,19 +16,32 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div className="Dashboard">
-        <h1 className="Dashboard-header">
-          Welcome To Broce Parts
-        </h1>
-        <a
-          onClick={this.settingsOnClickHandler}
-          className="btn Dashboard-anchor">
-          Settings
-        </a>
-        <a
-          onClick={this.props.logout}
-          className="btn Dashboard-anchor">
-          Log Out
-        </a>
+        <div className="content-wrapper">
+          <h1 className="Dashboard-header">
+            Broce Parts
+          </h1>
+          <div className="button-container">
+            <div className="icon-buttons-wrapper">
+              <a
+                onClick={() => {
+                  window.location.reload(true);
+                }}
+                className="button refresh">
+                <span></span>
+              </a>
+              <a
+                onClick={this.settingsOnClickHandler}
+                className="button settings">
+                <span></span>
+              </a>
+            </div>
+            <a
+              onClick={this.props.logout}
+              className="button">
+              <span>Log Out</span>
+            </a>
+          </div>
+        </div>
       </div>
     )
   }

@@ -1,0 +1,111 @@
+@import '../partials/variables';
+@import '../mixins/micro-clearfix';
+@import '../mixins/button';
+
+.Dashboard {
+  background-color: $Dashboard_bg_color;
+  height: 100%;
+  width: calc(100% - (2 * #{$Dashboard_padding}));
+  min-width: calc(#{$App_min_width} - (2 * #{$Dashboard_padding}));
+  @include micro-clearfix();
+  padding: $Dashboard_padding;
+  position: relative;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  height: 37px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  .content-wrapper {
+    width: 100%;
+    height: 100%;
+    max-width: calc(#{$App_max_width} - (2 * #{$Dashboard_padding}));
+    min-width: calc(#{$App_min_width} - (2 * #{$Dashboard_padding}));
+    margin: $Dashboard_padding;
+    margin: auto;
+    position: relative;
+  }
+}
+
+.Dashboard-header {
+  float: left;
+  width: $Dashboard_header_width;
+  height: 100%;
+  margin-left: 0.425em;
+}
+
+.button-container {
+  display: inline-block;
+  float: right;
+  width: calc(100% - #{$Dashboard_header_width} - (#{$Dashboard_padding}/2));
+  max-width: 32em;
+  margin: auto;
+  height: 100%;
+  position: absolute;
+  // right: 0;
+}
+
+.button {
+  @include button();
+  width: calc(45% - (#{$button_border_size}*2) - 0.7em);
+  height: 100%;
+  margin-left: 0.2em;
+  margin-right: 0.4em;
+  float: left;
+  height: 35px;
+  &:last-child {
+    margin-left: 0;
+    margin-right: 0.2em;
+  }
+  &.refresh {
+    margin-top: 0;
+    background-image: url('../../img/refresh.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: calc(26% - (#{$button_border_size}*2) - 0.7em);
+  }
+  &.settings {
+    margin-top: 0;
+    background-image: url('../../img/settings.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: calc(26% - (#{$button_border_size}*2) - 0.7em);
+    margin-right: 1em;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .Dashboard {
+    position: relative;
+    height: auto;
+    .content-wrapper {
+      position: static;
+    }
+  }
+  .Dashboard-header {
+    font-size: 150%;
+    font-size: 6.4vw;
+    clear: both;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  .button-container {
+    position: relative;
+    float: none;
+    clear: both;
+    display: block;
+    margin: auto;
+    padding-top: 0.8em;
+    width: 100%;
+    height: 2em;
+  }
+}
+
+@media screen and (min-width: 468px) and (max-width: 768px) {
+  .Dashboard-header {
+    font-size: 2em;
+  }
+}

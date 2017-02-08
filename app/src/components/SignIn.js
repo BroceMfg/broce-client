@@ -1,6 +1,9 @@
 import React from 'react';
 import Input from './Input';
+import ToggledMessage from './ToggledMessage';
 import { post } from '../middleware/XMLHTTP';
+
+import '../css/components/SignIn.css';
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -16,7 +19,7 @@ class SignIn extends React.Component {
 
     const data = { email, password };
 
-    let formData = ''
+    let formData = '';
     Object.keys(data).forEach(key => {
       formData += `${key}=${data[key]}&`;
     });
@@ -29,17 +32,35 @@ class SignIn extends React.Component {
         console.log(JSON.parse(response));
         this.props.setUser(JSON.parse(response).user);
       },
-      (errorResponse) => console.log(errorResponse)
+      (err) => {
+        console.log(err)
+        this.props.toggleMessage('Invalid username or password.', 'error');
+      }
     );
   }
 
   render() {
+    const {
+      message,
+      messageStatusCode,
+      toggleMessage
+    } = this.props;
     return (
       <div className="SignIn">
+        {
+          message
+            ? 
+              <ToggledMessage
+                message={message}
+                messageStatusCode={messageStatusCode}
+                dismiss={() => toggleMessage()}
+              />
+            : null
+        }
         <form onSubmit={this.postAction}>
-          <legend>Log In</legend>
+          <h1>Welcome to Broce Parts</h1>
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <div className="label-wrapper"><label htmlFor="email">Email</label></div>
             <Input
               refProp={(input) => { this.email = input }}
               type="email"
@@ -50,7 +71,7 @@ class SignIn extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Password</label>
+            <div className="label-wrapper"><label htmlFor="password">Password</label></div>
             <Input
               refProp={(input) => { this.password = input }}
               type="password"
@@ -60,9 +81,9 @@ class SignIn extends React.Component {
               submitOnEnter={true}
             />
           </div>
-          <button className="btn btn-primary" type="submit">Log In</button>
+          <button className="submit" type="submit">Log In</button>
         </form>
-        <a href="/forgot">Forgot your password?</a>
+        <a className="forgot" href="/forgot">Forgot your password?</a>
       </div>
     )
   }

@@ -7,13 +7,17 @@ import OrderDetail from './OrderDetail';
 import NotFound from './NotFound';
 import SignIn from './SignIn';
 
+import '../css/components/App.css';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.setOrders = this.setOrders.bind(this);
+    this.getStatusType = this.getStatusType.bind(this);
     this.setUser = this.setUser.bind(this);
     this.logout = this.logout.bind(this);
+    this.toggleMessage = this.toggleMessage.bind(this);
 
     const retrievedObj = localStorage.getItem('state');
     let storedState = retrievedObj ? JSON.parse(retrievedObj) : undefined;
@@ -51,6 +55,10 @@ class App extends React.Component {
     });
   }
 
+  getStatusType(statusTypeId) {
+    return this.state.statusTypes[statusTypeId];
+  }
+
   setUser(user) {
     this.setState({
       ...this.state,
@@ -73,12 +81,28 @@ class App extends React.Component {
     window.location.reload(false);
   }
 
+  toggleMessage(message, statusCode) {
+    let msgStatCode;
+    if (statusCode === 'success' || statusCode === 'error') {
+      msgStatCode = statusCode;
+    }
+    const toggle = (msg, msgStatCode) => this.setState({
+      ...this.state,
+      message: msg,
+      messageStatusCode: msgStatCode
+    });
+    toggle(message, msgStatCode);
+    setTimeout(toggle, 3000);
+  }
+
   render() {
     const {
       admin,
       orders,
       apiUrl,
-      user
+      user,
+      message,
+      messageStatusCode
     } = this.state;
 
     return (
@@ -100,6 +124,10 @@ class App extends React.Component {
                               logout={this.logout}
                               setOrders={this.setOrders}
                               statusTypes={this.state.statusTypes}
+                              getStatusType={this.getStatusType}
+                              message={message}
+                              messageStatusCode={messageStatusCode}
+                              toggleMessage={this.toggleMessage}
                             />
                     }
                   />
@@ -137,7 +165,14 @@ class App extends React.Component {
                 <Match
                   exactly
                   pattern="/"
-                  render={ () => <SignIn apiUrl={apiUrl} setUser={this.setUser}/> }
+                  render={() => <SignIn
+                                  apiUrl={apiUrl}
+                                  setUser={this.setUser}
+                                  message={message}
+                                  messageStatusCode={messageStatusCode}
+                                  toggleMessage={this.toggleMessage}
+                                />
+                  }
                 />
             }
             <Miss component={NotFound} />

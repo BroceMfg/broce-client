@@ -36,6 +36,7 @@ class AddPriceForm extends React.Component {
     // TODO: regex check the input as it is being input and
     // disable the submit button until the input matches is valid
     if (price > 0.00) {
+      this.props.toggleAddPriceForm();
       put(
         `${this.props.apiUrl}/orders/details/${this.props.orderDetail.id}`,
         `price=${price}`,
@@ -47,13 +48,11 @@ class AddPriceForm extends React.Component {
               ...this.props.orderDetail,
               price: parseFloat(price)
             }, this.props.index);
-            this.props.toggleMessage('Price Submission Successful.');
-            setTimeout(this.props.toggleMessage, 3000);
+            this.props.toggleMessage('Price Submission Successful.', 'success');
           } else {
             // handle error
             console.log('error: response contained an error.');
-            this.props.toggleMessage('Error: Please try again.');
-            setTimeout(() => this.props.toggleMessage, 3000);
+            this.props.toggleMessage('Error: Please try again.', 'error');
           }
         },
         (errorResponse) => console.log(errorResponse)
@@ -61,8 +60,7 @@ class AddPriceForm extends React.Component {
     } else {
       // handle error
       console.log('error: input not valid');
-      this.props.toggleMessage('Error: Invalid Price.');
-      setTimeout(() => this.props.toggleMessage, 3000);
+      this.props.toggleMessage('Error: Invalid Price.', 'error');
     }
     this.reset();
   }
@@ -79,16 +77,18 @@ class AddPriceForm extends React.Component {
     } = this.props;
     return (
       <div className="AddPriceForm" key={this.state.timestamp}>
-        <Input 
-          refProp={(input) => { this.price = input }}
-          type="number"
-          name={`order_detail_${orderDetail.id}_price`}
-          min={0.01}
-          placeholder="Price"
-          parentOnChange={this.onChange}
-          submit={this.submit}
-        />
-        <button onClick={this.submit}>Submit</button>
+        <div className="input-button-wrapper">
+          <Input 
+            refProp={(input) => { this.price = input }}
+            type="number"
+            name={`order_detail_${orderDetail.id}_price`}
+            min={0.01}
+            placeholder="Price"
+            parentOnChange={this.onChange}
+            submit={this.submit}
+          />
+          <button onClick={this.submit}>Submit</button>
+        </div>
       </div>
     )
   }

@@ -11,7 +11,7 @@ class OrderAction extends React.Component {
       <div className="status">
         {
           buttonTitle
-            ? <button onClick={action}>{buttonTitle}</button>
+            ? <button onClick={action}><span>{buttonTitle}</span></button>
             : <div>{alertTitle}</div>
         }
       </div>
