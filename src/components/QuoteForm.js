@@ -129,6 +129,8 @@ class QuoteForm extends React.Component {
       });
     });
 
+    console.log(orderDetails);
+
     console.log(`QuoteForm component => submit function called with ` +
       `orderDetails = ${JSON.stringify(orderDetails, null, 2)}`);
 

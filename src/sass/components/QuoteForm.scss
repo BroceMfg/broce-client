@@ -1,5 +1,6 @@
 @import '../partials/variables';
 @import '../mixins/button';
+@import '../mixins/micro-clearfix';
 
 .QuoteForm {
   background-color: $QuoteForm_bg_color;
@@ -73,12 +74,6 @@
 
 @media screen and (min-width: 1150px) {
   .QuoteForm {
-    position: absolute;
-    top: 0;
-    right: 0;
-    float: left;
-    width: 50%;
-    height: 100%;
     .content-wrapper {
       width: 94%;
       .header {

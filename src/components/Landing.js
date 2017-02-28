@@ -3,6 +3,7 @@ import { get } from '../middleware/XMLHTTP';
 import Dashboard from './Dashboard';
 import OrderList from './OrderList';
 import QuoteForm from './QuoteForm';
+import StockOrderForm from './StockOrderForm';
 import ToggledMessage from './ToggledMessage';
 
 import '../css/components/Landing.css';
@@ -115,10 +116,32 @@ class Landing extends React.Component {
           />
           {
             !this.props.admin
-              ? <QuoteForm
-                  apiUrl={this.props.apiUrl}
-                  toggleMessage={toggleMessage}
-                />
+              ?
+                <div className="quote-stock-form-wrapper">
+                  {
+                    this.props.showStockOrderForm
+                      ?
+                        <StockOrderForm
+                          apiUrl={this.props.apiUrl}
+                          toggleMessage={toggleMessage}
+                        />
+                      :
+                        <QuoteForm
+                          apiUrl={this.props.apiUrl}
+                          toggleMessage={toggleMessage}
+                        />
+                  }
+                  <button
+                    className="show-other-button"
+                    onClick={this.props.showOtherForm}
+                  >
+                    {
+                      this.props.showStockOrderForm
+                        ? <span>Place a Regular Quote Instead</span>
+                        : <span>Place a Stock Order Instead</span>
+                    }
+                  </button>
+                </div>
               : null
           }
         </div>

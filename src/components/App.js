@@ -18,6 +18,7 @@ class App extends React.Component {
     this.setUser = this.setUser.bind(this);
     this.logout = this.logout.bind(this);
     this.toggleMessage = this.toggleMessage.bind(this);
+    this.showOtherForm = this.showOtherForm.bind(this);
 
     const retrievedObj = localStorage.getItem('state');
     let storedState = retrievedObj ? JSON.parse(retrievedObj) : undefined;
@@ -40,8 +41,9 @@ class App extends React.Component {
         1: 'admin'
       },
       user: undefined,
-      admin: undefined
-    }
+      admin: undefined,
+      showStockOrderForm: true
+    };
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -95,6 +97,13 @@ class App extends React.Component {
     setTimeout(toggle, 3000);
   }
 
+  showOtherForm() {
+    this.setState({
+      ...this.state,
+      showStockOrderForm: !this.state.showStockOrderForm
+    });
+  }
+
   render() {
     const {
       admin,
@@ -102,7 +111,8 @@ class App extends React.Component {
       apiUrl,
       user,
       message,
-      messageStatusCode
+      messageStatusCode,
+      showStockOrderForm
     } = this.state;
 
     return (
@@ -128,6 +138,8 @@ class App extends React.Component {
                               message={message}
                               messageStatusCode={messageStatusCode}
                               toggleMessage={this.toggleMessage}
+                              showStockOrderForm={showStockOrderForm}
+                              showOtherForm={this.showOtherForm}
                             />
                     }
                   />

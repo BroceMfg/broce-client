@@ -1,0 +1,32 @@
+/***
+  COLOR PALLETTE
+***/
+/* Grey scale */
+/* Other Colors */
+/* Container colors */
+/* Element colors */
+/* --------------------- */
+/***
+  MEASUREMENTS
+***/
+/* Media query breakpoints */
+/* Container measurements */
+/* Element measurements */
+/* --------------------- */
+/***
+  FONTS
+***/
+.StockOrderForm {
+  background-color: #F6F6F6;
+  max-width: 1000px;
+  margin: auto; }
+  .StockOrderForm .content-wrapper {
+    position: relative;
+    background-color: #F6F6F6;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.16);
+    border-radius: 4px;
+    width: 96%;
+    margin: 0.5em auto;
+    padding-bottom: 3em; }
+
+/*# sourceMappingURL=StockOrderForm.css.map */

@@ -89,16 +89,9 @@
         border-color: #F6F6F6; }
 
 @media screen and (min-width: 1150px) {
-  .QuoteForm {
-    position: absolute;
-    top: 0;
-    right: 0;
-    float: left;
-    width: 50%;
-    height: 100%; }
-    .QuoteForm .content-wrapper {
-      width: 94%; }
-      .QuoteForm .content-wrapper .header {
-        font-size: 1.6em; } }
+  .QuoteForm .content-wrapper {
+    width: 94%; }
+    .QuoteForm .content-wrapper .header {
+      font-size: 1.6em; } }
 
 /*# sourceMappingURL=QuoteForm.css.map */
