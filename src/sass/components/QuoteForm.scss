@@ -57,6 +57,9 @@
         border-color: $c1;
         background-color: $success_green_highlight;
       }
+      &.hidden {
+        display: none;
+      }
     }
     .reset {
       position: absolute;
@@ -68,6 +71,9 @@
         background-color: $primary_blue_highlight;
         border-color: $c1;
       }
+    }
+    .with-submit-hidden {
+      left: calc(50% - 5em);
     }
   }
 }

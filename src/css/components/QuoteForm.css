@@ -78,6 +78,8 @@
       .QuoteForm .content-wrapper .submit:hover {
         border-color: #F6F6F6;
         background-color: #1DBF6E; }
+      .QuoteForm .content-wrapper .submit.hidden {
+        display: none; }
     .QuoteForm .content-wrapper .reset {
       position: absolute;
       bottom: 0.4em;
@@ -87,5 +89,7 @@
       .QuoteForm .content-wrapper .reset:hover {
         background-color: #2AAAF3;
         border-color: #F6F6F6; }
+    .QuoteForm .content-wrapper .with-submit-hidden {
+      left: calc(50% - 5em); }
 
 /*# sourceMappingURL=QuoteForm.css.map */

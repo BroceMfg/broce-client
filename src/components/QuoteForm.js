@@ -28,12 +28,14 @@ class QuoteForm extends React.Component {
       //   }
       // }
       // where there can be any number of machineNumber or partNumber blocks
-      form: this.getInitialForm(),
-      timestamp: Date.now()
+      form: this.props.getInitialForm ? this.props.getInitialForm() : this.getInitialForm(),
+      timestamp: this.props.timestamp || Date.now()
     };
   }
 
   shouldComponentUpdate(nextProps, nextState) {
+    console.log('nextState.form');
+    console.log(nextState.form);
     // re-render the ItemForm component with new form data
     // check if timestamp hasn't been updated in the past
     // .01 seconds so that infinite loop doesn't occur
@@ -122,7 +124,7 @@ class QuoteForm extends React.Component {
         const partNum = Object.keys(form[machKey][machNum][partKey])[0];
         const partQty = form[machKey][machNum][partKey][partNum];
         orderDetails = orderDetails.concat({
-          machineSerialNum: machNum,
+          machineSerialNum: machNum === '00000000' ? null : machNum,
           partNum,
           partQty
         });
@@ -174,10 +176,15 @@ class QuoteForm extends React.Component {
 
   reset(e) {
     e.preventDefault();
-    this.setState({
-      form: _.cloneDeep(gnum.INITIAL_QUOTE_FORM),
-      timestamp: Date.now()
-    });
+    this.props.stockOrderForm
+      ? this.setState({
+        form: this.props.getInitialForm(),
+        timestamp: Date.now()
+      })
+      : this.setState({
+        form: _.cloneDeep(gnum.INITIAL_QUOTE_FORM),
+        timestamp: Date.now()
+      });
   }
 
   render() {
@@ -190,7 +197,7 @@ class QuoteForm extends React.Component {
     console.log('$$$$');
     const machNums = Object.keys(form);
     return (
-      <div className="QuoteForm" key={timestamp}>
+      <div className={this.props.stockOrderForm ? 'StockOrderForm' : 'QuoteForm'} key={timestamp}>
         <div className="content-wrapper">
           <h1 className="header">
             <span>New Quote Request</span>
@@ -214,13 +221,49 @@ class QuoteForm extends React.Component {
               })
             }
             {
-              Object.keys(form[0])[0] !== ''
-                ?
-                  <div>
-                    <button className="submit" type="submit">Submit</button>
-                    <button className="reset" onClick={this.reset}>Reset Form</button>
-                  </div>
-                : null
+              this.props.stockOrderForm
+              ?
+                <div>
+                  {
+                    Object.keys(form[0][Object.keys(form[0])[0]][0])[0] !== ''
+                      ?
+                        <div>
+                          <button className="submit" type="submit">Submit</button>
+                          <button className="reset" onClick={this.reset}>Reset Form</button>
+                        </div>
+                      : null
+                  }
+                </div>
+              :
+                <div>
+                  {
+                    Object.keys(form[0])[0] !== ''
+                      ?
+                        <div>
+                          <button
+                            className={
+                              Object.keys(form[0][Object.keys(form[0])[0]][0])[0] !== ''
+                                ? 'submit'
+                                : 'submit hidden'
+                            }
+                            type="submit"
+                          >
+                            Submit
+                          </button>
+                          <button
+                            className={
+                              Object.keys(form[0][Object.keys(form[0])[0]][0])[0] !== ''
+                                ? 'reset'
+                                : 'reset with-submit-hidden'
+                            }
+                            onClick={this.reset}
+                          >
+                            Reset Form
+                          </button>
+                        </div>
+                      : null
+                  }
+                </div>
             }
           </form>
         </div>

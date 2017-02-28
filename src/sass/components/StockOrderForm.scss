@@ -1,5 +1,6 @@
 @import '../partials/variables';
 @import '../mixins/micro-clearfix';
+@import '../mixins/button';
 
 .StockOrderForm {
   background-color: $QuoteForm_bg_color;
@@ -34,6 +35,38 @@
         padding-bottom: 0.15em;
         border-bottom: solid 1px $OrderSubList_header_color;
         text-transform: uppercase;
+      }
+    }
+    .submit, .reset {
+      @include button();
+      height: 3.5em;
+      font-size: 14px;
+      width: 10em;
+      span {
+        display: block;
+        width: 100%;
+      }
+    }
+    .submit {
+      position: absolute;
+      bottom: 0.4em;
+      right: calc(50% - 10.5em);
+      background-color: $success_green;
+      border-color: $c1;
+      &:hover {
+        border-color: $c1;
+        background-color: $success_green_highlight;
+      }
+    }
+    .reset {
+      position: absolute;
+      bottom: 0.4em;
+      left: calc(50% - 10.5em);
+      background-color: $primary_blue;
+      border-color: $c1;
+      &:hover {
+        background-color: $primary_blue_highlight;
+        border-color: $c1;
       }
     }
   }
