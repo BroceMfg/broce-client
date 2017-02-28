@@ -36,6 +36,22 @@
 @media screen and (max-width: 768px) {
   .Landing {
     margin-top: 0.75em; } }
+.quote-stock-form-wrapper .show-other-button-wrapper {
+  width: 96%;
+  margin: auto;
+  margin-top: 1em; }
+  .quote-stock-form-wrapper .show-other-button-wrapper button {
+    border: none;
+    cursor: pointer;
+    color: #72C3F1;
+    background-color: transparent;
+    text-decoration: underline;
+    font-size: 15px;
+    font-weight: 600; }
+    .quote-stock-form-wrapper .show-other-button-wrapper button:hover {
+      color: #2AAAF3;
+      border: none; }
+
 @media screen and (min-width: 1150px) {
   .quote-stock-form-wrapper {
     position: absolute;
@@ -43,6 +59,12 @@
     right: 0;
     float: left;
     width: 50%;
-    height: 100%; } }
+    height: 100%; }
+    .quote-stock-form-wrapper .show-other-button-wrapper {
+      width: 94%; }
+    .quote-stock-form-wrapper .QuoteForm .content-wrapper, .quote-stock-form-wrapper .StockOrderForm .content-wrapper {
+      width: 94%; }
+      .quote-stock-form-wrapper .QuoteForm .content-wrapper .header, .quote-stock-form-wrapper .StockOrderForm .content-wrapper .header {
+        font-size: 1.6em; } }
 
 /*# sourceMappingURL=Landing.css.map */

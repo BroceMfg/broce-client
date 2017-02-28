@@ -131,16 +131,15 @@ class Landing extends React.Component {
                           toggleMessage={toggleMessage}
                         />
                   }
-                  <button
-                    className="show-other-button"
-                    onClick={this.props.showOtherForm}
-                  >
-                    {
-                      this.props.showStockOrderForm
-                        ? <span>Place a Regular Quote Instead</span>
-                        : <span>Place a Stock Order Instead</span>
-                    }
-                  </button>
+                  <div className="show-other-button-wrapper">
+                    <button onClick={this.props.showOtherForm}>
+                      {
+                        this.props.showStockOrderForm
+                          ? <span>Place a Regular Quote Instead</span>
+                          : <span>Place a Stock Order Instead</span>
+                      }
+                    </button>
+                  </div>
                 </div>
               : null
           }

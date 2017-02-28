@@ -14,6 +14,28 @@
     margin: 0.5em auto;
     // margin-top: 1.5em;
     padding-bottom: 3em;
+    >form, >button {
+      margin: 1rem;
+    }
+    .header {
+      font-size: 1.2em;
+      background-color: $OrderSubList_header_bg_color;
+      border-top-right-radius: $OrderSubList_border_radius;
+      border-top-left-radius: $OrderSubList_border_radius;
+      color: $OrderSubList_header_color;
+      text-align: center;
+      padding-top: 0.45em;
+      padding-bottom: 0.45em;
+      width: 100%;
+      span {
+        display: inline-block;
+        margin: auto;
+        width: 79%;
+        padding-bottom: 0.15em;
+        border-bottom: solid 1px $OrderSubList_header_color;
+        text-transform: uppercase;
+      }
+    }
   }
 }
 

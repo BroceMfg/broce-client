@@ -13,7 +13,9 @@ class StockOrderForm extends React.Component {
     return (
       <div className="StockOrderForm">
         <div className="content-wrapper">
-          <h1>Hello StockOrderForm</h1>
+          <h1 className="header">
+            <span>New Stock Order Request</span>
+          </h1>
         </div>
       </div>
     );

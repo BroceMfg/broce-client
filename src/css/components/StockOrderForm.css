@@ -28,5 +28,24 @@
     width: 96%;
     margin: 0.5em auto;
     padding-bottom: 3em; }
+    .StockOrderForm .content-wrapper > form, .StockOrderForm .content-wrapper > button {
+      margin: 1rem; }
+    .StockOrderForm .content-wrapper .header {
+      font-size: 1.2em;
+      background-color: #D7D7D7;
+      border-top-right-radius: 4px;
+      border-top-left-radius: 4px;
+      color: #000000;
+      text-align: center;
+      padding-top: 0.45em;
+      padding-bottom: 0.45em;
+      width: 100%; }
+      .StockOrderForm .content-wrapper .header span {
+        display: inline-block;
+        margin: auto;
+        width: 79%;
+        padding-bottom: 0.15em;
+        border-bottom: solid 1px #000000;
+        text-transform: uppercase; }
 
 /*# sourceMappingURL=StockOrderForm.css.map */

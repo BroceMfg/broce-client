@@ -88,10 +88,4 @@
         background-color: #2AAAF3;
         border-color: #F6F6F6; }
 
-@media screen and (min-width: 1150px) {
-  .QuoteForm .content-wrapper {
-    width: 94%; }
-    .QuoteForm .content-wrapper .header {
-      font-size: 1.6em; } }
-
 /*# sourceMappingURL=QuoteForm.css.map */
