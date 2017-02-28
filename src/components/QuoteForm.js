@@ -176,15 +176,12 @@ class QuoteForm extends React.Component {
 
   reset(e) {
     e.preventDefault();
-    this.props.stockOrderForm
-      ? this.setState({
-        form: this.props.getInitialForm(),
-        timestamp: Date.now()
-      })
-      : this.setState({
-        form: _.cloneDeep(gnum.INITIAL_QUOTE_FORM),
-        timestamp: Date.now()
-      });
+    this.setState({
+      form: this.props.getInitialForm
+        ? this.props.getInitialForm()
+        : _.cloneDeep(gnum.INITIAL_QUOTE_FORM),
+      timestamp: Date.now()
+    });
   }
 
   render() {
