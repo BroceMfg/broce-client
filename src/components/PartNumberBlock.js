@@ -55,6 +55,7 @@ class PartNumberBlock extends React.Component {
                   type="number"
                   name={`part_number_${this.props.index}_quantity`}
                   value={form[Object.keys(form)[0]]}
+                  min={1}
                   placeholder="Quantity"
                   parentOnChange={this.onChange}
                   submit={this.props.submit}
@@ -68,6 +69,7 @@ class PartNumberBlock extends React.Component {
               ?
                 <button
                   className="add-part-number-btn"
+                  title="add another part"
                   onClick={this.props.addPartNumBlock}
                 >+</button>
               : null

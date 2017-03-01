@@ -93,6 +93,7 @@ class MachineNumberBlock extends React.Component {
               ?
                 <button
                   className="add-machine-number-btn"
+                  title="add another machine number"
                   onClick={this.props.addMachNumBlock}
                 >+</button>
               : null

@@ -82,7 +82,7 @@ class OrderPart extends React.Component {
                   : '--'
               }
             </div>
-            <div className="machine_serial_num">{orderDetail.machine_serial_num}</div>
+            <div className="machine_serial_num">{orderDetail.machine_serial_num || '--'}</div>
             <div className="part_num">{orderDetail.Part.number}</div>
             <div className="quantity">{orderDetail.quantity}</div>
             <div className="price">
