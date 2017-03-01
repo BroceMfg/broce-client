@@ -1,6 +1,7 @@
 @import '../partials/variables';
 @import '../mixins/micro-clearfix';
 @import '../mixins/button';
+@import '../mixins/outline';
 
 .StockOrderForm {
   background-color: $QuoteForm_bg_color;
@@ -67,6 +68,42 @@
       &:hover {
         background-color: $primary_blue_highlight;
         border-color: $c1;
+      }
+    }
+  }
+  .MachineNumberBlock {
+    border: solid 1px $Order_border_color;
+    border-radius: $Order_border_radius;
+    box-shadow: 0px 1px 2px rgba(0,0,0,.16);
+    position: relative;
+    display: block;
+    min-height: 3.4em;
+    &:not(:first-child) {
+      margin-top: 0.6em;
+    }
+    .machine-wrapper {
+      margin-top: 0.4em;
+      @include micro-clearfix();
+      display: none;
+    }
+    .add-machine-number-btn {
+      display: none;
+    }
+    .PartNumberBlock {
+      position: relative;
+      display: block;
+      .part-wrapper {
+        border: none;
+        border-radius: 0;
+        margin-left: 0.8em;
+      }
+      .add-part-number-btn {
+        position: absolute;
+        top: 0.95em;
+        left: 1.25em;
+        @include button();
+        width: 2.25em;
+        height: 2.25em;
       }
     }
   }

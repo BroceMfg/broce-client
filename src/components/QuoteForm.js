@@ -197,7 +197,11 @@ class QuoteForm extends React.Component {
       <div className={this.props.stockOrderForm ? 'StockOrderForm' : 'QuoteForm'} key={timestamp}>
         <div className="content-wrapper">
           <h1 className="header">
-            <span>New Quote Request</span>
+            {
+              this.props.stockOrderForm
+                ? <span>New Stock Order</span>
+                : <span>New Quote Request</span>
+            }
           </h1>
           <form onSubmit={this.submit}>
             {
