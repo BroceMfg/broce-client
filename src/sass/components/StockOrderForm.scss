@@ -1,0 +1,128 @@
+@import '../partials/variables';
+@import '../mixins/micro-clearfix';
+@import '../mixins/button';
+@import '../mixins/outline';
+
+.StockOrderForm {
+  background-color: $QuoteForm_bg_color;
+  max-width: $OrderList_max_width;
+  margin: auto;
+  .content-wrapper {
+    position: relative;
+    background-color: $QuoteForm_bg_color;
+    box-shadow: 0px 1px 2px rgba(0,0,0,.16);
+    border-radius: $OrderSubList_border_radius;
+    width: 96%;
+    margin: 0.5em auto;
+    // margin-top: 1.5em;
+    padding-bottom: 3em;
+    >form, >button {
+      margin: 1rem;
+    }
+    .header {
+      font-size: 1.2em;
+      background-color: $OrderSubList_header_bg_color;
+      border-top-right-radius: $OrderSubList_border_radius;
+      border-top-left-radius: $OrderSubList_border_radius;
+      color: $OrderSubList_header_color;
+      text-align: center;
+      padding-top: 0.45em;
+      padding-bottom: 0.45em;
+      width: 100%;
+      span {
+        display: inline-block;
+        margin: auto;
+        width: 79%;
+        padding-bottom: 0.15em;
+        border-bottom: solid 1px $OrderSubList_header_color;
+        text-transform: uppercase;
+      }
+    }
+    .submit, .reset {
+      @include button();
+      height: 3.5em;
+      font-size: 14px;
+      width: 10em;
+      span {
+        display: block;
+        width: 100%;
+      }
+    }
+    .submit {
+      position: absolute;
+      bottom: 0.4em;
+      right: calc(50% - 10.5em);
+      background-color: $success_green;
+      border-color: $c1;
+      &:hover {
+        border-color: $c1;
+        background-color: $success_green_highlight;
+      }
+    }
+    .reset {
+      position: absolute;
+      bottom: 0.4em;
+      left: calc(50% - 10.5em);
+      background-color: $primary_blue;
+      border-color: $c1;
+      &:hover {
+        background-color: $primary_blue_highlight;
+        border-color: $c1;
+      }
+    }
+  }
+  .MachineNumberBlock {
+    border: solid 1px $Order_border_color;
+    border-radius: $Order_border_radius;
+    box-shadow: 0px 1px 2px rgba(0,0,0,.16);
+    position: relative;
+    display: block;
+    min-height: 3.4em;
+    &:not(:first-child) {
+      margin-top: 0.6em;
+    }
+    .machine-wrapper {
+      margin-top: 0.4em;
+      @include micro-clearfix();
+      display: none;
+    }
+    .add-machine-number-btn {
+      display: none;
+    }
+    .PartNumberBlock {
+      position: relative;
+      display: block;
+      .part-wrapper {
+        border: none;
+        border-radius: 0;
+        margin-left: 0.8em;
+      }
+      .add-part-number-btn {
+        position: absolute;
+        top: 0.95em;
+        left: 1.25em;
+        @include button();
+        width: 2.25em;
+        height: 2.25em;
+      }
+    }
+  }
+}
+
+// @media screen and (min-width: 1150px) {
+//   .StockOrderForm {
+//     @include micro-clearfix();
+//     position: absolute;
+//     top: 0;
+//     right: 0;
+//     float: left;
+//     width: 50%;
+//     height: 100%;
+//     .content-wrapper {
+//       width: 94%;
+//       .header {
+//         font-size: 1.6em;
+//       }
+//     }
+//   }
+// }

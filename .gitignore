@@ -1,8 +1,19 @@
-.DS_Store
-.env
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# dependencies
 node_modules
-npm-debug.log
+
+# testing
+coverage
+
+# production
+# build
 
 # sass
-app/.sass-cache/
-app/src/*.css.map
+.sass-cache/
+src/css/*.css.map
+
+# misc
+.DS_Store
+.env
+npm-debug.log

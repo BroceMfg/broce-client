@@ -1,0 +1,223 @@
+@import '../partials/variables';
+@import '../mixins/button';
+@import '../mixins/outline';
+@import '../mixins/micro-clearfix';
+
+.QuoteForm {
+  background-color: $QuoteForm_bg_color;
+  max-width: $OrderList_max_width;
+  margin: auto;
+  .content-wrapper {
+    position: relative;
+    background-color: $QuoteForm_bg_color;
+    box-shadow: 0px 1px 2px rgba(0,0,0,.16);
+    border-radius: $OrderSubList_border_radius;
+    width: 96%;
+    margin: 0.5em auto;
+    // margin-top: 1.5em;
+    padding-bottom: 3em;
+    >form, >button {
+      margin: 1rem;
+    }
+    .header {
+      font-size: 1.2em;
+      background-color: $OrderSubList_header_bg_color;
+      border-top-right-radius: $OrderSubList_border_radius;
+      border-top-left-radius: $OrderSubList_border_radius;
+      color: $OrderSubList_header_color;
+      text-align: center;
+      padding-top: 0.45em;
+      padding-bottom: 0.45em;
+      width: 100%;
+      span {
+        display: inline-block;
+        margin: auto;
+        width: 79%;
+        padding-bottom: 0.15em;
+        border-bottom: solid 1px $OrderSubList_header_color;
+        text-transform: uppercase;
+      }
+    }
+    .submit, .reset {
+      @include button();
+      height: 3.5em;
+      font-size: 14px;
+      width: 10em;
+      span {
+        display: block;
+        width: 100%;
+      }
+    }
+    .submit {
+      position: absolute;
+      bottom: 0.4em;
+      right: calc(50% - 10.5em);
+      background-color: $success_green;
+      border-color: $c1;
+      &:hover {
+        border-color: $c1;
+        background-color: $success_green_highlight;
+      }
+      &.hidden {
+        display: none;
+      }
+    }
+    .reset {
+      position: absolute;
+      bottom: 0.4em;
+      left: calc(50% - 10.5em);
+      background-color: $primary_blue;
+      border-color: $c1;
+      &:hover {
+        background-color: $primary_blue_highlight;
+        border-color: $c1;
+      }
+    }
+    .with-submit-hidden {
+      left: calc(50% - 5em);
+    }
+  }
+}
+
+.MachineNumberBlock {
+  border: solid 1px $Order_border_color;
+  border-radius: $Order_border_radius;
+  box-shadow: 0px 1px 2px rgba(0,0,0,.16);
+  position: relative;
+  display: block;
+  min-height: 3.4em;
+  &:not(:first-child) {
+    margin-top: 0.6em;
+  }
+  .machine-wrapper {
+    margin-top: 0.4em;
+    // @include outline(black, 2px);
+    @include micro-clearfix();
+    display: block;
+    .span-wrapper, .Input {
+      display: block;
+      float: left;
+      height: 2.4em;
+      // @include outline();
+    }
+    .Input {
+      margin-left: 1em;
+      @include micro-clearfix();
+      input {
+        float: left;
+        border: none;
+        border-radius: 4px;
+        width: 50%;
+        min-width: 200px;
+        height: 100%;
+        font-size: 16px;
+        padding-left: 0.4em;
+      }
+    }
+    .span-wrapper {
+      @include micro-clearfix();
+      margin-top: 0.675em;
+      height: 100%;
+      text-align: right;
+      span {
+        float: right;
+        margin-right: 1em;
+        display: block;
+        width: 44%;
+        min-width: 176px;
+      }
+    }
+  }
+  .add-machine-number-btn {
+    position: absolute;
+    top: 1.175em;
+    left: 0.6375em;
+    @include button();
+    width: 2.25em;
+    height: 2.25em;
+  }
+  .PartNumberBlock {
+    position: relative;
+    display: block;
+    .part-wrapper {
+      border: solid 1px $Order_border_color;
+      border-radius: $Order_border_radius;
+      margin: 0.4em 1em;
+      margin-left: 2.5em;
+      padding: 0.2em 0;
+      padding-bottom: 0.4em;
+      // @include outline(black, 2px);
+      @include micro-clearfix();
+      display: block;
+      .span-wrapper, .Input {
+        display: block;
+        float: left;
+        height: 2.4em;
+        // @include outline();
+      }
+      .Input {
+        margin-left: 1em;
+        @include micro-clearfix();
+        input {
+          float: left;
+          border: none;
+          border-radius: 4px;
+          width: 50%;
+          min-width: 200px;
+          height: 100%;
+          font-size: 16px;
+          padding-left: 0.4em;
+        }
+      }
+      .span-wrapper {
+        @include micro-clearfix();
+        margin-top: 0.675em;
+        height: 100%;
+        width: 9.4em;
+        text-align: right;
+        span {
+          float: right;
+          margin-right: 1em;
+          display: block;
+          width: 44%;
+          min-width: 176px;
+        }
+      }
+    }
+    .quantity {
+      // @include outline(red);
+      position: absolute;
+      top: 0;
+      height: 100%;
+      left: 27em;
+      .span-wrapper, .Input {
+        margin-top: 0.29em;
+        display: inline-block;
+        height: 76%;
+      }
+      .span-wrapper {
+        margin-right: 0.8em;
+      }
+      .Input {
+        input {
+          // width: auto;
+          max-width: 4.6em;
+          min-width: 2.4em;
+          padding-left: 0.8em;
+          height: 100%;
+          font-size: 14px;
+          border: none;
+          border-radius: 4px;
+        }
+      }
+    }
+    .add-part-number-btn {
+      position: absolute;
+      top: 1.1em;
+      left: 4.25em;
+      @include button();
+      width: 2.25em;
+      height: 2.25em;
+    }
+  }
+}

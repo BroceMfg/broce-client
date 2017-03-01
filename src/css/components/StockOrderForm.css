@@ -1,0 +1,140 @@
+/***
+  COLOR PALLETTE
+***/
+/* Grey scale */
+/* Other Colors */
+/* Container colors */
+/* Element colors */
+/* --------------------- */
+/***
+  MEASUREMENTS
+***/
+/* Media query breakpoints */
+/* Container measurements */
+/* Element measurements */
+/* --------------------- */
+/***
+  FONTS
+***/
+.StockOrderForm {
+  background-color: #F6F6F6;
+  max-width: 1000px;
+  margin: auto; }
+  .StockOrderForm .content-wrapper {
+    position: relative;
+    background-color: #F6F6F6;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.16);
+    border-radius: 4px;
+    width: 96%;
+    margin: 0.5em auto;
+    padding-bottom: 3em; }
+    .StockOrderForm .content-wrapper > form, .StockOrderForm .content-wrapper > button {
+      margin: 1rem; }
+    .StockOrderForm .content-wrapper .header {
+      font-size: 1.2em;
+      background-color: #D7D7D7;
+      border-top-right-radius: 4px;
+      border-top-left-radius: 4px;
+      color: #000000;
+      text-align: center;
+      padding-top: 0.45em;
+      padding-bottom: 0.45em;
+      width: 100%; }
+      .StockOrderForm .content-wrapper .header span {
+        display: inline-block;
+        margin: auto;
+        width: 79%;
+        padding-bottom: 0.15em;
+        border-bottom: solid 1px #000000;
+        text-transform: uppercase; }
+    .StockOrderForm .content-wrapper .submit, .StockOrderForm .content-wrapper .reset {
+      height: 3.5em;
+      font-size: 14px;
+      width: 10em; }
+      .StockOrderForm .content-wrapper .submit, .StockOrderForm .content-wrapper .reset {
+        background-color: #9A9A9A;
+        border: solid 1px;
+        border-color: #1F1F1F;
+        border-radius: 4px;
+        cursor: pointer;
+        display: table;
+        text-align: center; }
+        .StockOrderForm .content-wrapper .submit span, .StockOrderForm .content-wrapper .reset span {
+          display: table-cell;
+          vertical-align: middle;
+          text-align: center; }
+        .StockOrderForm .content-wrapper .submit:hover, .StockOrderForm .content-wrapper .reset:hover {
+          background-color: #7B7B7B;
+          border-color: #3D3D3D; }
+      .StockOrderForm .content-wrapper .submit span, .StockOrderForm .content-wrapper .reset span {
+        display: block;
+        width: 100%; }
+    .StockOrderForm .content-wrapper .submit {
+      position: absolute;
+      bottom: 0.4em;
+      right: calc(50% - 10.5em);
+      background-color: #5BDA9B;
+      border-color: #F6F6F6; }
+      .StockOrderForm .content-wrapper .submit:hover {
+        border-color: #F6F6F6;
+        background-color: #1DBF6E; }
+    .StockOrderForm .content-wrapper .reset {
+      position: absolute;
+      bottom: 0.4em;
+      left: calc(50% - 10.5em);
+      background-color: #72C3F1;
+      border-color: #F6F6F6; }
+      .StockOrderForm .content-wrapper .reset:hover {
+        background-color: #2AAAF3;
+        border-color: #F6F6F6; }
+  .StockOrderForm .MachineNumberBlock {
+    border: solid 1px #D7D7D7;
+    border-radius: 4px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.16);
+    position: relative;
+    display: block;
+    min-height: 3.4em; }
+    .StockOrderForm .MachineNumberBlock:not(:first-child) {
+      margin-top: 0.6em; }
+    .StockOrderForm .MachineNumberBlock .machine-wrapper {
+      margin-top: 0.4em;
+      display: none; }
+      .StockOrderForm .MachineNumberBlock .machine-wrapper {
+        *zoom: 1; }
+      .StockOrderForm .MachineNumberBlock .machine-wrapper:before, .StockOrderForm .MachineNumberBlock .machine-wrapper:after {
+        content: "";
+        display: table; }
+      .StockOrderForm .MachineNumberBlock .machine-wrapper:after {
+        clear: both; }
+    .StockOrderForm .MachineNumberBlock .add-machine-number-btn {
+      display: none; }
+    .StockOrderForm .MachineNumberBlock .PartNumberBlock {
+      position: relative;
+      display: block; }
+      .StockOrderForm .MachineNumberBlock .PartNumberBlock .part-wrapper {
+        border: none;
+        border-radius: 0;
+        margin-left: 0.8em; }
+      .StockOrderForm .MachineNumberBlock .PartNumberBlock .add-part-number-btn {
+        position: absolute;
+        top: 0.95em;
+        left: 1.25em;
+        width: 2.25em;
+        height: 2.25em; }
+        .StockOrderForm .MachineNumberBlock .PartNumberBlock .add-part-number-btn {
+          background-color: #9A9A9A;
+          border: solid 1px;
+          border-color: #1F1F1F;
+          border-radius: 4px;
+          cursor: pointer;
+          display: table;
+          text-align: center; }
+          .StockOrderForm .MachineNumberBlock .PartNumberBlock .add-part-number-btn span {
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center; }
+          .StockOrderForm .MachineNumberBlock .PartNumberBlock .add-part-number-btn:hover {
+            background-color: #7B7B7B;
+            border-color: #3D3D3D; }
+
+/*# sourceMappingURL=StockOrderForm.css.map */

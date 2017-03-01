@@ -1,0 +1,66 @@
+@import '../partials/variables';
+@import '../mixins/micro-clearfix';
+
+.Landing {
+  @include micro-clearfix();
+  background-color: $Landing_bg_color;
+  height: 600px;
+  width: 100%;
+  max-width: $App_max_width;
+  min-width: $App_min_width;
+  margin: auto;
+  position: relative;
+  margin-top: $Landing_padding_top;
+}
+
+@media screen and (max-width: 768px) {
+  .Landing {
+    margin-top: 0.75em;
+  }
+}
+
+.quote-stock-form-wrapper {
+  .show-other-button-wrapper {
+    width: 96%;
+    margin: auto;
+    margin-top: 1em;
+    button {
+      border: none;
+      cursor: pointer;
+      color: $primary_blue;
+      background-color: transparent;
+      text-decoration: underline;
+      font-size: 15px;
+      font-weight: 600;
+      &:hover {
+        color: $primary_blue_highlight;
+        border: none;
+      }
+      // $primary_blue: #72C3F1;
+      // $primary_blue_highlight: #2AAAF3;
+    }
+  }
+}
+
+@media screen and (min-width: 1150px) {
+  .quote-stock-form-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    float: left;
+    width: 50%;
+    height: 100%;
+    .show-other-button-wrapper {
+      width: 94%;
+    }
+    .QuoteForm, .StockOrderForm {
+      .content-wrapper {
+        width: 94%;
+        .header {
+          font-size: 1.6em;
+        }
+      }
+    }
+  }
+}
+
