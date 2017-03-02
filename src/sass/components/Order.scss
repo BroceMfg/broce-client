@@ -310,6 +310,20 @@
     }
     &.finalize {
       background-color: $warning_yellow;
+      .discount-form {
+        .Input {
+          display: inline-block;
+          width: 50%;
+          max-width: 60px;
+          margin-right: 0.5em;
+          & > input {
+            width: 100%;
+          }
+        }
+        span {
+          display: inline-block;
+        }
+      }
     }
   }
 }

@@ -30,6 +30,9 @@ class Input extends React.Component {
         && (e.charCode < 48 || e.charCode > 57)) {
         e.preventDefault();
       }
+      else if (this.props.step === 1 && e.charCode === 46) {
+        e.preventDefault();
+      }
       if (this.props.maxCharLength !== undefined) {
         if (e.target.value.length >= this.props.maxCharLength) {
           e.preventDefault();
@@ -61,7 +64,7 @@ class Input extends React.Component {
           name={this.props.name}
           placeholder={this.props.placeholder}
           required
-          step="any"
+          step={this.props.step || "any"}
           value={this.state.value}
           min={this.props.min}
           max={this.props.max}
@@ -77,7 +80,7 @@ class Input extends React.Component {
           type={this.props.type}
           name={this.props.name}
           placeholder={this.props.placeholder}
-          step="any"
+          step={this.props.step || "any"}
           value={this.state.value}
           min={this.props.min}
           max={this.props.max}

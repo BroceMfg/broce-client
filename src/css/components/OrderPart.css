@@ -41,7 +41,7 @@
       .OrderParts-wrapper .OrderParts-titles div:not(:last-child) {
         border-right: solid 1px black; }
   .OrderParts-wrapper .OrderParts-final {
-    font-size: 13px;
+    font-size: 14px;
     width: 100%;
     display: inline-block; }
     .OrderParts-wrapper .OrderParts-final div {
@@ -62,9 +62,9 @@
       background-color: #D7D7D7; }
   .OrderParts-wrapper .OrderParts-discount {
     width: 100%;
-    display: inline-block; }
+    display: inline-block;
+    font-size: 14px; }
     .OrderParts-wrapper .OrderParts-discount div {
-      font-size: 13px;
       display: inline-block;
       text-align: center;
       padding-bottom: 0.25em;
@@ -75,29 +75,30 @@
       .OrderParts-wrapper .OrderParts-discount .spacer#spacer5 {
         text-align: right;
         background-color: #5BDA9B;
-        width: calc(11.75% - 2px); }
+        width: calc(11.5% - 2px); }
     .OrderParts-wrapper .OrderParts-discount .discount {
       background-color: #5BDA9B;
-      width: calc(17.5% - 3px); }
+      width: calc(17.5% - 2px); }
   .OrderParts-wrapper .OrderParts-total {
     padding-bottom: 1em;
-    font-size: 13px;
+    font-size: 14px;
     width: 100%;
     display: inline-block; }
     .OrderParts-wrapper .OrderParts-total div {
       display: inline-block;
       text-align: center;
-      padding-bottom: 0.2em;
+      padding-bottom: 0.25em;
+      padding-top: 0.25em;
       margin-bottom: 0; }
     .OrderParts-wrapper .OrderParts-total .spacer {
       width: calc(17.75% - 2px); }
       .OrderParts-wrapper .OrderParts-total .spacer#spacer5 {
         text-align: right;
         background-color: #B9B9B9;
-        width: calc(11.75% - 2px); }
+        width: calc(11.5% - 2px); }
     .OrderParts-wrapper .OrderParts-total .final {
       background-color: #B9B9B9;
-      width: calc(17.5% - 3px); }
+      width: calc(17.5% - 2px); }
 
 .OrderPart {
   outline: solid 1px transparent;

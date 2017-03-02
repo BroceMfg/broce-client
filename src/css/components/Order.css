@@ -312,6 +312,15 @@
               background-color: #DB3030; }
     .Order .status-message.finalize {
       background-color: #FADA59; }
+      .Order .status-message.finalize .discount-form .Input {
+        display: inline-block;
+        width: 50%;
+        max-width: 60px;
+        margin-right: 0.5em; }
+        .Order .status-message.finalize .discount-form .Input > input {
+          width: 100%; }
+      .Order .status-message.finalize .discount-form span {
+        display: inline-block; }
 
 .OrderPart-wrapper-transition-enter {
   transition: all 350ms ease-in-out;

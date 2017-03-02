@@ -3,6 +3,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import OrderPart from './OrderPart';
 import ShippingDetailForm from './ShippingDetailForm';
 import ShippingAddressForm from './ShippingAddressForm';
+import Input from './Input';
 import { post, put } from '../middleware/XMLHTTP';
 
 import '../css/components/Order.css';
@@ -19,12 +20,32 @@ class Order extends React.Component {
     this.shippingControls = this.shippingControls.bind(this);
     this.acceptControls = this.acceptControls.bind(this);
     this.finalizeOrder = this.finalizeOrder.bind(this);
+    this.toggleDiscount = this.toggleDiscount.bind(this);
+    this.renderDiscountInput = this.renderDiscountInput.bind(this);
     this.acceptOrder = this.acceptOrder.bind(this);
     this.addShippingDetail = this.addShippingDetail.bind(this);
     this.state = {
       showDetails: false,
-      showControls: false
+      showControls: false,
+      showDiscount: false,
+      timestamp: Date.now()
     };
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    // re-render the ItemForm component with new form data
+    // check if timestamp hasn't been updated in the past
+    // .01 seconds so that infinite loop doesn't occur
+    if (Date.now() - this.state.timestamp > 10) {
+      console.log('UPDATING');
+      console.log(nextState);
+      this.setState({
+        ...nextState,
+        timestamp: Date.now()
+      });
+      return true;
+    }
+    return false;
   }
 
   updateOrderDetail(newOrderDetail, index) {
@@ -136,8 +157,8 @@ class Order extends React.Component {
     const allPriced = orderDetails
       .filter((od) => od.price).length === orderDetails.length;
 
-    const total = Math.round(orderDetails
-      .map((od) => (od.price * od.quantity)).reduce((a, b) => a + b) * 100) / 100;
+    // const total = Math.round(orderDetails
+    //   .map((od) => (od.price * od.quantity)).reduce((a, b) => a + b) * 100) / 100;
 
     return this.renderControls(
       allPriced,
@@ -145,7 +166,18 @@ class Order extends React.Component {
       (
         <div>
           <button onClick={this.finalizeOrder}><span>Finalize Order</span></button>
-          <span>Total: ${total}</span>
+          <button onClick={this.toggleDiscount}>
+            {
+              this.state.showDiscount
+                ? <span>Cancel</span>
+                : <span>Add Discount</span>
+            }
+          </button>
+          {
+            this.state.showDiscount
+              ? this.renderDiscountInput()
+              : null
+          }
         </div>
       ),
       'All items must be priced before proceeding.'
@@ -189,7 +221,98 @@ class Order extends React.Component {
         this.props.toggleMessage('Error: Please try again.', 'error');
       }
     );
+  }
 
+  toggleDiscount() {
+    this.setState({
+      ...this.state,
+      showDiscount: !this.state.showDiscount
+    });
+  }
+
+  renderDiscountInput() {
+    const submit = (e) => {
+      e.preventDefault();
+      const inputs = e.target.querySelectorAll('input[name]');
+      const data = {};
+      Object.keys(inputs).forEach((key) => {
+        data[inputs[key].name] = inputs[key].value;
+      });
+      let formData = '';
+      Object.keys(data).forEach((key) => {
+        formData += `${key}=${data[key]}&`;
+      });
+
+      const handleError = () => {
+        this.props.toggleMessage('Error: Please try again.', 'error');
+      };
+
+      const discount = data.discount !== '0' ? data.discount : null;
+      post(
+        `${this.props.apiUrl}/orders/${this.props.order.id}/discount`,
+        formData,
+        (response) => {
+          if (JSON.parse(response).success) {
+            // success
+            const updatedOrder = Object.assign(
+              this.props.order,
+              {
+                Order_Details: this.props.order.Order_Details
+                  .map(od => Object.assign(
+                    od,
+                    { discount }
+                  ))
+              }
+            );
+
+            this.props.updateOrder(
+              this.props.order,
+              null,
+              updatedOrder,
+              this.props.order.status || 'none'
+            );
+
+            this.setState({
+              ...this.state,
+              timestamp: Date.now()
+            });
+            const msgPt1 = discount !== null
+              ? `${discount}% Discount Added to `
+              : `Discount Removed from `;
+            this.props.toggleMessage(
+              msgPt1 +
+              `Order #${this.props.order.id}.`,
+             'success'
+           );
+          } else {
+            handleError();
+          }
+        },
+        handleError
+      );
+
+    }
+    return (
+      <div className="discount-form">
+        <form
+          onSubmit={submit}
+          title="Add a discount percentage to the order or 0 to remove the discount"
+        >
+          <Input
+            type="number"
+            min={0}
+            max={99}
+            step={1}
+            name="discount"
+            placeholder="Discount"
+            parentOnChange={() => {}}
+            submit={submit}
+          />
+          <span className="percent-symbol">%</span>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    )
   }
 
   // client order for accepting a "priced" order
@@ -269,7 +392,7 @@ class Order extends React.Component {
       .reduce((a, b) => a + b);
     const discount = order.Order_Details[0].discount;
     return (
-      <div className="Order">
+      <div className="Order" key={this.state.timestamp}>
         { 
           this.renderStatusMessage()
         }
@@ -349,17 +472,21 @@ class Order extends React.Component {
                           </div>
                         : null
                     }
-                    <div className="OrderParts-total">
-                      <div className="spacer" id="spacer1"></div>
-                      <div className="spacer" id="spacer2"></div>
-                      <div className="spacer" id="spacer3"></div>
-                      <div className="spacer" id="spacer4"></div>
-                      <div className="spacer" id="spacer5">final:</div>
-                      <div className="final">
-                        {totalPrice !== 0 ? `$${this.priceLessDiscount(totalPrice.toFixed(2), discount)}`
-                        : '--'}
-                      </div>
-                    </div>
+                    {
+                      totalPrice !== 0
+                        ?
+                          <div className="OrderParts-total">
+                            <div className="spacer" id="spacer1"></div>
+                            <div className="spacer" id="spacer2"></div>
+                            <div className="spacer" id="spacer3"></div>
+                            <div className="spacer" id="spacer4"></div>
+                            <div className="spacer" id="spacer5">final:</div>
+                            <div className="final">
+                              {`$${this.priceLessDiscount(totalPrice.toFixed(2), discount)}`}
+                            </div>
+                          </div>
+                        : null
+                    }
                   </div>
                 : null
             }
