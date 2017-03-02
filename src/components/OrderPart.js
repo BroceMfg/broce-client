@@ -63,6 +63,9 @@ class OrderPart extends React.Component {
   render() {
     const showAddPriceForm = this.state.showAddPriceForm;
     const orderDetail = this.props.orderDetail;
+    console.log('(()))(@)#(@))!)@#(@');
+    console.log(orderDetail);
+    console.log('(()))(@)#(@))!)@#(@');
     const orderAction = this.getOrderAction();
     const shippingDetail = orderDetail.Shipping_Detail;
     return (

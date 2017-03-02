@@ -35,27 +35,94 @@
     }
   }
   .OrderParts-final {
-    padding-bottom: 1em;
+    font-size: 13px;
     width: 100%;
     display: inline-block;
     div {
       display: inline-block;
       text-align: center;
+      padding-bottom: 0.2em;
+      margin-bottom: 0;
     }
     .spacer {
-      width: calc(16.5% - 2px);
-      // border-right: solid 1px black;3
+      width: calc(17.75% - 2px);
     }
     #spacer5 {
       border-right: 0;
+      // padding-bottom: 0.2em;
+      text-align: right;
+      color: black;
+      // border-bottom: solid 1px black;
+      background-color: $c2;
+      width: calc(11.5% - 2px);
     }
     .price {
-      width: calc(17.5% - 3px);
-      font-size: 13px;
-      // border-top: solid 1px black;
+      width: calc(17.5% - 2px);
+      // border-bottom: solid 1px black;
       // border-left: solid 1px black;
       // margin-top: 0.3em;
       // padding-top: 0.3em;
+      background-color: $c2;
+    }
+  }
+  .OrderParts-discount {
+    width: 100%;
+    display: inline-block;
+    div {
+      font-size: 13px;
+      display: inline-block;
+      text-align: center;
+      padding-bottom: 0.25em;
+      padding-top: 0.15em;
+      color: black;
+    }
+    .spacer {
+      width: calc(17.75% - 2px);
+      &#spacer5 {
+        // border-bottom: solid 1px black;
+        text-align: right;
+        background-color: $success_green;
+        width: calc(11.75% - 2px);
+        // border-top-left-radius: 4px;
+        // border-bottom-left-radius: 4px;
+      }
+    }
+    .discount {
+      background-color: $success_green;
+      // border-bottom: solid 1px black;
+      width: calc(17.5% - 3px);
+      // border-top-right-radius: 4px;
+      // border-bottom-right-radius: 4px;
+    }
+  }
+  .OrderParts-total {
+    padding-bottom: 1em;
+    font-size: 13px;
+    width: 100%;
+    display: inline-block;
+    div {
+      display: inline-block;
+      text-align: center;
+      padding-bottom: 0.2em;
+      margin-bottom: 0;
+    }
+    .spacer {
+      width: calc(17.75% - 2px);
+      &#spacer5 {
+        // border-bottom: solid 1px black;
+        text-align: right;
+        background-color: $c3;
+        width: calc(11.75% - 2px);
+        // border-top-left-radius: 4px;
+        // border-bottom-left-radius: 4px;
+      }
+    }
+    .final {
+      background-color: $c3;
+      // border-bottom: solid 1px black;
+      width: calc(17.5% - 3px);
+      // border-top-right-radius: 4px;
+      // border-bottom-right-radius: 4px;
     }
   }
 }

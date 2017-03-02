@@ -41,19 +41,63 @@
       .OrderParts-wrapper .OrderParts-titles div:not(:last-child) {
         border-right: solid 1px black; }
   .OrderParts-wrapper .OrderParts-final {
-    padding-bottom: 1em;
+    font-size: 13px;
     width: 100%;
     display: inline-block; }
     .OrderParts-wrapper .OrderParts-final div {
       display: inline-block;
-      text-align: center; }
+      text-align: center;
+      padding-bottom: 0.2em;
+      margin-bottom: 0; }
     .OrderParts-wrapper .OrderParts-final .spacer {
-      width: calc(16.5% - 2px); }
+      width: calc(17.75% - 2px); }
     .OrderParts-wrapper .OrderParts-final #spacer5 {
-      border-right: 0; }
+      border-right: 0;
+      text-align: right;
+      color: black;
+      background-color: #D7D7D7;
+      width: calc(11.5% - 2px); }
     .OrderParts-wrapper .OrderParts-final .price {
-      width: calc(17.5% - 3px);
-      font-size: 13px; }
+      width: calc(17.5% - 2px);
+      background-color: #D7D7D7; }
+  .OrderParts-wrapper .OrderParts-discount {
+    width: 100%;
+    display: inline-block; }
+    .OrderParts-wrapper .OrderParts-discount div {
+      font-size: 13px;
+      display: inline-block;
+      text-align: center;
+      padding-bottom: 0.25em;
+      padding-top: 0.15em;
+      color: black; }
+    .OrderParts-wrapper .OrderParts-discount .spacer {
+      width: calc(17.75% - 2px); }
+      .OrderParts-wrapper .OrderParts-discount .spacer#spacer5 {
+        text-align: right;
+        background-color: #5BDA9B;
+        width: calc(11.75% - 2px); }
+    .OrderParts-wrapper .OrderParts-discount .discount {
+      background-color: #5BDA9B;
+      width: calc(17.5% - 3px); }
+  .OrderParts-wrapper .OrderParts-total {
+    padding-bottom: 1em;
+    font-size: 13px;
+    width: 100%;
+    display: inline-block; }
+    .OrderParts-wrapper .OrderParts-total div {
+      display: inline-block;
+      text-align: center;
+      padding-bottom: 0.2em;
+      margin-bottom: 0; }
+    .OrderParts-wrapper .OrderParts-total .spacer {
+      width: calc(17.75% - 2px); }
+      .OrderParts-wrapper .OrderParts-total .spacer#spacer5 {
+        text-align: right;
+        background-color: #B9B9B9;
+        width: calc(11.75% - 2px); }
+    .OrderParts-wrapper .OrderParts-total .final {
+      background-color: #B9B9B9;
+      width: calc(17.5% - 3px); }
 
 .OrderPart {
   outline: solid 1px transparent;

@@ -258,11 +258,16 @@ class Order extends React.Component {
     );
   }
 
+  priceLessDiscount(price, disount) {
+    return (price * ((100 - disount) / 100)).toFixed(2);
+  }
+
   render() {
     const order = this.props.order;
     const totalPrice = order.Order_Details
       .map(od => (od.price || 0) * od.quantity)
       .reduce((a, b) => a + b);
+    const discount = order.Order_Details[0].discount;
     return (
       <div className="Order">
         { 
@@ -315,14 +320,44 @@ class Order extends React.Component {
                         />
                       )
                     }
-                    <div className="OrderParts-final">
+                    {
+                      discount
+                        ?
+                          <div>
+                            <div className="OrderParts-final">
+                              <div className="spacer" id="spacer1"></div>
+                              <div className="spacer" id="spacer2"></div>
+                              <div className="spacer" id="spacer3"></div>
+                              <div className="spacer" id="spacer4"></div>
+                              <div className="spacer" id="spacer5">subtotal:</div>
+                              <div className="price">
+                                {totalPrice !== 0 ? `$${totalPrice.toFixed(2)}` : '--'}
+                              </div>
+                            </div>
+                            <div className="OrderParts-discount">
+                              <div className="spacer" id="spacer1"></div>
+                              <div className="spacer" id="spacer2"></div>
+                              <div className="spacer" id="spacer3"></div>
+                              <div className="spacer" id="spacer4"></div>
+                              <div className="spacer" id="spacer5">
+                                <span>disount:</span>
+                              </div>
+                              <div className="discount">
+                                {discount}% off
+                              </div>
+                            </div>
+                          </div>
+                        : null
+                    }
+                    <div className="OrderParts-total">
                       <div className="spacer" id="spacer1"></div>
                       <div className="spacer" id="spacer2"></div>
                       <div className="spacer" id="spacer3"></div>
                       <div className="spacer" id="spacer4"></div>
-                      <div className="spacer" id="spacer5"></div>
-                      <div className="price">
-                        {totalPrice !== 0 ? `$${totalPrice.toFixed(2)}` : '--'}
+                      <div className="spacer" id="spacer5">final:</div>
+                      <div className="final">
+                        {totalPrice !== 0 ? `$${this.priceLessDiscount(totalPrice.toFixed(2), discount)}`
+                        : '--'}
                       </div>
                     </div>
                   </div>
