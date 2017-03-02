@@ -12,15 +12,23 @@ class OrderList extends React.Component {
     this.renderSubLists = this.renderSubLists.bind(this);
   }
 
-  updateOrder(order, statusType) {
-    let newList = this.props.orders[statusType];
-    newList[order.id] = order;
-    let newStatusTypeList = {};
-    newStatusTypeList[statusType] = newList;
-    this.props.setOrders(Object.assign(
-      this.props.orders,
-      newStatusTypeList
-    ));
+  // provide a statusType OR an updatedOrder
+  // statusType will take priority if provided
+  // currentStatusType is used for locating the order
+  updateOrder(order, statusType, updatedOrder, currentStatusType) {
+    if (statusType) {
+      let newList = this.props.orders[statusType];
+      newList[order.id] = order;
+      let newStatusTypeList = {};
+      newStatusTypeList[statusType] = newList;
+      this.props.setOrders(Object.assign(
+        this.props.orders,
+        newStatusTypeList
+      ));
+    } else if (updatedOrder && currentStatusType) {
+      const subList = this.props.orders[currentStatusType];
+      console.log(subList);
+    }
   }
 
   getNextStatusType(currentStatusType){

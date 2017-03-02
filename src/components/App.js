@@ -42,7 +42,7 @@ class App extends React.Component {
       },
       user: undefined,
       admin: undefined,
-      showStockOrderForm: true
+      showStockOrderForm: false
     };
   }
 
