@@ -15,10 +15,16 @@
         font-size: 1em;
       }
       &.machine_serial_num {
-        width: calc(28% - 3px);
+        width: calc(22% - 3px);
       }
       &.quantity {
         width: calc(15% - 3px);
+      }
+      &.price-unit {
+        width: calc(11.5% - 3px);
+      }
+      &.price-total {
+        width: calc(17.5% - 3px);
       }
       display: inline-block;
       text-align: center;
@@ -37,16 +43,17 @@
       text-align: center;
     }
     .spacer {
-      width: calc(19.25% - 3px);
-      border-right: solid 1px black;
+      width: calc(16.5% - 2px);
+      // border-right: solid 1px black;3
     }
-    #spacer4 {
+    #spacer5 {
       border-right: 0;
     }
     .price {
-      width: calc(23% - 3px);
+      width: calc(17.5% - 3px);
+      font-size: 13px;
       // border-top: solid 1px black;
-      border-left: solid 1px black;
+      // border-left: solid 1px black;
       // margin-top: 0.3em;
       // padding-top: 0.3em;
     }
@@ -58,6 +65,7 @@
   line-height: 1.4em;
   height: calc(auto + 100px);
   .content-wrapper {
+    font-size: 13px;
     .details {
       // @include outline(blue, 3px);
       display: inline-block;
@@ -86,14 +94,18 @@
           }
         }
         &.machine_serial_num {
-          width: calc(28% - 3px);
+          width: calc(22% - 3px);
         }
         &.quantity {
           width: calc(15% - 3px);
         }
-        &.price {
-          // @include outline(red);
+        &.price-unit {
           position: relative;
+          width: calc(11.5% - 3px);
+        }
+        &.price-total {
+          position: relative;
+          width: calc(17.5% - 3px);
           .status {
             // @include outline(blue);
             position: absolute;

@@ -298,7 +298,8 @@ class Order extends React.Component {
                       <div className="machine_serial_num">mach serial #</div>
                       <div className="part_num">part #</div>
                       <div className="quantity">quantity</div>
-                      <div className="price">price ($)</div>
+                      <div className="price-unit">PPU</div>
+                      <div className="price-total">total</div>
                     </div>
                     {
                       order.Order_Details.map((orderDetail, i) =>
@@ -319,8 +320,9 @@ class Order extends React.Component {
                       <div className="spacer" id="spacer2"></div>
                       <div className="spacer" id="spacer3"></div>
                       <div className="spacer" id="spacer4"></div>
+                      <div className="spacer" id="spacer5"></div>
                       <div className="price">
-                        {totalPrice !== 0 ? totalPrice.toFixed(2) : '--'}
+                        {totalPrice !== 0 ? `$${totalPrice.toFixed(2)}` : '--'}
                       </div>
                     </div>
                   </div>

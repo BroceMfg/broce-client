@@ -29,7 +29,7 @@ class OrderPart extends React.Component {
     if (this.props.admin) {
       if (this.props.statusType === 'quote'
         && this.props.orderDetail.price === null) {
-        obj.buttonTitle = this.state.showAddPriceForm ? 'Cancel' : 'Add Price';
+        obj.buttonTitle = this.state.showAddPriceForm ? 'Cancel' : '+';
         obj.func = this.toggleAddPriceForm;
       } else if (this.props.statusType === 'quote' && this.props.orderDetail.price !== null) {
         obj.buttonTitle = this.state.showAddPriceForm ? 'Cancel' : 'Edit';
@@ -85,8 +85,19 @@ class OrderPart extends React.Component {
             <div className="machine_serial_num">{orderDetail.machine_serial_num || '--'}</div>
             <div className="part_num">{orderDetail.Part.number}</div>
             <div className="quantity">{orderDetail.quantity}</div>
-            <div className="price">
-              {orderDetail.price ? (orderDetail.price * orderDetail.quantity).toFixed(2) : '--'}
+            <div className="price-unit">
+             {
+              orderDetail.price
+                  ? <span className="each">{`$${orderDetail.price}`}</span>
+                  : <span className="each">--</span>
+              }
+            </div>
+            <div className="price-total">
+              {
+                orderDetail.price
+                  ? `$${(orderDetail.price * orderDetail.quantity).toFixed(2)}`
+                  : '--'
+              }
               <OrderAction
                 admin={this.props.admin}
                 statusType={this.props.statusType}
