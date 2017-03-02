@@ -112,6 +112,11 @@
     display: block;
     width: 12em;
     margin: auto;
-    margin-top: 11.4em; }
+    margin-top: 11.4em;
+    color: #2AAAF3; }
+    .SignIn .forgot:link, .SignIn .forgot:visited, .SignIn .forgot:active {
+      color: #2AAAF3; }
+    .SignIn .forgot:hover {
+      color: #72C3F1; }
 
 /*# sourceMappingURL=SignIn.css.map */
