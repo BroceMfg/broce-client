@@ -83,6 +83,8 @@
   width: 96%;
   margin: 0.5em auto;
   padding-bottom: 0.2em; }
+  .OrderSubList:not(:first-child) {
+    margin-top: 1.1em; }
   .OrderSubList .header {
     font-size: 1.2em;
     background-color: #D7D7D7;
@@ -100,6 +102,50 @@
       padding-bottom: 0.15em;
       border-bottom: solid 1px #000000;
       text-transform: uppercase; }
+    .OrderSubList .header.status-type-header {
+      position: relative; }
+      .OrderSubList .header.status-type-header .reveal-hide-button-wrapper {
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        right: 1.6rem;
+        bottom: 0;
+        display: flex;
+        align-items: center; }
+        .OrderSubList .header.status-type-header .reveal-hide-button-wrapper button {
+          cursor: pointer;
+          border: none;
+          background-color: transparent;
+          text-align: center;
+          color: #3D3D3D; }
+          .OrderSubList .header.status-type-header .reveal-hide-button-wrapper button span {
+            text-align: center;
+            border: none;
+            width: 100%; }
+            .OrderSubList .header.status-type-header .reveal-hide-button-wrapper button span i {
+              font-size: 2.4rem; }
+          .OrderSubList .header.status-type-header .reveal-hide-button-wrapper button:focus {
+            outline: none; }
+          .OrderSubList .header.status-type-header .reveal-hide-button-wrapper button:hover {
+            color: #7B7B7B; }
+
+.OrderSubList-transition-enter {
+  transition: all 350ms ease-in-out;
+  max-height: 0;
+  opacity: 0.01; }
+
+.OrderSubList-transition-enter-active {
+  max-height: 300px;
+  opacity: 1; }
+
+.OrderSubList-transition-leave {
+  transition: all 350ms ease-in-out;
+  opacity: 1;
+  max-height: 300px; }
+
+.OrderSubList-transition-leave-active {
+  max-height: 0;
+  opacity: 0.01; }
 
 @media screen and (min-width: 1150px) {
   .OrderSubList {
