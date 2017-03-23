@@ -397,8 +397,20 @@ class Order extends React.Component {
           this.renderStatusMessage()
         }
         <div className="content">
-          <div className={'oStatus'}>
+          <div className="oStatus">
             <h3><span className="oId">#{order.id}</span> | {order.status}</h3>
+            {
+              order.status === 'quote'
+                ?
+                  <div className="add-another-part-button-wrapper">
+                    <button className="add-another-part-button">
+                      <span>
+                        add another part
+                      </span>
+                    </button>
+                  </div>
+                : null
+            }
           </div>
           <div><h4>Order created on: {new Date(order.createdAt).toLocaleDateString("en-US")}</h4></div>
           <button className="reveal-details" onClick={this.toggleDetails}>

@@ -35,10 +35,10 @@ class Landing extends React.Component {
       }
       json.orders
         .sort((a, b) => {
-          const statusTypeValues = Object.values(statusTypes);
+          const statusTypeKeys = Object.keys(statusTypes);
           if (admin) {
-            return statusTypeValues.indexOf(this.getStatusTypeId(a))
-              - statusTypeValues.indexOf(this.getStatusTypeId(b));
+            return statusTypeKeys.indexOf(`${this.getStatusTypeId(a)}`)
+              - statusTypeKeys.indexOf(`${this.getStatusTypeId(b)}`);
           }
           return (
             new Date(b.createdAt).getTime()
