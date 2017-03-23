@@ -81,6 +81,7 @@ class MachineNumberBlock extends React.Component {
                   addPartNumBlock={this.addPartNumBlock}
                   submit={this.props.submit}
                   lastOne={(partNums.length - 1) === i}
+                  noAddButtons={this.props.noAddButtons}
                 />
               ))
             : null
@@ -89,7 +90,8 @@ class MachineNumberBlock extends React.Component {
           {
             (Object.keys(form)[0] !== ''
               && Object.keys(form[Object.keys(form)[0]][partNums.length - 1])[0] !== ''
-              && this.props.lastOne)
+              && this.props.lastOne
+              && !this.props.noAddButtons)
               ?
                 <button
                   className="add-machine-number-btn"

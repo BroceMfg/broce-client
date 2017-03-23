@@ -76,7 +76,8 @@ $ShippingDetail_border_radius: 4px;
 /***
   FONTS
 ***/
-$main_font_family: sans-serif;
+@import '../fonts/roboto';
+$main_font: 'Roboto', sans-serif;
 $raleway: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $titillium: "Titillium Web", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial,
 sans-serif;

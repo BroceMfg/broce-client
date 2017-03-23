@@ -81,6 +81,9 @@ class OrderList extends React.Component {
               getStatusType={this.props.getStatusType}
               getNextStatusType={this.getNextStatusType}
               toggleMessage={this.props.toggleMessage}
+              showOtherForm={this.props.showOtherForm}
+              showStockOrderForm={this.props.showStockOrderForm}
+              fetchOrders={this.props.fetchOrders}
             />
           ))
         )

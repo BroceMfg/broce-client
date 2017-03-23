@@ -4,7 +4,9 @@ import OrderPart from './OrderPart';
 import ShippingDetailForm from './ShippingDetailForm';
 import ShippingAddressForm from './ShippingAddressForm';
 import Input from './Input';
-import { post, put } from '../middleware/XMLHTTP';
+import StockOrderForm from './StockOrderForm';
+import QuoteForm from './QuoteForm';
+import { post, put, parseJSONtoFormData } from '../middleware/XMLHTTP';
 
 import '../css/components/Order.css';
 
@@ -24,10 +26,12 @@ class Order extends React.Component {
     this.renderDiscountInput = this.renderDiscountInput.bind(this);
     this.acceptOrder = this.acceptOrder.bind(this);
     this.addShippingDetail = this.addShippingDetail.bind(this);
+    this.renderAddAnoterPartForm = this.renderAddAnoterPartForm.bind(this);
     this.state = {
       showDetails: false,
       showControls: false,
       showDiscount: false,
+      showAddAnotherPart: false,
       timestamp: Date.now()
     };
   }
@@ -111,7 +115,8 @@ class Order extends React.Component {
     }
     this.setState({
       ...this.state,
-      showDetails
+      showDetails,
+      showAddAnotherPart: false
     });
   }
 
@@ -385,6 +390,88 @@ class Order extends React.Component {
     return (price * ((100 - disount) / 100)).toFixed(2);
   }
 
+  renderAddAnoterPartForm() {
+    const submit = (e) => {
+      e.preventDefault();
+      console.log(e);
+      const data = {};
+      const inputs = e.target.querySelectorAll('input[name]');
+      Object.keys(inputs).forEach((key) => {
+        data[inputs[key].name.replace(/_0/, '')] = inputs[key].value;
+      });
+      console.log(data);
+
+      const handleErr = () => {
+        this.props.toggleMessage('Error: Please try again.', 'error');
+      };
+      // just testing post and get out
+      post(
+        `${this.props.apiUrl}/orders/${this.props.order.id}/part`,
+        parseJSONtoFormData(data),
+        (response) => {
+          console.log('JSON.parse(response)');
+          console.log(JSON.parse(response));
+          if (response) {
+            const resp = JSON.parse(response);
+            if (resp.success) {
+              this.props.toggleMessage(
+                `New Part Added to Order #${this.props.order.id}. Thank you!`,
+                'success'
+              );
+              setTimeout(
+                () => { this.props.fetchOrders(); },
+                750
+              );
+            } else {
+              handleErr();
+            }
+          }
+        },
+        handleErr
+      );
+
+      this.setState({
+        ...this.state,
+        showAddAnotherPart: false
+      });
+    };
+    return (
+      <div className="add-anoter-part-form">
+        <div className="quote-stock-form-wrapper">
+          <div className="h3-wrapper">
+            <h3>Add Another Part to this Order</h3>
+          </div>
+          {
+            this.props.showStockOrderForm
+              ?
+                <StockOrderForm
+                  apiUrl={this.props.apiUrl}
+                  toggleMessage={this.props.toggleMessage}
+                  noAddButtons={true}
+                  submit={submit}
+                />
+              :
+                <QuoteForm
+                  apiUrl={this.props.apiUrl}
+                  toggleMessage={this.props.toggleMessage}
+                  noAddButtons={true}
+                  submit={submit}
+                />
+          }
+          <div className="show-other-button-wrapper">
+            <button onClick={this.props.showOtherForm}>
+              {
+                this.props.showStockOrderForm
+                  ? <span>Regular Quote Part Instead</span>
+                  : <span>Stock Order Part Instead</span>
+              }
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     const order = this.props.order;
     const totalPrice = order.Order_Details
@@ -397,7 +484,7 @@ class Order extends React.Component {
           this.renderStatusMessage()
         }
         <div className="content">
-          <div className={'oStatus'}>
+          <div className="oStatus">
             <h3><span className="oId">#{order.id}</span> | {order.status}</h3>
           </div>
           <div><h4>Order created on: {new Date(order.createdAt).toLocaleDateString("en-US")}</h4></div>
@@ -422,12 +509,42 @@ class Order extends React.Component {
                 ? 
                   <div className="OrderParts-wrapper">
                     <div className="OrderParts-titles">
-                      <div className="shipped">ship</div>
-                      <div className="machine_serial_num">mach serial #</div>
-                      <div className="part_num">part #</div>
-                      <div className="quantity">quantity</div>
-                      <div className="price-unit">PPU</div>
-                      <div className="price-total">total</div>
+                      <div
+                        className="shipped"
+                        title="has shipped"
+                      >
+                        ship
+                      </div>
+                      <div
+                        className="machine_serial_num"
+                        title="machine serial number"
+                      >
+                        mach serial #
+                      </div>
+                      <div
+                        className="part_num"
+                        title="part number"
+                      >
+                        part #
+                      </div>
+                      <div
+                        className="quantity"
+                        title="quantity"
+                      >
+                        quantity
+                      </div>
+                      <div
+                        className="price-unit"
+                        title="price per unit"
+                      >
+                        PPU
+                      </div>
+                      <div
+                        className="price-total"
+                        title="total price"
+                      >
+                        total
+                      </div>
                     </div>
                     {
                       order.Order_Details.map((orderDetail, i) =>
@@ -485,6 +602,40 @@ class Order extends React.Component {
                               {`$${this.priceLessDiscount(totalPrice.toFixed(2), discount)}`}
                             </div>
                           </div>
+                        : null
+                    }
+                    {
+                      order.status === 'quote'
+                        ?
+                          <div className="add-another-part-button-wrapper">
+                            <button
+                              className="add-another-part-button"
+                              onClick={() => {
+                                this.setState({
+                                  ...this.state,
+                                  showAddAnotherPart: !this.state.showAddAnotherPart
+                                });
+                              }}
+                            >
+                              {
+                                this.state.showAddAnotherPart
+                                  ?
+                                    <span>
+                                      Cancel
+                                    </span>
+                                  :
+                                    <span>
+                                      Add Another Part
+                                    </span>
+                              }
+                            </button>
+                          </div>
+                        : null
+                    }
+                    {
+                      this.state.showAddAnotherPart
+                        ?
+                          this.renderAddAnoterPartForm()
                         : null
                     }
                   </div>

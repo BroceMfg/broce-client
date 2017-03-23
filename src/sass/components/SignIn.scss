@@ -84,5 +84,12 @@
     width: 12em;
     margin: auto;
     margin-top: 11.4em;
+    color: $primary_blue_highlight;
+    &:link, &:visited, &:active {
+      color: $primary_blue_highlight;
+    }
+    &:hover {
+      color: $primary_blue;
+    }
   }
 }
