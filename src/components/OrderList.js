@@ -83,6 +83,7 @@ class OrderList extends React.Component {
               toggleMessage={this.props.toggleMessage}
               showOtherForm={this.props.showOtherForm}
               showStockOrderForm={this.props.showStockOrderForm}
+              fetchOrders={this.props.fetchOrders}
             />
           ))
         )

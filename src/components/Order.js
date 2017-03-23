@@ -419,8 +419,8 @@ class Order extends React.Component {
                 'success'
               );
               setTimeout(
-                () => { window.location.reload(false); },
-                1000
+                () => { this.props.fetchOrders(); },
+                750
               );
             } else {
               handleErr();
@@ -509,12 +509,42 @@ class Order extends React.Component {
                 ? 
                   <div className="OrderParts-wrapper">
                     <div className="OrderParts-titles">
-                      <div className="shipped">ship</div>
-                      <div className="machine_serial_num">mach serial #</div>
-                      <div className="part_num">part #</div>
-                      <div className="quantity">quantity</div>
-                      <div className="price-unit">PPU</div>
-                      <div className="price-total">total</div>
+                      <div
+                        className="shipped"
+                        title="has shipped"
+                      >
+                        ship
+                      </div>
+                      <div
+                        className="machine_serial_num"
+                        title="machine serial number"
+                      >
+                        mach serial #
+                      </div>
+                      <div
+                        className="part_num"
+                        title="part number"
+                      >
+                        part #
+                      </div>
+                      <div
+                        className="quantity"
+                        title="quantity"
+                      >
+                        quantity
+                      </div>
+                      <div
+                        className="price-unit"
+                        title="price per unit"
+                      >
+                        PPU
+                      </div>
+                      <div
+                        className="price-total"
+                        title="total price"
+                      >
+                        total
+                      </div>
                     </div>
                     {
                       order.Order_Details.map((orderDetail, i) =>

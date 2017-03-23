@@ -384,31 +384,29 @@
 
 .add-anoter-part-form {
   align-items: center;
-  outline: solid 1px red;
   position: relative;
   display: flex; }
   .add-anoter-part-form .quote-stock-form-wrapper {
-    outline: solid 1px blue;
     display: block;
     position: static;
-    width: 70%; }
+    width: 70%;
+    min-width: 600px; }
     .add-anoter-part-form .quote-stock-form-wrapper .h3-wrapper {
-      outline: solid 1px red;
       display: flex;
       width: 100%;
-      margin-top: 0.6rem; }
+      margin-top: 0.6rem;
+      margin-bottom: 0.1rem; }
+      .add-anoter-part-form .quote-stock-form-wrapper .h3-wrapper h3 {
+        border-bottom: solid 1px black; }
     .add-anoter-part-form .quote-stock-form-wrapper .header {
-      outline: solid 1px red;
       color: transparent;
       height: 0;
       background-color: transparent; }
       .add-anoter-part-form .quote-stock-form-wrapper .header span {
         border: none;
         height: 0; }
-    .add-anoter-part-form .quote-stock-form-wrapper .span-wrapper {
-      outline: solid 1px red; }
-      .add-anoter-part-form .quote-stock-form-wrapper .span-wrapper span {
-        color: black; }
+    .add-anoter-part-form .quote-stock-form-wrapper .span-wrapper span {
+      color: black; }
 
 .OrderPart-wrapper-transition-enter {
   transition: all 350ms ease-in-out;

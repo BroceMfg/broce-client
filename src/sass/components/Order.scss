@@ -330,23 +330,28 @@
 
 .add-anoter-part-form {
   align-items: center;
-  outline: solid 1px red;
+  // outline: solid 1px red;
   position: relative;
   display: flex;
   // height: 10rem;
   .quote-stock-form-wrapper {
     .h3-wrapper {
-      outline: solid 1px red;
+      // outline: solid 1px red;
       display: flex;
       width: 100%;
       margin-top: 0.6rem;
+      margin-bottom: 0.1rem;
+      h3 {
+        border-bottom: solid 1px black;
+      }
     }
-    outline: solid 1px blue;
+    // outline: solid 3px green;
     display: block;
     position: static;
     width: 70%;
+    min-width: 600px;
     .header {
-      outline: solid 1px red;
+      // outline: solid 1px red;
       // display: none;
       color: transparent;
       height: 0;
@@ -357,7 +362,7 @@
       }
     }
     .span-wrapper {
-      outline: solid 1px red;
+      // outline: solid 1px red;
       // width: 40px;
       span {
         color: black;

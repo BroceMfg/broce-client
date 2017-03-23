@@ -121,6 +121,7 @@ class Landing extends React.Component {
             toggleMessage={toggleMessage}
             showOtherForm={this.props.showOtherForm}
             showStockOrderForm={this.props.showStockOrderForm}
+            fetchOrders={this.fetchOrders}
           />
           {
             !this.props.admin
