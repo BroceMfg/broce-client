@@ -40,6 +40,9 @@
   .status-message {
     // @include outline();
     // border: solid 1px #D23427;
+    align-items: center;
+    // justify-content: center;
+    display: flex;
     position: absolute;
     top: 0.4em;
     right: 0.4em;
@@ -51,7 +54,40 @@
     max-width: 14em;
     height: 2.875em;
     margin-top: 0.3em;
-    display: table;
+    // display: table;
+    .discount-form {
+      align-items: center;
+      // outline: solid 1px red;
+      position: absolute;
+      top: 0;
+      right: 0.2rem;
+      bottom: 0;
+      width: 44%;
+      display: flex;
+      form {
+        width: 100%;
+        // outline: solid 1px blue;
+        span {
+          // outline: solid 1px blue;
+          width: 20%;
+          display: block;
+        }
+        .Input {
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          // outline: solid 1px blue;
+          display: block;
+          input {
+            width: 100%;
+            display: block;
+          }
+        }
+        button {
+          display: block;
+        }
+      }
+    }
     &.controls-wrapper {
       top: 0;
       right: 0;
@@ -59,7 +95,6 @@
       div {
         // @include outline();
         .controls {
-          position: relative;
           button {
             position: absolute;
             top: 0;

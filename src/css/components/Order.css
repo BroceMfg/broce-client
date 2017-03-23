@@ -119,6 +119,8 @@
       .Order .content .oStatus .oId {
         font-size: 19px; }
   .Order .status-message {
+    align-items: center;
+    display: flex;
     position: absolute;
     top: 0.4em;
     right: 0.4em;
@@ -129,19 +131,39 @@
     min-width: 12em;
     max-width: 14em;
     height: 2.875em;
-    margin-top: 0.3em;
-    display: table; }
+    margin-top: 0.3em; }
+    .Order .status-message .discount-form {
+      align-items: center;
+      position: absolute;
+      top: 0;
+      right: 0.2rem;
+      bottom: 0;
+      width: 44%;
+      display: flex; }
+      .Order .status-message .discount-form form {
+        width: 100%; }
+        .Order .status-message .discount-form form span {
+          width: 20%;
+          display: block; }
+        .Order .status-message .discount-form form .Input {
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          display: block; }
+          .Order .status-message .discount-form form .Input input {
+            width: 100%;
+            display: block; }
+        .Order .status-message .discount-form form button {
+          display: block; }
     .Order .status-message.controls-wrapper {
       top: 0;
       right: 0;
       background-color: transparent; }
-      .Order .status-message.controls-wrapper div .controls {
-        position: relative; }
-        .Order .status-message.controls-wrapper div .controls button {
-          position: absolute;
-          top: 0;
-          right: 0;
-          z-index: 10; }
+      .Order .status-message.controls-wrapper div .controls button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 10; }
       .Order .status-message.controls-wrapper.accept-controls {
         height: 2.875em; }
         .Order .status-message.controls-wrapper.accept-controls button {
