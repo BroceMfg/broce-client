@@ -65,7 +65,9 @@ class PartNumberBlock extends React.Component {
         }
         <div>
           {
-            this.props.lastOne && Object.keys(this.state.form)[0] !== ''
+            (this.props.lastOne &&
+              Object.keys(this.state.form)[0] !== '' &&
+              !this.props.noAddButtons)
               ?
                 <button
                   className="add-part-number-btn"

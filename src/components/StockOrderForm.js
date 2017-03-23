@@ -22,6 +22,8 @@ class StockOrderForm extends React.Component {
         toggleMessage={this.props.toggleMessage}
         getInitialForm={this.getInitialForm}
         stockOrderForm={true}
+        noAddButtons={this.props.noAddButtons}
+        submit={this.props.submit}
       />
     );
   }

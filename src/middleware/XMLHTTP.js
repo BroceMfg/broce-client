@@ -35,3 +35,11 @@ export const post = (theUrl, formData, callback, errorCallback) => putPost("POST
   theUrl, formData, callback, errorCallback);
 export const put = (theUrl, formData, callback, errorCallback) => putPost("PUT",
   theUrl, formData, callback, errorCallback);
+
+export const parseJSONtoFormData = (json) => {
+  let formData = '';
+  Object.keys(json).forEach((key) => {
+    formData += `${key}=${json[key]}&`;
+  });
+  return formData;
+};

@@ -203,7 +203,9 @@ class QuoteForm extends React.Component {
                 : <span>New Quote Request</span>
             }
           </h1>
-          <form onSubmit={this.submit}>
+          <form
+            onSubmit={this.props.submit || this.submit}
+          >
             {
               machNums.map((key, i) => {
                 const formObj = form[key];
@@ -217,6 +219,7 @@ class QuoteForm extends React.Component {
                     updateForm={this.updateForm}
                     submit={this.submit}
                     lastOne={(machNums.length - 1) === i}
+                    noAddButtons={this.props.noAddButtons}
                   />
                 )
               })

@@ -13,9 +13,21 @@ class Landing extends React.Component {
   constructor(props) {
     super(props);
     this.getStatusTypeId = this.getStatusTypeId.bind(this);
+    this.fetchOrders = this.fetchOrders.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
+    this.fetchOrders();
+  }
+
+  getStatusTypeId(order) {
+    return order.Order_Statuses
+      .filter(
+        status => status.current
+      )[0].StatusTypeId || 0;
+  }
+
+  fetchOrders() {
     const {
       admin,
       statusTypes,
@@ -63,9 +75,10 @@ class Landing extends React.Component {
           }
         });
       setOrders(orders);
-    }
+    };
     get(
-      `${apiUrl}/orders?status=quote,priced`,
+      // `${apiUrl}/orders?status=quote,priced`,
+      `${apiUrl}/orders`,
       (data) => cb(data),
       (err) => {
         console.log(`err = ${err}`);
@@ -74,13 +87,6 @@ class Landing extends React.Component {
         this.props.logout();
       }
     );
-  }
-
-  getStatusTypeId(order) {
-    return order.Order_Statuses
-      .filter(
-        status => status.current
-      )[0].StatusTypeId || 0;
   }
 
   render() {
@@ -113,6 +119,8 @@ class Landing extends React.Component {
               (order) => this.props.getStatusType(this.getStatusTypeId(order))
             }
             toggleMessage={toggleMessage}
+            showOtherForm={this.props.showOtherForm}
+            showStockOrderForm={this.props.showStockOrderForm}
           />
           {
             !this.props.admin

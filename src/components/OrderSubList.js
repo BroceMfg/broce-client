@@ -36,6 +36,8 @@ class OrderSubList extends React.Component {
                       }
                       getNextStatusType={this.props.getNextStatusType}
                       toggleMessage={this.props.toggleMessage}
+                      showOtherForm={this.props.showOtherForm}
+                      showStockOrderForm={this.props.showStockOrderForm}
                     />
                   ))
                 }
