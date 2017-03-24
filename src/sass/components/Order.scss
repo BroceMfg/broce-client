@@ -105,6 +105,8 @@
       }
       &.accept-controls {
         height: 2.875em;
+        // outline: solid 1px red;
+        margin-right: 0.3em;
         button {
           width: 80%;
           background-color: $success_green;

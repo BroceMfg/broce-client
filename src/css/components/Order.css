@@ -165,7 +165,8 @@
         right: 0;
         z-index: 10; }
       .Order .status-message.controls-wrapper.accept-controls {
-        height: 2.875em; }
+        height: 2.875em;
+        margin-right: 0.3em; }
         .Order .status-message.controls-wrapper.accept-controls button {
           width: 80%;
           background-color: #5BDA9B;
