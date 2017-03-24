@@ -14,6 +14,10 @@ class Landing extends React.Component {
     super(props);
     this.getStatusTypeId = this.getStatusTypeId.bind(this);
     this.fetchOrders = this.fetchOrders.bind(this);
+    this.changeView = this.changeView.bind(this);
+    this.state = {
+      viewBy: 'all'
+    };
   }
 
   componentDidMount() {
@@ -89,6 +93,14 @@ class Landing extends React.Component {
     );
   }
 
+  changeView(sType) {
+    const sT = sType || 'all';
+    this.setState({
+      ...this.state,
+      viewBy: sT
+    });
+  }
+
   render() {
     const {
       message,
@@ -109,10 +121,59 @@ class Landing extends React.Component {
         }
         <Dashboard logout={this.props.logout} />
         <div className="Landing">
+          {
+            this.props.admin
+              ?
+                <div className="filtering-options">
+                  <div className="filter-by-wrapper">
+                    <span>Filter By:</span>
+                  </div>
+                  <div
+                    className={
+                      `item ${this.state.viewBy === 'all' ? 'active' : ''}`
+                    }
+                  >
+                    <button
+                      onClick={() => { this.changeView(); }}
+                    >
+                      <span>All</span>
+                    </button>
+                  </div>
+                  {
+                    Object.keys(this.props.orders)
+                      .map(sType => (
+                        <div
+                          className={
+                            `item ${this.state.viewBy === sType ? 'active' : ''}`
+                          }
+                          key={Math.random()}>
+                          <button
+                            onClick={() => { this.changeView(sType); }}
+                          >
+                            <span>
+                              {sType.charAt(0).toUpperCase() + sType.slice(1)}
+                            </span>
+                          </button>
+                        </div>
+                      ))
+                  }
+                </div>
+              : null
+          }
           <OrderList
             admin={this.props.admin}
             apiUrl={this.props.apiUrl}
-            orders={this.props.orders}
+            orders={
+              this.state.viewBy !== 'all'
+                ?
+                  (() => {
+                    const orders = {};
+                    orders[this.state.viewBy] = this.props.orders[this.state.viewBy];
+                    return orders;
+                  })()
+                :
+                  this.props.orders
+            }
             setOrders={this.props.setOrders}
             statusTypes={this.props.statusTypes}
             getStatusType={

@@ -279,7 +279,8 @@ class Order extends React.Component {
 
             this.setState({
               ...this.state,
-              timestamp: Date.now()
+              timestamp: Date.now(),
+              showDiscount: false
             });
             const msgPt1 = discount !== null
               ? `${discount}% Discount Added to `
