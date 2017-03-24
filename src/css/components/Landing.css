@@ -92,6 +92,35 @@
     display: table; }
   .Landing:after {
     clear: both; }
+  .Landing .filtering-options {
+    margin: 0.5em auto 1.2rem;
+    width: 94%;
+    display: flex;
+    align-items: center;
+    max-width: 940px;
+    color: #1F1F1F; }
+    .Landing .filtering-options .filter-by-wrapper {
+      margin-right: 0.6rem;
+      font-size: 1.2rem; }
+    .Landing .filtering-options .item {
+      margin: 0 0.6rem; }
+      .Landing .filtering-options .item button {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        font-size: 0.9rem;
+        color: #5C5C5C;
+        border-bottom: solid 1px #5C5C5C;
+        font-weight: 300; }
+        .Landing .filtering-options .item button:hover {
+          color: #72C3F1;
+          border-bottom: solid 1px #72C3F1; }
+        .Landing .filtering-options .item button:focus {
+          outline: none; }
+      .Landing .filtering-options .item.active button {
+        color: #72C3F1;
+        border-bottom: solid 1px #2AAAF3;
+        font-style: italic; }
 
 @media screen and (max-width: 768px) {
   .Landing {
