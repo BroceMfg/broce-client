@@ -159,6 +159,14 @@ class QuoteForm extends React.Component {
         console.log(JSON.parse(response))
         if (response) {
           this.props.toggleMessage('New Quote Created. Thank you!', 'success');
+          // reload the page to show the newly created order
+          setTimeout(
+            () => { window.location.reload(false); },
+            // 1500ms = 1.5s -- what I think is enough time to show the success msg
+            // but then reload the page fast enough that the user isn't confused
+            // as to why the new order hasn't appeared in their orders list yet
+            1500
+          );
         }
       },
       (errorResponse) => {

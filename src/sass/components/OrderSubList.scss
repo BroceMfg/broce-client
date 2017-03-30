@@ -69,6 +69,26 @@
       }
     }
   }
+  .show-more-button-wrapper {
+    width: 100%;
+    margin: auto;
+    margin-top: 1em;
+    padding-bottom: 0.6em;
+    text-align: center;
+    button {
+      border: none;
+      cursor: pointer;
+      color: $primary_blue;
+      background-color: transparent;
+      text-decoration: underline;
+      font-size: 15px;
+      font-weight: 600;
+      &:hover {
+        color: $primary_blue_highlight;
+        border: none;
+      }
+    }
+  }
 }
 
 .OrderSubList-transition-enter {
