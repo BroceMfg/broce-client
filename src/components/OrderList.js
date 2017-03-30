@@ -69,23 +69,28 @@ class OrderList extends React.Component {
     let keyCount = 1;
     return list.length > 0 && Object.keys(list[0]).length > 0
       ? (
-          list.map((orders, i) => (
-            <OrderSubList
-              key={keyCount++}
-              admin={this.props.admin}
-              apiUrl={this.props.apiUrl}
-              orders={orders}
-              updateOrder={this.updateOrder}
-              promoteOrder={this.promoteOrder}
-              statusType={getStatusType(this.props.orders, i)}
-              getStatusType={this.props.getStatusType}
-              getNextStatusType={this.getNextStatusType}
-              toggleMessage={this.props.toggleMessage}
-              showOtherForm={this.props.showOtherForm}
-              showStockOrderForm={this.props.showStockOrderForm}
-              fetchOrders={this.props.fetchOrders}
-            />
-          ))
+          list.map((orders, i) => {
+            const statusType = getStatusType(this.props.orders, i);
+            return (
+              <OrderSubList
+                key={keyCount++}
+                admin={this.props.admin}
+                apiUrl={this.props.apiUrl}
+                orders={orders}
+                updateOrder={this.updateOrder}
+                promoteOrder={this.promoteOrder}
+                statusType={statusType}
+                getStatusType={this.props.getStatusType}
+                getNextStatusType={this.getNextStatusType}
+                toggleMessage={this.props.toggleMessage}
+                showOtherForm={this.props.showOtherForm}
+                showStockOrderForm={this.props.showStockOrderForm}
+                fetchOrders={this.props.fetchOrders}
+                show={this.props.viewBy === 'all' || this.props.viewBy === statusType}
+                showChevron={this.props.viewBy === 'all'}
+              />
+            );
+          })
         )
     : (
       <div className="OrderSubList">

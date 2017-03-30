@@ -83,6 +83,8 @@
   width: 96%;
   margin: 0.5em auto;
   padding-bottom: 0.2em; }
+  .OrderSubList.hidden {
+    display: none; }
   .OrderSubList:not(:first-child) {
     margin-top: 1.1em; }
   .OrderSubList .header {
@@ -128,6 +130,23 @@
             outline: none; }
           .OrderSubList .header.status-type-header .reveal-hide-button-wrapper button:hover {
             color: #7B7B7B; }
+  .OrderSubList .show-more-button-wrapper {
+    width: 100%;
+    margin: auto;
+    margin-top: 1em;
+    padding-bottom: 0.6em;
+    text-align: center; }
+    .OrderSubList .show-more-button-wrapper button {
+      border: none;
+      cursor: pointer;
+      color: #72C3F1;
+      background-color: transparent;
+      text-decoration: underline;
+      font-size: 15px;
+      font-weight: 600; }
+      .OrderSubList .show-more-button-wrapper button:hover {
+        color: #2AAAF3;
+        border: none; }
 
 .OrderSubList-transition-enter {
   transition: all 350ms ease-in-out;

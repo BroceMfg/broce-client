@@ -168,17 +168,7 @@ class Landing extends React.Component {
           <OrderList
             admin={this.props.admin}
             apiUrl={this.props.apiUrl}
-            orders={
-              this.state.viewBy !== 'all'
-                ?
-                  (() => {
-                    const orders = {};
-                    orders[this.state.viewBy] = this.props.orders[this.state.viewBy];
-                    return orders;
-                  })()
-                :
-                  this.props.orders
-            }
+            orders={this.props.orders}
             setOrders={this.props.setOrders}
             statusTypes={this.props.statusTypes}
             getStatusType={
@@ -190,6 +180,7 @@ class Landing extends React.Component {
             fetchOrders={this.fetchOrders}
             fetching={this.state.fetching}
             renderLoading={this.props.renderLoading}
+            viewBy={this.state.viewBy}
           />
           {
             !this.props.admin
