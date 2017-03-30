@@ -42,7 +42,7 @@ class OrderSubList extends React.Component {
   render() {
     console.log(this.props.statusType);
     return (
-      <div className="OrderSubList">
+      <div className={`OrderSubList ${this.props.show ? 'shown' : 'hidden'}`}>
         {
           this.state.shownOrders && Object.keys(this.state.shownOrders).length > 0
             ?
@@ -51,24 +51,29 @@ class OrderSubList extends React.Component {
                   this.props.admin
                     ? <h1 className="header status-type-header">
                         <span>{this.props.statusType}</span>
-                        <div
-                          className="reveal-hide-button-wrapper"
-                          title={this.state.showing ? 'hide' : 'show'}
-                        >
-                          <button onClick={this.toggleShowing}>
-                            {
-                              this.state.showing
-                                ?
-                                  <span>
-                                    <i className="mdi mdi-chevron-down"></i>
-                                  </span>
-                                :
-                                  <span>
-                                    <i className="mdi mdi-chevron-left"></i>
-                                  </span>
-                            }
-                          </button>
-                        </div>
+                        {
+                          this.props.showChevron
+                            ?
+                              <div
+                                className="reveal-hide-button-wrapper"
+                                title={this.state.showing ? 'hide' : 'show'}
+                              >
+                                <button onClick={this.toggleShowing}>
+                                  {
+                                    this.state.showing
+                                      ?
+                                        <span>
+                                          <i className="mdi mdi-chevron-down"></i>
+                                        </span>
+                                      :
+                                        <span>
+                                          <i className="mdi mdi-chevron-left"></i>
+                                        </span>
+                                  }
+                                </button>
+                              </div>
+                            : null
+                        }
                       </h1>
                     : <h1 className="header">
                         <span>Your Orders</span>

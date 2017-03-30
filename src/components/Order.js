@@ -606,7 +606,7 @@ class Order extends React.Component {
                         : null
                     }
                     {
-                      order.status === 'quote'
+                      order.status === 'quote' && this.props.admin
                         ?
                           <div className="add-another-part-button-wrapper">
                             <button

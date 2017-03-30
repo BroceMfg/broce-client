@@ -9,6 +9,9 @@
   width: 96%;
   margin: 0.5em auto;
   padding-bottom: 0.2em;
+  &.hidden {
+    display: none;
+  }
   &:not(:first-child) {
     margin-top: 1.1em;
   }
