@@ -86,9 +86,19 @@
       text-decoration: underline;
       font-size: 15px;
       font-weight: 600;
+      &:focus {
+        outline: none;
+      }
       &:hover {
         color: $primary_blue_highlight;
         border: none;
+      }
+      &.show-less-button {
+        font-size: 0.8em;
+        color: $c4;
+        &:hover {
+          color: $c6;
+        }
       }
     }
   }

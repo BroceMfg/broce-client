@@ -144,9 +144,16 @@
       text-decoration: underline;
       font-size: 15px;
       font-weight: 600; }
+      .OrderSubList .show-more-button-wrapper button:focus {
+        outline: none; }
       .OrderSubList .show-more-button-wrapper button:hover {
         color: #2AAAF3;
         border: none; }
+      .OrderSubList .show-more-button-wrapper button.show-less-button {
+        font-size: 0.8em;
+        color: #9A9A9A; }
+        .OrderSubList .show-more-button-wrapper button.show-less-button:hover {
+          color: #5C5C5C; }
 
 .OrderSubList-transition-enter {
   transition: all 350ms ease-in-out;

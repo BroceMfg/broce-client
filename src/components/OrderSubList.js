@@ -8,7 +8,8 @@ class OrderSubList extends React.Component {
   constructor(props) {
     super(props);
     this.toggleShowing = this.toggleShowing.bind(this);
-    this.showFiveMore = this.showFiveMore.bind(this);
+    this.showMore = this.showMore.bind(this);
+    this.showLess = this.showLess.bind(this);
     this.state = {
       showing: true,
       shownOrders: {}
@@ -16,27 +17,39 @@ class OrderSubList extends React.Component {
   }
 
   componentDidMount() {
-    this.showFiveMore();
+    this.showMore(5);
   }
 
   toggleShowing() {
     this.setState({
       ...this.state,
       showing: !this.state.showing
-    });
+    }, () => { this.showMore(5); });
   }
 
-  showFiveMore() {
-    console.log('show five more');
+  showMore(val) {
+    console.log('showMore');
+    console.log('val');
+    console.log(val);
     const orders = {};
-    const currCount = Object.keys(this.state.shownOrders).length;
-    Object.keys(this.props.orders).slice(0, currCount + 5).forEach((key) => {
+    let v;
+    if (val !== undefined) {
+      v = val;
+    } else {
+      v = Object.keys(this.state.shownOrders).length + 5;
+    }
+    Object.keys(this.props.orders).slice(0, v).forEach((key) => {
       orders[key] = this.props.orders[key];
     });
     this.setState({
       ...this.state,
       shownOrders: orders
     });
+  }
+
+  showLess() {
+    const v = Object.keys(this.state.shownOrders).length - 5;
+    this.showMore(v > 5 ? v : 5);
   }
 
   render() {
@@ -92,40 +105,51 @@ class OrderSubList extends React.Component {
                     this.state.showing
                       ?
                         <ul>
-                        {
-                          Object.values(this.state.shownOrders).map((order) => (
-                            <Order
-                              admin={this.props.admin}
-                              apiUrl={this.props.apiUrl}
-                              key={order.id || Math.random()}
-                              order={order}
-                              updateOrder={this.props.updateOrder}
-                              promoteOrder={this.props.promoteOrder}
-                              statusType={
-                                order.status || this.props.statusType || this.props.getStatusType(order)
-                              }
-                              getNextStatusType={this.props.getNextStatusType}
-                              toggleMessage={this.props.toggleMessage}
-                              showOtherForm={this.props.showOtherForm}
-                              showStockOrderForm={this.props.showStockOrderForm}
-                              fetchOrders={this.props.fetchOrders}
-                            />
-                          ))
-                        }
-                        {
-                          (Object.keys(this.state.shownOrders).length
-                            < Object.keys(this.props.orders).length)
-                            ?
-                              <div className="show-more-button-wrapper">
-                                <button
-                                  className="show-more-button"
-                                  onClick={this.showFiveMore}
-                                >
-                                  Show More
-                                </button>
-                              </div>
-                            : null
-                        }
+                          {
+                            Object.values(this.state.shownOrders).map((order) => (
+                              <Order
+                                admin={this.props.admin}
+                                apiUrl={this.props.apiUrl}
+                                key={order.id || Math.random()}
+                                order={order}
+                                updateOrder={this.props.updateOrder}
+                                promoteOrder={this.props.promoteOrder}
+                                statusType={
+                                  order.status || this.props.statusType || this.props.getStatusType(order)
+                                }
+                                getNextStatusType={this.props.getNextStatusType}
+                                toggleMessage={this.props.toggleMessage}
+                                showOtherForm={this.props.showOtherForm}
+                                showStockOrderForm={this.props.showStockOrderForm}
+                                fetchOrders={this.props.fetchOrders}
+                              />
+                            ))
+                          }
+                          <div className="show-more-button-wrapper">
+                            {
+                              Object.keys(this.state.shownOrders).length > 5
+                                ?
+                                  <button
+                                    className="show-less-button"
+                                    onClick={() => { this.showLess(); }}
+                                  >
+                                    Show Less
+                                  </button>
+                                : null
+                            }
+                            {
+                              (Object.keys(this.state.shownOrders).length
+                                < Object.keys(this.props.orders).length)
+                                ?
+                                  <button
+                                    className="show-more-button"
+                                    onClick={() => { this.showMore(); }}
+                                  >
+                                    Show More
+                                  </button>
+                                : null
+                            }
+                          </div>
                         </ul>
                       : null
                   }
