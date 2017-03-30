@@ -127,7 +127,7 @@ class Landing extends React.Component {
         <Dashboard logout={this.props.logout} />
         <div className="Landing">
           {
-            this.props.admin
+            this.props.admin && Object.keys(this.props.orders).length > 1
               ?
                 <div className="filtering-options">
                   <div className="filter-by-wrapper">
