@@ -13,6 +13,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.renderLoading = this.renderLoading.bind(this);
     this.setOrders = this.setOrders.bind(this);
     this.getStatusType = this.getStatusType.bind(this);
     this.setUser = this.setUser.bind(this);
@@ -48,6 +49,29 @@ class App extends React.Component {
 
   componentWillUpdate(nextProps, nextState) {
     localStorage.setItem('state', JSON.stringify(nextState));
+  }
+
+  renderLoading() {
+    return (
+      <div className="Loading">
+        <div className="inner">
+          <div className="sk-fading-circle">
+            <div className="sk-circle1 sk-circle" />
+            <div className="sk-circle2 sk-circle" />
+            <div className="sk-circle3 sk-circle" />
+            <div className="sk-circle4 sk-circle" />
+            <div className="sk-circle5 sk-circle" />
+            <div className="sk-circle6 sk-circle" />
+            <div className="sk-circle7 sk-circle" />
+            <div className="sk-circle8 sk-circle" />
+            <div className="sk-circle9 sk-circle" />
+            <div className="sk-circle10 sk-circle" />
+            <div className="sk-circle11 sk-circle" />
+            <div className="sk-circle12 sk-circle" />
+          </div>
+        </div>
+      </div>
+    );
   }
 
   setOrders(orders) {
@@ -140,6 +164,7 @@ class App extends React.Component {
                               toggleMessage={this.toggleMessage}
                               showStockOrderForm={showStockOrderForm}
                               showOtherForm={this.showOtherForm}
+                              renderLoading={this.renderLoading}
                             />
                     }
                   />

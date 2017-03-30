@@ -16,7 +16,8 @@ class Landing extends React.Component {
     this.fetchOrders = this.fetchOrders.bind(this);
     this.changeView = this.changeView.bind(this);
     this.state = {
-      viewBy: 'all'
+      viewBy: 'all',
+      fetching: true
     };
   }
 
@@ -79,6 +80,10 @@ class Landing extends React.Component {
           }
         });
       setOrders(orders);
+      this.setState({
+        ...this.state,
+        fetching: false
+      });
     };
     get(
       // `${apiUrl}/orders?status=quote,priced`,
@@ -183,6 +188,8 @@ class Landing extends React.Component {
             showOtherForm={this.props.showOtherForm}
             showStockOrderForm={this.props.showStockOrderForm}
             fetchOrders={this.fetchOrders}
+            fetching={this.state.fetching}
+            renderLoading={this.props.renderLoading}
           />
           {
             !this.props.admin

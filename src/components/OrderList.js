@@ -102,7 +102,13 @@ class OrderList extends React.Component {
     console.log('@@@@@@@');
     return (
       <div className={`OrderList${this.props.admin ? ' admin' : ''}`}>
-        {this.renderSubLists()}
+        {
+          !this.props.fetching
+            ?
+              this.renderSubLists()
+            :
+              this.props.renderLoading()
+        }
       </div>
     )
   }
