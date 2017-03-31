@@ -2,12 +2,18 @@ import React, { Component } from 'react';
 import { BrowserRouter, Match, Miss } from 'react-router';
 import autoBind from 'react-autobind';
 
-import { post } from '../../middleware/XMLHTTP';
+import {
+  post,
+  parseJSONtoFormData
+} from '../../middleware/XMLHTTP';
 import ssv from './middleware/set-state-val';
+import sub from './middleware/submit';
+import getOrderStatus from './middleware/get-order-status';
 
+import TogAlert from '../misc/TogAlert';
 import ErrorHandler from '../misc/ErrorHandler';
 import Loading from '../misc/Loading';
-import SignIn from '../SignIn';
+import SignIn from '../SignIn/SignIn';
 import Landing from '../Landing';
 import Settings from '../Settings';
 import OrderDetail from '../OrderDetail';
@@ -20,13 +26,19 @@ import defaultState from '../../default.json';
 class App extends Component {
   constructor(props) {
     super(props);
+    this.http = {
+      post,
+      parseJSONtoFormData
+      // TODO: Add GET, PUT, DELETE
+    };
     this.setStateVal = ssv.bind(this);
+    this.submit = sub.bind(this);
+    this.getOStatus = getOrderStatus.bind(this);
     autoBind(this);
 
     this.state = Object.assign(
       // check loclStorage for previously stored state
-      JSON.parse(localStorage.getItem('state')),
-      {},
+      JSON.parse(localStorage.getItem('state')) || {},
       defaultState
     );
   }
@@ -34,30 +46,6 @@ class App extends Component {
   componentWillUpdate(nextProps, nextState) {
     // whenever we update, update our localStorage-stored state
     localStorage.setItem('state', JSON.stringify(nextState));
-  }
-
-  getStatus(order) {
-    // confirm order and order.Order_Statuses exist before attempting to access
-    if (!(order && order.Order_Statuses)) {
-      const errMsg = 'function "getStatus" in component "App" expected ' +
-        'a value  for order, order.Order_Statuses, but found none.';
-      this.setStateVal({ errExists: true, errMsg });
-    }
-
-    const curr = order.Order_Statuses.filter(s => s.current)[0];
-    const id = curr ? curr.StatusTypeId : 0;
-    return {
-      id,
-      type: this.state.statusTypes[id]
-    };
-  }
-
-  setUser(user) {
-    this.setState({
-      ...this.state,
-      user,
-      admin: this.state.userRoleTypes[user.role || 0] === 'admin'
-    });
   }
 
   logout() {
@@ -74,18 +62,28 @@ class App extends Component {
     window.location.reload(false);
   }
 
-  toggleMessage(message, statusCode) {
-    let msgStatCode;
-    if (statusCode === 'success' || statusCode === 'error') {
-      msgStatCode = statusCode;
+  dismissTog(togId) {
+    if (this.state.currTogId === togId) {
+      this.setStateVal({ togStat: '' }); // keep the msg text present for the animation
+      setTimeout(() => {
+        this.setStateVal({ togMsg: '' });
+      }, 250); // 250 corresponds to the fade out CSS animation
     }
-    const toggle = (msg, msgStatCode) => this.setState({
-      ...this.state,
-      message: msg,
-      messageStatusCode: msgStatCode
+  }
+
+  toggleMessage(msg, status, time) {
+    this.setStateVal({
+      togMsg: msg || this.state.defErrMsg,
+      togStat: status,
+      currTogId: this.state.currTogId + 1
     });
-    toggle(message, msgStatCode);
-    setTimeout(toggle, 3000);
+
+    // set the timeout for the TogAlert to hide itself again
+    const t = time && typeof time === 'number' ? time : this.state.defTogTime;
+    const togId = this.state.currTogId;
+    setTimeout(() => {
+      this.dismissTog(togId);
+    }, t);
   }
 
   showOtherForm() {
@@ -98,11 +96,12 @@ class App extends Component {
   render() {
     const {
       admin,
-      fetching,
+      fetchingOrders,
       logErrs,
       errMsg,
       defErrMsg,
-      errExists,
+      togMsg,
+      togStat,
       orders,
       apiUrl,
       user,
@@ -112,96 +111,103 @@ class App extends Component {
     } = this.state;
     return (
       <div className="App">
+        <TogAlert
+          msg={togMsg}
+          status={togStat}
+          dismiss={() => {
+            const togId = this.state.currTogId;
+            this.dismissTog(togId);
+          }}
+        />
         {
           (() => {
-            let r;
-            if (errExists) {
-              r = (
+            if (errMsg) {
+              return (
                 <ErrorHandler
                   log={logErrs}
-                  msg={errMsg || defErrMsg}
+                  msg={errMsg}
+                  defErrMsg={defErrMsg}
                 />
               );
-            } else {
-              r = (
-                <BrowserRouter>
-                  <div>
-                    {
-                      user
-                        ?
-                          <div>
-                            <Match
-                              exactly
-                              pattern="/"
-                              render={
-                                () => <Landing
-                                        admin={admin}
-                                        fetching={fetching}
-                                        orders={orders}
-                                        apiUrl={apiUrl}
-                                        logout={this.logout}
-                                        setStateVal={this.setStateVal}
-                                        statusTypes={this.state.statusTypes}
-                                        getStatus={this.getStatus}
-                                        message={message}
-                                        messageStatusCode={messageStatusCode}
-                                        toggleMessage={this.toggleMessage}
-                                        showStockOrderForm={showStockOrderForm}
-                                        showOtherForm={this.showOtherForm}
-                                        renderLoading={ () => <Loading /> }
-                                      />
-                              }
-                            />
-                            <Match
-                              exactly
-                              pattern="/settings"
-                              render={() => <Settings return="/" />}
-                            />
-                            <Match
-                              exactly
-                              pattern="/orders/:id"
-                              render={
-                                (matchProps) => {
-                                  const order = orders[matchProps.params.id];
-                                  console.log(matchProps.params.id);
-                                  if (order) {
-                                    return (
-                                      <OrderDetail
-                                        order={order}
-                                        actionTitle={'FOOBAR'}
-                                        actionHandler={
-                                          () => this.orderDetailAction()
-                                        } />
-                                    )
-                                  } else {
-                                    return (
-                                      <NotFound />
-                                    )
-                                  }
-                                }
-                              }
-                            />
-                          </div>
-                        :
+            }
+            return (
+              <BrowserRouter>
+                <div>
+                  {
+                    user
+                      ?
+                        <div>
                           <Match
                             exactly
                             pattern="/"
-                            render={() => <SignIn
-                                            apiUrl={apiUrl}
-                                            setUser={this.setUser}
-                                            message={message}
-                                            messageStatusCode={messageStatusCode}
-                                            toggleMessage={this.toggleMessage}
-                                          />
+                            render={
+                              () => <Landing
+                                      admin={admin}
+                                      fetchingOrders={fetchingOrders}
+                                      orders={orders}
+                                      apiUrl={apiUrl}
+                                      logout={this.logout}
+                                      setStateVal={this.setStateVal}
+                                      statusTypes={this.state.statusTypes}
+                                      getOStatus={this.getOStatus}
+                                      message={message}
+                                      messageStatusCode={messageStatusCode}
+                                      toggleMessage={this.toggleMessage}
+                                      showStockOrderForm={showStockOrderForm}
+                                      showOtherForm={this.showOtherForm}
+                                      renderLoading={ () => <Loading /> }
+                                    />
                             }
                           />
-                    }
-                    <Miss component={NotFound} />
-                  </div>
-                </BrowserRouter>
-              );
-            }
-            return r;
+                          <Match
+                            exactly
+                            pattern="/settings"
+                            render={() => <Settings return="/" />}
+                          />
+                          <Match
+                            exactly
+                            pattern="/orders/:id"
+                            render={
+                              (matchProps) => {
+                                const order = orders[matchProps.params.id];
+                                console.log(matchProps.params.id);
+                                if (order) {
+                                  return (
+                                    <OrderDetail
+                                      order={order}
+                                      actionTitle={'FOOBAR'}
+                                      actionHandler={
+                                        () => this.orderDetailAction()
+                                      } />
+                                  )
+                                } else {
+                                  return (
+                                    <NotFound />
+                                  )
+                                }
+                              }
+                            }
+                          />
+                        </div>
+                      :
+                        <Match
+                          exactly
+                          pattern="/"
+                          render={() =>
+                            <SignIn
+                              submit={this.submit}
+                              setStateVal={this.setStateVal}
+                              message={message}
+                              messageStatusCode={messageStatusCode}
+                              toggleMessage={this.toggleMessage}
+                            />
+                          }
+                        />
+                  }
+                  <Miss component={NotFound} />
+                </div>
+              </BrowserRouter>
+            );
           })()
         }
       </div>

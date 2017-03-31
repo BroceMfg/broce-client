@@ -76,57 +76,50 @@
   font-style: italic;
   font-weight: 200;
   src: local("Roboto-ThinItalic"), url(../../fonts/Roboto-ThinItalic.ttf); }
-.ToggledMessage {
+.TogAlert {
   position: fixed;
-  top: 0.45rem;
-  left: 0;
-  background-color: transparent;
-  width: 100%;
-  height: 2.8rem;
-  z-index: 100; }
-  .ToggledMessage .content-wrapper {
-    position: relative;
-    display: table;
-    background-color: #9A9A9A;
-    width: 99%;
-    max-width: calc(1600px - 1600px*.01);
-    margin: auto;
-    height: 100%;
-    border-radius: 4px; }
-    .ToggledMessage .content-wrapper span {
-      display: table-cell;
-      vertical-align: middle;
-      width: 100%;
-      text-align: center;
-      font-size: 1.2em; }
-    .ToggledMessage .content-wrapper button {
-      width: auto;
-      height: 60%;
-      position: absolute;
-      top: 0.56rem;
-      left: 0.56rem;
-      display: table; }
-      .ToggledMessage .content-wrapper button {
-        background-color: #9A9A9A;
-        border: solid 1px;
-        border-color: #1F1F1F;
-        border-radius: 4px;
+  top: 0;
+  right: 0;
+  opacity: 1;
+  transition: all 0.25s ease-in-out;
+  font-weight: 300;
+  color: #1F1F1F; }
+  .TogAlert .inner .content {
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    min-height: 2.8rem;
+    padding: 0 1.4rem;
+    margin: 0.6rem 0.8rem 0.8rem auto; }
+    .TogAlert .inner .content.success {
+      background: #66BB6A; }
+    .TogAlert .inner .content.error {
+      background: #E57373; }
+    .TogAlert .inner .content .button-wrapper {
+      margin-left: 1.4rem; }
+      .TogAlert .inner .content .button-wrapper button {
+        color: #3D3D3D;
+        border: none;
+        background-color: transparent;
+        border-bottom: solid 1px transparent;
         cursor: pointer;
-        display: table;
-        text-align: center; }
-        .ToggledMessage .content-wrapper button span {
-          display: table-cell;
-          vertical-align: middle;
-          text-align: center; }
-        .ToggledMessage .content-wrapper button:hover {
-          background-color: #7B7B7B;
-          border-color: #3D3D3D; }
-      .ToggledMessage .content-wrapper button span {
-        display: table-cell;
-        vertical-align: center; }
-  .ToggledMessage.success .content-wrapper {
-    background-color: #66BB6A; }
-  .ToggledMessage.error .content-wrapper {
-    background-color: #E57373; }
+        font-size: 1.2rem; }
+      .TogAlert .inner .content .button-wrapper button:hover {
+        border-bottom: solid 1px #3D3D3D;
+        color: #000000;
+        transition: 0.2s ease all; }
+      .TogAlert .inner .content .button-wrapper button:focus {
+        outline: none; }
+      .TogAlert .inner .content .button-wrapper button i {
+        font-weight: 100; }
+  .TogAlert.hidden {
+    opacity: 0.25; }
+    .TogAlert.hidden .inner .content {
+      transition: all 0.25s ease-in-out;
+      transform: translateX(calc(100% + 2rem)); }
+  .TogAlert.shown .inner .content {
+    transition: all 0.25s ease-in-out;
+    transform: translateX(0); }
 
-/*# sourceMappingURL=ToggledMessage.css.map */
+/*# sourceMappingURL=TogAlert.css.map */

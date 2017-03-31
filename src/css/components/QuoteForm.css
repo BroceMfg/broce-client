@@ -133,11 +133,11 @@
       position: absolute;
       bottom: 0.4em;
       right: calc(50% - 10.5em);
-      background-color: #5BDA9B;
+      background-color: #66BB6A;
       border-color: #F6F6F6; }
       .QuoteForm .content-wrapper .submit:hover {
         border-color: #F6F6F6;
-        background-color: #1DBF6E; }
+        background-color: #43A047; }
       .QuoteForm .content-wrapper .submit.hidden {
         display: none; }
     .QuoteForm .content-wrapper .reset {

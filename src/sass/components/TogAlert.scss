@@ -1,0 +1,56 @@
+@import '../partials/variables';
+@import '../mixins/icon_button';
+
+.TogAlert {
+  position: fixed;
+  top: 0;
+  right: 0;
+  opacity: 1;
+  transition: all 0.25s ease-in-out;
+  font-weight: 300;
+  color: $c8;
+  .inner {
+    .content {
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      text-align: left;
+      min-height: 2.8rem;
+      padding: 0 1.4rem;
+      margin: 0.6rem 0.8rem 0.8rem auto;
+      &.success {
+        background: $success_green;
+      }
+      &.error {
+        background: $error_red;
+      }
+      .button-wrapper {
+        margin-left: 1.4rem;
+        button {
+          @include icon_button($c7, $c9);
+          i {
+            font-weight: 100;
+          }
+        }
+      }
+    }
+  }
+  &.hidden {
+    opacity: 0.25;
+    .inner {
+      .content {
+        // display: none;
+        transition: all 0.25s ease-in-out;
+        transform: translateX(calc(100% + 2rem));
+      }
+    }
+  }
+  &.shown {
+    .inner {
+      .content {
+        transition: all 0.25s ease-in-out;
+        transform: translateX(0);
+      }
+    }
+  }
+}

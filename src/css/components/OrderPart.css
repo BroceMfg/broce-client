@@ -134,10 +134,10 @@
       width: calc(17.75% - 2px); }
       .OrderParts-wrapper .OrderParts-discount .spacer#spacer5 {
         text-align: right;
-        background-color: #5BDA9B;
+        background-color: #66BB6A;
         width: calc(11.5% - 2px); }
     .OrderParts-wrapper .OrderParts-discount .discount {
-      background-color: #5BDA9B;
+      background-color: #66BB6A;
       width: calc(17.5% - 2px); }
   .OrderParts-wrapper .OrderParts-total {
     padding-bottom: 1em;

@@ -1,9 +1,13 @@
 {
   "apiUrl": "http://localhost:3001",
-  "fetching": false,
+  "fetchingOrders": false,
   "logErrs": true,
-  "defErrMsg": "An unexpected error occurred.",
-  "errExists": false,
+  "defErrMsg": "An Unexpected Error Occurred.",
+  "errMsg": "",
+  "togMsg": "",
+  "togStat": "",
+  "currTogId": 0,
+  "defTogTime": 4000,
   "orders": {},
   "statusTypes": {
     "0": "unknown",
@@ -14,9 +18,10 @@
     "5": "archived",
     "6": "abandoned"
   },
-  "userRoleTypes": {
+  "uRoleTypes": {
     "0": "client",
     "1": "admin"
   },
+  "defURole": "client",
   "showStockOrderForm": false
 }

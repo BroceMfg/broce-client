@@ -79,7 +79,6 @@ class OrderList extends React.Component {
                 updateOrder={this.updateOrder}
                 promoteOrder={this.promoteOrder}
                 statusType={statusType}
-                getStatusType={this.props.getStatusType}
                 getNextStatusType={this.getNextStatusType}
                 toggleMessage={this.props.toggleMessage}
                 showOtherForm={this.props.showOtherForm}
@@ -106,7 +105,7 @@ class OrderList extends React.Component {
     return (
       <div className={`OrderList${this.props.admin ? ' admin' : ''}`}>
         {
-          !this.props.fetching
+          !this.props.fetchingOrders
             ?
               this.renderSubLists()
             :

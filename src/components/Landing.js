@@ -41,8 +41,8 @@ class Landing extends React.Component {
       }
       json.orders
         .sort((a, b) => {
-          const aStatus = this.props.getStatus(a);
-          const bStatus = this.props.getStatus(b);
+          const aStatus = this.props.getOStatus(a);
+          const bStatus = this.props.getOStatus(b);
           const statusTypeKeys = Object.keys(statusTypes);
           if (admin) {
             return statusTypeKeys.indexOf(`${aStatus.id}`)
@@ -56,7 +56,7 @@ class Landing extends React.Component {
         .forEach((order) => {
           console.log('order');
           console.log(order);
-          const status = this.props.getStatus(order);
+          const status = this.props.getOStatus(order);
           console.log('status');
           console.log(status);
           const newOrder = Object.assign(order, { status: status.type });
@@ -69,9 +69,9 @@ class Landing extends React.Component {
           console.log('orders');
           console.log(orders);
         });
-      this.props.setStateVal({ orders, fetching: false });
+      this.props.setStateVal({ orders, fetchingOrders: false });
     };
-    this.props.setStateVal({ fetching: true });
+    this.props.setStateVal({ fetchingOrders: true });
     get(
       // `${apiUrl}/orders?status=quote,priced`,
       `${apiUrl}/orders`,
@@ -158,14 +158,11 @@ class Landing extends React.Component {
             orders={this.props.orders}
             setStateVal={this.props.setStateVal}
             statusTypes={this.props.statusTypes}
-            getStatusType={
-              (order) => this.props.getStatusType(this.getStatusTypeId(order))
-            }
             toggleMessage={toggleMessage}
             showOtherForm={this.props.showOtherForm}
             showStockOrderForm={this.props.showStockOrderForm}
             fetchOrders={this.fetchOrders}
-            fetching={this.props.fetching}
+            fetchingOrders={this.props.fetchingOrders}
             viewBy={this.state.viewBy}
           />
           {

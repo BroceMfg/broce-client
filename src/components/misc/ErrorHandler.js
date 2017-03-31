@@ -22,4 +22,9 @@ export default ErrorHandler;
 ErrorHandler.propTypes = {
   log: PropTypes.bool.isRequired,
   msg: PropTypes.string.isRequired,
+  defErrMsg: PropTypes.string
+};
+
+ErrorHandler.defaultPropTypes = {
+  defErrMsg: 'An Unexpected Error Occurred.'
 };

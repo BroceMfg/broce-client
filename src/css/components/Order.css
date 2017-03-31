@@ -169,7 +169,7 @@
         margin-right: 0.3em; }
         .Order .status-message.controls-wrapper.accept-controls button {
           width: 80%;
-          background-color: #5BDA9B;
+          background-color: #66BB6A;
           border-color: #F6F6F6;
           height: 3em;
           font-size: 16px;
@@ -178,7 +178,7 @@
             display: block;
             width: 100%; }
           .Order .status-message.controls-wrapper.accept-controls button:hover {
-            background-color: #1DBF6E; }
+            background-color: #43A047; }
         .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm {
           position: fixed;
           top: 0;
@@ -256,10 +256,10 @@
             .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper .submit {
               top: calc(100% + 1em);
               right: calc(50% - 10.5em);
-              background-color: #5BDA9B;
+              background-color: #66BB6A;
               border-color: #F6F6F6; }
               .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper .submit:hover {
-                background-color: #1DBF6E; }
+                background-color: #43A047; }
             .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper .reset {
               position: absolute;
               display: block;
@@ -275,15 +275,15 @@
               left: 1em;
               width: 2.25em;
               height: 2.25em;
-              background-color: #DF6C6C;
+              background-color: #E57373;
               border-color: #F6F6F6; }
               .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper .cancel:hover {
-                background-color: #DB3030; }
+                background-color: #EF5350; }
       .Order .status-message.controls-wrapper.shipping-controls {
         height: 2.875em; }
         .Order .status-message.controls-wrapper.shipping-controls button {
           width: 80%;
-          background-color: #5BDA9B;
+          background-color: #66BB6A;
           border-color: #F6F6F6;
           height: 3em;
           font-size: 16px;
@@ -292,7 +292,7 @@
             display: block;
             width: 100%; }
           .Order .status-message.controls-wrapper.shipping-controls button:hover {
-            background-color: #1DBF6E; }
+            background-color: #43A047; }
         .Order .status-message.controls-wrapper.shipping-controls .ShippingDetailForm {
           position: fixed;
           top: 0;
@@ -370,10 +370,10 @@
           .Order .status-message.controls-wrapper.shipping-controls .form-wrapper .submit {
             top: calc(100% + 1em);
             right: calc(50% - 10.5em);
-            background-color: #5BDA9B;
+            background-color: #66BB6A;
             border-color: #F6F6F6; }
             .Order .status-message.controls-wrapper.shipping-controls .form-wrapper .submit:hover {
-              background-color: #1DBF6E; }
+              background-color: #43A047; }
           .Order .status-message.controls-wrapper.shipping-controls .form-wrapper .reset {
             position: absolute;
             display: block;
@@ -389,10 +389,10 @@
             left: 1em;
             width: 2.25em;
             height: 2.25em;
-            background-color: #DF6C6C;
+            background-color: #E57373;
             border-color: #F6F6F6; }
             .Order .status-message.controls-wrapper.shipping-controls .form-wrapper .cancel:hover {
-              background-color: #DB3030; }
+              background-color: #EF5350; }
     .Order .status-message.finalize {
       background-color: #FADA59; }
       .Order .status-message.finalize .discount-form .Input {
