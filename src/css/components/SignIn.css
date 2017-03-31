@@ -133,6 +133,7 @@
       border-radius: 4px;
       width: 30%;
       min-width: 160px;
+      max-width: 190px;
       height: 100%;
       font-size: 16px;
       padding-left: 0.8em; }
