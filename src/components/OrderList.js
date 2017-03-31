@@ -1,5 +1,6 @@
 import React from 'react';
 import OrderSubList from './OrderSubList';
+import Loading from './misc/Loading';
 
 import '../css/components/OrderList.css';
 
@@ -21,10 +22,9 @@ class OrderList extends React.Component {
       newList[order.id] = order;
       let newStatusTypeList = {};
       newStatusTypeList[statusType] = newList;
-      this.props.setOrders(Object.assign(
-        this.props.orders,
-        newStatusTypeList
-      ));
+      this.setStateVal({
+        orders: Object.assign(this.props.orders, {}, newStatusTypeList)
+      });
     } else if (updatedOrder && currentStatusType) {
       const subList = this.props.orders[currentStatusType];
       console.log(subList);
@@ -52,8 +52,7 @@ class OrderList extends React.Component {
       updatedOrder.status = this.getNextStatusType(order.status)
       orders[new Date(order.createdAt).getTime()] = updatedOrder;
     }
-    console.log(orders);
-    this.props.setOrders(orders);
+    this.props.setStateVal({ orders });
   }
 
   renderSubLists() {
@@ -111,7 +110,7 @@ class OrderList extends React.Component {
             ?
               this.renderSubLists()
             :
-              this.props.renderLoading()
+              <Loading />
         }
       </div>
     )

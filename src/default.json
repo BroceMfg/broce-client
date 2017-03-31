@@ -1,0 +1,22 @@
+{
+  "apiUrl": "http://localhost:3001",
+  "fetching": false,
+  "logErrs": true,
+  "defErrMsg": "An unexpected error occurred.",
+  "errExists": false,
+  "orders": {},
+  "statusTypes": {
+    "0": "unknown",
+    "1": "quote",
+    "2": "priced",
+    "3": "ordered",
+    "4": "shipped",
+    "5": "archived",
+    "6": "abandoned"
+  },
+  "userRoleTypes": {
+    "0": "client",
+    "1": "admin"
+  },
+  "showStockOrderForm": false
+}

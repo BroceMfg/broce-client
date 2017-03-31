@@ -12,12 +12,10 @@ class Landing extends React.Component {
 
   constructor(props) {
     super(props);
-    this.getStatusTypeId = this.getStatusTypeId.bind(this);
     this.fetchOrders = this.fetchOrders.bind(this);
     this.changeView = this.changeView.bind(this);
     this.state = {
       viewBy: 'all',
-      fetching: true
     };
   }
 
@@ -25,19 +23,10 @@ class Landing extends React.Component {
     this.fetchOrders();
   }
 
-  getStatusTypeId(order) {
-    return order.Order_Statuses
-      .filter(
-        status => status.current
-      )[0].StatusTypeId || 0;
-  }
-
   fetchOrders() {
     const {
       admin,
       statusTypes,
-      getStatusType,
-      setOrders,
       apiUrl
     } = this.props;
 
@@ -52,10 +41,12 @@ class Landing extends React.Component {
       }
       json.orders
         .sort((a, b) => {
+          const aStatus = this.props.getStatus(a);
+          const bStatus = this.props.getStatus(b);
           const statusTypeKeys = Object.keys(statusTypes);
           if (admin) {
-            return statusTypeKeys.indexOf(`${this.getStatusTypeId(a)}`)
-              - statusTypeKeys.indexOf(`${this.getStatusTypeId(b)}`);
+            return statusTypeKeys.indexOf(`${aStatus.id}`)
+              - statusTypeKeys.indexOf(`${bStatus.id}`);
           }
           return (
             new Date(b.createdAt).getTime()
@@ -63,28 +54,24 @@ class Landing extends React.Component {
           );
         })
         .forEach((order) => {
-          // if (this.props.admin) {
-          const orderStatusType = getStatusType(this.getStatusTypeId(order));
-          const statusType = (orderStatusType !== undefined) ? orderStatusType : 'unknown';
-          const newOrder = Object.assign(
-            order,
-            {
-              status: statusType
-            }
-          );
+          console.log('order');
+          console.log(order);
+          const status = this.props.getStatus(order);
+          console.log('status');
+          console.log(status);
+          const newOrder = Object.assign(order, { status: status.type });
           if (admin) {
-            orders[statusType] = orders[statusType] || {};
-            orders[statusType][order.id] = newOrder;
+            orders[status.type] = orders[status.type] || {};
+            orders[status.type][order.id] = newOrder;
           } else {
             orders[new Date(order.createdAt).getTime()] = newOrder;
           }
+          console.log('orders');
+          console.log(orders);
         });
-      setOrders(orders);
-      this.setState({
-        ...this.state,
-        fetching: false
-      });
+      this.props.setStateVal({ orders, fetching: false });
     };
+    this.props.setStateVal({ fetching: true });
     get(
       // `${apiUrl}/orders?status=quote,priced`,
       `${apiUrl}/orders`,
@@ -116,7 +103,7 @@ class Landing extends React.Component {
       <div className="main-wrapper">
         {
           message
-            ? 
+            ?
               <ToggledMessage
                 message={message}
                 messageStatusCode={messageStatusCode}
@@ -169,7 +156,7 @@ class Landing extends React.Component {
             admin={this.props.admin}
             apiUrl={this.props.apiUrl}
             orders={this.props.orders}
-            setOrders={this.props.setOrders}
+            setStateVal={this.props.setStateVal}
             statusTypes={this.props.statusTypes}
             getStatusType={
               (order) => this.props.getStatusType(this.getStatusTypeId(order))
@@ -178,8 +165,7 @@ class Landing extends React.Component {
             showOtherForm={this.props.showOtherForm}
             showStockOrderForm={this.props.showStockOrderForm}
             fetchOrders={this.fetchOrders}
-            fetching={this.state.fetching}
-            renderLoading={this.props.renderLoading}
+            fetching={this.props.fetching}
             viewBy={this.state.viewBy}
           />
           {
