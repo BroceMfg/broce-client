@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import gnum from '../helpers/global-enum';
 import MachineNumberBlock from './MachineNumberBlock';
-import { post } from '../middleware/XMLHTTP';
+import req from './middleware/request';
 
 import '../css/components/QuoteForm.css';
 
@@ -16,6 +16,7 @@ class QuoteForm extends React.Component {
     this.addPartNumBlock = this.addPartNumBlock.bind(this);
     this.submit = this.submit.bind(this);
     this.reset = this.reset.bind(this);
+    this.request = req.bind(this);
     this.state = {
       // form object structure should look like this:
       // {
@@ -50,7 +51,7 @@ class QuoteForm extends React.Component {
   }
 
   getInitialForm() {
-    return this.props.form 
+    return this.props.form
       ? _.cloneDeep(this.props.form)
       : _.cloneDeep(gnum.INITIAL_QUOTE_FORM)
   }
@@ -152,7 +153,8 @@ class QuoteForm extends React.Component {
 
 
     // just testing post and get out
-    post(
+    this.request(
+      'POSt',
       `${this.props.apiUrl}/orders`,
       formData,
       (response) => {

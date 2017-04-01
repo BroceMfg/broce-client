@@ -1,5 +1,5 @@
 import React from 'react';
-import { get } from '../middleware/XMLHTTP';
+import req from './middleware/request';
 import Dashboard from './Dashboard';
 import OrderList from './OrderList';
 import QuoteForm from './QuoteForm';
@@ -14,6 +14,7 @@ class Landing extends React.Component {
     super(props);
     this.fetchOrders = this.fetchOrders.bind(this);
     this.changeView = this.changeView.bind(this);
+    this.request = req.bind(this);
     this.state = {
       viewBy: 'all',
     };
@@ -72,7 +73,8 @@ class Landing extends React.Component {
       this.props.setStateVal({ orders, fetchingOrders: false });
     };
     this.props.setStateVal({ fetchingOrders: true });
-    get(
+    this.request(
+      'GET',
       // `${apiUrl}/orders?status=quote,priced`,
       `${apiUrl}/orders`,
       (data) => cb(data),

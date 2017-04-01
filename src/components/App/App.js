@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Match, Miss } from 'react-router';
 import autoBind from 'react-autobind';
 
-import {
-  post,
-  parseJSONtoFormData
-} from '../../middleware/XMLHTTP';
+import req from '../middleware/request';
 import ssv from './middleware/set-state-val';
 import sub from './middleware/submit';
 import getOrderStatus from './middleware/get-order-status';
@@ -26,11 +23,7 @@ import defaultState from '../../default.json';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.http = {
-      post,
-      parseJSONtoFormData
-      // TODO: Add GET, PUT, DELETE
-    };
+    this.request = req.bind(this);
     this.setStateVal = ssv.bind(this);
     this.submit = sub.bind(this);
     this.getOStatus = getOrderStatus.bind(this);
@@ -51,7 +44,8 @@ class App extends Component {
   logout() {
     localStorage.clear();
 
-    post(
+    this.request(
+      'POST'
       `${this.state.apiUrl}/users/logout`,
       (response) => {
         console.log(JSON.parse(response));

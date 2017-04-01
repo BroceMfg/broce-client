@@ -39,7 +39,6 @@
     opacity: 0.25;
     .inner {
       .content {
-        // display: none;
         transition: all 0.25s ease-in-out;
         transform: translateX(calc(100% + 2rem));
       }

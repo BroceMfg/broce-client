@@ -6,7 +6,7 @@ module.exports = function signIn(e) {
     (resp) => {
       this.setState({ loading: false });
       if (!resp.success) {
-        if (resp.message.includes('wrong')) {
+        if (resp.message.includes('wrong') || resp.message.includes('email does not exist')) {
           this.props.toggleMessage('Invalid Username or Password.', 'error');
         } else {
           this.props.toggleMessage(null, 'error');
@@ -19,31 +19,4 @@ module.exports = function signIn(e) {
       }
     }
   );
-  // const apiUrl = this.props.apiUrl;
-  // e.preventDefault();
-  // const email = this.email.value;
-  // const password = this.password.value;
-
-  // const data = { email, password };
-
-  // let formData = '';
-  // Object.keys(data).forEach(key => {
-  //   formData += `${key}=${data[key]}&`;
-  // });
-
-  // // just testing post and get out
-  // post(
-  //   `${apiUrl}/users/login`,
-  //   formData,
-  //   (response) => {
-
-  //   },
-  //   (err) => {
-  //     console.log(err)
-  //     this.props.toggleMessage(
-  //       'An unexpected error occurred.',
-  //       'error'
-  //     );
-  //   }
-  // );
 };
