@@ -9,10 +9,8 @@ import ToggledMessage from '../ToggledMessage';
 import '../../css/components/Landing.css';
 
 class Landing extends React.Component {
-
   constructor(props) {
     super(props);
-    this.fetchOrders = this.fetchOrders.bind(this);
     this.changeView = this.changeView.bind(this);
     this.request = req.bind(this);
     this.state = {
@@ -21,71 +19,7 @@ class Landing extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchOrders();
-  }
-
-  fetchOrders() {
-    const {
-      admin,
-      statusTypes,
-      apiUrl
-    } = this.props;
-
-    // clear out whatever message was being displayed
-    this.props.toggleMessage();
-
-    const cb = (data) => {
-      const orders = {};
-      const json = JSON.parse(data);
-      if (!json.orders) {
-        this.props.logout();
-      }
-      json.orders
-        .sort((a, b) => {
-          const aStatus = this.props.getOStatus(a);
-          const bStatus = this.props.getOStatus(b);
-          const statusTypeKeys = Object.keys(statusTypes);
-          if (admin) {
-            return statusTypeKeys.indexOf(`${aStatus.id}`)
-              - statusTypeKeys.indexOf(`${bStatus.id}`);
-          }
-          return (
-            new Date(b.createdAt).getTime()
-              - new Date(a.createdAt).getTime()
-          );
-        })
-        .forEach((order) => {
-          console.log('order');
-          console.log(order);
-          const status = this.props.getOStatus(order);
-          console.log('status');
-          console.log(status);
-          const newOrder = Object.assign(order, { status: status.type });
-          if (admin) {
-            orders[status.type] = orders[status.type] || {};
-            orders[status.type][order.id] = newOrder;
-          } else {
-            orders[new Date(order.createdAt).getTime()] = newOrder;
-          }
-          console.log('orders');
-          console.log(orders);
-        });
-      this.props.loading.off();
-      this.props.setStateVal({ orders });
-    };
-    this.props.loading.on();
-    this.request(
-      'GET',
-      `${apiUrl}/orders`,
-      undefined,
-      data => cb(data),
-      (err) => {
-        console.log(`err = ${err}`);
-        // session expired or possible security vulnerability.
-        // log user out and reload
-        this.props.logout();
-      }
-    );
+    this.props.fetchOrders();
   }
 
   changeView(sType) {
@@ -164,7 +98,7 @@ class Landing extends React.Component {
             toggleMessage={toggleMessage}
             showOtherForm={this.props.showOtherForm}
             showStockOrderForm={this.props.showStockOrderForm}
-            fetchOrders={this.fetchOrders}
+            fetchOrders={this.props.fetchOrders}
             fetchingOrders={this.props.fetchingOrders}
             viewBy={this.state.viewBy}
           />

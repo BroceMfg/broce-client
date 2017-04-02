@@ -105,8 +105,9 @@
       transition: all 0.25s ease-in-out;
       transform: translateX(0); }
   .Loading .inner .content {
-    min-width: 3.8em;
-    background-color: #3D3D3D; }
+    padding: 0 0.8em;
+    background-color: #3D3D3D;
+    margin-left: 0.8em; }
   .Loading.hidden .inner .content {
     transform: translateX(calc(-100% - 2rem)); }
 

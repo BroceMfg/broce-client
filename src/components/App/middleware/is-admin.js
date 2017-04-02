@@ -4,9 +4,9 @@
  */
 function getRole(u) {
   if (u && u.role) {
-    return this.props.uRoleTypes[u.role];
+    return this.state.uRoleTypes[u.role];
   }
-  return this.props.defURole;
+  return this.state.defURole;
 }
 
 /**

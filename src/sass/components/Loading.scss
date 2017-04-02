@@ -7,8 +7,10 @@
   left: 0;
   .inner {
     .content {
-      min-width: 3.8em;
+      padding: 0 0.8em;
+      // min-width: 3.8em;
       background-color: $c7;
+      margin-left: 0.8em;
     }
   }
   &.hidden {

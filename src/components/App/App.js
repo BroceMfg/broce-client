@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import { BrowserRouter, Match, Miss } from 'react-router';
 import autoBind from 'react-autobind';
 
+import dismissTog from './middleware/dismiss-tog';
+import toggleMessage from './middleware/toggle-message';
 import request from '../middleware/request';
 import submit from '../middleware/submit';
 import setStateVal from './middleware/set-state-val';
 import showOtherForm from './middleware/show-other-form';
 import getOrderStatus from './middleware/get-order-status';
-import dismissTog from './middleware/dismiss-tog';
-import toggleMessage from './middleware/toggle-message';
+import fetchOrders from './middleware/fetch-orders';
 import loading from './middleware/loading';
+import signIn from './middleware/sign-in';
 import logout from './middleware/logout';
 
 import Loading from '../misc/Loading';
@@ -32,10 +34,12 @@ class App extends Component {
     this.setStateVal = setStateVal.bind(this);
     this.showOtherForm = showOtherForm.bind(this);
     this.submit = submit.bind(this);
-    this.getOStatus = getOrderStatus.bind(this);
+    this.getOrderStatus = getOrderStatus.bind(this);
     this.dismissTog = dismissTog.bind(this);
     this.toggleMessage = toggleMessage.bind(this);
+    this.fetchOrders = fetchOrders.bind(this);
     this.loading = loading.call(this);
+    this.signIn = signIn.bind(this);
     this.logout = logout.bind(this);
     this.noop = () => {};
     autoBind(this);
@@ -103,6 +107,7 @@ class App extends Component {
                             render={
                               () =>
                                 <Landing
+                                  fetchOrders={this.fetchOrders}
                                   apiUrl={apiUrl}
                                   admin={admin}
                                   fetchingOrders={fetchingOrders}
@@ -152,18 +157,7 @@ class App extends Component {
                         <Match
                           exactly
                           pattern="/"
-                          render={() =>
-                            <SignIn
-                              submit={this.submit}
-                              setStateVal={this.setStateVal}
-                              message={message}
-                              messageStatusCode={messageStatusCode}
-                              toggleMessage={this.toggleMessage}
-                              loading={this.loading}
-                              uRoleTypes={this.state.uRoleTypes}
-                              defURole={this.state.defURole}
-                            />
-                          }
+                          render={() => <SignIn signIn={this.signIn} />}
                         />
                   }
                   <Miss component={NotFound} />

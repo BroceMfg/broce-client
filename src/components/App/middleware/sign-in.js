@@ -1,20 +1,22 @@
+import isAdmin from './is-admin';
+
 module.exports = function signIn(e) {
-  this.props.loading.on();
-  this.props.submit(
+  this.loading.on();
+  this.submit(
     e,
     '/users/login',
     (resp) => {
-      this.props.loading.off();
+      this.loading.off();
       if (!resp.success) {
         if (resp.message.includes('wrong') || resp.message.includes('email does not exist')) {
-          this.props.toggleMessage('Invalid Username or Password.', 'error');
+          this.toggleMessage('Invalid Username or Password.', 'error');
         } else {
-          this.props.toggleMessage(null, 'error');
+          this.toggleMessage(null, 'error');
         }
       } else {
-        this.props.setStateVal({
+        this.setStateVal({
           user: resp.user,
-          admin: this.isAdmin(resp.user)
+          admin: isAdmin.call(this, resp.user)
         });
       }
     }
