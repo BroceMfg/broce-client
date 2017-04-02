@@ -6,7 +6,6 @@ import ShippingAddressForm from './ShippingAddressForm';
 import Input from './Input';
 import StockOrderForm from './StockOrderForm';
 import QuoteForm from './QuoteForm';
-import { post, put, parseJSONtoFormData } from '../middleware/XMLHTTP';
 import req from './middleware/request';
 
 import '../css/components/Order.css';
@@ -338,7 +337,7 @@ class Order extends React.Component {
 
     const statusType = this.props.getNextStatusType(this.props.statusType);
 
-    request(
+    this.request(
       'POSt',
       `${this.props.apiUrl}/orders/details/${orderDetailIds.join(',')}` +
         `/shippingaddress?statusType=${statusType}`,
@@ -415,7 +414,7 @@ class Order extends React.Component {
       this.request(
         'POST',
         `${this.props.apiUrl}/orders/${this.props.order.id}/part`,
-        parseJSONtoFormData(data),
+        data,
         (response) => {
           console.log('JSON.parse(response)');
           console.log(JSON.parse(response));

@@ -1,10 +1,3 @@
-const methods = {
-  get: 'GET',
-  post: 'POST',
-  put: 'PUT',
-  delete: 'DELETE'
-};
-
 const parseJSONtoFormData = (json) => {
   let formData = '';
   Object.keys(json).forEach((key) => {
@@ -13,12 +6,12 @@ const parseJSONtoFormData = (json) => {
   return formData;
 };
 
-const request = (method, theUrl, data, callback, errorCallback) => {
+const request = (method, theUrl, data = {}, callback, errorCallback) => {
   const xmlHttp = new XMLHttpRequest();
   xmlHttp.open(method, theUrl, true); // true for asynchronous
   xmlHttp.withCredentials = true;
   let formData = null;
-  if (method !== methods.get) {
+  if (method !== 'GET') {
     xmlHttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     formData = parseJSONtoFormData(data);
   }

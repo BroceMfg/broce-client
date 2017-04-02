@@ -75,9 +75,9 @@ class Landing extends React.Component {
     this.props.setStateVal({ fetchingOrders: true });
     this.request(
       'GET',
-      // `${apiUrl}/orders?status=quote,priced`,
       `${apiUrl}/orders`,
-      (data) => cb(data),
+      undefined,
+      data => cb(data),
       (err) => {
         console.log(`err = ${err}`);
         // session expired or possible security vulnerability.

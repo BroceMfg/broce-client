@@ -4,7 +4,7 @@ import autoBind from 'react-autobind';
 
 import req from '../middleware/request';
 import ssv from './middleware/set-state-val';
-import sub from './middleware/submit';
+import sub from '../middleware/submit';
 import getOrderStatus from './middleware/get-order-status';
 
 import TogAlert from '../misc/TogAlert';
@@ -45,12 +45,15 @@ class App extends Component {
     localStorage.clear();
 
     this.request(
-      'POST'
+      'POST',
       `${this.state.apiUrl}/users/logout`,
+      undefined,
       (response) => {
         console.log(JSON.parse(response));
       },
-      (errorResponse) => console.log(errorResponse)
+      (errorResponse) => {
+        console.log(errorResponse);
+      }
     );
     // refresh the broswer to unmount/remount our component
     window.location.reload(false);

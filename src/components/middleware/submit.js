@@ -1,3 +1,12 @@
+import request from './request';
+
+const supportedHTTPMethods = [
+  'GET',
+  'POST',
+  'PUT',
+  'DELETE'
+];
+
 /**
  * Submit a form, using one of our predefined http POST, PUT, or DELETE methods
  * @param {*} e - Either the html form itself or a string containing
@@ -50,17 +59,10 @@ module.exports = function submit(
     }
   };
 
-  let method;
-  if (httpMethod !== 'POST') {
-    // TODO: add ability to do PUT and DELETE
-    method = () => {};
-  } else {
-    method = this.http.post;
-  }
-
-  method(
+  request(
+    supportedHTTPMethods.includes(httpMethod) ? httpMethod : 'POST',
     this.state.apiUrl + path,
-    this.http.parseJSONtoFormData(data),
+    data,
     handleSuccess,
     (err) => {
       this.setStateVal({ generalLoading: false });

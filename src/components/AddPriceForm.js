@@ -1,6 +1,6 @@
 import React from 'react';
 import Input from './Input';
-import { put } from '../middleware/XMLHTTP';
+import req from './middleware/request';
 
 class AddPriceForm extends React.Component {
   constructor(props) {
@@ -8,6 +8,7 @@ class AddPriceForm extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.submit = this.submit.bind(this);
     this.reset = this.reset.bind(this);
+    this.request = req.bind(this);
     this.state = { timestamp: Date.now() }
   }
 
@@ -37,7 +38,8 @@ class AddPriceForm extends React.Component {
     // disable the submit button until the input matches is valid
     if (price > 0.00) {
       this.props.toggleAddPriceForm();
-      put(
+      this.request(
+        'PUT',
         `${this.props.apiUrl}/orders/details/${this.props.orderDetail.id}`,
         `price=${price}`,
         (response) => {
@@ -78,7 +80,7 @@ class AddPriceForm extends React.Component {
     return (
       <div className="AddPriceForm" key={this.state.timestamp}>
         <div className="input-button-wrapper">
-          <Input 
+          <Input
             refProp={(input) => { this.price = input }}
             type="number"
             name={`order_detail_${orderDetail.id}_price`}
