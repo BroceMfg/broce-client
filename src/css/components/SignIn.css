@@ -3,6 +3,8 @@
 ***/
 /* Grey scale */
 /* Other Colors */
+/* MD Colors */
+/* Blues */
 /* Container colors */
 /* Element colors */
 /* --------------------- */
@@ -179,12 +181,5 @@
       color: #2AAAF3; }
     .SignIn .forgot:hover {
       color: #72C3F1; }
-  .SignIn .SignIn-loading-wrapper {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    z-index: 100; }
-    .SignIn .SignIn-loading-wrapper .Loading {
-      height: 45%; }
 
 /*# sourceMappingURL=SignIn.css.map */

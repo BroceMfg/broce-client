@@ -1,10 +1,10 @@
 module.exports = function signIn(e) {
-  this.setState({ loading: true });
+  this.props.loading.on();
   this.props.submit(
     e,
     '/users/login',
     (resp) => {
-      this.setState({ loading: false });
+      this.props.loading.off();
       if (!resp.success) {
         if (resp.message.includes('wrong') || resp.message.includes('email does not exist')) {
           this.props.toggleMessage('Invalid Username or Password.', 'error');

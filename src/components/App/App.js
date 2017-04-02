@@ -2,16 +2,20 @@ import React, { Component } from 'react';
 import { BrowserRouter, Match, Miss } from 'react-router';
 import autoBind from 'react-autobind';
 
-import req from '../middleware/request';
-import ssv from './middleware/set-state-val';
-import sub from '../middleware/submit';
+import request from '../middleware/request';
+import submit from '../middleware/submit';
+import setStateVal from './middleware/set-state-val';
 import getOrderStatus from './middleware/get-order-status';
+import dismissTog from './middleware/dismissTog';
+import toggleMessage from './middleware/toggleMessage';
+import loading from './middleware/loading';
+import logout from './middleware/logout';
 
+import Loading from '../misc/Loading';
 import TogAlert from '../misc/TogAlert';
 import ErrorHandler from '../misc/ErrorHandler';
-import Loading from '../misc/Loading';
 import SignIn from '../SignIn/SignIn';
-import Landing from '../Landing';
+import Landing from '../Landing/Landing';
 import Settings from '../Settings';
 import OrderDetail from '../OrderDetail';
 import NotFound from '../NotFound';
@@ -23,10 +27,15 @@ import defaultState from '../../default.json';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.request = req.bind(this);
-    this.setStateVal = ssv.bind(this);
-    this.submit = sub.bind(this);
+    this.request = request.bind(this);
+    this.setStateVal = setStateVal.bind(this);
+    this.submit = submit.bind(this);
     this.getOStatus = getOrderStatus.bind(this);
+    this.dismissTog = dismissTog.bind(this);
+    this.toggleMessage = toggleMessage.bind(this);
+    this.loading = loading.call(this);
+    this.logout = logout.bind(this);
+    this.noop = () => {};
     autoBind(this);
 
     this.state = Object.assign(
@@ -39,48 +48,6 @@ class App extends Component {
   componentWillUpdate(nextProps, nextState) {
     // whenever we update, update our localStorage-stored state
     localStorage.setItem('state', JSON.stringify(nextState));
-  }
-
-  logout() {
-    localStorage.clear();
-
-    this.request(
-      'POST',
-      `${this.state.apiUrl}/users/logout`,
-      undefined,
-      (response) => {
-        console.log(JSON.parse(response));
-      },
-      (errorResponse) => {
-        console.log(errorResponse);
-      }
-    );
-    // refresh the broswer to unmount/remount our component
-    window.location.reload(false);
-  }
-
-  dismissTog(togId) {
-    if (this.state.currTogId === togId) {
-      this.setStateVal({ togStat: '' }); // keep the msg text present for the animation
-      setTimeout(() => {
-        this.setStateVal({ togMsg: '' });
-      }, 250); // 250 corresponds to the fade out CSS animation
-    }
-  }
-
-  toggleMessage(msg, status, time) {
-    this.setStateVal({
-      togMsg: msg || this.state.defErrMsg,
-      togStat: status,
-      currTogId: this.state.currTogId + 1
-    });
-
-    // set the timeout for the TogAlert to hide itself again
-    const t = time && typeof time === 'number' ? time : this.state.defTogTime;
-    const togId = this.state.currTogId;
-    setTimeout(() => {
-      this.dismissTog(togId);
-    }, t);
   }
 
   showOtherForm() {
@@ -108,6 +75,7 @@ class App extends Component {
     } = this.state;
     return (
       <div className="App">
+        <Loading loading={this.state.loading} />
         <TogAlert
           msg={togMsg}
           status={togStat}
@@ -152,7 +120,7 @@ class App extends Component {
                                       toggleMessage={this.toggleMessage}
                                       showStockOrderForm={showStockOrderForm}
                                       showOtherForm={this.showOtherForm}
-                                      renderLoading={ () => <Loading /> }
+                                      loading={this.loading}
                                     />
                             }
                           />
@@ -197,6 +165,7 @@ class App extends Component {
                               message={message}
                               messageStatusCode={messageStatusCode}
                               toggleMessage={this.toggleMessage}
+                              loading={this.loading}
                             />
                           }
                         />

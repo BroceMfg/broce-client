@@ -1,5 +1,6 @@
 {
   "apiUrl": "http://localhost:3001",
+  "loading": false,
   "fetchingOrders": false,
   "logErrs": true,
   "defErrMsg": "An Unexpected Error Occurred.",

@@ -1,12 +1,12 @@
 import React from 'react';
-import req from './middleware/request';
-import Dashboard from './Dashboard';
-import OrderList from './OrderList';
-import QuoteForm from './QuoteForm';
-import StockOrderForm from './StockOrderForm';
-import ToggledMessage from './ToggledMessage';
+import req from '../middleware/request';
+import Dashboard from '../Dashboard';
+import OrderList from '../OrderList';
+import QuoteForm from '../QuoteForm';
+import StockOrderForm from '../StockOrderForm';
+import ToggledMessage from '../ToggledMessage';
 
-import '../css/components/Landing.css';
+import '../../css/components/Landing.css';
 
 class Landing extends React.Component {
 
@@ -70,9 +70,10 @@ class Landing extends React.Component {
           console.log('orders');
           console.log(orders);
         });
-      this.props.setStateVal({ orders, fetchingOrders: false });
+      this.props.loading.off();
+      this.props.setStateVal({ orders });
     };
-    this.props.setStateVal({ fetchingOrders: true });
+    this.props.loading.on();
     this.request(
       'GET',
       `${apiUrl}/orders`,
