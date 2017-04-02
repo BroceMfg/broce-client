@@ -3,10 +3,12 @@
 
 .Loading {
   @include alert();
+  z-index: 100;
   left: 0;
   .inner {
     .content {
-      background-color: $blue4;
+      min-width: 3.8em;
+      background-color: $c7;
     }
   }
   &.hidden {

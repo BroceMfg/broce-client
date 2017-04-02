@@ -2,12 +2,12 @@
  * Check the role of a user
  * @param {Object} u - An Object representing a user of the application
  */
-const getRole = (u) => {
+function getRole(u) {
   if (u && u.role) {
-    return this.state.uRoleTypes[u.role];
+    return this.props.uRoleTypes[u.role];
   }
-  return this.state.defURole;
-};
+  return this.props.defURole;
+}
 
 /**
  * Check if a user is an admin
@@ -17,8 +17,5 @@ const getRole = (u) => {
  * @param {Object} u - An Object representing a user of the application
  */
 module.exports = function isAdmin(u) {
-  if (!u) {
-    return getRole(u) === 'admin';
-  }
-  return false;
+  return u ? getRole.call(this, u) === 'admin' : false;
 };

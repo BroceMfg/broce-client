@@ -5,9 +5,10 @@ import autoBind from 'react-autobind';
 import request from '../middleware/request';
 import submit from '../middleware/submit';
 import setStateVal from './middleware/set-state-val';
+import showOtherForm from './middleware/show-other-form';
 import getOrderStatus from './middleware/get-order-status';
-import dismissTog from './middleware/dismissTog';
-import toggleMessage from './middleware/toggleMessage';
+import dismissTog from './middleware/dismiss-tog';
+import toggleMessage from './middleware/toggle-message';
 import loading from './middleware/loading';
 import logout from './middleware/logout';
 
@@ -29,6 +30,7 @@ class App extends Component {
     super(props);
     this.request = request.bind(this);
     this.setStateVal = setStateVal.bind(this);
+    this.showOtherForm = showOtherForm.bind(this);
     this.submit = submit.bind(this);
     this.getOStatus = getOrderStatus.bind(this);
     this.dismissTog = dismissTog.bind(this);
@@ -48,13 +50,6 @@ class App extends Component {
   componentWillUpdate(nextProps, nextState) {
     // whenever we update, update our localStorage-stored state
     localStorage.setItem('state', JSON.stringify(nextState));
-  }
-
-  showOtherForm() {
-    this.setState({
-      ...this.state,
-      showStockOrderForm: !this.state.showStockOrderForm
-    });
   }
 
   render() {
@@ -106,22 +101,23 @@ class App extends Component {
                             exactly
                             pattern="/"
                             render={
-                              () => <Landing
-                                      admin={admin}
-                                      fetchingOrders={fetchingOrders}
-                                      orders={orders}
-                                      apiUrl={apiUrl}
-                                      logout={this.logout}
-                                      setStateVal={this.setStateVal}
-                                      statusTypes={this.state.statusTypes}
-                                      getOStatus={this.getOStatus}
-                                      message={message}
-                                      messageStatusCode={messageStatusCode}
-                                      toggleMessage={this.toggleMessage}
-                                      showStockOrderForm={showStockOrderForm}
-                                      showOtherForm={this.showOtherForm}
-                                      loading={this.loading}
-                                    />
+                              () =>
+                                <Landing
+                                  apiUrl={apiUrl}
+                                  admin={admin}
+                                  fetchingOrders={fetchingOrders}
+                                  orders={orders}
+                                  logout={this.logout}
+                                  setStateVal={this.setStateVal}
+                                  statusTypes={this.state.statusTypes}
+                                  getOStatus={this.getOStatus}
+                                  message={message}
+                                  messageStatusCode={messageStatusCode}
+                                  toggleMessage={this.toggleMessage}
+                                  showStockOrderForm={showStockOrderForm}
+                                  showOtherForm={this.showOtherForm}
+                                  loading={this.loading}
+                                />
                             }
                           />
                           <Match
@@ -143,13 +139,11 @@ class App extends Component {
                                       actionTitle={'FOOBAR'}
                                       actionHandler={
                                         () => this.orderDetailAction()
-                                      } />
-                                  )
-                                } else {
-                                  return (
-                                    <NotFound />
-                                  )
+                                      }
+                                    />
+                                  );
                                 }
+                                return <NotFound />;
                               }
                             }
                           />
@@ -166,6 +160,8 @@ class App extends Component {
                               messageStatusCode={messageStatusCode}
                               toggleMessage={this.toggleMessage}
                               loading={this.loading}
+                              uRoleTypes={this.state.uRoleTypes}
+                              defURole={this.state.defURole}
                             />
                           }
                         />

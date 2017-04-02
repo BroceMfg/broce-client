@@ -1,8 +1,8 @@
 import React from 'react';
 import autoBind from 'react-autobind';
 
-import isAdm from './middleware/is-admin';
-import signIn from './middleware/sign-in';
+import isAdmin from './middleware/is-admin';
+import submit from './middleware/sign-in';
 
 import Input from '../Input';
 import ToggledMessage from '../ToggledMessage';
@@ -12,8 +12,8 @@ import '../../css/components/SignIn.css';
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
-    this.isAdmin = isAdm.bind(this);
-    this.submit = signIn.bind(this);
+    this.isAdmin = isAdmin.bind(this);
+    this.submit = submit.bind(this);
     autoBind(this);
   }
 
