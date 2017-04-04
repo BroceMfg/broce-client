@@ -1,53 +1,25 @@
-import React from 'react';
-import req from '../middleware/request';
+import React, { Component, PropTypes } from 'react';
+import request from '../middleware/request';
 import Dashboard from '../Dashboard';
 import OrderList from '../OrderList';
 import QuoteForm from '../QuoteForm';
 import StockOrderForm from '../StockOrderForm';
-import ToggledMessage from '../ToggledMessage';
 
 import '../../css/components/Landing.css';
 
-class Landing extends React.Component {
+class Landing extends Component {
   constructor(props) {
     super(props);
-    this.changeView = this.changeView.bind(this);
-    this.request = req.bind(this);
-    this.state = {
-      viewBy: 'all',
-    };
+    this.request = request.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchOrders();
   }
 
-  changeView(sType) {
-    const sT = sType || 'all';
-    this.setState({
-      ...this.state,
-      viewBy: sT
-    });
-  }
-
   render() {
-    const {
-      message,
-      messageStatusCode,
-      toggleMessage
-    } = this.props;
     return (
       <div className="main-wrapper">
-        {
-          message
-            ?
-              <ToggledMessage
-                message={message}
-                messageStatusCode={messageStatusCode}
-                dismiss={() => toggleMessage()}
-              />
-            : null
-        }
         <Dashboard logout={this.props.logout} />
         <div className="Landing">
           {
@@ -59,11 +31,13 @@ class Landing extends React.Component {
                   </div>
                   <div
                     className={
-                      `item ${this.state.viewBy === 'all' ? 'active' : ''}`
+                      `item ${this.props.viewBy === 'all' ? 'active' : ''}`
                     }
                   >
                     <button
-                      onClick={() => { this.changeView(); }}
+                      onClick={() => {
+                        this.props.changeOrderView();
+                      }}
                     >
                       <span>All</span>
                     </button>
@@ -73,14 +47,20 @@ class Landing extends React.Component {
                       .map(sType => (
                         <div
                           className={
-                            `item ${this.state.viewBy === sType ? 'active' : ''}`
+                            `item ${this.props.viewBy === sType ? 'active' : ''}`
                           }
-                          key={Math.random()}>
+                          key={Math.random()}
+                        >
                           <button
-                            onClick={() => { this.changeView(sType); }}
+                            onClick={() => {
+                              this.props.changeOrderView(sType);
+                            }}
                           >
                             <span>
-                              {sType.charAt(0).toUpperCase() + sType.slice(1)}
+                              {
+                                // capitalize the statusType
+                                sType.charAt(0).toUpperCase() + sType.slice(1)
+                              }
                             </span>
                           </button>
                         </div>
@@ -95,12 +75,11 @@ class Landing extends React.Component {
             orders={this.props.orders}
             setStateVal={this.props.setStateVal}
             statusTypes={this.props.statusTypes}
-            toggleMessage={toggleMessage}
             showOtherForm={this.props.showOtherForm}
             showStockOrderForm={this.props.showStockOrderForm}
             fetchOrders={this.props.fetchOrders}
-            fetchingOrders={this.props.fetchingOrders}
-            viewBy={this.state.viewBy}
+            viewBy={this.props.viewBy}
+            toggleMessage={this.props.toggleMessage}
           />
           {
             !this.props.admin
@@ -111,12 +90,10 @@ class Landing extends React.Component {
                       ?
                         <StockOrderForm
                           apiUrl={this.props.apiUrl}
-                          toggleMessage={toggleMessage}
                         />
                       :
                         <QuoteForm
                           apiUrl={this.props.apiUrl}
-                          toggleMessage={toggleMessage}
                         />
                   }
                   <div className="show-other-button-wrapper">
@@ -133,12 +110,23 @@ class Landing extends React.Component {
           }
         </div>
       </div>
-    )
+    );
   }
 }
 
-Landing.contextTypes = {
-  router: React.PropTypes.object.isRequired,
-};
-
 export default Landing;
+
+Landing.propTypes = {
+  fetchOrders: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
+  admin: PropTypes.bool.isRequired,
+  apiUrl: PropTypes.string.isRequired,
+  orders: PropTypes.shape({}).isRequired,
+  viewBy: PropTypes.string.isRequired,
+  toggleMessage: PropTypes.func.isRequired,
+  changeOrderView: PropTypes.func.isRequired,
+  setStateVal: PropTypes.func.isRequired,
+  statusTypes: PropTypes.shape({}).isRequired,
+  showOtherForm: PropTypes.func.isRequired,
+  showStockOrderForm: PropTypes.bool.isRequired,
+};

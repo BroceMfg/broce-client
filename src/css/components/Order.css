@@ -2,9 +2,10 @@
   COLOR PALLETTE
 ***/
 /* Grey scale */
-/* Other Colors */
 /* MD Colors */
 /* Blues */
+/* Greens */
+/* Other Colors */
 /* Container colors */
 /* Element colors */
 /* --------------------- */
@@ -171,7 +172,7 @@
         margin-right: 0.3em; }
         .Order .status-message.controls-wrapper.accept-controls button {
           width: 80%;
-          background-color: #66BB6A;
+          background-color: #81C784;
           border-color: #F6F6F6;
           height: 3em;
           font-size: 16px;
@@ -180,7 +181,7 @@
             display: block;
             width: 100%; }
           .Order .status-message.controls-wrapper.accept-controls button:hover {
-            background-color: #43A047; }
+            background-color: #66BB6A; }
         .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm {
           position: fixed;
           top: 0;
@@ -258,10 +259,10 @@
             .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper .submit {
               top: calc(100% + 1em);
               right: calc(50% - 10.5em);
-              background-color: #66BB6A;
+              background-color: #81C784;
               border-color: #F6F6F6; }
               .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper .submit:hover {
-                background-color: #43A047; }
+                background-color: #66BB6A; }
             .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper .reset {
               position: absolute;
               display: block;
@@ -285,7 +286,7 @@
         height: 2.875em; }
         .Order .status-message.controls-wrapper.shipping-controls button {
           width: 80%;
-          background-color: #66BB6A;
+          background-color: #81C784;
           border-color: #F6F6F6;
           height: 3em;
           font-size: 16px;
@@ -294,7 +295,7 @@
             display: block;
             width: 100%; }
           .Order .status-message.controls-wrapper.shipping-controls button:hover {
-            background-color: #43A047; }
+            background-color: #66BB6A; }
         .Order .status-message.controls-wrapper.shipping-controls .ShippingDetailForm {
           position: fixed;
           top: 0;
@@ -372,10 +373,10 @@
           .Order .status-message.controls-wrapper.shipping-controls .form-wrapper .submit {
             top: calc(100% + 1em);
             right: calc(50% - 10.5em);
-            background-color: #66BB6A;
+            background-color: #81C784;
             border-color: #F6F6F6; }
             .Order .status-message.controls-wrapper.shipping-controls .form-wrapper .submit:hover {
-              background-color: #43A047; }
+              background-color: #66BB6A; }
           .Order .status-message.controls-wrapper.shipping-controls .form-wrapper .reset {
             position: absolute;
             display: block;

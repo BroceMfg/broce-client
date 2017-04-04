@@ -43,7 +43,7 @@ module.exports = function fetchOrders() {
       // log user out and reload
       const errMsg = 'An unexpected error occurred.';
       this.setStateVal({ errMsg });
-      setTimeout(() => { this.props.logout(); }, 1500);
+      setTimeout(() => { this.props.logout(); }, 1250);
     }
   );
 };

@@ -132,11 +132,6 @@ class QuoteForm extends React.Component {
       });
     });
 
-    console.log(orderDetails);
-
-    console.log(`QuoteForm component => submit function called with ` +
-      `orderDetails = ${JSON.stringify(orderDetails, null, 2)}`);
-
     const dummyForm = {
       shipping_address: '1 main street',
       shipping_city: 'Manhattan',
@@ -144,7 +139,7 @@ class QuoteForm extends React.Component {
       shipping_zip: 10001,
       po_number: '678',
       status: 'quote'
-    }
+    };
 
     let formData = `orderDetails=${JSON.stringify(orderDetails)}&`;
     Object.keys(dummyForm).forEach(key => {
@@ -199,9 +194,6 @@ class QuoteForm extends React.Component {
       form,
       timestamp
     } = this.state;
-    console.log('$$$$');
-    console.log(form);
-    console.log('$$$$');
     const machNums = Object.keys(form);
     return (
       <div className={this.props.stockOrderForm ? 'StockOrderForm' : 'QuoteForm'} key={timestamp}>

@@ -2,9 +2,10 @@
   COLOR PALLETTE
 ***/
 /* Grey scale */
-/* Other Colors */
 /* MD Colors */
 /* Blues */
+/* Greens */
+/* Other Colors */
 /* Container colors */
 /* Element colors */
 /* --------------------- */
@@ -104,7 +105,7 @@
       transition: all 0.25s ease-in-out;
       transform: translateX(0); }
   .TogAlert .inner .content.success {
-    background: #66BB6A; }
+    background: #81C784; }
   .TogAlert .inner .content.error {
     background: #E57373; }
   .TogAlert .inner .content .button-wrapper {

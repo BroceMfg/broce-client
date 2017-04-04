@@ -1,7 +1,6 @@
 {
   "apiUrl": "http://localhost:3001",
   "loading": false,
-  "fetchingOrders": false,
   "logErrs": true,
   "defErrMsg": "An Unexpected Error Occurred.",
   "errMsg": "",
@@ -10,6 +9,7 @@
   "currTogId": 0,
   "defTogTime": 4000,
   "orders": {},
+  "viewBy": "all",
   "statusTypes": {
     "0": "unknown",
     "1": "quote",

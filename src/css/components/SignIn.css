@@ -2,9 +2,10 @@
   COLOR PALLETTE
 ***/
 /* Grey scale */
-/* Other Colors */
 /* MD Colors */
 /* Blues */
+/* Greens */
+/* Other Colors */
 /* Container colors */
 /* Element colors */
 /* --------------------- */
@@ -163,14 +164,14 @@
     margin-left: -5em;
     margin-top: 3em;
     font-size: 18px;
-    background-color: #66BB6A;
+    background-color: #81C784;
     border-color: #F6F6F6; }
     .SignIn form .submit span {
       display: block;
       width: 100%; }
     .SignIn form .submit:hover {
       border-color: #F6F6F6;
-      background-color: #43A047; }
+      background-color: #66BB6A; }
   .SignIn .forgot {
     display: block;
     width: 12em;

@@ -10,6 +10,7 @@ import setStateVal from './middleware/set-state-val';
 import showOtherForm from './middleware/show-other-form';
 import getOrderStatus from './middleware/get-order-status';
 import fetchOrders from './middleware/fetch-orders';
+import changeOrderView from './middleware/change-order-view';
 import loading from './middleware/loading';
 import signIn from './middleware/sign-in';
 import logout from './middleware/logout';
@@ -20,7 +21,6 @@ import ErrorHandler from '../misc/ErrorHandler';
 import SignIn from '../SignIn/SignIn';
 import Landing from '../Landing/Landing';
 import Settings from '../Settings';
-import OrderDetail from '../OrderDetail';
 import NotFound from '../NotFound';
 
 import '../../css/components/App.css';
@@ -38,6 +38,7 @@ class App extends Component {
     this.dismissTog = dismissTog.bind(this);
     this.toggleMessage = toggleMessage.bind(this);
     this.fetchOrders = fetchOrders.bind(this);
+    this.changeOrderView = changeOrderView.bind(this);
     this.loading = loading.call(this);
     this.signIn = signIn.bind(this);
     this.logout = logout.bind(this);
@@ -59,7 +60,6 @@ class App extends Component {
   render() {
     const {
       admin,
-      fetchingOrders,
       logErrs,
       errMsg,
       defErrMsg,
@@ -68,8 +68,6 @@ class App extends Component {
       orders,
       apiUrl,
       user,
-      message,
-      messageStatusCode,
       showStockOrderForm
     } = this.state;
     return (
@@ -107,21 +105,18 @@ class App extends Component {
                             render={
                               () =>
                                 <Landing
-                                  fetchOrders={this.fetchOrders}
                                   apiUrl={apiUrl}
-                                  admin={admin}
-                                  fetchingOrders={fetchingOrders}
-                                  orders={orders}
+                                  fetchOrders={this.fetchOrders}
                                   logout={this.logout}
+                                  admin={admin}
+                                  orders={orders}
+                                  viewBy={this.state.viewBy}
+                                  toggleMessage={this.toggleMessage}
+                                  changeOrderView={this.changeOrderView}
                                   setStateVal={this.setStateVal}
                                   statusTypes={this.state.statusTypes}
-                                  getOStatus={this.getOStatus}
-                                  message={message}
-                                  messageStatusCode={messageStatusCode}
-                                  toggleMessage={this.toggleMessage}
-                                  showStockOrderForm={showStockOrderForm}
                                   showOtherForm={this.showOtherForm}
-                                  loading={this.loading}
+                                  showStockOrderForm={showStockOrderForm}
                                 />
                             }
                           />
@@ -129,28 +124,6 @@ class App extends Component {
                             exactly
                             pattern="/settings"
                             render={() => <Settings return="/" />}
-                          />
-                          <Match
-                            exactly
-                            pattern="/orders/:id"
-                            render={
-                              (matchProps) => {
-                                const order = orders[matchProps.params.id];
-                                console.log(matchProps.params.id);
-                                if (order) {
-                                  return (
-                                    <OrderDetail
-                                      order={order}
-                                      actionTitle={'FOOBAR'}
-                                      actionHandler={
-                                        () => this.orderDetailAction()
-                                      }
-                                    />
-                                  );
-                                }
-                                return <NotFound />;
-                              }
-                            }
                           />
                         </div>
                       :
