@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../css/components/Dashboard.css';
+import '../../../css/components/Dashboard.css';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -22,24 +22,22 @@ class Dashboard extends React.Component {
           </h1>
           <div className="button-container">
             <div className="icon-buttons-wrapper">
-              <a
+              <button
                 onClick={() => {
                   window.location.reload(true);
                 }}
-                className="button refresh">
-                <span></span>
-              </a>
-              <a
+                className="button refresh"
+              />
+              <button
                 onClick={this.settingsOnClickHandler}
-                className="button settings">
-                <span></span>
-              </a>
+                className="button settings"
+              />
             </div>
-            <a
+            <button
               onClick={this.props.logout}
-              className="button">
+              className="button logout">
               <span>Log Out</span>
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -47,8 +45,8 @@ class Dashboard extends React.Component {
   }
 }
 
+export default Dashboard;
+
 Dashboard.contextTypes = {
   router: React.PropTypes.object
-}
-
-export default Dashboard;
+};

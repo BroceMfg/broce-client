@@ -114,8 +114,10 @@
     min-height: 2em;
     background-color: #9A9A9A;
     margin-left: -0.2em; }
-  .Loading.hidden .inner .content {
-    transform: translateX(calc(-100% - 2rem)); }
+  .Loading.hidden {
+    z-index: -10; }
+    .Loading.hidden .inner .content {
+      transform: translateX(calc(-100% - 2rem)); }
 
 .sk-fading-circle {
   display: inline-block;

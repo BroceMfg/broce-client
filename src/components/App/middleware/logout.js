@@ -1,10 +1,12 @@
+import request from '../../middleware/request';
+
 module.exports = function logout() {
   localStorage.clear();
-  this.request(
+  request(
     'POST',
     `${this.state.apiUrl}/users/logout`,
     undefined,
-    this.noop,
+    () => {},
     (err) => {
       this.setStateVal({ errMsg: err });
     }

@@ -114,7 +114,8 @@
         font-size: 0.9rem;
         color: #5C5C5C;
         border-bottom: solid 1px #5C5C5C;
-        font-weight: 300; }
+        font-weight: 300;
+        text-transform: capitalize; }
         .Landing .filtering-options .item button:hover {
           color: #72C3F1;
           border-bottom: solid 1px #72C3F1; }

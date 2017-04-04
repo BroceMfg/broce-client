@@ -169,6 +169,12 @@
     background-position: center;
     width: calc(26% - (1px*2) - 0.7em);
     margin-right: 1em; }
+  .button.logout {
+    font-size: 1em;
+    text-align: center; }
+    .button.logout span {
+      width: 100%;
+      display: block; }
 
 @media screen and (max-width: 768px) {
   .Dashboard {

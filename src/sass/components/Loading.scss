@@ -18,6 +18,7 @@
     }
   }
   &.hidden {
+    z-index: -10;
     .inner {
       .content {
         transform: translateX(calc(-100% - 2rem));

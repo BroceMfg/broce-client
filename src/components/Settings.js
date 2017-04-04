@@ -3,11 +3,11 @@ import React from 'react';
 class Settings extends React.Component {
   constructor(props) {
     super(props);
-    
     this.returnToMain = this.returnToMain.bind(this);
   }
 
   returnToMain() {
+    console.log('hello world');
     this.context.router.transitionTo(this.props.return);
   }
 
@@ -21,8 +21,8 @@ class Settings extends React.Component {
   }
 }
 
+export default Settings;
+
 Settings.contextTypes = {
   router: React.PropTypes.object
-}
-
-export default Settings;
+};

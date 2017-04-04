@@ -4,13 +4,7 @@ import autoBind from 'react-autobind';
 
 import dismissTog from './middleware/dismiss-tog';
 import toggleMessage from './middleware/toggle-message';
-import request from '../middleware/request';
-import submit from '../middleware/submit';
 import setStateVal from './middleware/set-state-val';
-import showOtherForm from './middleware/show-other-form';
-import getOrderStatus from './middleware/get-order-status';
-import fetchOrders from './middleware/fetch-orders';
-import changeOrderView from './middleware/change-order-view';
 import loading from './middleware/loading';
 import signIn from './middleware/sign-in';
 import logout from './middleware/logout';
@@ -19,7 +13,8 @@ import Loading from '../misc/Loading';
 import TogAlert from '../misc/TogAlert';
 import ErrorHandler from '../misc/ErrorHandler';
 import SignIn from '../SignIn/SignIn';
-import Landing from '../Landing/Landing';
+import Dashboard from './Dashboard/Dashboard';
+import Landing from './Landing/Landing';
 import Settings from '../Settings';
 import NotFound from '../NotFound';
 
@@ -30,19 +25,12 @@ import defaultState from '../../default.json';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.request = request.bind(this);
     this.setStateVal = setStateVal.bind(this);
-    this.showOtherForm = showOtherForm.bind(this);
-    this.submit = submit.bind(this);
-    this.getOrderStatus = getOrderStatus.bind(this);
     this.dismissTog = dismissTog.bind(this);
     this.toggleMessage = toggleMessage.bind(this);
-    this.fetchOrders = fetchOrders.bind(this);
-    this.changeOrderView = changeOrderView.bind(this);
     this.loading = loading.call(this);
     this.signIn = signIn.bind(this);
     this.logout = logout.bind(this);
-    this.noop = () => {};
     autoBind(this);
 
     this.state = Object.assign(
@@ -65,6 +53,7 @@ class App extends Component {
       defErrMsg,
       togMsg,
       togStat,
+      currTogId,
       orders,
       apiUrl,
       user,
@@ -77,7 +66,7 @@ class App extends Component {
           msg={togMsg}
           status={togStat}
           dismiss={() => {
-            const togId = this.state.currTogId;
+            const togId = currTogId;
             this.dismissTog(togId);
           }}
         />
@@ -104,20 +93,21 @@ class App extends Component {
                             pattern="/"
                             render={
                               () =>
-                                <Landing
-                                  apiUrl={apiUrl}
-                                  fetchOrders={this.fetchOrders}
-                                  logout={this.logout}
-                                  admin={admin}
-                                  orders={orders}
-                                  viewBy={this.state.viewBy}
-                                  toggleMessage={this.toggleMessage}
-                                  changeOrderView={this.changeOrderView}
-                                  setStateVal={this.setStateVal}
-                                  statusTypes={this.state.statusTypes}
-                                  showOtherForm={this.showOtherForm}
-                                  showStockOrderForm={showStockOrderForm}
-                                />
+                                <div className="main-wrapper">
+                                  <Dashboard logout={this.logout} />
+                                  <Landing
+                                    apiUrl={apiUrl}
+                                    loading={this.loading}
+                                    logout={this.logout}
+                                    admin={admin}
+                                    orders={orders}
+                                    viewBy={this.state.viewBy}
+                                    toggleMessage={this.toggleMessage}
+                                    setStateVal={this.setStateVal}
+                                    statusTypes={this.state.statusTypes}
+                                    showStockOrderForm={showStockOrderForm}
+                                  />
+                                </div>
                             }
                           />
                           <Match
