@@ -15,7 +15,7 @@ import ErrorHandler from './misc/ErrorHandler';
 import SignIn from './SignIn/SignIn';
 import Dashboard from './Dashboard/Dashboard';
 import Landing from './Landing/Landing';
-import Settings from '../Settings';
+import Settings from './Settings/Settings';
 import Forgot from './misc/Forgot';
 import NotFound from './misc/NotFound';
 
