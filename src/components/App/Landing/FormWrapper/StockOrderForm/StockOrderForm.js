@@ -1,32 +1,30 @@
-import React from 'react';
-import _ from 'lodash';
+import React, { PropTypes } from 'react';
 import gnum from '../../../../../helpers/global-enum';
 import QuoteForm from '../QuoteForm/QuoteForm';
 
 import '../../../../../css/components/StockOrderForm.css';
 
-class StockOrderForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.getInitialForm = this.getInitialForm.bind(this);
-  }
-
-  getInitialForm() {
-    return _.cloneDeep(gnum.INITIAL_STOCK_FORM);
-  }
-
-  render() {
-    return (
-      <QuoteForm
-        apiUrl={this.props.apiUrl}
-        toggleMessage={this.props.toggleMessage}
-        getInitialForm={this.getInitialForm}
-        stockOrderForm={true}
-        noAddButtons={this.props.noAddButtons}
-        submit={this.props.submit}
-      />
-    );
-  }
-}
+const StockOrderForm = props => (
+  <QuoteForm
+    apiUrl={props.apiUrl}
+    toggleMessage={props.toggleMessage}
+    initialForm={gnum.INITIAL_STOCK_FORM}
+    stockOrderForm
+    noAddButtons={props.noAddButtons}
+    submit={props.submit}
+  />
+);
 
 export default StockOrderForm;
+
+StockOrderForm.propTypes = {
+  apiUrl: PropTypes.string.isRequired,
+  toggleMessage: PropTypes.func.isRequired,
+  noAddButtons: PropTypes.bool,
+  submit: PropTypes.func
+};
+
+StockOrderForm.defaultProps = {
+  noAddButtons: undefined,
+  submit: undefined
+};

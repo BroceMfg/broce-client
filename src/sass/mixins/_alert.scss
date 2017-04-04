@@ -6,6 +6,7 @@
     transition: all 0.25s ease-in-out;
     font-weight: 300;
     color: $c8;
+    z-index: 100;
     .inner {
       .content {
         border-radius: 2px;

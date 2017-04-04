@@ -87,7 +87,8 @@
     opacity: 1;
     transition: all 0.25s ease-in-out;
     font-weight: 300;
-    color: #1F1F1F; }
+    color: #1F1F1F;
+    z-index: 100; }
     .TogAlert .inner .content {
       border-radius: 2px;
       display: flex;

@@ -9,10 +9,12 @@ const FormWrapper = props => (
         ?
           <StockOrderForm
             apiUrl={props.apiUrl}
+            toggleMessage={props.toggleMessage}
           />
         :
           <QuoteForm
             apiUrl={props.apiUrl}
+            toggleMessage={props.toggleMessage}
           />
     }
     <div className="show-other-button-wrapper">
@@ -31,6 +33,7 @@ export default FormWrapper;
 
 FormWrapper.propTypes = {
   apiUrl: PropTypes.string.isRequired,
-  showOtherForm: PropTypes.bool.isRequired,
-  showStockOrderForm: PropTypes.bool.isRequired
+  showOtherForm: PropTypes.func.isRequired,
+  showStockOrderForm: PropTypes.bool.isRequired,
+  toggleMessage: PropTypes.func.isRequired
 };

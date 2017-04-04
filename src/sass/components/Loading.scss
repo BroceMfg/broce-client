@@ -3,7 +3,6 @@
 
 .Loading {
   @include alert();
-  z-index: 100;
   left: 0;
   height: 60px;
   display: flex;

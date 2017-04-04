@@ -97,16 +97,15 @@ class App extends Component {
                                 <div className="main-wrapper">
                                   <Dashboard logout={this.logout} />
                                   <Landing
+                                    admin={admin}
                                     apiUrl={apiUrl}
                                     loading={this.loading}
-                                    logout={this.logout}
-                                    admin={admin}
                                     orders={orders}
-                                    viewBy={this.state.viewBy}
-                                    toggleMessage={this.toggleMessage}
                                     setStateVal={this.setStateVal}
-                                    statusTypes={this.state.statusTypes}
                                     showStockOrderForm={showStockOrderForm}
+                                    statusTypes={this.state.statusTypes}
+                                    toggleMessage={this.toggleMessage}
+                                    viewBy={this.state.viewBy}
                                   />
                                 </div>
                             }

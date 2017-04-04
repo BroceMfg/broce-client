@@ -47,6 +47,7 @@ class Landing extends Component {
                 apiUrl={this.props.apiUrl}
                 showOtherForm={this.showOtherForm}
                 showStockOrderForm={this.props.showStockOrderForm}
+                toggleMessage={this.props.toggleMessage}
               />
             : null
         }

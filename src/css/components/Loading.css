@@ -80,7 +80,6 @@
   font-weight: 200;
   src: local("Roboto-ThinItalic"), url(../../fonts/Roboto-ThinItalic.ttf); }
 .Loading {
-  z-index: 100;
   left: 0;
   height: 60px;
   display: flex;
@@ -91,7 +90,8 @@
     opacity: 1;
     transition: all 0.25s ease-in-out;
     font-weight: 300;
-    color: #1F1F1F; }
+    color: #1F1F1F;
+    z-index: 100; }
     .Loading .inner .content {
       border-radius: 2px;
       display: flex;
