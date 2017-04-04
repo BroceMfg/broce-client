@@ -3,6 +3,7 @@ import fetchOrders from './middleware/fetch-orders';
 import changeOrderView from './middleware/change-order-view';
 import showOtherForm from './middleware/show-other-form';
 
+import FilterByBar from './FilterByBar/FilterByBar';
 import OrderList from '../../OrderList';
 import QuoteForm from '../../QuoteForm';
 import StockOrderForm from '../../StockOrderForm';
@@ -23,48 +24,12 @@ class Landing extends Component {
   render() {
     return (
       <div className="Landing">
-        {
-          this.props.admin && Object.keys(this.props.orders).length > 1
-            ?
-              <div className="filtering-options">
-                <div className="filter-by-wrapper">
-                  <span>Filter By:</span>
-                </div>
-                <div
-                  className={
-                    `item ${this.props.viewBy === 'all' ? 'active' : ''}`
-                  }
-                >
-                  <button
-                    onClick={() => {
-                      this.changeOrderView();
-                    }}
-                  >
-                    <span>All</span>
-                  </button>
-                </div>
-                {
-                  Object.keys(this.props.orders)
-                    .map(sType => (
-                      <div
-                        className={
-                          `item ${this.props.viewBy === sType ? 'active' : ''}`
-                        }
-                        key={Math.random()}
-                      >
-                        <button
-                          onClick={() => {
-                            this.changeOrderView(sType);
-                          }}
-                        >
-                          <span>{sType}</span>
-                        </button>
-                      </div>
-                    ))
-                }
-              </div>
-            : null
-        }
+        <FilterByBar
+          admin={this.props.admin}
+          orderSubGroups={Object.keys(this.props.orders)}
+          viewBy={this.props.viewBy}
+          changeOrderView={this.changeOrderView}
+        />
         <OrderList
           admin={this.props.admin}
           apiUrl={this.props.apiUrl}

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { BrowserRouter, Match, Miss } from 'react-router';
 import autoBind from 'react-autobind';
 
@@ -135,3 +135,7 @@ class App extends Component {
 }
 
 export default App;
+
+App.contextTypes = {
+  router: PropTypes.object
+};

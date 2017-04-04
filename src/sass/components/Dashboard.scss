@@ -24,9 +24,6 @@
     margin: $Dashboard_padding;
     margin: auto;
     position: relative;
-    button {
-
-    }
   }
 }
 
@@ -74,7 +71,7 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    width: calc(26% - (#{$button_border_size}*2) - 0.7em);
+    width: calc(26% - (#{$button_border_size}*2) - 0.9em);
   }
   &.settings {
     margin-top: 0;
@@ -84,6 +81,7 @@
     background-position: center;
     width: calc(26% - (#{$button_border_size}*2) - 0.7em);
     margin-right: 1em;
+    height: 33px;
   }
   &.logout {
     font-size: 1em;
