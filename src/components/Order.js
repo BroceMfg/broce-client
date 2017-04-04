@@ -1,11 +1,11 @@
 import React from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import OrderPart from './OrderPart';
 import ShippingDetailForm from './ShippingDetailForm';
 import ShippingAddressForm from './ShippingAddressForm';
 import Input from './Input';
-import StockOrderForm from './StockOrderForm';
-import QuoteForm from './QuoteForm';
+import StockOrderForm from './App/Landing/FormWrapper/StockOrderForm/StockOrderForm';
+import QuoteForm from './App/Landing/FormWrapper/QuoteForm/QuoteForm';
 import req from './middleware/request';
 
 import '../css/components/Order.css';

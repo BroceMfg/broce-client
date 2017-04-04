@@ -1,10 +1,10 @@
 import React from 'react';
 import _ from 'lodash';
-import gnum from '../helpers/global-enum';
-import MachineNumberBlock from './MachineNumberBlock';
-import req from './middleware/request';
+import gnum from '../../../../../helpers/global-enum';
+import MachineNumberBlock from '../../../../MachineNumberBlock';
+import req from '../../../../middleware/request';
 
-import '../css/components/QuoteForm.css';
+import '../../../../../css/components/QuoteForm.css';
 
 class QuoteForm extends React.Component {
   constructor(props) {

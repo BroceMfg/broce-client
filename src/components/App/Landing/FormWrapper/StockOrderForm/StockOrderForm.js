@@ -1,9 +1,9 @@
 import React from 'react';
 import _ from 'lodash';
-import gnum from '../helpers/global-enum';
-import QuoteForm from './QuoteForm';
+import gnum from '../../../../../helpers/global-enum';
+import QuoteForm from '../QuoteForm/QuoteForm';
 
-import '../css/components/StockOrderForm.css';
+import '../../../../../css/components/StockOrderForm.css';
 
 class StockOrderForm extends React.Component {
   constructor(props) {

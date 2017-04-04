@@ -4,9 +4,8 @@ import changeOrderView from './middleware/change-order-view';
 import showOtherForm from './middleware/show-other-form';
 
 import FilterByBar from './FilterByBar/FilterByBar';
-import OrderList from '../../OrderList';
-import QuoteForm from '../../QuoteForm';
-import StockOrderForm from '../../StockOrderForm';
+import OrderList from './OrderList/OrderList';
+import FormWrapper from './FormWrapper/FormWrapper';
 
 import '../../../css/components/Landing.css';
 
@@ -44,28 +43,11 @@ class Landing extends Component {
         {
           !this.props.admin
             ?
-              <div className="quote-stock-form-wrapper">
-                {
-                  this.props.showStockOrderForm
-                    ?
-                      <StockOrderForm
-                        apiUrl={this.props.apiUrl}
-                      />
-                    :
-                      <QuoteForm
-                        apiUrl={this.props.apiUrl}
-                      />
-                }
-                <div className="show-other-button-wrapper">
-                  <button onClick={this.showOtherForm}>
-                    {
-                      this.props.showStockOrderForm
-                        ? <span>Place a Regular Quote Instead</span>
-                        : <span>Place a Stock Order Instead</span>
-                    }
-                  </button>
-                </div>
-              </div>
+              <FormWrapper
+                apiUrl={this.props.apiUrl}
+                showOtherForm={this.showOtherForm}
+                showStockOrderForm={this.props.showStockOrderForm}
+              />
             : null
         }
       </div>
