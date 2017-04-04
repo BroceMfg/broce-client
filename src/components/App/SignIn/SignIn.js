@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-import '../../css/components/SignIn.css';
+import '../../../css/components/SignIn.css';
 
 const SignIn = props => (
   <div className="SignIn">

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-import '../../css/components/TogAlert.css';
+import '../../../css/components/TogAlert.css';
 
 const TogAlert = props => (
   <div className={`TogAlert ${(props.msg !== '' && props.status !== '') ? 'shown' : 'hidden'} `}>

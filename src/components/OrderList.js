@@ -1,6 +1,5 @@
 import React from 'react';
 import OrderSubList from './OrderSubList';
-import Loading from './misc/Loading';
 
 import '../css/components/OrderList.css';
 
@@ -104,13 +103,7 @@ class OrderList extends React.Component {
     console.log('@@@@@@@');
     return (
       <div className={`OrderList${this.props.admin ? ' admin' : ''}`}>
-        {
-          !this.props.fetchingOrders
-            ?
-              this.renderSubLists()
-            :
-              <Loading />
-        }
+        {this.renderSubLists()}
       </div>
     )
   }

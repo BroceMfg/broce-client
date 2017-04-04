@@ -9,14 +9,15 @@ import loading from './middleware/loading';
 import signIn from './middleware/sign-in';
 import logout from './middleware/logout';
 
-import Loading from '../misc/Loading';
-import TogAlert from '../misc/TogAlert';
-import ErrorHandler from '../misc/ErrorHandler';
-import SignIn from '../SignIn/SignIn';
+import Loading from './misc/Loading';
+import TogAlert from './misc/TogAlert';
+import ErrorHandler from './misc/ErrorHandler';
+import SignIn from './SignIn/SignIn';
 import Dashboard from './Dashboard/Dashboard';
 import Landing from './Landing/Landing';
 import Settings from '../Settings';
-import NotFound from '../NotFound';
+import Forgot from './misc/Forgot';
+import NotFound from './misc/NotFound';
 
 import '../../css/components/App.css';
 
@@ -117,11 +118,18 @@ class App extends Component {
                           />
                         </div>
                       :
-                        <Match
-                          exactly
-                          pattern="/"
-                          render={() => <SignIn signIn={this.signIn} />}
-                        />
+                        <div>
+                          <Match
+                            exactly
+                            pattern="/"
+                            render={() => <SignIn signIn={this.signIn} />}
+                          />
+                          <Match
+                            exactly
+                            pattern="/forgot"
+                            component={Forgot}
+                          />
+                        </div>
                   }
                   <Miss component={NotFound} />
                 </div>

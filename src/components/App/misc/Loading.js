@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import '../../css/components/Loading.css';
+import '../../../css/components/Loading.css';
 
 const Loading = props => (
   <div className={`Loading ${props.loading ? 'shown' : 'hidden'} `}>
