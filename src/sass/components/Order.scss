@@ -93,13 +93,12 @@
       right: 0;
       background-color: transparent;
       div {
-        // @include outline();
         .controls {
           button {
             position: absolute;
             top: 0;
             right: 0;
-            z-index: 10;
+            z-index: 1;
           }
         }
       }
@@ -234,6 +233,7 @@
           height: 3em;
           font-size: 16px;
           font-weight: 500;
+          margin-right: 0.4em;
           span {
             display: block;
             width: 100%;

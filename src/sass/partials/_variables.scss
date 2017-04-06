@@ -14,9 +14,34 @@ $c7: #3D3D3D;
 $c8: #1F1F1F;
 $c9: #000000;
 
+/* MD Colors */
+/* Blues */
+$blue0: #E3F2FD;
+$blue1: #BBDEFB;
+$blue2: #90CAF9;
+$blue3: #64B5F6;
+$blue4: #42A5F5;
+$blue5: #2196F3;
+$blue6: #1E88E5;
+$blue7: #1976D2;
+$blue8: #1565C0;
+$blue9: #0D47A1;
+
+/* Greens */
+$green0: #E8F5E9;
+$green1: #C8E6C9;
+$green2: #A5D6A7;
+$green3: #81C784;
+$green4: #66BB6A;
+$green5: #4CAF50;
+$green6: #43A047;
+$green7: #388E3C;
+$green8: #2E7D32;
+$green9: #1B5E20;
+
 /* Other Colors */
-$success_green: #66BB6A;
-$success_green_highlight: #43A047;
+$success_green: $green3;
+$success_green_highlight: $green4;
 $error_red: #E57373;
 $error_red_highlight: #EF5350;
 $primary_blue: #72C3F1;
@@ -62,6 +87,7 @@ $Dashboard_padding: 0.7em;
 $Dashboard_header_width: 70%;
 $Landing_padding_top: 4.5em;
 $OrderList_max_width: 1000px;
+$Notif_Menu_height: 20rem;
 
 /* Element measurements */
 $button_border_size: 1px;

@@ -1,23 +1,24 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { BrowserRouter, Match, Miss } from 'react-router';
 import autoBind from 'react-autobind';
 
-import {
-  post,
-  parseJSONtoFormData
-} from '../../middleware/XMLHTTP';
-import ssv from './middleware/set-state-val';
-import sub from './middleware/submit';
-import getOrderStatus from './middleware/get-order-status';
+import dismissTog from './middleware/dismiss-tog';
+import toggleMessage from './middleware/toggle-message';
+import setStateVal from './middleware/set-state-val';
+import loading from './middleware/loading';
+import signIn from './middleware/sign-in';
+import logout from './middleware/logout';
+import togNotifMenu from './middleware/toggle-notifications';
 
-import TogAlert from '../misc/TogAlert';
-import ErrorHandler from '../misc/ErrorHandler';
-import Loading from '../misc/Loading';
-import SignIn from '../SignIn/SignIn';
-import Landing from '../Landing';
-import Settings from '../Settings';
-import OrderDetail from '../OrderDetail';
-import NotFound from '../NotFound';
+import Loading from './misc/Loading';
+import TogAlert from './misc/TogAlert';
+import ErrorHandler from './misc/ErrorHandler';
+import SignIn from './SignIn/SignIn';
+import Dashboard from './Dashboard/Dashboard';
+import Landing from './Landing/Landing';
+import Settings from './Settings/Settings';
+import Forgot from './misc/Forgot';
+import NotFound from './misc/NotFound';
 
 import '../../css/components/App.css';
 
@@ -26,14 +27,13 @@ import defaultState from '../../default.json';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.http = {
-      post,
-      parseJSONtoFormData
-      // TODO: Add GET, PUT, DELETE
-    };
-    this.setStateVal = ssv.bind(this);
-    this.submit = sub.bind(this);
-    this.getOStatus = getOrderStatus.bind(this);
+    this.setStateVal = setStateVal.bind(this);
+    this.dismissTog = dismissTog.bind(this);
+    this.toggleMessage = toggleMessage.bind(this);
+    this.loading = loading.call(this);
+    this.signIn = signIn.bind(this);
+    this.logout = logout.bind(this);
+    this.togNotifMenu = togNotifMenu.bind(this);
     autoBind(this);
 
     this.state = Object.assign(
@@ -48,74 +48,30 @@ class App extends Component {
     localStorage.setItem('state', JSON.stringify(nextState));
   }
 
-  logout() {
-    localStorage.clear();
-
-    post(
-      `${this.state.apiUrl}/users/logout`,
-      (response) => {
-        console.log(JSON.parse(response));
-      },
-      (errorResponse) => console.log(errorResponse)
-    );
-    // refresh the broswer to unmount/remount our component
-    window.location.reload(false);
-  }
-
-  dismissTog(togId) {
-    if (this.state.currTogId === togId) {
-      this.setStateVal({ togStat: '' }); // keep the msg text present for the animation
-      setTimeout(() => {
-        this.setStateVal({ togMsg: '' });
-      }, 250); // 250 corresponds to the fade out CSS animation
-    }
-  }
-
-  toggleMessage(msg, status, time) {
-    this.setStateVal({
-      togMsg: msg || this.state.defErrMsg,
-      togStat: status,
-      currTogId: this.state.currTogId + 1
-    });
-
-    // set the timeout for the TogAlert to hide itself again
-    const t = time && typeof time === 'number' ? time : this.state.defTogTime;
-    const togId = this.state.currTogId;
-    setTimeout(() => {
-      this.dismissTog(togId);
-    }, t);
-  }
-
-  showOtherForm() {
-    this.setState({
-      ...this.state,
-      showStockOrderForm: !this.state.showStockOrderForm
-    });
-  }
-
   render() {
     const {
       admin,
-      fetchingOrders,
-      logErrs,
-      errMsg,
+      apiUrl,
+      currTogId,
       defErrMsg,
+      errMsg,
+      logErrs,
+      notifs,
+      orders,
+      showNotifMenu,
+      showStockOrderForm,
       togMsg,
       togStat,
-      orders,
-      apiUrl,
-      user,
-      message,
-      messageStatusCode,
-      showStockOrderForm
+      user
     } = this.state;
     return (
       <div className="App">
+        <Loading loading={this.state.loading} />
         <TogAlert
           msg={togMsg}
           status={togStat}
           dismiss={() => {
-            const togId = this.state.currTogId;
+            const togId = currTogId;
             this.dismissTog(togId);
           }}
         />
@@ -141,22 +97,26 @@ class App extends Component {
                             exactly
                             pattern="/"
                             render={
-                              () => <Landing
-                                      admin={admin}
-                                      fetchingOrders={fetchingOrders}
-                                      orders={orders}
-                                      apiUrl={apiUrl}
-                                      logout={this.logout}
-                                      setStateVal={this.setStateVal}
-                                      statusTypes={this.state.statusTypes}
-                                      getOStatus={this.getOStatus}
-                                      message={message}
-                                      messageStatusCode={messageStatusCode}
-                                      toggleMessage={this.toggleMessage}
-                                      showStockOrderForm={showStockOrderForm}
-                                      showOtherForm={this.showOtherForm}
-                                      renderLoading={ () => <Loading /> }
-                                    />
+                              () =>
+                                <div className="main-wrapper">
+                                  <Dashboard
+                                    logout={this.logout}
+                                    showNotifMenu={showNotifMenu}
+                                    togNotifMenu={this.togNotifMenu}
+                                    notifs={notifs}
+                                  />
+                                  <Landing
+                                    admin={admin}
+                                    apiUrl={apiUrl}
+                                    loading={this.loading}
+                                    orders={orders}
+                                    setStateVal={this.setStateVal}
+                                    showStockOrderForm={showStockOrderForm}
+                                    statusTypes={this.state.statusTypes}
+                                    toggleMessage={this.toggleMessage}
+                                    viewBy={this.state.viewBy}
+                                  />
+                                </div>
                             }
                           />
                           <Match
@@ -164,45 +124,20 @@ class App extends Component {
                             pattern="/settings"
                             render={() => <Settings return="/" />}
                           />
-                          <Match
-                            exactly
-                            pattern="/orders/:id"
-                            render={
-                              (matchProps) => {
-                                const order = orders[matchProps.params.id];
-                                console.log(matchProps.params.id);
-                                if (order) {
-                                  return (
-                                    <OrderDetail
-                                      order={order}
-                                      actionTitle={'FOOBAR'}
-                                      actionHandler={
-                                        () => this.orderDetailAction()
-                                      } />
-                                  )
-                                } else {
-                                  return (
-                                    <NotFound />
-                                  )
-                                }
-                              }
-                            }
-                          />
                         </div>
                       :
-                        <Match
-                          exactly
-                          pattern="/"
-                          render={() =>
-                            <SignIn
-                              submit={this.submit}
-                              setStateVal={this.setStateVal}
-                              message={message}
-                              messageStatusCode={messageStatusCode}
-                              toggleMessage={this.toggleMessage}
-                            />
-                          }
-                        />
+                        <div>
+                          <Match
+                            exactly
+                            pattern="/"
+                            render={() => <SignIn signIn={this.signIn} />}
+                          />
+                          <Match
+                            exactly
+                            pattern="/forgot"
+                            component={Forgot}
+                          />
+                        </div>
                   }
                   <Miss component={NotFound} />
                 </div>
@@ -216,3 +151,7 @@ class App extends Component {
 }
 
 export default App;
+
+App.contextTypes = {
+  router: PropTypes.object
+};

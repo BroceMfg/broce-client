@@ -55,32 +55,105 @@
 
 .button {
   @include button();
-  width: calc(45% - (#{$button_border_size}*2) - 0.7em);
+  width: calc(40.5% - (#{$button_border_size}*2) - 0.7em);
   height: 100%;
-  margin-left: 0.2em;
-  margin-right: 0.4em;
   float: left;
   height: 35px;
   &:last-child {
     margin-left: 0;
     margin-right: 0.2em;
   }
-  &.refresh {
+  &:focus {
+    outline: none;
+  }
+  &.dashboard-controls-button {
     margin-top: 0;
-    background-image: url('../../img/refresh.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: calc(26% - (#{$button_border_size}*2) - 0.7em);
+    width: calc(21% - (#{$button_border_size}*2) - 0.9em);
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .icon-wrapper {
+      border-bottom: solid 1px transparent;
+      display: block;
+      width: 2.5rem;
+      max-height: 1.6rem;
+      padding: 0.18rem 0;
+      color: $c7;
+    }
+    &:hover {
+      .icon-wrapper {
+        border-bottom: solid 1px $c8;
+        color: $c8;
+      }
+    }
+    i {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+    }
+  }
+  &.refresh {
+    // margin-left: calc(9% - (#{$button_border_size}*2) - 0.9em);
+  }
+  &.notifications {
+    .icon-wrapper {
+      position: relative;
+      .new-notifs-count {
+        background-color: $error_red;
+        border-radius: 100%;
+        color: $c1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+        font-style: italic;
+        font-weight: 100;
+        padding: 0.15rem;
+        position: absolute;
+        right: -0.275rem;
+        top: -0.4rem;
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+    }
   }
   &.settings {
-    margin-top: 0;
-    background-image: url('../../img/settings.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: calc(26% - (#{$button_border_size}*2) - 0.7em);
     margin-right: 1em;
+    text-decoration: none;
+    color: inherit;
+  }
+  &.logout {
+    // outline: solid 1px red;
+    font-size: 1em;
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span {
+      border-bottom: solid 1px transparent;
+      margin-top: 0.425rem;
+      padding-bottom: 0.3rem;
+      color: $c7;
+      font-style: italic;
+    }
+    &:hover {
+      span {
+        border-bottom: solid 1px $c8;
+        color: $c8;
+      }
+    }
+    span {
+      // outline: solid 1px red;
+      width: 74%;
+      display: block;
+    }
   }
 }
 
