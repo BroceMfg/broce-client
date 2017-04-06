@@ -166,7 +166,7 @@
         position: absolute;
         top: 0;
         right: 0;
-        z-index: 10; }
+        z-index: 1; }
       .Order .status-message.controls-wrapper.accept-controls {
         height: 2.875em;
         margin-right: 0.3em; }
@@ -290,7 +290,8 @@
           border-color: #F6F6F6;
           height: 3em;
           font-size: 16px;
-          font-weight: 500; }
+          font-weight: 500;
+          margin-right: 0.4em; }
           .Order .status-message.controls-wrapper.shipping-controls button span {
             display: block;
             width: 100%; }

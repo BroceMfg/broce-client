@@ -212,7 +212,7 @@ class Order extends React.Component {
     this.request(
       'PUT',
       `${this.props.apiUrl}/orders/${this.props.order.id}/status?type=priced`,
-      null,
+      undefined,
       (response) => {
         if (JSON.parse(response).success) {
           // success
@@ -245,10 +245,6 @@ class Order extends React.Component {
       Object.keys(inputs).forEach((key) => {
         data[inputs[key].name] = inputs[key].value;
       });
-      let formData = '';
-      Object.keys(data).forEach((key) => {
-        formData += `${key}=${data[key]}&`;
-      });
 
       const handleError = () => {
         this.props.toggleMessage('Error: Please try again.', 'error');
@@ -258,7 +254,7 @@ class Order extends React.Component {
       this.request(
         'POST',
         `${this.props.apiUrl}/orders/${this.props.order.id}/discount`,
-        formData,
+        data,
         (response) => {
           if (JSON.parse(response).success) {
             // success
@@ -327,11 +323,6 @@ class Order extends React.Component {
   // client order for accepting a "priced" order
   // this will promote the order's OrderStatus to "ordered"
   acceptOrder(form) {
-    let formData = ''
-    Object.keys(form).forEach(key => {
-      formData += `${key}=${form[key]}&`;
-    });
-
     const orderDetailIds = this.props.order.Order_Details
       .map((orderDetail) => orderDetail.id);
 
@@ -341,7 +332,7 @@ class Order extends React.Component {
       'POSt',
       `${this.props.apiUrl}/orders/details/${orderDetailIds.join(',')}` +
         `/shippingaddress?statusType=${statusType}`,
-      formData,
+      form,
       (response) => {
         if (JSON.parse(response).success) {
           // success
@@ -360,11 +351,6 @@ class Order extends React.Component {
   }
 
   addShippingDetail(form) {
-    let formData = ''
-    Object.keys(form).forEach(key => {
-      formData += `${key}=${form[key]}&`;
-    });
-
     const orderDetailIds = this.props.order.Order_Details
       .map((orderDetail) => orderDetail.id);
 
@@ -374,7 +360,7 @@ class Order extends React.Component {
       'PUT',
       `${this.props.apiUrl}/orders/details/${orderDetailIds.join(',')}` +
         `?statusType=${statusType}`,
-      formData,
+      form,
       (response) => {
         if (JSON.parse(response).success) {
           // success

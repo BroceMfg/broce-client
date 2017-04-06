@@ -101,7 +101,8 @@
       padding: 0 1.4rem;
       margin: 0.6rem 0.8rem 0.8rem auto; }
     .Loading.hidden {
-      opacity: 0.25; }
+      opacity: 0.25;
+      z-index: -10; }
       .Loading.hidden .inner .content {
         transition: all 0.25s ease-in-out;
         transform: translateX(calc(100% + 2rem)); }
@@ -114,10 +115,8 @@
     min-height: 2em;
     background-color: #9A9A9A;
     margin-left: -0.2em; }
-  .Loading.hidden {
-    z-index: -10; }
-    .Loading.hidden .inner .content {
-      transform: translateX(calc(-100% - 2rem)); }
+  .Loading.hidden .inner .content {
+    transform: translateX(calc(-100% - 2rem)); }
 
 .sk-fading-circle {
   display: inline-block;

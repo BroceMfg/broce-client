@@ -24,5 +24,7 @@
     "1": "admin"
   },
   "defURole": "client",
-  "showStockOrderForm": false
+  "showStockOrderForm": false,
+  "showNotifMenu": false,
+  "notifs": []
 }

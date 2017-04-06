@@ -41,7 +41,7 @@ class AddPriceForm extends React.Component {
       this.request(
         'PUT',
         `${this.props.apiUrl}/orders/details/${this.props.orderDetail.id}`,
-        `price=${price}`,
+        { price },
         (response) => {
           if (JSON.parse(response).success) {
             // console.log(this.props.orderDetail);

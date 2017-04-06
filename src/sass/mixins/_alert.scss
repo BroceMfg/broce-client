@@ -20,6 +20,7 @@
     }
     &.hidden {
       opacity: 0.25;
+      z-index: -10;
       .inner {
         .content {
           transition: all 0.25s ease-in-out;

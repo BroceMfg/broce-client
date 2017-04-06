@@ -10,6 +10,9 @@ class OrderList extends React.Component {
     this.getNextStatusType = this.getNextStatusType.bind(this);
     this.promoteOrder = this.promoteOrder.bind(this);
     this.renderSubLists = this.renderSubLists.bind(this);
+    this.state = {
+      key: 1
+    };
   }
 
   // provide a statusType OR an updatedOrder
@@ -24,9 +27,6 @@ class OrderList extends React.Component {
       this.props.setStateVal({
         orders: Object.assign(this.props.orders, {}, newStatusTypeList)
       });
-    } else if (updatedOrder && currentStatusType) {
-      const subList = this.props.orders[currentStatusType];
-      console.log(subList);
     }
   }
 
@@ -41,7 +41,7 @@ class OrderList extends React.Component {
     if (this.props.admin) {
       const nextStatusType = this.getNextStatusType(currentStatusType);
       delete orders[currentStatusType][order.id];
-      if (orders[currentStatusType][0] === undefined) {
+      if (!orders[currentStatusType][Object.keys(orders[currentStatusType])[0]]) {
         delete orders[currentStatusType];
       }
       orders[nextStatusType] = orders[nextStatusType] || {};
@@ -52,6 +52,11 @@ class OrderList extends React.Component {
       orders[new Date(order.createdAt).getTime()] = updatedOrder;
     }
     this.props.setStateVal({ orders });
+    // force update
+    this.setState({
+      ...this.state,
+      key: this.state.key + 1
+    });
   }
 
   renderSubLists() {
@@ -98,11 +103,11 @@ class OrderList extends React.Component {
   }
 
   render() {
-    console.log('@@@@@@@');
-    console.log(this.props.orders);
-    console.log('@@@@@@@');
     return (
-      <div className={`OrderList${this.props.admin ? ' admin' : ''}`}>
+      <div
+        className={`OrderList${this.props.admin ? ' admin' : ''}`}
+        key={this.state.key}
+      >
         {this.renderSubLists()}
       </div>
     )

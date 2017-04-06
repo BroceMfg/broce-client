@@ -79,53 +79,26 @@
   font-style: italic;
   font-weight: 200;
   src: local("Roboto-ThinItalic"), url(../../fonts/Roboto-ThinItalic.ttf); }
-.TogAlert {
-  right: 0; }
-  .TogAlert {
-    position: fixed;
-    top: 0;
-    opacity: 1;
-    transition: all 0.25s ease-in-out;
-    font-weight: 300;
-    color: #1F1F1F;
-    z-index: 100; }
-    .TogAlert .inner .content {
-      border-radius: 2px;
-      display: flex;
-      align-items: center;
-      text-align: left;
-      min-height: 2.8rem;
-      padding: 0 1.4rem;
-      margin: 0.6rem 0.8rem 0.8rem auto; }
-    .TogAlert.hidden {
-      opacity: 0.25;
-      z-index: -10; }
-      .TogAlert.hidden .inner .content {
-        transition: all 0.25s ease-in-out;
-        transform: translateX(calc(100% + 2rem)); }
-    .TogAlert.shown .inner .content {
-      transition: all 0.25s ease-in-out;
-      transform: translateX(0); }
-  .TogAlert .inner .content.success {
-    background: #81C784; }
-  .TogAlert .inner .content.error {
-    background: #E57373; }
-  .TogAlert .inner .content .button-wrapper {
-    margin-left: 1.4rem; }
-    .TogAlert .inner .content .button-wrapper button {
-      color: #3D3D3D;
-      border: none;
-      background-color: transparent;
-      border-bottom: solid 1px transparent;
-      cursor: pointer;
-      font-size: 1.2rem; }
-    .TogAlert .inner .content .button-wrapper button:hover {
-      border-bottom: solid 1px #3D3D3D;
-      color: #000000;
-      transition: 0.2s ease all; }
-    .TogAlert .inner .content .button-wrapper button:focus {
-      outline: none; }
-    .TogAlert .inner .content .button-wrapper button i {
-      font-weight: 100; }
+.NotifMenu {
+  position: absolute;
+  top: calc(100% + 1rem);
+  left: -12rem;
+  width: 24rem;
+  max-height: 20rem;
+  padding: 0.25rem 0;
+  background-color: #F6F6F6;
+  border: solid 1px #D7D7D7;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25); }
 
-/*# sourceMappingURL=TogAlert.css.map */
+.inner-content {
+  overflow: auto;
+  max-height: calc(20rem - 0.5rem); }
+
+.no-notifs {
+  outline: solid 1px red;
+  padding: 0.8rem 0;
+  font-size: 0.8rem;
+  font-style: italic; }
+
+/*# sourceMappingURL=NotifMenu.css.map */

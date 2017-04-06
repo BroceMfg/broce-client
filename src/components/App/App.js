@@ -8,6 +8,7 @@ import setStateVal from './middleware/set-state-val';
 import loading from './middleware/loading';
 import signIn from './middleware/sign-in';
 import logout from './middleware/logout';
+import togNotifMenu from './middleware/toggle-notifications';
 
 import Loading from './misc/Loading';
 import TogAlert from './misc/TogAlert';
@@ -32,6 +33,7 @@ class App extends Component {
     this.loading = loading.call(this);
     this.signIn = signIn.bind(this);
     this.logout = logout.bind(this);
+    this.togNotifMenu = togNotifMenu.bind(this);
     autoBind(this);
 
     this.state = Object.assign(
@@ -49,16 +51,18 @@ class App extends Component {
   render() {
     const {
       admin,
-      logErrs,
-      errMsg,
+      apiUrl,
+      currTogId,
       defErrMsg,
+      errMsg,
+      logErrs,
+      notifs,
+      orders,
+      showNotifMenu,
+      showStockOrderForm,
       togMsg,
       togStat,
-      currTogId,
-      orders,
-      apiUrl,
-      user,
-      showStockOrderForm
+      user
     } = this.state;
     return (
       <div className="App">
@@ -95,7 +99,12 @@ class App extends Component {
                             render={
                               () =>
                                 <div className="main-wrapper">
-                                  <Dashboard logout={this.logout} />
+                                  <Dashboard
+                                    logout={this.logout}
+                                    showNotifMenu={showNotifMenu}
+                                    togNotifMenu={this.togNotifMenu}
+                                    notifs={notifs}
+                                  />
                                   <Landing
                                     admin={admin}
                                     apiUrl={apiUrl}
