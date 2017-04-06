@@ -21,7 +21,7 @@ class OrderList extends React.Component {
       newList[order.id] = order;
       let newStatusTypeList = {};
       newStatusTypeList[statusType] = newList;
-      this.setStateVal({
+      this.props.setStateVal({
         orders: Object.assign(this.props.orders, {}, newStatusTypeList)
       });
     } else if (updatedOrder && currentStatusType) {
