@@ -35,10 +35,7 @@ const Dashboard = props => (
                 props.notifs.length > 0
                   ?
                     <div className="new-notifs-count">
-                      {
-                        // props.notifs.filter(n => n.new).length
-                      }
-                      8
+                      {props.notifs.filter(n => n.new).length}
                     </div>
                   : null
               }
