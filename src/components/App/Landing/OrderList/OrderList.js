@@ -89,6 +89,7 @@ class OrderList extends React.Component {
                 showStockOrderForm={this.props.showStockOrderForm}
                 fetchOrders={this.props.fetchOrders}
                 show={this.props.viewBy === 'all' || this.props.viewBy === statusType}
+                header={this.props.header}
               />
             );
           })

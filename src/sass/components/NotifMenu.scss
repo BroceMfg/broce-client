@@ -24,3 +24,46 @@
   font-size: 0.8rem;
   font-style: italic;
 }
+
+.notif {
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  padding: 0 1.5rem;
+  text-transform: capitalize;
+  text-decoration: none;
+  width: calc(100% - 3rem);
+  height: 2.4rem;
+  &:not(:first-child) {
+    border-top: solid 1px $c2;
+  }
+  &:not(:last-child) {
+    padding-bottom: 0.1rem;
+  }
+}
+
+.new-wrapper, .order-id-wrapper, .order-status-wrapper {
+  display: inline-block;
+  font-weight: 300;
+}
+
+.order-id-wrapper {
+  margin: 0 0.6rem 0 0.8rem;
+}
+
+.order-status-wrapper {
+  font-style: italic;
+}
+
+.new-wrapper {
+  background-color: $blue4;
+  border-radius: 100%;
+  color: transparent;
+  width: 0.95rem;
+  height: 0.95rem;
+  &:not(.new) {
+    background-color: $c2;
+  }
+}

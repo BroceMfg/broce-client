@@ -1,0 +1,14 @@
+@import '../partials/variables';
+
+.OrderDetail {
+  .inner-content, .no-order-found {
+    display: block;
+  }
+  .OrderList {
+    width: 100%;
+    max-width: 50rem;
+    .OrderSubList {
+      padding-top: 0.4rem;
+    }
+  }
+}

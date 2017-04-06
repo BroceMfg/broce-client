@@ -1,8 +1,11 @@
 import React, { Component, PropTypes } from 'react';
+
 import fetchOrders from './middleware/fetch-orders';
+import fetchNotifs from './middleware/fetch-notifs';
 import changeOrderView from './middleware/change-order-view';
 import showOtherForm from './middleware/show-other-form';
 
+import OrderDetail from '../OrderDetail/OrderDetail';
 import FilterByBar from './FilterByBar/FilterByBar';
 import OrderList from './OrderList/OrderList';
 import FormWrapper from './FormWrapper/FormWrapper';
@@ -18,39 +21,61 @@ class Landing extends Component {
 
   componentDidMount() {
     fetchOrders.call(this, this.props.loading);
+    fetchNotifs.call(this, this.props.loading);
   }
 
   render() {
     return (
-      <div className="Landing">
-        <FilterByBar
-          admin={this.props.admin}
-          orderSubGroups={Object.keys(this.props.orders)}
-          viewBy={this.props.viewBy}
-          changeOrderView={this.changeOrderView}
-        />
-        <OrderList
-          admin={this.props.admin}
-          apiUrl={this.props.apiUrl}
-          orders={this.props.orders}
-          setStateVal={this.props.setStateVal}
-          statusTypes={this.props.statusTypes}
-          showOtherForm={this.showOtherForm}
-          showStockOrderForm={this.props.showStockOrderForm}
-          viewBy={this.props.viewBy}
-          toggleMessage={this.props.toggleMessage}
-        />
+      <div
+        className={`Landing${this.props.showOrderDetail
+          ? ' showingOrderDetail' : ''}`}
+      >
         {
-          !this.props.admin
+          this.props.showOrderDetail
             ?
-              <FormWrapper
+              <OrderDetail
+                admin={this.props.admin}
                 apiUrl={this.props.apiUrl}
+                loading={this.props.loading}
+                order={this.props.orders[this.props.showOrderDetail]}
+                setStateVal={this.props.setStateVal}
+                statusTypes={this.props.statusTypes}
                 showOtherForm={this.showOtherForm}
                 showStockOrderForm={this.props.showStockOrderForm}
                 toggleMessage={this.props.toggleMessage}
               />
             : null
         }
+        <div className="landing-inner">
+          <FilterByBar
+            admin={this.props.admin}
+            orderSubGroups={Object.keys(this.props.orders)}
+            viewBy={this.props.viewBy}
+            changeOrderView={this.changeOrderView}
+          />
+          <OrderList
+            admin={this.props.admin}
+            apiUrl={this.props.apiUrl}
+            orders={this.props.orders}
+            setStateVal={this.props.setStateVal}
+            statusTypes={this.props.statusTypes}
+            showOtherForm={this.showOtherForm}
+            showStockOrderForm={this.props.showStockOrderForm}
+            viewBy={this.props.viewBy}
+            toggleMessage={this.props.toggleMessage}
+          />
+          {
+            !this.props.admin
+              ?
+                <FormWrapper
+                  apiUrl={this.props.apiUrl}
+                  showOtherForm={this.showOtherForm}
+                  showStockOrderForm={this.props.showStockOrderForm}
+                  toggleMessage={this.props.toggleMessage}
+                />
+              : null
+          }
+        </div>
       </div>
     );
   }
@@ -67,8 +92,13 @@ Landing.propTypes = {
   }).isRequired,
   orders: PropTypes.shape({}).isRequired,
   setStateVal: PropTypes.func.isRequired,
+  showOrderDetail: PropTypes.string,
   showStockOrderForm: PropTypes.bool.isRequired,
   statusTypes: PropTypes.shape({}).isRequired,
   toggleMessage: PropTypes.func.isRequired,
-  viewBy: PropTypes.string.isRequired
+  viewBy: PropTypes.string.isRequired,
+};
+
+Landing.defaultProps = {
+  showOrderDetail: undefined
 };

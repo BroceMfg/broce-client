@@ -32,7 +32,7 @@ const Dashboard = props => (
             <div className="icon-wrapper">
               <i className="mdi mdi-bell-outline" />
               {
-                props.notifs.length > 0
+                props.notifs.filter(n => n.new).length > 0
                   ?
                     <div className="new-notifs-count">
                       {props.notifs.filter(n => n.new).length}
@@ -41,7 +41,7 @@ const Dashboard = props => (
               }
               {
                 props.showNotifMenu
-                  ? <NotifMenu notifs={props.notifs} />
+                  ? <NotifMenu admin={props.admin} notifs={props.notifs} />
                   : null
               }
             </div>
@@ -71,10 +71,15 @@ const Dashboard = props => (
 export default Dashboard;
 
 Dashboard.propTypes = {
+  admin: PropTypes.bool.isRequired,
   logout: PropTypes.func.isRequired,
   showNotifMenu: PropTypes.bool.isRequired,
   togNotifMenu: PropTypes.func.isRequired,
   notifs: PropTypes.arrayOf(PropTypes.shape({})).isRequired
+};
+
+Dashboard.defaultProps = {
+  admin: false
 };
 
 Dashboard.contextTypes = {

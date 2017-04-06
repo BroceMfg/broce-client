@@ -58,7 +58,7 @@ module.exports = function fetchOrders(loading) {
             orders[status.type] = orders[status.type] || {};
             orders[status.type][order.id] = newOrder;
           } else {
-            orders[new Date(order.createdAt).getTime()] = newOrder;
+            orders[order.id] = newOrder;
           }
         });
       loading.off();
