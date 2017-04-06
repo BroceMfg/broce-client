@@ -11,7 +11,7 @@ const NotifMenu = props => (
           ?
             props.notifs.map(n => (
               <Link
-                to={`/orders/${n.OrderId}`}
+                to={`/orders/${n.OrderId}/${n.status}`}
                 key={Math.random()}
                 className="notif"
                 title={`Go To Order #${n.OrderId}`}

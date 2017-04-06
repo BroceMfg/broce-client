@@ -48,7 +48,7 @@ class App extends Component {
     localStorage.setItem('state', JSON.stringify(nextState));
   }
 
-  renderMain(showOrderDetail) {
+  renderMain(showOrderDetail, showOrderDetailStatus) {
     const precondition = showOrderDetail !== undefined
       && typeof showOrderDetail === 'string';
     const showOD = precondition ? showOrderDetail : undefined;
@@ -71,6 +71,7 @@ class App extends Component {
           toggleMessage={this.toggleMessage}
           viewBy={this.state.viewBy}
           showOrderDetail={showOD}
+          showOrderDetailStatus={showOrderDetailStatus || 'quote'}
         />
       </div>
     );
@@ -122,9 +123,9 @@ class App extends Component {
                           />
                           <Match
                             exactly
-                            pattern="/orders/:id"
+                            pattern="/orders/:id/:status"
                             render={matchProps =>
-                              this.renderMain(matchProps.params.id)
+                              this.renderMain(matchProps.params.id, matchProps.params.status)
                             }
                           />
                           <Match

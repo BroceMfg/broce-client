@@ -37,7 +37,13 @@ class Landing extends Component {
                 admin={this.props.admin}
                 apiUrl={this.props.apiUrl}
                 loading={this.props.loading}
-                order={this.props.orders[this.props.showOrderDetail]}
+                order={
+                  this.props.admin
+                    && this.props.orders
+                    && (!this.props.admin || this.props.orders[this.props.showOrderDetailStatus])
+                    ? this.props.orders[this.props.showOrderDetailStatus][parseInt(this.props.showOrderDetail, 10)]
+                    : this.props.orders[this.props.showOrderDetail]
+                }
                 setStateVal={this.props.setStateVal}
                 statusTypes={this.props.statusTypes}
                 showOtherForm={this.showOtherForm}
@@ -93,6 +99,7 @@ Landing.propTypes = {
   orders: PropTypes.shape({}).isRequired,
   setStateVal: PropTypes.func.isRequired,
   showOrderDetail: PropTypes.string,
+  showOrderDetailStatus: PropTypes.string.isRequired,
   showStockOrderForm: PropTypes.bool.isRequired,
   statusTypes: PropTypes.shape({}).isRequired,
   toggleMessage: PropTypes.func.isRequired,

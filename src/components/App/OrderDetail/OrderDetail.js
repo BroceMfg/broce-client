@@ -31,7 +31,12 @@ class OrderDetail extends Component {
                 {
                   (() => {
                     const orders = {};
-                    orders[this.props.order.id] = this.props.order;
+                    if (this.props.admin) {
+                      orders[this.props.order.status] = {};
+                      orders[this.props.order.status][this.props.order.id] = this.props.order;
+                    } else {
+                      orders[this.props.order.id] = this.props.order;
+                    }
                     return (
                       <OrderList
                         admin={this.props.admin}
@@ -69,7 +74,8 @@ OrderDetail.propTypes = {
     off: PropTypes.func.isRequired
   }).isRequired,
   order: PropTypes.shape({
-    id: PropTypes.number.isRequired
+    id: PropTypes.number.isRequired,
+    status: PropTypes.string.isRequired,
   }),
   setStateVal: PropTypes.func.isRequired,
   showStockOrderForm: PropTypes.bool.isRequired,
