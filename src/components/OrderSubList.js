@@ -122,6 +122,7 @@ class OrderSubList extends React.Component {
                                 showOtherForm={this.props.showOtherForm}
                                 showStockOrderForm={this.props.showStockOrderForm}
                                 fetchOrders={this.props.fetchOrders}
+                                showDetails={this.props.showDetails}
                               />
                             ))
                           }

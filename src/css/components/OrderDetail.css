@@ -79,12 +79,24 @@
   font-style: italic;
   font-weight: 200;
   src: local("Roboto-ThinItalic"), url(../../fonts/Roboto-ThinItalic.ttf); }
-.OrderDetail .inner-content, .OrderDetail .no-order-found {
-  display: block; }
-.OrderDetail .OrderList {
-  width: 100%;
-  max-width: 50rem; }
-  .OrderDetail .OrderList .OrderSubList {
-    padding-top: 0.4rem; }
+.OrderDetail {
+  overflow: visible; }
+  .OrderDetail .inner-content, .OrderDetail .no-order-found {
+    display: block; }
+  .OrderDetail .OrderList {
+    width: 100%;
+    max-width: 50rem; }
+    .OrderDetail .OrderList .OrderSubList {
+      padding-top: 0.4rem; }
+
+.no-order-found {
+  margin: 1.2rem 2rem;
+  font-size: 1.1rem;
+  font-style: italic;
+  padding-bottom: 0.6rem;
+  padding-left: 0.3rem;
+  border-bottom: solid 1px #5C5C5C;
+  width: auto;
+  max-width: 8rem; }
 
 /*# sourceMappingURL=OrderDetail.css.map */

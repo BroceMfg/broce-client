@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
 
 import '../../../../css/components/NotifMenu.css';
 
@@ -10,8 +9,8 @@ const NotifMenu = props => (
         props.notifs.length > 0
           ?
             props.notifs.map(n => (
-              <Link
-                to={`/orders/${n.OrderId}/${n.status}`}
+              <a
+                href={`/orders/${n.OrderId}/${n.status}`}
                 key={Math.random()}
                 className="notif"
                 title={`Go To Order #${n.OrderId}`}
@@ -32,7 +31,7 @@ const NotifMenu = props => (
                     }
                   </span>
                 </div>
-              </Link>
+              </a>
             ))
           :
             <div className="no-notifs">

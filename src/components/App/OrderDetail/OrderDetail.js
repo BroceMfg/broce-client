@@ -10,8 +10,25 @@ class OrderDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hasDoneHasSeen: false
+      hasDoneHasSeen: false,
+      timestamp: Date.now()
     };
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    // re-render the ItemForm component with new form data
+    // check if timestamp hasn't been updated in the past
+    // .01 seconds so that infinite loop doesn't occur
+    if (Date.now() - this.state.timestamp > 10) {
+      console.log('UPDATING');
+      console.log(nextState);
+      this.setState({
+        ...nextState,
+        timestamp: Date.now()
+      });
+      return true;
+    }
+    return false;
   }
 
   componentWillUpdate(nextProps) {
@@ -23,11 +40,11 @@ class OrderDetail extends Component {
 
   render() {
     return (
-      <div className="OrderDetail">
+      <div className="OrderDetail" key={this.state.timestamp}>
         {
           this.props.order
             ?
-              <div className="inner-content">
+              <div className="order-detail-inner-content">
                 {
                   (() => {
                     const orders = {};
@@ -49,6 +66,7 @@ class OrderDetail extends Component {
                         toggleMessage={this.props.toggleMessage}
                         viewBy={'all'}
                         header={'none'}
+                        showDetails
                       />
                     );
                   })()

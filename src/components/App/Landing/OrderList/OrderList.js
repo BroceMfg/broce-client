@@ -90,6 +90,7 @@ class OrderList extends React.Component {
                 fetchOrders={this.props.fetchOrders}
                 show={this.props.viewBy === 'all' || this.props.viewBy === statusType}
                 header={this.props.header}
+                showDetails={this.props.showDetails}
               />
             );
           })

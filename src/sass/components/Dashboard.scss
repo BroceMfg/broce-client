@@ -47,6 +47,7 @@
   float: right;
   width: calc(100% - #{$Dashboard_header_width} - (#{$Dashboard_padding}/2));
   max-width: 32em;
+  min-width: 20em;
   margin: auto;
   height: 100%;
   position: absolute;
@@ -55,7 +56,8 @@
 
 .button {
   @include button();
-  width: calc(40.5% - (#{$button_border_size}*2) - 0.7em);
+  width: calc(39.5% - (#{$button_border_size}*2) - 0.7em);
+  min-width: 50px;
   height: 100%;
   float: left;
   height: 35px;
@@ -68,7 +70,7 @@
   }
   &.dashboard-controls-button {
     margin-top: 0;
-    width: calc(21% - (#{$button_border_size}*2) - 0.9em);
+    width: calc(18% - (#{$button_border_size}*2) - 0.9em);
     background-color: transparent;
     border: none;
     border-radius: 0;
@@ -121,10 +123,12 @@
       }
     }
   }
-  &.settings {
-    margin-right: 1em;
+  &.home, &.settings {
     text-decoration: none;
     color: inherit;
+  }
+  &.settings {
+    margin-right: 1em;
   }
   &.logout {
     // outline: solid 1px red;
@@ -136,6 +140,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    // width: 6.125rem;
     span {
       border-bottom: solid 1px transparent;
       margin-top: 0.425rem;
@@ -158,6 +163,10 @@
 }
 
 @media screen and (max-width: 768px) {
+  .button {
+    width: calc(30.5% - (#{$button_border_size}*2) - 0.7em);
+  }
+
   .Dashboard {
     position: relative;
     height: auto;

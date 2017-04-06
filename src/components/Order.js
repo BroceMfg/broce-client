@@ -29,7 +29,7 @@ class Order extends React.Component {
     this.renderAddAnoterPartForm = this.renderAddAnoterPartForm.bind(this);
     this.request = req.bind(this);
     this.state = {
-      showDetails: false,
+      showDetails: this.props.showDetails || false,
       showControls: false,
       showDiscount: false,
       showAddAnotherPart: false,
@@ -218,6 +218,9 @@ class Order extends React.Component {
           // success
           this.props.promoteOrder(this.props.order, this.props.statusType);
           this.props.toggleMessage('Prices Submitted Successfully.', 'success');
+          setTimeout(() => {
+            window.location = '/';
+          }, 1000);
         } else {
           // handle error
           console.log('internal server error');
@@ -287,8 +290,9 @@ class Order extends React.Component {
             this.props.toggleMessage(
               msgPt1 +
               `Order #${this.props.order.id}.`,
-             'success'
-           );
+             'success',
+             1000
+            );
           } else {
             handleError();
           }
@@ -338,6 +342,9 @@ class Order extends React.Component {
           // success
           this.props.promoteOrder(this.props.order, this.props.statusType);
           this.props.toggleMessage('Thank You', 'success');
+          setTimeout(() => {
+            window.location = '/';
+          }, 1000);
         } else {
           // handle error
           console.log('internal server error');
@@ -366,6 +373,9 @@ class Order extends React.Component {
           // success
           this.props.promoteOrder(this.props.order, this.props.statusType);
           this.props.toggleMessage('Added Shipping Details.', 'success');
+          setTimeout(() => {
+            window.location = '/';
+          }, 1000);
         } else {
           // handle error
           console.log('internal server error');
@@ -411,10 +421,9 @@ class Order extends React.Component {
                 `New Part Added to Order #${this.props.order.id}. Thank you!`,
                 'success'
               );
-              setTimeout(
-                () => { this.props.fetchOrders(); },
-                750
-              );
+              setTimeout(() => {
+                window.location.reload(false);
+              }, 750);
             } else {
               handleErr();
             }
@@ -480,14 +489,23 @@ class Order extends React.Component {
           <div className="oStatus">
             <h3><span className="oId">#{order.id}</span> | {order.status}</h3>
           </div>
-          <div><h4>Order created on: {new Date(order.createdAt).toLocaleDateString("en-US")}</h4></div>
-          <button className="reveal-details" onClick={this.toggleDetails}>
-            {
-              this.state.showDetails
-                ? <span>Hide Details</span>
-                : <span>Show Details</span>
-            }
-          </button>
+          <div>
+            <h4>
+              Order created on: {new Date(order.createdAt).toLocaleDateString('en-US')}
+            </h4>
+          </div>
+          {
+            !this.props.showDetails
+              ?
+                <button className="reveal-details" onClick={this.toggleDetails}>
+                  {
+                    this.state.showDetails
+                      ? <span>Hide Details</span>
+                      : <span>Show Details</span>
+                  }
+                </button>
+              : null
+          }
           <ReactCSSTransitionGroup
             className={
               `OrderPart-wrapper ${this.state.showDetails ? 'show' : 'hide'}`

@@ -42,7 +42,14 @@ class Landing extends Component {
                     && this.props.orders
                     && (!this.props.admin || this.props.orders[this.props.showOrderDetailStatus])
                     ? this.props.orders[this.props.showOrderDetailStatus][parseInt(this.props.showOrderDetail, 10)]
-                    : this.props.orders[this.props.showOrderDetail]
+                    : (() => {
+                      const key = Object.keys(this.props.orders)
+                        .filter(k => k.split('|')[1] === this.props.showOrderDetail)[0];
+                      if (key) {
+                        return this.props.orders[key];
+                      }
+                      return undefined;
+                    })()
                 }
                 setStateVal={this.props.setStateVal}
                 statusTypes={this.props.statusTypes}

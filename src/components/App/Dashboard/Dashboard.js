@@ -13,6 +13,14 @@ const Dashboard = props => (
       </h1>
       <div className="button-container">
         <div className="icon-buttons-wrapper">
+          <a
+            className="button dashboard-controls-button home"
+            href="/"
+          >
+            <div className="icon-wrapper">
+              <i className="mdi mdi-home"></i>
+            </div>
+          </a>
           <button
             onClick={() => {
               window.location.reload(true);

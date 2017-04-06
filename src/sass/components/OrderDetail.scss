@@ -1,6 +1,7 @@
 @import '../partials/variables';
 
 .OrderDetail {
+  overflow: visible;
   .inner-content, .no-order-found {
     display: block;
   }
@@ -11,4 +12,15 @@
       padding-top: 0.4rem;
     }
   }
+}
+
+.no-order-found {
+  margin: 1.2rem 2rem;
+  font-size: 1.1rem;
+  font-style: italic;
+  padding-bottom: 0.6rem;
+  padding-left: 0.3rem;
+  border-bottom: solid 1px $c6;
+  width: auto;
+  max-width: 8rem;
 }
