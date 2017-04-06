@@ -1,0 +1,27 @@
+@import '../partials/variables';
+@import '../mixins/icon_button';
+@import '../mixins/alert';
+
+.TogAlert {
+  @include alert();
+  right: 0;
+  .inner {
+    .content {
+      &.success {
+        background: $success_green;
+      }
+      &.error {
+        background: $error_red;
+      }
+      .button-wrapper {
+        margin-left: 1.4rem;
+        button {
+          @include icon_button($c7, $c9);
+          i {
+            font-weight: 100;
+          }
+        }
+      }
+    }
+  }
+}

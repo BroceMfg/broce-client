@@ -1,0 +1,43 @@
+@import '../partials/variables';
+
+.FilterByBar {
+  .filtering-options {
+    margin: 0.5em auto 1.2rem;
+    width: 94%;
+    display: flex;
+    align-items: center;
+    max-width: 940px;
+    color: $c8;
+    .filter-by-wrapper {
+      margin-right: 0.6rem;
+      font-size: 1.2rem;
+    }
+    .item {
+      margin: 0 0.6rem;
+      button {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        font-size: 0.9rem;
+        color: $c6;
+        border-bottom: solid 1px $c6;
+        font-weight: 300;
+        text-transform: capitalize;
+        &:hover {
+          color: $primary_blue;
+          border-bottom: solid 1px $primary_blue;
+        }
+        &:focus {
+          outline: none;
+        }
+      }
+      &.active {
+        button {
+          color: $primary_blue;
+          border-bottom: solid 1px $primary_blue_highlight;
+          font-style: italic;
+        }
+      }
+    }
+  }
+}

@@ -1,12 +1,12 @@
 import React from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import OrderPart from './OrderPart';
 import ShippingDetailForm from './ShippingDetailForm';
 import ShippingAddressForm from './ShippingAddressForm';
 import Input from './Input';
-import StockOrderForm from './StockOrderForm';
-import QuoteForm from './QuoteForm';
-import { post, put, parseJSONtoFormData } from '../middleware/XMLHTTP';
+import StockOrderForm from './App/Landing/FormWrapper/StockOrderForm/StockOrderForm';
+import QuoteForm from './App/Landing/FormWrapper/QuoteForm/QuoteForm';
+import req from './middleware/request';
 
 import '../css/components/Order.css';
 
@@ -27,6 +27,7 @@ class Order extends React.Component {
     this.acceptOrder = this.acceptOrder.bind(this);
     this.addShippingDetail = this.addShippingDetail.bind(this);
     this.renderAddAnoterPartForm = this.renderAddAnoterPartForm.bind(this);
+    this.request = req.bind(this);
     this.state = {
       showDetails: false,
       showControls: false,
@@ -208,9 +209,10 @@ class Order extends React.Component {
   // admin function to promote order to the "priced" OrderStatus
   // only available after pricing each item in an order
   finalizeOrder() {
-    put(
+    this.request(
+      'PUT',
       `${this.props.apiUrl}/orders/${this.props.order.id}/status?type=priced`,
-      null,
+      undefined,
       (response) => {
         if (JSON.parse(response).success) {
           // success
@@ -243,19 +245,16 @@ class Order extends React.Component {
       Object.keys(inputs).forEach((key) => {
         data[inputs[key].name] = inputs[key].value;
       });
-      let formData = '';
-      Object.keys(data).forEach((key) => {
-        formData += `${key}=${data[key]}&`;
-      });
 
       const handleError = () => {
         this.props.toggleMessage('Error: Please try again.', 'error');
       };
 
       const discount = data.discount !== '0' ? data.discount : null;
-      post(
+      this.request(
+        'POST',
         `${this.props.apiUrl}/orders/${this.props.order.id}/discount`,
-        formData,
+        data,
         (response) => {
           if (JSON.parse(response).success) {
             // success
@@ -324,20 +323,16 @@ class Order extends React.Component {
   // client order for accepting a "priced" order
   // this will promote the order's OrderStatus to "ordered"
   acceptOrder(form) {
-    let formData = ''
-    Object.keys(form).forEach(key => {
-      formData += `${key}=${form[key]}&`;
-    });
-
     const orderDetailIds = this.props.order.Order_Details
       .map((orderDetail) => orderDetail.id);
 
     const statusType = this.props.getNextStatusType(this.props.statusType);
 
-    post(
-      `${this.props.apiUrl}/orders/details/${orderDetailIds.join(',')}` + 
+    this.request(
+      'POSt',
+      `${this.props.apiUrl}/orders/details/${orderDetailIds.join(',')}` +
         `/shippingaddress?statusType=${statusType}`,
-      formData,
+      form,
       (response) => {
         if (JSON.parse(response).success) {
           // success
@@ -356,20 +351,16 @@ class Order extends React.Component {
   }
 
   addShippingDetail(form) {
-    let formData = ''
-    Object.keys(form).forEach(key => {
-      formData += `${key}=${form[key]}&`;
-    });
-
     const orderDetailIds = this.props.order.Order_Details
       .map((orderDetail) => orderDetail.id);
 
     const statusType = this.props.getNextStatusType(this.props.statusType);
 
-    put(
-      `${this.props.apiUrl}/orders/details/${orderDetailIds.join(',')}` + 
+    this.request(
+      'PUT',
+      `${this.props.apiUrl}/orders/details/${orderDetailIds.join(',')}` +
         `?statusType=${statusType}`,
-      formData,
+      form,
       (response) => {
         if (JSON.parse(response).success) {
           // success
@@ -406,9 +397,10 @@ class Order extends React.Component {
         this.props.toggleMessage('Error: Please try again.', 'error');
       };
       // just testing post and get out
-      post(
+      this.request(
+        'POST',
         `${this.props.apiUrl}/orders/${this.props.order.id}/part`,
-        parseJSONtoFormData(data),
+        data,
         (response) => {
           console.log('JSON.parse(response)');
           console.log(JSON.parse(response));
@@ -481,7 +473,7 @@ class Order extends React.Component {
     const discount = order.Order_Details[0].discount;
     return (
       <div className="Order" key={this.state.timestamp}>
-        { 
+        {
           this.renderStatusMessage()
         }
         <div className="content">
@@ -507,7 +499,7 @@ class Order extends React.Component {
           >
             {
               this.state.showDetails
-                ? 
+                ?
                   <div className="OrderParts-wrapper">
                     <div className="OrderParts-titles">
                       <div

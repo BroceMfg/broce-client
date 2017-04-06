@@ -1,0 +1,131 @@
+/***
+  COLOR PALLETTE
+***/
+/* Grey scale */
+/* MD Colors */
+/* Blues */
+/* Greens */
+/* Other Colors */
+/* Container colors */
+/* Element colors */
+/* --------------------- */
+/***
+  MEASUREMENTS
+***/
+/* Media query breakpoints */
+/* Container measurements */
+/* Element measurements */
+/* --------------------- */
+/***
+  FONTS
+***/
+@font-face {
+  font-family: 'Roboto';
+  font-style: bold;
+  font-weight: 900;
+  src: local("Roboto-Black"), url(../../fonts/Roboto-Black.ttf); }
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 900;
+  src: local("Roboto-BlackItalic"), url(../../fonts/Roboto-BlackItalic.ttf); }
+@font-face {
+  font-family: 'Roboto';
+  font-style: bold;
+  font-weight: 800;
+  src: local("Roboto-Bold"), url(../../fonts/Roboto-Bold.ttf); }
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 800;
+  src: local("Roboto-BoldItalic"), url(../../fonts/Roboto-BoldItalic.ttf); }
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 400;
+  src: local("Roboto-Italic"), url(../../fonts/Roboto-Italic.ttf); }
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: local("Roboto-Light"), url(../../fonts/Roboto-Light.ttf); }
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 300;
+  src: local("Roboto-LightItalic"), url(../../fonts/Roboto-LightItalic.ttf); }
+@font-face {
+  font-family: 'Roboto';
+  font-style: medium;
+  font-weight: 500;
+  src: local("Roboto-Medium"), url(../../fonts/Roboto-Medium.ttf); }
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 500;
+  src: local("Roboto-MediumItalic"), url(../../fonts/Roboto-MediumItalic.ttf); }
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Roboto-Regular"), url(../../fonts/Roboto-Regular.ttf); }
+@font-face {
+  font-family: 'Roboto';
+  font-style: thin;
+  font-weight: 200;
+  src: local("Roboto-Thin"), url(../../fonts/Roboto-Thin.ttf); }
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 200;
+  src: local("Roboto-ThinItalic"), url(../../fonts/Roboto-ThinItalic.ttf); }
+.TogAlert {
+  right: 0; }
+  .TogAlert {
+    position: fixed;
+    top: 0;
+    opacity: 1;
+    transition: all 0.25s ease-in-out;
+    font-weight: 300;
+    color: #1F1F1F;
+    z-index: 100; }
+    .TogAlert .inner .content {
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      text-align: left;
+      min-height: 2.8rem;
+      padding: 0 1.4rem;
+      margin: 0.6rem 0.8rem 0.8rem auto; }
+    .TogAlert.hidden {
+      opacity: 0.25;
+      z-index: -10; }
+      .TogAlert.hidden .inner .content {
+        transition: all 0.25s ease-in-out;
+        transform: translateX(calc(100% + 2rem)); }
+    .TogAlert.shown .inner .content {
+      transition: all 0.25s ease-in-out;
+      transform: translateX(0); }
+  .TogAlert .inner .content.success {
+    background: #81C784; }
+  .TogAlert .inner .content.error {
+    background: #E57373; }
+  .TogAlert .inner .content .button-wrapper {
+    margin-left: 1.4rem; }
+    .TogAlert .inner .content .button-wrapper button {
+      color: #3D3D3D;
+      border: none;
+      background-color: transparent;
+      border-bottom: solid 1px transparent;
+      cursor: pointer;
+      font-size: 1.2rem; }
+    .TogAlert .inner .content .button-wrapper button:hover {
+      border-bottom: solid 1px #3D3D3D;
+      color: #000000;
+      transition: 0.2s ease all; }
+    .TogAlert .inner .content .button-wrapper button:focus {
+      outline: none; }
+    .TogAlert .inner .content .button-wrapper button i {
+      font-weight: 100; }
+
+/*# sourceMappingURL=TogAlert.css.map */

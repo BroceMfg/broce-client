@@ -1,21 +1,24 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import _ from 'lodash';
-import gnum from '../helpers/global-enum';
-import MachineNumberBlock from './MachineNumberBlock';
-import { post } from '../middleware/XMLHTTP';
+import gnum from '../../../../../helpers/global-enum';
+import getInitialForm from './middleware/get-initial-form';
+import req from '../../../../middleware/request';
+import sub from '../../../../middleware/submit';
 
-import '../css/components/QuoteForm.css';
+import MachineNumberBlock from '../../../../MachineNumberBlock';
+
+import '../../../../../css/components/QuoteForm.css';
 
 class QuoteForm extends React.Component {
   constructor(props) {
     super(props);
-    this.form = {};
-    this.getInitialForm = this.getInitialForm.bind(this);
     this.updateForm = this.updateForm.bind(this);
     this.addMachNumBlock = this.addMachNumBlock.bind(this);
     this.addPartNumBlock = this.addPartNumBlock.bind(this);
     this.submit = this.submit.bind(this);
     this.reset = this.reset.bind(this);
+    this.request = req.bind(this);
+    this.sub = sub.bind(this);
     this.state = {
       // form object structure should look like this:
       // {
@@ -28,14 +31,12 @@ class QuoteForm extends React.Component {
       //   }
       // }
       // where there can be any number of machineNumber or partNumber blocks
-      form: this.props.getInitialForm ? this.props.getInitialForm() : this.getInitialForm(),
-      timestamp: this.props.timestamp || Date.now()
+      form: getInitialForm.apply(this),
+      timestamp: Date.now()
     };
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log('nextState.form');
-    console.log(nextState.form);
     // re-render the ItemForm component with new form data
     // check if timestamp hasn't been updated in the past
     // .01 seconds so that infinite loop doesn't occur
@@ -47,12 +48,6 @@ class QuoteForm extends React.Component {
       return true;
     }
     return false;
-  }
-
-  getInitialForm() {
-    return this.props.form 
-      ? _.cloneDeep(this.props.form)
-      : _.cloneDeep(gnum.INITIAL_QUOTE_FORM)
   }
 
   updateForm(i, newObj) {
@@ -111,53 +106,63 @@ class QuoteForm extends React.Component {
     const form = this.state.form;
     this.setState({
       ...this.state,
-      form: _.cloneDeep(gnum.INITIAL_QUOTE_FORM)
+      form: getInitialForm.apply(this)
     });
 
     // console.log(`QuoteForm component => submit function called with ` +
     //   `form = ${JSON.stringify(form, null, 2)}`);
 
-    let orderDetails = [];
-    Object.keys(form).forEach(machKey => {
+    let orderDetails = '';
+    Object.keys(form).forEach((machKey) => {
       const machNum = Object.keys(form[machKey])[0];
-      Object.keys(form[machKey][machNum]).forEach(partKey => {
+      Object.keys(form[machKey][machNum]).forEach((partKey) => {
         const partNum = Object.keys(form[machKey][machNum][partKey])[0];
         const partQty = form[machKey][machNum][partKey][partNum];
-        orderDetails = orderDetails.concat({
-          machineSerialNum: machNum === '00000000' ? null : machNum,
-          partNum,
-          partQty
-        });
+        orderDetails += 'machineSerialNum=' +
+          `${machNum === '00000000' ? null : machNum},` +
+          `partNum=${partNum},` +
+          `partQty=${partQty}|`;
+        // orderDetails = orderDetails.concat({
+        //   machineSerialNum: machNum === '00000000' ? null : machNum,
+        //   partNum,
+        //   partQty
+        // });
       });
     });
 
-    console.log(orderDetails);
-
-    console.log(`QuoteForm component => submit function called with ` +
-      `orderDetails = ${JSON.stringify(orderDetails, null, 2)}`);
-
-    const dummyForm = {
+    const dummyData = {
       shipping_address: '1 main street',
       shipping_city: 'Manhattan',
       shipping_state: 'NY',
       shipping_zip: 10001,
       po_number: '678',
       status: 'quote'
-    }
+    };
 
-    let formData = `orderDetails=${JSON.stringify(orderDetails)}&`;
-    Object.keys(dummyForm).forEach(key => {
-      formData += `${key}=${dummyForm[key]}&`;
+    const data = Object.assign(dummyData, {
+      // trim the last '|' off the end of orderDetails
+      orderDetails: orderDetails.substring(0, orderDetails.length - 1)
     });
 
+    // let formData = `orderDetails=${orderDetails}&`;
+    // Object.keys(dummyForm).forEach(key => {
+    //   formData += `${key}=${dummyForm[key]}&`;
+    // });
 
-    // just testing post and get out
-    post(
+    console.log('data');
+    console.log(data);
+
+    this.request(
+      'POST',
       `${this.props.apiUrl}/orders`,
-      formData,
+      data,
       (response) => {
-        console.log(JSON.parse(response))
-        if (response) {
+        const resp = JSON.parse(response);
+        if (resp && resp.success) {
+          console.log('got here');
+          console.log('resp');
+          console.log(resp);
+          console.log(this.props.toggleMessage)
           this.props.toggleMessage('New Quote Created. Thank you!', 'success');
           // reload the page to show the newly created order
           setTimeout(
@@ -175,8 +180,6 @@ class QuoteForm extends React.Component {
       }
     );
 
-    /* --- TODO: API POST --- */
-
     setTimeout(() => {
       this.reset(e);
     }, 50);
@@ -185,9 +188,7 @@ class QuoteForm extends React.Component {
   reset(e) {
     e.preventDefault();
     this.setState({
-      form: this.props.getInitialForm
-        ? this.props.getInitialForm()
-        : _.cloneDeep(gnum.INITIAL_QUOTE_FORM),
+      form: getInitialForm.apply(this),
       timestamp: Date.now()
     });
   }
@@ -197,9 +198,6 @@ class QuoteForm extends React.Component {
       form,
       timestamp
     } = this.state;
-    console.log('$$$$');
-    console.log(form);
-    console.log('$$$$');
     const machNums = Object.keys(form);
     return (
       <div className={this.props.stockOrderForm ? 'StockOrderForm' : 'QuoteForm'} key={timestamp}>
@@ -285,3 +283,11 @@ class QuoteForm extends React.Component {
 }
 
 export default QuoteForm;
+
+QuoteForm.propTypes = {
+  initialForm: PropTypes.shape({})
+};
+
+QuoteForm.defaultProps = {
+  initialForm: undefined
+};

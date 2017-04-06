@@ -1,0 +1,26 @@
+@import '../partials/variables';
+
+.NotifMenu {
+  position: absolute;
+  top: calc(100% + 1rem);
+  left: -12rem;
+  width: 24rem;
+  max-height: $Notif_Menu_height;
+  padding: 0.25rem 0;
+  background-color: $c1;
+  border: solid 1px $c2;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+}
+
+.inner-content {
+  overflow: auto;
+  max-height: calc(#{$Notif_Menu_height} - 0.5rem);
+}
+
+.no-notifs {
+  outline: solid 1px red;
+  padding: 0.8rem 0;
+  font-size: 0.8rem;
+  font-style: italic;
+}
