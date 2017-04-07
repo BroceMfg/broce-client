@@ -64,6 +64,7 @@ class App extends Component {
           admin={this.state.admin}
           apiUrl={this.state.apiUrl}
           loading={this.loading}
+          notifs={this.state.notifs}
           orders={this.state.orders}
           setStateVal={this.setStateVal}
           showStockOrderForm={this.state.showStockOrderForm}

@@ -13,8 +13,14 @@ module.exports = function markSeen(orderId, loading) {
     undefined,
     (data) => {
       loading.off();
-      const resp = JSON.parse(data);
-      console.log(resp);
+      const notifs = this.props.notifs.map((n) => {
+        const notif = n;
+        if (notif.OrderId === orderId) {
+          notif.new = false;
+        }
+        return notif;
+      });
+      this.props.setStateVal({ notifs });
     },
     () => {
       // session expired or possible security vulnerability.

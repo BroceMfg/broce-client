@@ -37,6 +37,7 @@ class Landing extends Component {
                 admin={this.props.admin}
                 apiUrl={this.props.apiUrl}
                 loading={this.props.loading}
+                notifs={this.props.notifs}
                 order={
                   this.props.admin
                     && this.props.orders
@@ -56,6 +57,9 @@ class Landing extends Component {
                 showOtherForm={this.showOtherForm}
                 showStockOrderForm={this.props.showStockOrderForm}
                 toggleMessage={this.props.toggleMessage}
+                fetchNotifs={() => {
+                  fetchNotifs.call(this, this.props.loading);
+                }}
               />
             : null
         }
@@ -103,6 +107,7 @@ Landing.propTypes = {
     on: PropTypes.func.isRequired,
     off: PropTypes.func.isRequired
   }).isRequired,
+  notifs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   orders: PropTypes.shape({}).isRequired,
   setStateVal: PropTypes.func.isRequired,
   showOrderDetail: PropTypes.string,

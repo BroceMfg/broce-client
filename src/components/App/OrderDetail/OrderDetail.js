@@ -91,6 +91,7 @@ OrderDetail.propTypes = {
     on: PropTypes.func.isRequired,
     off: PropTypes.func.isRequired
   }).isRequired,
+  notifs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   order: PropTypes.shape({
     id: PropTypes.number.isRequired,
     status: PropTypes.string.isRequired,
