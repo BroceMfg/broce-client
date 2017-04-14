@@ -88,7 +88,7 @@ class ShippingAddressForm extends React.Component {
     return (
       <div className="ShippingAddressForm" key={timestamp}>
         {
-          this.props.addresses.length > 1
+          this.props.addresses.length > 0
             ?
               <ExistingAddressSelect
                 addresses={this.props.addresses}
@@ -99,7 +99,7 @@ class ShippingAddressForm extends React.Component {
         }
         <div className="form-wrapper">
           {
-            this.props.addresses.length > 1
+            this.props.addresses.length > 0
               ? <h4>Or Enter a New Address</h4>
               : <h4>Please Enter a Shipping Address</h4>
           }
