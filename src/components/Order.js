@@ -2,7 +2,7 @@ import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import OrderPart from './OrderPart';
 import ShippingDetailForm from './ShippingDetailForm';
-import ShippingAddressForm from './ShippingAddressForm';
+import ShippingAddressForm from './ShippingAddressForm/ShippingAddressForm';
 import Input from './Input';
 import StockOrderForm from './App/Landing/FormWrapper/StockOrderForm/StockOrderForm';
 import QuoteForm from './App/Landing/FormWrapper/QuoteForm/QuoteForm';

@@ -43,6 +43,7 @@ class ShippingAddressForm extends React.Component {
         state: selectedAddress.state,
         zip: selectedAddress.zip
       },
+      selectedAddressIndex: addressIndex,
       timestamp: Date.now()
     });
   }
@@ -92,6 +93,7 @@ class ShippingAddressForm extends React.Component {
               <ExistingAddressSelect
                 addresses={this.props.addresses}
                 onChange={this.onExistingAddressSelectChange}
+                originalValue={this.state.selectedAddressIndex}
               />
             : null
         }

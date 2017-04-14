@@ -2,13 +2,14 @@ import React, { PropTypes } from 'react';
 
 const ExistingAddressSelect = props => (
   <div className="ExistingAddressSelect">
-    <h4>Select An Existing Address</h4>
+    <h4 className="existing-address-header">Select An Existing Address</h4>
     <select
-      name="shipping-address-select"
-      defaultValue="none"
+      className="existing-address-select"
+      name="existing-address-select"
+      defaultValue={props.originalValue}
       onChange={props.onChange}
     >
-      <option value="none">--</option>
+      <option value={-1}>Select an Existing Address</option>
       {
         props.addresses.map((addr, i) => (
           <option key={Math.random()} value={i}>
@@ -24,5 +25,10 @@ export default ExistingAddressSelect;
 
 ExistingAddressSelect.propTypes = {
   addresses: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  originalValue: PropTypes.number
+};
+
+ExistingAddressSelect.defaultProps = {
+  originalValue: -1
 };
