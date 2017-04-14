@@ -76,9 +76,11 @@ class OrderList extends React.Component {
             const statusType = getStatusType(this.props.orders, i);
             return (
               <OrderSubList
+                addresses={this.props.addresses}
                 key={keyCount++}
                 admin={this.props.admin}
                 apiUrl={this.props.apiUrl}
+                loading={this.props.loading}
                 orders={orders}
                 updateOrder={this.updateOrder}
                 promoteOrder={this.promoteOrder}

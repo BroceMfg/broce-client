@@ -1,14 +1,14 @@
 import React from 'react';
-import Input from './Input';
+import Input from '../Input';
+import autoBind from 'react-autobind';
 import _ from 'lodash';
+
+import ExistingAddressSelect from './ExistingAddressSelect';
 
 class ShippingAddressForm extends React.Component {
   constructor(props) {
     super(props);
-    this.onChange = this.onChange.bind(this);
-    this.updateForm = this.updateForm.bind(this);
-    this.submit = this.submit.bind(this);
-    this.reset = this.reset.bind(this);
+    autoBind(this);
     this.state = {
       form: _.cloneDeep(this.props.form) || {},
       timestamp: Date.now()
@@ -27,6 +27,24 @@ class ShippingAddressForm extends React.Component {
       return true;
     }
     return false;
+  }
+
+  onExistingAddressSelectChange(e) {
+    console.log('onExistingAddressSelectChange');
+    const addressIndex = e.target.value;
+    const selectedAddress = this.props.addresses[addressIndex];
+    console.log(selectedAddress);
+    this.setState({
+      ...this.state,
+      form: {
+        street: selectedAddress.street,
+        po_number: selectedAddress.po_number,
+        city: selectedAddress.city,
+        state: selectedAddress.state,
+        zip: selectedAddress.zip
+      },
+      timestamp: Date.now()
+    });
   }
 
   onChange() {
@@ -68,8 +86,21 @@ class ShippingAddressForm extends React.Component {
     } = this.state;
     return (
       <div className="ShippingAddressForm" key={timestamp}>
+        {
+          this.props.addresses.length > 1
+            ?
+              <ExistingAddressSelect
+                addresses={this.props.addresses}
+                onChange={this.onExistingAddressSelectChange}
+              />
+            : null
+        }
         <div className="form-wrapper">
-          <h4>Please add your shipping info</h4>
+          {
+            this.props.addresses.length > 1
+              ? <h4>Or Enter a New Address</h4>
+              : <h4>Please Enter a Shipping Address</h4>
+          }
           <form onSubmit={this.submit}>
             <div className="street-wrapper">
               <div className="span-wrapper"><span>Address</span></div>

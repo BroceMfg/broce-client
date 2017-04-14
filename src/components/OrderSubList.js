@@ -110,9 +110,11 @@ class OrderSubList extends React.Component {
                           {
                             Object.values(this.state.shownOrders).map((order) => (
                               <Order
+                                addresses={this.props.addresses}
                                 admin={this.props.admin}
                                 apiUrl={this.props.apiUrl}
                                 key={order.id || Math.random()}
+                                loading={this.props.loading}
                                 order={order}
                                 updateOrder={this.props.updateOrder}
                                 promoteOrder={this.props.promoteOrder}
@@ -123,6 +125,7 @@ class OrderSubList extends React.Component {
                                 showStockOrderForm={this.props.showStockOrderForm}
                                 fetchOrders={this.props.fetchOrders}
                                 showDetails={this.props.showDetails}
+                                setStateVal={this.props.setStateVal}
                               />
                             ))
                           }

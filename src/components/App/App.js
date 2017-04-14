@@ -61,6 +61,7 @@ class App extends Component {
           notifs={this.state.notifs}
         />
         <Landing
+          addresses={this.state.addresses}
           admin={this.state.admin}
           apiUrl={this.state.apiUrl}
           loading={this.loading}

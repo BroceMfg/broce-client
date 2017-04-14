@@ -34,7 +34,7 @@ class Order extends React.Component {
       showDiscount: false,
       showAddAnotherPart: false,
       timestamp: Date.now()
-    };
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -42,8 +42,6 @@ class Order extends React.Component {
     // check if timestamp hasn't been updated in the past
     // .01 seconds so that infinite loop doesn't occur
     if (Date.now() - this.state.timestamp > 10) {
-      console.log('UPDATING');
-      console.log(nextState);
       this.setState({
         ...nextState,
         timestamp: Date.now()
@@ -202,7 +200,13 @@ class Order extends React.Component {
     return this.renderControls(
       this.state.showControls,
       'Accept Order',
-      <ShippingAddressForm submit={this.acceptOrder} cancel={this.toggleControls} />
+      <ShippingAddressForm
+        addresses={this.props.addresses}
+        loading={this.props.loading}
+        submit={this.acceptOrder}
+        cancel={this.toggleControls}
+        setStateVal={this.props.setStateVal}
+      />
     );
   }
 
@@ -227,7 +231,6 @@ class Order extends React.Component {
         }
       },
       (errorResponse) => {
-        console.log(errorResponse);
         this.props.toggleMessage('Error: Please try again.', 'error');
       }
     );
@@ -382,7 +385,6 @@ class Order extends React.Component {
         }
       },
       (errorResponse) => {
-        console.log(errorResponse)
         this.props.toggleMessage('Error: Please try again.', 'error');
       }
     );
@@ -395,13 +397,11 @@ class Order extends React.Component {
   renderAddAnoterPartForm() {
     const submit = (e) => {
       e.preventDefault();
-      console.log(e);
       const data = {};
       const inputs = e.target.querySelectorAll('input[name]');
       Object.keys(inputs).forEach((key) => {
         data[inputs[key].name.replace(/_0/, '')] = inputs[key].value;
       });
-      console.log(data);
 
       const handleErr = () => {
         this.props.toggleMessage('Error: Please try again.', 'error');
@@ -412,8 +412,6 @@ class Order extends React.Component {
         `${this.props.apiUrl}/orders/${this.props.order.id}/part`,
         data,
         (response) => {
-          console.log('JSON.parse(response)');
-          console.log(JSON.parse(response));
           if (response) {
             const resp = JSON.parse(response);
             if (resp.success) {

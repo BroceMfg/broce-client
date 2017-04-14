@@ -26,5 +26,6 @@
   "defURole": "client",
   "showStockOrderForm": false,
   "showNotifMenu": false,
-  "notifs": []
+  "notifs": [],
+  "addresses": []
 }

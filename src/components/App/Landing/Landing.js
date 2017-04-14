@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 import fetchOrders from './middleware/fetch-orders';
 import fetchNotifs from './middleware/fetch-notifs';
+import fetchAddresses from './middleware/fetch-addresses';
 import changeOrderView from './middleware/change-order-view';
 import showOtherForm from './middleware/show-other-form';
 
@@ -22,6 +23,7 @@ class Landing extends Component {
   componentDidMount() {
     fetchOrders.call(this, this.props.loading);
     fetchNotifs.call(this, this.props.loading);
+    fetchAddresses.call(this, this.props.loading);
   }
 
   render() {
@@ -71,8 +73,10 @@ class Landing extends Component {
             changeOrderView={this.changeOrderView}
           />
           <OrderList
+            addresses={this.props.addresses}
             admin={this.props.admin}
             apiUrl={this.props.apiUrl}
+            loading={this.props.loading}
             orders={this.props.orders}
             setStateVal={this.props.setStateVal}
             statusTypes={this.props.statusTypes}
@@ -101,6 +105,7 @@ class Landing extends Component {
 export default Landing;
 
 Landing.propTypes = {
+  addresses: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   admin: PropTypes.bool.isRequired,
   apiUrl: PropTypes.string.isRequired,
   loading: PropTypes.shape({
