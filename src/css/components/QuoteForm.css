@@ -129,6 +129,8 @@
         .QuoteForm .content-wrapper .submit:hover, .QuoteForm .content-wrapper .reset:hover {
           background-color: #7B7B7B;
           border-color: #3D3D3D; }
+        .QuoteForm .content-wrapper .submit:focus, .QuoteForm .content-wrapper .reset:focus {
+          outline: none; }
       .QuoteForm .content-wrapper .submit span, .QuoteForm .content-wrapper .reset span {
         display: block;
         width: 100%; }
@@ -234,6 +236,8 @@
       .MachineNumberBlock .add-machine-number-btn:hover {
         background-color: #7B7B7B;
         border-color: #3D3D3D; }
+      .MachineNumberBlock .add-machine-number-btn:focus {
+        outline: none; }
   .MachineNumberBlock .PartNumberBlock {
     position: relative;
     display: block; }
@@ -332,5 +336,7 @@
         .MachineNumberBlock .PartNumberBlock .add-part-number-btn:hover {
           background-color: #7B7B7B;
           border-color: #3D3D3D; }
+        .MachineNumberBlock .PartNumberBlock .add-part-number-btn:focus {
+          outline: none; }
 
 /*# sourceMappingURL=QuoteForm.css.map */

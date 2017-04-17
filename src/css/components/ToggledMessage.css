@@ -124,6 +124,8 @@
         .ToggledMessage .content-wrapper button:hover {
           background-color: #7B7B7B;
           border-color: #3D3D3D; }
+        .ToggledMessage .content-wrapper button:focus {
+          outline: none; }
       .ToggledMessage .content-wrapper button span {
         display: table-cell;
         vertical-align: center; }

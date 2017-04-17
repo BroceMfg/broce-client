@@ -161,6 +161,8 @@
     .button:hover {
       background-color: #7B7B7B;
       border-color: #3D3D3D; }
+    .button:focus {
+      outline: none; }
   .button:last-child {
     margin-left: 0; }
   .button:focus {

@@ -188,6 +188,8 @@
       .Order button:hover {
         background-color: #7B7B7B;
         border-color: #3D3D3D; }
+      .Order button:focus {
+        outline: none; }
     .Order button.reveal-details {
       margin-top: 0.5em;
       position: absolute;
