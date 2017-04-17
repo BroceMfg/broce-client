@@ -172,17 +172,6 @@ class ShippingAddressForm extends React.Component {
                   }
                 </select>
               </div>
-              {
-                // <Input
-                  // refProp={(input) => { this.shipping_state = input }}
-                  // type="text"
-                  // name="shipping_address_state"
-                  // value={form.state}
-                  // placeholder="State"
-                  // parentOnChange={this.onChange}
-                  // submit={this.submit}
-                // />
-              }
             </div>
             <div className="zip-wrapper">
               <div className="span-wrapper"><span>Zip</span></div>
