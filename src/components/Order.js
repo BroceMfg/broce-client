@@ -206,6 +206,7 @@ class Order extends React.Component {
         submit={this.acceptOrder}
         cancel={this.toggleControls}
         setStateVal={this.props.setStateVal}
+        statesList={this.props.statesList}
       />
     );
   }

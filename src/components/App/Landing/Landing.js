@@ -79,6 +79,7 @@ class Landing extends Component {
             loading={this.props.loading}
             orders={this.props.orders}
             setStateVal={this.props.setStateVal}
+            statesList={this.props.statesList}
             statusTypes={this.props.statusTypes}
             showOtherForm={this.showOtherForm}
             showStockOrderForm={this.props.showStockOrderForm}
@@ -118,6 +119,7 @@ Landing.propTypes = {
   showOrderDetail: PropTypes.string,
   showOrderDetailStatus: PropTypes.string.isRequired,
   showStockOrderForm: PropTypes.bool.isRequired,
+  statesList: PropTypes.arrayOf(PropTypes.string).isRequired,
   statusTypes: PropTypes.shape({}).isRequired,
   toggleMessage: PropTypes.func.isRequired,
   viewBy: PropTypes.string.isRequired,

@@ -69,6 +69,7 @@ class App extends Component {
           orders={this.state.orders}
           setStateVal={this.setStateVal}
           showStockOrderForm={this.state.showStockOrderForm}
+          statesList={this.state.statesList}
           statusTypes={this.state.statusTypes}
           toggleMessage={this.toggleMessage}
           viewBy={this.state.viewBy}

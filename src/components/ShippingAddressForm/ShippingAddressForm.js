@@ -53,7 +53,7 @@ class ShippingAddressForm extends React.Component {
     this.updateForm({
       street: this.street.value,
       city: this.city.value,
-      state: this.shipping_state.value,
+      state: this.state.form.state,
       zip: this.zip.value,
       po_number: this.po_number.value.length > 0 ? this.po_number.value : null
     });
@@ -143,15 +143,44 @@ class ShippingAddressForm extends React.Component {
             </div>
             <div className="state-wrapper">
               <div className="span-wrapper"><span>State</span></div>
-              <Input
-                refProp={(input) => { this.shipping_state = input }}
-                type="text"
+              <select
+                ref="shipping_state"
+                onChange={(e) => {
+                  this.setState({
+                    ...this.state,
+                    form: {
+                      ...this.state.form,
+                      state: e.target.value
+                    }
+                  });
+                }}
+                id="state-select"
                 name="shipping_address_state"
-                value={form.state}
-                placeholder="State"
-                parentOnChange={this.onChange}
-                submit={this.submit}
-              />
+                value={form.state || "none"}
+              >
+                <option value="none">Select A State</option>
+                {
+                  this.props.statesList.map(state => (
+                    <option
+                      key={Math.random()}
+                      value={state}
+                    >
+                      {state}
+                    </option>
+                  ))
+                }
+              </select>
+              {
+                // <Input
+                  // refProp={(input) => { this.shipping_state = input }}
+                  // type="text"
+                  // name="shipping_address_state"
+                  // value={form.state}
+                  // placeholder="State"
+                  // parentOnChange={this.onChange}
+                  // submit={this.submit}
+                // />
+              }
             </div>
             <div className="zip-wrapper">
               <div className="span-wrapper"><span>Zip</span></div>

@@ -116,6 +116,7 @@ class OrderSubList extends React.Component {
                                 key={order.id || Math.random()}
                                 loading={this.props.loading}
                                 order={order}
+                                statesList={this.props.statesList}
                                 updateOrder={this.props.updateOrder}
                                 promoteOrder={this.props.promoteOrder}
                                 statusType={order.status || this.props.statusType}

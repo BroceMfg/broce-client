@@ -84,6 +84,7 @@ class OrderList extends React.Component {
                 orders={orders}
                 updateOrder={this.updateOrder}
                 promoteOrder={this.promoteOrder}
+                statesList={this.props.statesList}
                 statusType={statusType}
                 getNextStatusType={this.getNextStatusType}
                 toggleMessage={this.props.toggleMessage}
