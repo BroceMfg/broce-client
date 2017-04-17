@@ -143,33 +143,35 @@ class ShippingAddressForm extends React.Component {
             </div>
             <div className="state-wrapper">
               <div className="span-wrapper"><span>State</span></div>
-              <select
-                ref="shipping_state"
-                onChange={(e) => {
-                  this.setState({
-                    ...this.state,
-                    form: {
-                      ...this.state.form,
-                      state: e.target.value
-                    }
-                  });
-                }}
-                id="state-select"
-                name="shipping_address_state"
-                value={form.state || "none"}
-              >
-                <option value="none">Select A State</option>
-                {
-                  this.props.statesList.map(state => (
-                    <option
-                      key={Math.random()}
-                      value={state}
-                    >
-                      {state}
-                    </option>
-                  ))
-                }
-              </select>
+              <div className="select-wrapper">
+                <select
+                  ref="shipping_state"
+                  onChange={(e) => {
+                    this.setState({
+                      ...this.state,
+                      form: {
+                        ...this.state.form,
+                        state: e.target.value
+                      }
+                    });
+                  }}
+                  id="state-select"
+                  name="shipping_address_state"
+                  value={form.state || "none"}
+                >
+                  <option value="none">Select A State</option>
+                  {
+                    this.props.statesList.map(state => (
+                      <option
+                        key={Math.random()}
+                        value={state}
+                      >
+                        {state}
+                      </option>
+                    ))
+                  }
+                </select>
+              </div>
               {
                 // <Input
                   // refProp={(input) => { this.shipping_state = input }}

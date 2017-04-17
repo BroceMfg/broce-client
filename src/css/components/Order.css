@@ -332,6 +332,33 @@
                   height: 100%;
                   font-size: 16px;
                   padding-left: 0.8em; }
+                .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div .select-wrapper {
+                  display: inline-block;
+                  height: 3.125rem;
+                  width: 13.3625rem;
+                  float: left; }
+                  .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div .select-wrapper {
+                    *zoom: 1; }
+                  .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div .select-wrapper:before, .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div .select-wrapper:after {
+                    content: "";
+                    display: table; }
+                  .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div .select-wrapper:after {
+                    clear: both; }
+                  .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div .select-wrapper select {
+                    float: left;
+                    margin-left: 0.5em;
+                    padding-left: 0.8em; }
+                    .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div .select-wrapper select {
+                      font-family: inherit;
+                      background-color: #FFFFFF;
+                      width: 100%;
+                      height: 100%;
+                      padding: 0.25rem 0;
+                      font-size: 1rem;
+                      color: #3D3D3D;
+                      border: none; }
+                    .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div .select-wrapper select:focus {
+                      outline: none; }
             .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper button {
               height: 3.5em;
               font-size: 14px;

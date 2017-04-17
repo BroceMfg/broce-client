@@ -179,6 +179,19 @@
                     padding-left: 0.8em;
                   }
                 }
+                .select-wrapper {
+                  @include micro-clearfix();
+                  display: inline-block;
+                  height: 3.125rem;
+                  width: 13.3625rem;
+                  float: left;
+                  select {
+                    float: left;
+                    @include select(100%, 100%);
+                    margin-left: 0.5em;
+                    padding-left: 0.8em;
+                  }
+                }
               }
             }
             button {
