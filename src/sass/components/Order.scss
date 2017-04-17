@@ -119,7 +119,26 @@
             width: 100%;
           }
           &:hover {
-          background-color: $success_green_highlight;
+            background-color: $success_green_highlight;
+          }
+        }
+        .changeSelectButton {
+          position: static;
+          margin: auto;
+          height: auto;
+          width: 100%;
+          font-size: 0.8rem;
+          font-weight: 200;
+          background-color: transparent;
+          border: none;
+          color: $blue5;
+          margin-top: 0.9rem;
+          &:hover {
+            background-color: transparent;
+            color: $blue3;
+          }
+          &:focus {
+            outline: none;
           }
         }
         .ShippingAddressForm {
@@ -141,8 +160,15 @@
               margin-top: 2em;
               font-size: 26px;
             }
+            .header-wrapper.hidden {
+              display: none;
+            }
             form {
               margin-top: 2em;
+              &.hidden {
+                height: 0;
+                overflow: hidden;
+              }
               div {
                 margin: 0.4em 0;
                 @include micro-clearfix();
@@ -211,6 +237,9 @@
               &:hover {
                 background-color: $success_green_highlight;
               }
+              &.hidden {
+                right: calc(50% - 5em);
+              }
             }
             .reset {
               position: absolute;
@@ -233,6 +262,16 @@
               border-color: $c1;
               &:hover {
                 background-color: $error_red_highlight;
+              }
+            }
+            .reset-canc-wrapper {
+              &.hidden {
+                .reset {
+                  display: none;
+                }
+                .submit {
+                  right: calc(50% - 5em);
+                }
               }
             }
           }

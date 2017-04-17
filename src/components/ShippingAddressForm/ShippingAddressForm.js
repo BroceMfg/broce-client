@@ -11,6 +11,7 @@ class ShippingAddressForm extends React.Component {
     autoBind(this);
     this.state = {
       form: _.cloneDeep(this.props.form) || {},
+      showSelectExisting: true,
       timestamp: Date.now()
     };
   }
@@ -83,12 +84,13 @@ class ShippingAddressForm extends React.Component {
   render() {
     const {
       form,
-      timestamp
+      timestamp,
+      showSelectExisting
     } = this.state;
     return (
       <div className="ShippingAddressForm" key={timestamp}>
         {
-          this.props.addresses.length > 0
+          this.props.addresses.length > 0 && showSelectExisting
             ?
               <ExistingAddressSelect
                 addresses={this.props.addresses}
@@ -97,13 +99,47 @@ class ShippingAddressForm extends React.Component {
               />
             : null
         }
+        {
+          this.props.addresses.length > 0 && showSelectExisting
+            ?
+              <div>
+                <button
+                  className="changeSelectButton"
+                  onClick={() => {
+                    this.setState({
+                      ...this.state,
+                      showSelectExisting: !this.state.showSelectExisting
+                    });
+                  }}
+                >
+                  Enter a New Address
+                </button>
+              </div>
+            : null
+        }
         <div className="form-wrapper">
-          {
-            this.props.addresses.length > 0
-              ? <h4>Or Enter a New Address</h4>
-              : <h4>Please Enter a Shipping Address</h4>
-          }
-          <form onSubmit={this.submit}>
+          <div
+           className={`header-wrapper ${this.props.addresses.length > 0
+             && showSelectExisting
+             ? 'hidden'
+             : 'shown'}`
+           }
+          >
+            {
+              this.props.addresses.length > 0
+                ? <h4>Enter a New Address</h4>
+                : <h4>Please Enter a Shipping Address</h4>
+            }
+          </div>
+          <form
+            className={
+              `shipping-address-form ${this.props.addresses.length > 0
+                && showSelectExisting
+                ? 'hidden'
+                : 'shown'}`
+            }
+            onSubmit={this.submit}
+          >
             <div className="street-wrapper">
               <div className="span-wrapper"><span>Address</span></div>
               <Input
@@ -188,10 +224,45 @@ class ShippingAddressForm extends React.Component {
                 submit={this.submit}
               />
             </div>
-            <button className="submit" type="submit"><span>Submit</span></button>
+            <button className={`submit  ${this.props.addresses.length > 0
+              && showSelectExisting
+              ? 'hidden'
+              : 'shown'}`
+            }
+            type="submit"
+          >
+            <span>Submit</span>
+          </button>
           </form>
-          <button className="cancel" onClick={this.props.cancel}>X</button>
-          <button className="reset" onClick={this.reset}><span>Reset Form</span></button>
+          <div
+            className={`reset-canc-wrapper ${this.props.addresses.length > 0
+              && showSelectExisting
+              ? 'hidden'
+              : 'shown'}`
+            }
+          >
+            <button className="cancel" onClick={this.props.cancel}>X</button>
+            <button className="reset" onClick={this.reset}><span>Reset Form</span></button>
+          </div>
+        {
+          !showSelectExisting
+            ?
+              <div>
+                <button
+                  className="changeSelectButton"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    this.setState({
+                      ...this.state,
+                      showSelectExisting: !this.state.showSelectExisting
+                    });
+                  }}
+                >
+                  Select An Existing Address
+                </button>
+              </div>
+            : null
+        }
         </div>
       </div>
     );

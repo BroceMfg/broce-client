@@ -265,6 +265,22 @@
             width: 100%; }
           .Order .status-message.controls-wrapper.accept-controls button:hover {
             background-color: #66BB6A; }
+        .Order .status-message.controls-wrapper.accept-controls .changeSelectButton {
+          position: static;
+          margin: auto;
+          height: auto;
+          width: 100%;
+          font-size: 0.8rem;
+          font-weight: 200;
+          background-color: transparent;
+          border: none;
+          color: #2196F3;
+          margin-top: 0.9rem; }
+          .Order .status-message.controls-wrapper.accept-controls .changeSelectButton:hover {
+            background-color: transparent;
+            color: #64B5F6; }
+          .Order .status-message.controls-wrapper.accept-controls .changeSelectButton:focus {
+            outline: none; }
         .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm {
           position: fixed;
           top: 0;
@@ -282,8 +298,13 @@
             .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper h4 {
               margin-top: 2em;
               font-size: 26px; }
+            .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper .header-wrapper.hidden {
+              display: none; }
             .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form {
               margin-top: 2em; }
+              .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form.hidden {
+                height: 0;
+                overflow: hidden; }
               .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div {
                 margin: 0.4em 0; }
                 .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div {
@@ -373,6 +394,8 @@
               border-color: #F6F6F6; }
               .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper .submit:hover {
                 background-color: #66BB6A; }
+              .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper .submit.hidden {
+                right: calc(50% - 5em); }
             .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper .reset {
               position: absolute;
               display: block;
@@ -392,6 +415,10 @@
               border-color: #F6F6F6; }
               .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper .cancel:hover {
                 background-color: #EF5350; }
+            .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper .reset-canc-wrapper.hidden .reset {
+              display: none; }
+            .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper .reset-canc-wrapper.hidden .submit {
+              right: calc(50% - 5em); }
           .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .ExistingAddressSelect {
             margin-top: 4em; }
           .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .existing-address-select {
