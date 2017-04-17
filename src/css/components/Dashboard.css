@@ -85,7 +85,6 @@
   width: calc(100% - (2 * 0.7em));
   min-width: calc(600px - (2 * 0.7em));
   padding: 0.7em;
-  position: relative;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
   height: 37px;
   position: fixed;
@@ -109,26 +108,37 @@
     position: relative; }
 
 .Dashboard-header {
-  float: left;
-  width: 70%;
+  display: flex;
+  align-items: center;
+  font-size: 1.8rem;
+  width: 10rem;
   height: 100%;
-  margin-left: 0.425em; }
+  margin-left: 0.765rem; }
   .Dashboard-header a {
     text-decoration: none;
     color: black; }
     .Dashboard-header a:hover {
       text-decoration: none;
-      color: black; }
+      color: #3D3D3D; }
 
 .button-container {
   display: inline-block;
-  float: right;
-  width: calc(100% - 70% - (0.7em/2));
-  max-width: 32em;
-  min-width: 20em;
-  margin: auto;
-  height: 100%;
-  position: absolute; }
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 0.765rem; }
+
+.button-container-inner {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%; }
+
+.icon-buttons-wrapper {
+  display: inline-block;
+  width: auto; }
 
 .button {
   width: calc(39.5% - (1px*2) - 0.7em);
@@ -152,8 +162,7 @@
       background-color: #7B7B7B;
       border-color: #3D3D3D; }
   .button:last-child {
-    margin-left: 0;
-    margin-right: 0.2em; }
+    margin-left: 0; }
   .button:focus {
     outline: none; }
   .button.dashboard-controls-button {
@@ -201,9 +210,8 @@
   .button.home, .button.settings {
     text-decoration: none;
     color: inherit; }
-  .button.settings {
-    margin-right: 1em; }
   .button.logout {
+    width: 5.85rem;
     font-size: 1em;
     text-align: center;
     background-color: transparent;
@@ -224,36 +232,5 @@
     .button.logout span {
       width: 74%;
       display: block; }
-
-@media screen and (max-width: 768px) {
-  .button {
-    width: calc(30.5% - (1px*2) - 0.7em); }
-
-  .Dashboard {
-    position: relative;
-    height: auto; }
-    .Dashboard .content-wrapper {
-      position: static; }
-
-  .Dashboard-header {
-    font-size: 150%;
-    font-size: 6.4vw;
-    clear: both;
-    display: block;
-    width: 100%;
-    text-align: center; }
-
-  .button-container {
-    position: relative;
-    float: none;
-    clear: both;
-    display: block;
-    margin: auto;
-    padding-top: 0.8em;
-    width: 100%;
-    height: 2em; } }
-@media screen and (min-width: 468px) and (max-width: 768px) {
-  .Dashboard-header {
-    font-size: 2em; } }
 
 /*# sourceMappingURL=Dashboard.css.map */
