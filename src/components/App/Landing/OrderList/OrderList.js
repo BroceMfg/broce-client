@@ -35,11 +35,15 @@ class OrderList extends React.Component {
     return statusTypes[statusTypes.indexOf(currentStatusType) + 1];
   }
 
-  promoteOrder(order, currentStatusType) {
+  promoteOrder(order, currentStatusType, forcedNewStatusType) {
     const orders = this.props.orders;
     const updatedOrder = order;
+    let nextStatusType;
+    if (forcedNewStatusType) {
+      nextStatusType = forcedNewStatusType;
+    }
     if (this.props.admin) {
-      const nextStatusType = this.getNextStatusType(currentStatusType);
+      nextStatusType = nextStatusType || this.getNextStatusType(currentStatusType);
       delete orders[currentStatusType][order.id];
       if (!orders[currentStatusType][Object.keys(orders[currentStatusType])[0]]) {
         delete orders[currentStatusType];
@@ -48,7 +52,8 @@ class OrderList extends React.Component {
       updatedOrder.status = nextStatusType;
       orders[nextStatusType][order.id] = updatedOrder;
     } else {
-      updatedOrder.status = this.getNextStatusType(order.status)
+      nextStatusType = nextStatusType || this.getNextStatusType(order.status);
+      updatedOrder.status = nextStatusType;
       orders[new Date(order.createdAt).getTime()] = updatedOrder;
     }
     this.props.setStateVal({ orders });

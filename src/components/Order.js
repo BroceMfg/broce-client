@@ -17,20 +17,6 @@ import '../css/components/Order.css';
 class Order extends React.Component {
   constructor(props) {
     super(props);
-    // this.updateOrderDetail = this.updateOrderDetail.bind(this);
-    // this.renderStatusMessage = this.renderStatusMessage.bind(this);
-    // this.toggleDetails = this.toggleDetails.bind(this);
-    // this.toggleControls = this.toggleControls.bind(this);
-    // this.renderControls = this.renderControls.bind(this);
-    // this.finalizeControls = this.finalizeControls.bind(this);
-    // this.shippingControls = this.shippingControls.bind(this);
-    // this.acceptControls = this.acceptControls.bind(this);
-    // this.finalizeOrder = this.finalizeOrder.bind(this);
-    // this.toggleDiscount = this.toggleDiscount.bind(this);
-    // this.renderDiscountInput = this.renderDiscountInput.bind(this);
-    // this.acceptOrder = this.acceptOrder.bind(this);
-    // this.addShippingDetail = this.addShippingDetail.bind(this);
-    // this.renderAddAnoterPartForm = this.renderAddAnoterPartForm.bind(this);
     this.request = req.bind(this);
     autoBind(this);
     this.state = {
@@ -335,7 +321,7 @@ class Order extends React.Component {
               msgPt1 +
               `Order #${this.props.order.id}.`,
              'success',
-             1000
+             500
             );
           } else {
             handleError();
@@ -409,16 +395,16 @@ class Order extends React.Component {
       (response) => {
         const resp = JSON.parse(response);
         if (resp.success) {
-          // success
-          // this.props.promoteOrder(this.props.order, this.props.statusType);
-          // this.props.toggleMessage('Prices Submitted Successfully.', 'success');
-          // setTimeout(() => {
-            // window.location = '/';
-          // }, 1000);
-          console.log('--------');
-          console.log('got a success response');
-          console.log(resp);
-          console.log('--------');
+          this.props.promoteOrder(
+            this.props.order,
+            this.props.statusType,
+            'abandoned'
+          );
+          this.props.toggleMessage('Order has been abandoned.', 'success');
+
+          setTimeout(() => {
+            window.location = '/';
+          }, 1000);
         } else {
           // handle error
           console.log('internal server error');

@@ -50,7 +50,7 @@ class AddPriceForm extends React.Component {
               ...this.props.orderDetail,
               price: parseFloat(price)
             }, this.props.index);
-            this.props.toggleMessage('Price Submission Successful.', 'success', 1000);
+            this.props.toggleMessage('Price Submission Successful.', 'success', 500);
           } else {
             // handle error
             console.log('error: response contained an error.');
