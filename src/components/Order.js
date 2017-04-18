@@ -26,6 +26,7 @@ class Order extends React.Component {
       showAddAnotherPart: false,
       showDenyConfirmation: false,
       showArchiveConfirmation: false,
+      showFinalizeConfirmation: false,
       timestamp: Date.now()
     }
   }
@@ -161,8 +162,29 @@ class Order extends React.Component {
       allPriced,
       null,
       (
-        <div>
-          <button onClick={this.finalizeOrder}><span>Finalize Order</span></button>
+        <div className="finalize-controls-wrapper">
+          {
+            this.state.showFinalizeConfirmation
+              ?
+                <Confirmation
+                  cancel={() => {
+                    this.setState({
+                      ...this.state,
+                      showFinalizeConfirmation: false
+                    });
+                  }}
+                  message={'Are you sure you want to finalize order ' +
+                      `#${this.props.order.id}?`}
+                  submit={this.finalizeOrder}
+                />
+              : null
+          }
+          <button onClick={() => {
+            this.setState({
+              ...this.state,
+              showFinalizeConfirmation: true
+            });
+          }}><span>Finalize Order</span></button>
           <button onClick={this.toggleDiscount}>
             {
               this.state.showDiscount
