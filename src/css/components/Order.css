@@ -604,6 +604,8 @@
           width: 100%; }
       .Order .status-message.finalize .discount-form span {
         display: inline-block; }
+      .Order .status-message.finalize .finalize-controls-wrapper .Confirmation button {
+        border: none; }
 
 .add-anoter-part-form {
   align-items: center;
