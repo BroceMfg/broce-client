@@ -26,9 +26,9 @@ export default ExistingAddressSelect;
 ExistingAddressSelect.propTypes = {
   addresses: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   onChange: PropTypes.func.isRequired,
-  originalValue: PropTypes.number
+  originalValue: PropTypes.string
 };
 
 ExistingAddressSelect.defaultProps = {
-  originalValue: -1
+  originalValue: '-1'
 };

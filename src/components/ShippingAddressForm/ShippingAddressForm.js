@@ -77,6 +77,8 @@ class ShippingAddressForm extends React.Component {
   reset() {
     this.setState({
       form: {},
+      selectedAddressIndex: '-1',
+      showSelectExisting: false,
       timestamp: Date.now()
     });
   }
@@ -108,7 +110,9 @@ class ShippingAddressForm extends React.Component {
                   onClick={() => {
                     this.setState({
                       ...this.state,
-                      showSelectExisting: !this.state.showSelectExisting
+                      showSelectExisting: !this.state.showSelectExisting,
+                      form: {},
+                      timestamp: Date.now()
                     });
                   }}
                 >
@@ -243,7 +247,7 @@ class ShippingAddressForm extends React.Component {
             }
           >
             <button className="cancel" onClick={this.props.cancel}>X</button>
-            <button className="reset" onClick={this.reset}><span>Reset Form</span></button>
+            <button className="reset" onClick={this.reset}><span>Clear Form</span></button>
           </div>
         {
           !showSelectExisting
@@ -255,11 +259,12 @@ class ShippingAddressForm extends React.Component {
                     e.preventDefault();
                     this.setState({
                       ...this.state,
-                      showSelectExisting: !this.state.showSelectExisting
+                      showSelectExisting: !this.state.showSelectExisting,
+                      selectedAddressIndex: '-1',
                     });
                   }}
                 >
-                  Select An Existing Address
+                  Select An Existing Address Instead
                 </button>
               </div>
             : null

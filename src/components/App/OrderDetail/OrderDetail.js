@@ -56,10 +56,12 @@ class OrderDetail extends Component {
                     }
                     return (
                       <OrderList
+                        addresses={this.props.addresses}
                         admin={this.props.admin}
                         apiUrl={this.props.apiUrl}
                         orders={orders}
                         setStateVal={this.props.setStateVal}
+                        statesList={this.props.statesList}
                         statusTypes={this.props.statusTypes}
                         showOtherForm={this.showOtherForm}
                         showStockOrderForm={this.props.showStockOrderForm}
@@ -85,6 +87,7 @@ class OrderDetail extends Component {
 export default OrderDetail;
 
 OrderDetail.propTypes = {
+  addresses: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   admin: PropTypes.bool.isRequired,
   apiUrl: PropTypes.string.isRequired,
   loading: PropTypes.shape({
@@ -97,6 +100,7 @@ OrderDetail.propTypes = {
     status: PropTypes.string.isRequired,
   }),
   setStateVal: PropTypes.func.isRequired,
+  statesList: PropTypes.arrayOf(PropTypes.string).isRequired,
   showStockOrderForm: PropTypes.bool.isRequired,
   statusTypes: PropTypes.shape({}).isRequired,
   toggleMessage: PropTypes.func.isRequired

@@ -36,6 +36,7 @@ class Landing extends Component {
           this.props.showOrderDetail
             ?
               <OrderDetail
+                addresses={this.props.addresses}
                 admin={this.props.admin}
                 apiUrl={this.props.apiUrl}
                 loading={this.props.loading}
@@ -55,6 +56,7 @@ class Landing extends Component {
                     })()
                 }
                 setStateVal={this.props.setStateVal}
+                statesList={this.props.statesList}
                 statusTypes={this.props.statusTypes}
                 showOtherForm={this.showOtherForm}
                 showStockOrderForm={this.props.showStockOrderForm}
