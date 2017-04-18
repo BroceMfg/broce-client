@@ -24,6 +24,11 @@
     margin: auto;
     position: relative;
   }
+  &.admin {
+    .content-wrapper {
+      max-width: 968px;
+    }
+  }
 }
 
 .Dashboard-header {

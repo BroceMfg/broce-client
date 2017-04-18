@@ -106,6 +106,8 @@
     margin: 0.7em;
     margin: auto;
     position: relative; }
+  .Dashboard.admin .content-wrapper {
+    max-width: 968px; }
 
 .Dashboard-header {
   display: flex;

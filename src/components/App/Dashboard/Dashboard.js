@@ -6,7 +6,7 @@ import NotifMenu from './NotifMenu/NotifMenu';
 import '../../../css/components/Dashboard.css';
 
 const Dashboard = props => (
-  <div className="Dashboard">
+  <div className={`Dashboard ${props.admin ? 'admin' : ''}`}>
     <div className="content-wrapper">
       <div className="Dashboard-header">
         <a href="/">Broce Parts</a>
