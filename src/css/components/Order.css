@@ -265,6 +265,34 @@
             width: 100%; }
           .Order .status-message.controls-wrapper.accept-controls button:hover {
             background-color: #66BB6A; }
+        .Order .status-message.controls-wrapper.accept-controls .accept-deny-controls-wrapper {
+          display: block;
+          width: 100%;
+          height: 100%;
+          margin-top: 1rem; }
+          .Order .status-message.controls-wrapper.accept-controls .accept-deny-controls-wrapper .controls {
+            display: block;
+            width: 12rem;
+            top: 0;
+            left: 0; }
+            .Order .status-message.controls-wrapper.accept-controls .accept-deny-controls-wrapper .controls button {
+              position: static;
+              height: 2.8rem;
+              width: 100%; }
+            .Order .status-message.controls-wrapper.accept-controls .accept-deny-controls-wrapper .controls:nth-child(2) button {
+              background-color: transparent;
+              border: none;
+              border-radius: 0;
+              color: #E57373;
+              font-size: 0.8rem;
+              height: 1rem;
+              padding-bottom: 1rem;
+              border-bottom: solid 1px transparent; }
+              .Order .status-message.controls-wrapper.accept-controls .accept-deny-controls-wrapper .controls:nth-child(2) button:hover {
+                color: #EF5350;
+                border-bottom: 1px solid #EF5350; }
+            .Order .status-message.controls-wrapper.accept-controls .accept-deny-controls-wrapper .controls button.submit {
+              position: absolute; }
         .Order .status-message.controls-wrapper.accept-controls .changeSelectButton {
           position: static;
           margin: auto;

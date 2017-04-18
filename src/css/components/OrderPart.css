@@ -192,6 +192,22 @@
             height: 100%;
             min-width: 14px;
             border-bottom: none; }
+            .OrderPart .content-wrapper .details div.shipped .done:first-child::before {
+              background-color: #2196F3;
+              border-radius: 2px;
+              content: "View Shipping Details";
+              color: #F6F6F6;
+              cursor: pointer;
+              display: block;
+              font-weight: 300;
+              font-style: italic;
+              padding: 0.4rem;
+              position: absolute;
+              top: 1rem;
+              right: 1rem;
+              z-index: 10; }
+              .OrderPart .content-wrapper .details div.shipped .done:first-child::before:hover {
+                background-color: #64B5F6; }
         .OrderPart .content-wrapper .details div.machine_serial_num {
           width: calc(22% - 3px); }
         .OrderPart .content-wrapper .details div.quantity {

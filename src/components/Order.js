@@ -1,11 +1,15 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import autoBind from 'react-autobind';
+
 import OrderPart from './OrderPart';
 import ShippingDetailForm from './ShippingDetailForm';
 import ShippingAddressForm from './ShippingAddressForm/ShippingAddressForm';
 import Input from './Input';
 import StockOrderForm from './App/Landing/FormWrapper/StockOrderForm/StockOrderForm';
 import QuoteForm from './App/Landing/FormWrapper/QuoteForm/QuoteForm';
+import Confirmation from './App/misc/Confirmation';
+
 import req from './middleware/request';
 
 import '../css/components/Order.css';
@@ -13,26 +17,14 @@ import '../css/components/Order.css';
 class Order extends React.Component {
   constructor(props) {
     super(props);
-    this.updateOrderDetail = this.updateOrderDetail.bind(this);
-    this.renderStatusMessage = this.renderStatusMessage.bind(this);
-    this.toggleDetails = this.toggleDetails.bind(this);
-    this.toggleControls = this.toggleControls.bind(this);
-    this.renderControls = this.renderControls.bind(this);
-    this.finalizeControls = this.finalizeControls.bind(this);
-    this.shippingControls = this.shippingControls.bind(this);
-    this.acceptControls = this.acceptControls.bind(this);
-    this.finalizeOrder = this.finalizeOrder.bind(this);
-    this.toggleDiscount = this.toggleDiscount.bind(this);
-    this.renderDiscountInput = this.renderDiscountInput.bind(this);
-    this.acceptOrder = this.acceptOrder.bind(this);
-    this.addShippingDetail = this.addShippingDetail.bind(this);
-    this.renderAddAnoterPartForm = this.renderAddAnoterPartForm.bind(this);
     this.request = req.bind(this);
+    autoBind(this);
     this.state = {
       showDetails: this.props.showDetails || false,
       showControls: false,
       showDiscount: false,
       showAddAnotherPart: false,
+      showConfirmation: false,
       timestamp: Date.now()
     }
   }
@@ -197,17 +189,51 @@ class Order extends React.Component {
   }
 
   acceptControls() {
-    return this.renderControls(
-      this.state.showControls,
-      'Accept Order',
-      <ShippingAddressForm
-        addresses={this.props.addresses}
-        loading={this.props.loading}
-        submit={this.acceptOrder}
-        cancel={this.toggleControls}
-        setStateVal={this.props.setStateVal}
-        statesList={this.props.statesList}
-      />
+    return (
+      <div className="accept-deny-controls-wrapper">
+        {
+          this.renderControls(
+            this.state.showControls,
+            'Accept Order',
+            <ShippingAddressForm
+              addresses={this.props.addresses}
+              loading={this.props.loading}
+              submit={this.acceptOrder}
+              cancel={this.toggleControls}
+              setStateVal={this.props.setStateVal}
+              statesList={this.props.statesList}
+            />
+          )
+        }
+        <div className="controls">
+          <button
+            onClick={() => {
+              this.setState({
+                ...this.state,
+                showConfirmation: true
+              });
+            }}
+          >
+            <span>Deny Order</span>
+          </button>
+        </div>
+        {
+          this.state.showConfirmation
+            ?
+              <Confirmation
+                cancel={() => {
+                  this.setState({
+                    ...this.state,
+                    showConfirmation: false
+                  });
+                }}
+                message={'Are you sure you want to deny order ' +
+                    `#${this.props.order.id}?`}
+                submit={this.denyOrder}
+              />
+            : null
+        }
+      </div>
     );
   }
 
@@ -295,7 +321,7 @@ class Order extends React.Component {
               msgPt1 +
               `Order #${this.props.order.id}.`,
              'success',
-             1000
+             500
             );
           } else {
             handleError();
@@ -356,6 +382,35 @@ class Order extends React.Component {
       },
       (errorResponse) => {
         // console.log(errorResponse)
+        this.props.toggleMessage('Error: Please try again.', 'error');
+      }
+    );
+  }
+
+  denyOrder() {
+    this.request(
+      'PUT',
+      `${this.props.apiUrl}/orders/${this.props.order.id}/status?type=abandoned`,
+      undefined,
+      (response) => {
+        const resp = JSON.parse(response);
+        if (resp.success) {
+          this.props.promoteOrder(
+            this.props.order,
+            this.props.statusType,
+            'abandoned'
+          );
+          this.props.toggleMessage('Order has been abandoned.', 'success');
+
+          setTimeout(() => {
+            window.location = '/';
+          }, 1000);
+        } else {
+          // handle error
+          console.log('internal server error');
+        }
+      },
+      (errorResponse) => {
         this.props.toggleMessage('Error: Please try again.', 'error');
       }
     );
