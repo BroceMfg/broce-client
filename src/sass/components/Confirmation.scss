@@ -1,0 +1,38 @@
+@import '../partials/variables';
+
+.Confirmation {
+  background-color: $c1;
+  border: solid 1px $c2;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  padding: 0.3rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  .message-wrapper {
+    color: black;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  .buttons-wrapper {
+    #confirmation-cancel-button, #confirmation-submit-button {
+      background-color: $success_green;
+      font-size: 0.7rem;
+      float: left;
+      width: 48%;
+      &:hover {
+        background-color: $success_green_highlight;
+      }
+    }
+    #confirmation-cancel-button {
+      background-color: $error_red;
+      margin-right: 4%;
+      &:hover {
+        background-color: $error_red_highlight;
+      }
+    }
+  }
+}
+

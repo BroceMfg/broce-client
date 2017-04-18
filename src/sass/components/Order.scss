@@ -122,6 +122,44 @@
             background-color: $success_green_highlight;
           }
         }
+        .accept-deny-controls-wrapper {
+          // outline: solid 1px red;
+          display: block;
+          width: 100%;
+          height: 100%;
+          margin-top: 1rem;
+          .controls {
+            display: block;
+            // outline: solid 1px blue;
+            width: 12rem;
+            top: 0;
+            left: 0;
+            button {
+              position: static;
+              height: 2.8rem;
+              width: 100%;
+            }
+            &:nth-child(2) { // deny order button
+              button {
+                background-color: transparent;
+                border: none;
+                border-radius: 0;
+                color: $error_red;
+                font-size: 0.8rem;
+                height: 1rem;
+                padding-bottom: 1rem;
+                border-bottom: solid 1px transparent;
+                &:hover {
+                  color: $error_red_highlight;
+                  border-bottom: 1px solid $error_red_highlight;
+                }
+              }
+            }
+            button.submit {
+              position: absolute;
+            }
+          }
+        }
         .changeSelectButton {
           position: static;
           margin: auto;

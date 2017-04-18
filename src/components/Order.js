@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
 import OrderPart from './OrderPart';
 import ShippingDetailForm from './ShippingDetailForm';
 import ShippingAddressForm from './ShippingAddressForm/ShippingAddressForm';
 import Input from './Input';
 import StockOrderForm from './App/Landing/FormWrapper/StockOrderForm/StockOrderForm';
 import QuoteForm from './App/Landing/FormWrapper/QuoteForm/QuoteForm';
+import Confirmation from './App/misc/Confirmation';
+
 import req from './middleware/request';
 
 import '../css/components/Order.css';
@@ -33,6 +36,7 @@ class Order extends React.Component {
       showControls: false,
       showDiscount: false,
       showAddAnotherPart: false,
+      showConfirmation: false,
       timestamp: Date.now()
     }
   }
@@ -197,17 +201,53 @@ class Order extends React.Component {
   }
 
   acceptControls() {
-    return this.renderControls(
-      this.state.showControls,
-      'Accept Order',
-      <ShippingAddressForm
-        addresses={this.props.addresses}
-        loading={this.props.loading}
-        submit={this.acceptOrder}
-        cancel={this.toggleControls}
-        setStateVal={this.props.setStateVal}
-        statesList={this.props.statesList}
-      />
+    return (
+      <div className="accept-deny-controls-wrapper">
+        {
+          this.renderControls(
+            this.state.showControls,
+            'Accept Order',
+            <ShippingAddressForm
+              addresses={this.props.addresses}
+              loading={this.props.loading}
+              submit={this.acceptOrder}
+              cancel={this.toggleControls}
+              setStateVal={this.props.setStateVal}
+              statesList={this.props.statesList}
+            />
+          )
+        }
+        <div className="controls">
+          <button
+            onClick={() => {
+              this.setState({
+                ...this.state,
+                showConfirmation: true
+              });
+            }}
+          >
+            <span>Deny Order</span>
+          </button>
+        </div>
+        {
+          this.state.showConfirmation
+            ?
+              <Confirmation
+                cancel={() => {
+                  this.setState({
+                    ...this.state,
+                    showConfirmation: false
+                  });
+                }}
+                message={'Are you sure you want to deny order ' +
+                    `#${this.props.order.id}?`}
+                submit={() => {
+                  console.log('denying order woo!');
+                }}
+              />
+            : null
+        }
+      </div>
     );
   }
 
