@@ -9,7 +9,6 @@
   min-width: calc(#{$App_min_width} - (2 * #{$Dashboard_padding}));
   @include micro-clearfix();
   padding: $Dashboard_padding;
-  position: relative;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
   height: 37px;
   position: fixed;
@@ -28,47 +27,71 @@
 }
 
 .Dashboard-header {
-  float: left;
-  width: $Dashboard_header_width;
+  display: flex;
+  align-items: center;
+  font-size: 1.8rem;
+  width: 10rem;
   height: 100%;
-  margin-left: 0.425em;
+  // float: left;
+  // width: $Dashboard_header_width;
+  // height: 100%;
+  margin-left: 0.765rem;
   a {
     text-decoration: none;
     color: black;
     &:hover {
       text-decoration: none;
-      color: black;
+      color: $c7;
     }
   }
 }
 
 .button-container {
   display: inline-block;
-  float: right;
-  width: calc(100% - #{$Dashboard_header_width} - (#{$Dashboard_padding}/2));
-  max-width: 32em;
-  margin: auto;
-  height: 100%;
+  width: auto;
+  height: auto;
   position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 0.765rem;
+  // float: right;
+  // width: calc(100% - #{$Dashboard_header_width} - (#{$Dashboard_padding}/2));
+  // max-width: 32em;
+  // min-width: 20em;
+  // margin: auto;
+  // height: 100%;
+  // position: absolute;
   // right: 0;
+}
+
+.button-container-inner {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.icon-buttons-wrapper {
+  display: inline-block;
+  width: auto;
 }
 
 .button {
   @include button();
-  width: calc(40.5% - (#{$button_border_size}*2) - 0.7em);
+  width: calc(39.5% - (#{$button_border_size}*2) - 0.7em);
+  min-width: 50px;
   height: 100%;
   float: left;
   height: 35px;
   &:last-child {
     margin-left: 0;
-    margin-right: 0.2em;
   }
   &:focus {
     outline: none;
   }
   &.dashboard-controls-button {
     margin-top: 0;
-    width: calc(21% - (#{$button_border_size}*2) - 0.9em);
+    width: calc(18% - (#{$button_border_size}*2) - 0.9em);
     background-color: transparent;
     border: none;
     border-radius: 0;
@@ -121,13 +144,15 @@
       }
     }
   }
-  &.settings {
-    margin-right: 1em;
+  &.home, &.settings {
     text-decoration: none;
     color: inherit;
   }
+  &.settings {
+    // margin-right: 1em;
+  }
   &.logout {
-    // outline: solid 1px red;
+    width: 5.85rem;
     font-size: 1em;
     text-align: center;
     background-color: transparent;
@@ -136,6 +161,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    // width: 6.125rem;
     span {
       border-bottom: solid 1px transparent;
       margin-top: 0.425rem;
@@ -150,43 +176,9 @@
       }
     }
     span {
-      // outline: solid 1px red;
       width: 74%;
       display: block;
     }
   }
 }
 
-@media screen and (max-width: 768px) {
-  .Dashboard {
-    position: relative;
-    height: auto;
-    .content-wrapper {
-      position: static;
-    }
-  }
-  .Dashboard-header {
-    font-size: 150%;
-    font-size: 6.4vw;
-    clear: both;
-    display: block;
-    width: 100%;
-    text-align: center;
-  }
-  .button-container {
-    position: relative;
-    float: none;
-    clear: both;
-    display: block;
-    margin: auto;
-    padding-top: 0.8em;
-    width: 100%;
-    height: 2em;
-  }
-}
-
-@media screen and (min-width: 468px) and (max-width: 768px) {
-  .Dashboard-header {
-    font-size: 2em;
-  }
-}

@@ -155,6 +155,8 @@
     .SignIn form button:hover {
       background-color: #7B7B7B;
       border-color: #3D3D3D; }
+    .SignIn form button:focus {
+      outline: none; }
   .SignIn form .submit {
     position: absolute;
     height: 3.5em;

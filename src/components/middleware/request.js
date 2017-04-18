@@ -1,7 +1,12 @@
 const parseJSONtoFormData = (json) => {
   let formData = '';
   Object.keys(json).forEach((key) => {
-    formData += `${key}=${json[key]}&`;
+    console.log(key);
+    console.log(json[key]);
+    const value = json[key];
+    if (value) {
+      formData += `${key}=${json[key]}&`;
+    }
   });
   return formData;
 };

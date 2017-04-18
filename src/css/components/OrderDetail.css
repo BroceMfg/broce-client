@@ -79,59 +79,24 @@
   font-style: italic;
   font-weight: 200;
   src: local("Roboto-ThinItalic"), url(../../fonts/Roboto-ThinItalic.ttf); }
-.ToggledMessage {
-  position: fixed;
-  top: 0.45rem;
-  left: 0;
-  background-color: transparent;
-  width: 100%;
-  height: 2.8rem;
-  z-index: 100; }
-  .ToggledMessage .content-wrapper {
-    position: relative;
-    display: table;
-    background-color: #9A9A9A;
-    width: 99%;
-    max-width: calc(1340px - 1340px*.01);
-    margin: auto;
-    height: 100%;
-    border-radius: 4px; }
-    .ToggledMessage .content-wrapper span {
-      display: table-cell;
-      vertical-align: middle;
-      width: 100%;
-      text-align: center;
-      font-size: 1.2em; }
-    .ToggledMessage .content-wrapper button {
-      width: auto;
-      height: 60%;
-      position: absolute;
-      top: 0.56rem;
-      left: 0.56rem;
-      display: table; }
-      .ToggledMessage .content-wrapper button {
-        background-color: #9A9A9A;
-        border: solid 1px;
-        border-color: #1F1F1F;
-        border-radius: 4px;
-        cursor: pointer;
-        display: table;
-        text-align: center; }
-        .ToggledMessage .content-wrapper button span {
-          display: table-cell;
-          vertical-align: middle;
-          text-align: center; }
-        .ToggledMessage .content-wrapper button:hover {
-          background-color: #7B7B7B;
-          border-color: #3D3D3D; }
-        .ToggledMessage .content-wrapper button:focus {
-          outline: none; }
-      .ToggledMessage .content-wrapper button span {
-        display: table-cell;
-        vertical-align: center; }
-  .ToggledMessage.success .content-wrapper {
-    background-color: #81C784; }
-  .ToggledMessage.error .content-wrapper {
-    background-color: #E57373; }
+.OrderDetail {
+  overflow: visible; }
+  .OrderDetail .inner-content, .OrderDetail .no-order-found {
+    display: block; }
+  .OrderDetail .OrderList {
+    width: 100%;
+    max-width: 50rem; }
+    .OrderDetail .OrderList .OrderSubList {
+      padding-top: 0.4rem; }
 
-/*# sourceMappingURL=ToggledMessage.css.map */
+.no-order-found {
+  margin: 1.2rem 2rem;
+  font-size: 1.1rem;
+  font-style: italic;
+  padding-bottom: 0.6rem;
+  padding-left: 0.3rem;
+  border-bottom: solid 1px #5C5C5C;
+  width: auto;
+  max-width: 8rem; }
+
+/*# sourceMappingURL=OrderDetail.css.map */

@@ -48,18 +48,44 @@ class App extends Component {
     localStorage.setItem('state', JSON.stringify(nextState));
   }
 
+  renderMain(showOrderDetail, showOrderDetailStatus) {
+    const precondition = showOrderDetail !== undefined
+      && typeof showOrderDetail === 'string';
+    const showOD = precondition ? showOrderDetail : undefined;
+    return (
+      <div className="main-wrapper">
+        <Dashboard
+          logout={this.logout}
+          showNotifMenu={this.state.showNotifMenu}
+          togNotifMenu={this.togNotifMenu}
+          notifs={this.state.notifs}
+        />
+        <Landing
+          addresses={this.state.addresses}
+          admin={this.state.admin}
+          apiUrl={this.state.apiUrl}
+          loading={this.loading}
+          notifs={this.state.notifs}
+          orders={this.state.orders}
+          setStateVal={this.setStateVal}
+          showStockOrderForm={this.state.showStockOrderForm}
+          statesList={this.state.statesList}
+          statusTypes={this.state.statusTypes}
+          toggleMessage={this.toggleMessage}
+          viewBy={this.state.viewBy}
+          showOrderDetail={showOD}
+          showOrderDetailStatus={showOrderDetailStatus || 'quote'}
+        />
+      </div>
+    );
+  }
+
   render() {
     const {
-      admin,
-      apiUrl,
       currTogId,
       defErrMsg,
       errMsg,
       logErrs,
-      notifs,
-      orders,
-      showNotifMenu,
-      showStockOrderForm,
       togMsg,
       togStat,
       user
@@ -96,27 +122,13 @@ class App extends Component {
                           <Match
                             exactly
                             pattern="/"
-                            render={
-                              () =>
-                                <div className="main-wrapper">
-                                  <Dashboard
-                                    logout={this.logout}
-                                    showNotifMenu={showNotifMenu}
-                                    togNotifMenu={this.togNotifMenu}
-                                    notifs={notifs}
-                                  />
-                                  <Landing
-                                    admin={admin}
-                                    apiUrl={apiUrl}
-                                    loading={this.loading}
-                                    orders={orders}
-                                    setStateVal={this.setStateVal}
-                                    showStockOrderForm={showStockOrderForm}
-                                    statusTypes={this.state.statusTypes}
-                                    toggleMessage={this.toggleMessage}
-                                    viewBy={this.state.viewBy}
-                                  />
-                                </div>
+                            render={this.renderMain}
+                          />
+                          <Match
+                            exactly
+                            pattern="/orders/:id/:status"
+                            render={matchProps =>
+                              this.renderMain(matchProps.params.id, matchProps.params.status)
                             }
                           />
                           <Match

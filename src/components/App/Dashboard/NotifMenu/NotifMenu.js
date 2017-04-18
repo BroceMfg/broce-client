@@ -9,16 +9,33 @@ const NotifMenu = props => (
         props.notifs.length > 0
           ?
             props.notifs.map(n => (
-              <div
+              <a
+                href={`/orders/${n.OrderId}/${n.status}`}
                 key={Math.random()}
                 className="notif"
+                title={`Go To Order #${n.OrderId}`}
               >
-                hello notif
-              </div>
+                <div className={`new-wrapper${n.new ? ' new' : ''}`}>-</div>
+                <div className="order-id-wrapper">
+                  <span className="order-id">Order #{n.OrderId}</span>
+                </div>
+                <div className="order-status-wrapper">
+                  <span className="order-status">
+                    {
+                      (() => {
+                        if (n.status === 'quote') {
+                          return 'New Quote';
+                        }
+                        return `Has been ${n.status}`;
+                      })()
+                    }
+                  </span>
+                </div>
+              </a>
             ))
           :
             <div className="no-notifs">
-              No New Notifications
+              No Notifications to Show
             </div>
       }
     </div>
@@ -28,5 +45,6 @@ const NotifMenu = props => (
 export default NotifMenu;
 
 NotifMenu.propTypes = {
+  admin: PropTypes.bool.isRequired,
   notifs: PropTypes.arrayOf(PropTypes.shape({})).isRequired
 };

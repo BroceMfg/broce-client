@@ -76,12 +76,15 @@ class OrderList extends React.Component {
             const statusType = getStatusType(this.props.orders, i);
             return (
               <OrderSubList
+                addresses={this.props.addresses}
                 key={keyCount++}
                 admin={this.props.admin}
                 apiUrl={this.props.apiUrl}
+                loading={this.props.loading}
                 orders={orders}
                 updateOrder={this.updateOrder}
                 promoteOrder={this.promoteOrder}
+                statesList={this.props.statesList}
                 statusType={statusType}
                 getNextStatusType={this.getNextStatusType}
                 toggleMessage={this.props.toggleMessage}
@@ -89,6 +92,8 @@ class OrderList extends React.Component {
                 showStockOrderForm={this.props.showStockOrderForm}
                 fetchOrders={this.props.fetchOrders}
                 show={this.props.viewBy === 'all' || this.props.viewBy === statusType}
+                header={this.props.header}
+                showDetails={this.props.showDetails}
               />
             );
           })

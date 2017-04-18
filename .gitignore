@@ -17,3 +17,6 @@ src/css/*.css.map
 .DS_Store
 .env
 npm-debug.log
+
+# vim swap files
+*.swp

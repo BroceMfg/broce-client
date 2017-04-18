@@ -61,31 +61,38 @@ class OrderSubList extends React.Component {
             ?
               <div>
                 {
-                  this.props.admin
-                    ? <h1 className="header status-type-header">
-                        <span>{this.props.statusType}</span>
-                        <div
-                          className="reveal-hide-button-wrapper"
-                          title={this.state.showing ? 'hide' : 'show'}
-                        >
-                          <button onClick={this.toggleShowing}>
-                            {
-                              this.state.showing
-                                ?
-                                  <span>
-                                    <i className="mdi mdi-chevron-down"></i>
-                                  </span>
-                                :
-                                  <span>
-                                    <i className="mdi mdi-chevron-left"></i>
-                                  </span>
-                            }
-                          </button>
-                        </div>
-                      </h1>
-                    : <h1 className="header">
-                        <span>Your Orders</span>
-                      </h1>
+                  this.props.header !== 'none'
+                    ?
+                      <div>
+                        {
+                          this.props.admin
+                            ? <h1 className="header status-type-header">
+                                <span>{this.props.statusType}</span>
+                                <div
+                                  className="reveal-hide-button-wrapper"
+                                  title={this.state.showing ? 'hide' : 'show'}
+                                >
+                                  <button onClick={this.toggleShowing}>
+                                    {
+                                      this.state.showing
+                                        ?
+                                          <span>
+                                            <i className="mdi mdi-chevron-down"></i>
+                                          </span>
+                                        :
+                                          <span>
+                                            <i className="mdi mdi-chevron-left"></i>
+                                          </span>
+                                    }
+                                  </button>
+                                </div>
+                              </h1>
+                            : <h1 className="header">
+                                <span>Your Orders</span>
+                              </h1>
+                        }
+                      </div>
+                    : null
                 }
                 <ReactCSSTransitionGroup
                   className={
@@ -103,10 +110,13 @@ class OrderSubList extends React.Component {
                           {
                             Object.values(this.state.shownOrders).map((order) => (
                               <Order
+                                addresses={this.props.addresses}
                                 admin={this.props.admin}
                                 apiUrl={this.props.apiUrl}
                                 key={order.id || Math.random()}
+                                loading={this.props.loading}
                                 order={order}
+                                statesList={this.props.statesList}
                                 updateOrder={this.props.updateOrder}
                                 promoteOrder={this.props.promoteOrder}
                                 statusType={order.status || this.props.statusType}
@@ -115,6 +125,8 @@ class OrderSubList extends React.Component {
                                 showOtherForm={this.props.showOtherForm}
                                 showStockOrderForm={this.props.showStockOrderForm}
                                 fetchOrders={this.props.fetchOrders}
+                                showDetails={this.props.showDetails}
+                                setStateVal={this.props.setStateVal}
                               />
                             ))
                           }

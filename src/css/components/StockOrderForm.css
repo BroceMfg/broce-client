@@ -129,6 +129,8 @@
         .StockOrderForm .content-wrapper .submit:hover, .StockOrderForm .content-wrapper .reset:hover {
           background-color: #7B7B7B;
           border-color: #3D3D3D; }
+        .StockOrderForm .content-wrapper .submit:focus, .StockOrderForm .content-wrapper .reset:focus {
+          outline: none; }
       .StockOrderForm .content-wrapper .submit span, .StockOrderForm .content-wrapper .reset span {
         display: block;
         width: 100%; }
@@ -199,5 +201,7 @@
           .StockOrderForm .MachineNumberBlock .PartNumberBlock .add-part-number-btn:hover {
             background-color: #7B7B7B;
             border-color: #3D3D3D; }
+          .StockOrderForm .MachineNumberBlock .PartNumberBlock .add-part-number-btn:focus {
+            outline: none; }
 
 /*# sourceMappingURL=StockOrderForm.css.map */

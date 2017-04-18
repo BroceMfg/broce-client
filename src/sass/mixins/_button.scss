@@ -16,5 +16,8 @@
       background-color: $button_bg_hov_color;
       border-color: $button_border_hov_color;
     }
+    &:focus {
+      outline: none;
+    }
   }
 }

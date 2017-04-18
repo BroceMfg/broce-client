@@ -1,0 +1,20 @@
+@import '../partials/variables';
+
+@mixin select(
+  $width: 10rem,
+  $height: 3rem
+) {
+  & {
+    font-family: inherit;
+    background-color: $c0;
+    width: $width;
+    height: $height;
+    padding: 0.25rem 0;
+    font-size: 1rem;
+    color: $c7;
+    border: none;
+  }
+  &:focus {
+    outline: none;
+  }
+}
