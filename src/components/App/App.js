@@ -55,6 +55,7 @@ class App extends Component {
     return (
       <div className="main-wrapper">
         <Dashboard
+          admin={this.state.admin}
           logout={this.logout}
           showNotifMenu={this.state.showNotifMenu}
           togNotifMenu={this.togNotifMenu}
@@ -103,7 +104,7 @@ class App extends Component {
         />
         {
           (() => {
-            if (errMsg) {
+            if (errMsg && user) {
               return (
                 <ErrorHandler
                   log={logErrs}

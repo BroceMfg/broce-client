@@ -204,6 +204,18 @@
       right: 0; }
       .Order .content .oStatus .oId {
         font-size: 19px; }
+    .Order .content .archive-button-wrapper {
+      position: relative;
+      width: auto;
+      width: 14rem; }
+      .Order .content .archive-button-wrapper button {
+        background-color: #E57373;
+        border: none;
+        color: #F6F6F6;
+        font-size: 0.8rem;
+        padding: 0.5rem; }
+        .Order .content .archive-button-wrapper button:hover {
+          background-color: #EF5350; }
   .Order .status-message {
     align-items: center;
     display: flex;

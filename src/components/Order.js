@@ -24,7 +24,8 @@ class Order extends React.Component {
       showControls: false,
       showDiscount: false,
       showAddAnotherPart: false,
-      showConfirmation: false,
+      showDenyConfirmation: false,
+      showArchiveConfirmation: false,
       timestamp: Date.now()
     }
   }
@@ -210,7 +211,7 @@ class Order extends React.Component {
             onClick={() => {
               this.setState({
                 ...this.state,
-                showConfirmation: true
+                showDenyConfirmation: true
               });
             }}
           >
@@ -218,13 +219,13 @@ class Order extends React.Component {
           </button>
         </div>
         {
-          this.state.showConfirmation
+          this.state.showDenyConfirmation
             ?
               <Confirmation
                 cancel={() => {
                   this.setState({
                     ...this.state,
-                    showConfirmation: false
+                    showDenyConfirmation: false
                   });
                 }}
                 message={'Are you sure you want to deny order ' +
@@ -416,6 +417,36 @@ class Order extends React.Component {
     );
   }
 
+  archiveOrder() {
+    this.request(
+      'PUT',
+      `${this.props.apiUrl}/orders/${this.props.order.id}/status?type=archived`,
+      undefined,
+      (response) => {
+        const resp = JSON.parse(response);
+        if (resp.success) {
+          this.props.promoteOrder(
+            this.props.order,
+            this.props.statusType,
+            'archived'
+          );
+          this.props.toggleMessage('Order has been archived.', 'success');
+
+          setTimeout(() => {
+            window.location = '/';
+          }, 1000);
+        } else {
+          // handle error
+          console.log('internal server error');
+        }
+      },
+      (errorResponse) => {
+        this.props.toggleMessage('Error: Please try again.', 'error');
+      }
+    );
+
+  }
+
   addShippingDetail(form) {
     const orderDetailIds = this.props.order.Order_Details
       .map((orderDetail) => orderDetail.id);
@@ -548,6 +579,43 @@ class Order extends React.Component {
               Order created on: {new Date(order.createdAt).toLocaleDateString('en-US')}
             </h4>
           </div>
+          {
+            (this.props.admin
+              && new Date(order.createdAt).getTime() -
+              new Date().getTime() > (2 * 24 * 60 * 60 * 1000))
+              // older than 2 days
+              || (!this.props.admin && order.status === 'shipped')
+              ?
+                <div className="archive-button-wrapper">
+                  <button
+                    onClick={() => {
+                      this.setState({
+                        ...this.state,
+                        showArchiveConfirmation: true
+                      });
+                    }}
+                  >
+                    <span>Archive</span>
+                  </button>
+                  {
+                    this.state.showArchiveConfirmation
+                      ?
+                        <Confirmation
+                          cancel={() => {
+                            this.setState({
+                              ...this.state,
+                              showArchiveConfirmation: false
+                            });
+                          }}
+                          message={'Are you sure you want to archive order ' +
+                              `#${this.props.order.id}?`}
+                          submit={this.archiveOrder}
+                        />
+                      : null
+                  }
+                </div>
+              : null
+          }
           {
             !this.props.showDetails
               ?

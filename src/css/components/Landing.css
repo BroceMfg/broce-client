@@ -98,9 +98,6 @@
   .Landing.showingOrderDetail .landing-inner {
     display: none; }
 
-@media screen and (max-width: 768px) {
-  .Landing {
-    margin-top: 0.75em; } }
 .quote-stock-form-wrapper .show-other-button-wrapper {
   width: 96%;
   margin: auto;

@@ -106,6 +106,8 @@
     margin: 0.7em;
     margin: auto;
     position: relative; }
+  .Dashboard.admin .content-wrapper {
+    max-width: 968px; }
 
 .Dashboard-header {
   display: flex;
@@ -213,7 +215,7 @@
     text-decoration: none;
     color: inherit; }
   .button.logout {
-    width: 5.85rem;
+    width: 7rem;
     font-size: 1em;
     text-align: center;
     background-color: transparent;
