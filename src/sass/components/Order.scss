@@ -37,6 +37,21 @@
         font-size: 19px;
       }
     }
+    .archive-button-wrapper {
+      position: relative;
+      width: auto;
+      width: 14rem;
+      button {
+        background-color: $error_red;
+        border: none;
+        color: $c1;
+        font-size: 0.8rem;
+        padding: 0.5rem;
+        &:hover {
+          background-color: $error_red_highlight;
+        }
+      }
+    }
   }
   .status-message {
     // @include outline();
