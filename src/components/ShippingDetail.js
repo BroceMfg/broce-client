@@ -7,10 +7,12 @@ class ShippingDetail extends React.Component {
     const shippingDetail = this.props.shippingDetail;
     return (
       <div className="ShippingDetail">
-        <button id="ShippingDetailHide" onClick={this.props.hide}><span>X</span></button>
-        <h4>Shipping Details</h4>
-        <div>Tracking Number: {shippingDetail.tracking_number}</div>
-        <div>Cost: ${shippingDetail.cost}</div>
+        <div className="ShippingDetail-inner">
+          <button id="ShippingDetailHide" onClick={this.props.hide}><span>X</span></button>
+          <h4>Shipping Details</h4>
+          <div>Tracking Number: {shippingDetail.tracking_number}</div>
+          <div>Cost: ${shippingDetail.cost}</div>
+        </div>
       </div>
     );
   }

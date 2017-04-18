@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import autoBind from 'react-autobind';
 
 import OrderPart from './OrderPart';
 import ShippingDetailForm from './ShippingDetailForm';
@@ -16,21 +17,22 @@ import '../css/components/Order.css';
 class Order extends React.Component {
   constructor(props) {
     super(props);
-    this.updateOrderDetail = this.updateOrderDetail.bind(this);
-    this.renderStatusMessage = this.renderStatusMessage.bind(this);
-    this.toggleDetails = this.toggleDetails.bind(this);
-    this.toggleControls = this.toggleControls.bind(this);
-    this.renderControls = this.renderControls.bind(this);
-    this.finalizeControls = this.finalizeControls.bind(this);
-    this.shippingControls = this.shippingControls.bind(this);
-    this.acceptControls = this.acceptControls.bind(this);
-    this.finalizeOrder = this.finalizeOrder.bind(this);
-    this.toggleDiscount = this.toggleDiscount.bind(this);
-    this.renderDiscountInput = this.renderDiscountInput.bind(this);
-    this.acceptOrder = this.acceptOrder.bind(this);
-    this.addShippingDetail = this.addShippingDetail.bind(this);
-    this.renderAddAnoterPartForm = this.renderAddAnoterPartForm.bind(this);
+    // this.updateOrderDetail = this.updateOrderDetail.bind(this);
+    // this.renderStatusMessage = this.renderStatusMessage.bind(this);
+    // this.toggleDetails = this.toggleDetails.bind(this);
+    // this.toggleControls = this.toggleControls.bind(this);
+    // this.renderControls = this.renderControls.bind(this);
+    // this.finalizeControls = this.finalizeControls.bind(this);
+    // this.shippingControls = this.shippingControls.bind(this);
+    // this.acceptControls = this.acceptControls.bind(this);
+    // this.finalizeOrder = this.finalizeOrder.bind(this);
+    // this.toggleDiscount = this.toggleDiscount.bind(this);
+    // this.renderDiscountInput = this.renderDiscountInput.bind(this);
+    // this.acceptOrder = this.acceptOrder.bind(this);
+    // this.addShippingDetail = this.addShippingDetail.bind(this);
+    // this.renderAddAnoterPartForm = this.renderAddAnoterPartForm.bind(this);
     this.request = req.bind(this);
+    autoBind(this);
     this.state = {
       showDetails: this.props.showDetails || false,
       showControls: false,
@@ -241,9 +243,7 @@ class Order extends React.Component {
                 }}
                 message={'Are you sure you want to deny order ' +
                     `#${this.props.order.id}?`}
-                submit={() => {
-                  console.log('denying order woo!');
-                }}
+                submit={this.denyOrder}
               />
             : null
         }
@@ -396,6 +396,35 @@ class Order extends React.Component {
       },
       (errorResponse) => {
         // console.log(errorResponse)
+        this.props.toggleMessage('Error: Please try again.', 'error');
+      }
+    );
+  }
+
+  denyOrder() {
+    this.request(
+      'PUT',
+      `${this.props.apiUrl}/orders/${this.props.order.id}/status?type=abandoned`,
+      undefined,
+      (response) => {
+        const resp = JSON.parse(response);
+        if (resp.success) {
+          // success
+          // this.props.promoteOrder(this.props.order, this.props.statusType);
+          // this.props.toggleMessage('Prices Submitted Successfully.', 'success');
+          // setTimeout(() => {
+            // window.location = '/';
+          // }, 1000);
+          console.log('--------');
+          console.log('got a success response');
+          console.log(resp);
+          console.log('--------');
+        } else {
+          // handle error
+          console.log('internal server error');
+        }
+      },
+      (errorResponse) => {
         this.props.toggleMessage('Error: Please try again.', 'error');
       }
     );

@@ -2,12 +2,26 @@
 @import '../mixins/button';
 
 .ShippingDetail {
+  background-color: $c1;
   border: solid 1px $c2;
   border-radius: $ShippingDetail_border_radius;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
   margin: 0.5em;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 11;
   padding: 0.4em 0.6em;
+  .ShippingDetail-inner {
+    width: calc(100% - 1rem);
+    height: calc(100% - 1rem);
+    position: relative;
+    padding: 0.5rem;
+    font-weight: 300;
+    font-style: italic;
+  }
   #ShippingDetailHide {
     @include button(2em, 2em);
     position: absolute;

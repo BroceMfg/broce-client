@@ -80,12 +80,25 @@
   font-weight: 200;
   src: local("Roboto-ThinItalic"), url(../../fonts/Roboto-ThinItalic.ttf); }
 .ShippingDetail {
+  background-color: #F6F6F6;
   border: solid 1px #D7D7D7;
   border-radius: 4px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
   margin: 0.5em;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 11;
   padding: 0.4em 0.6em; }
+  .ShippingDetail .ShippingDetail-inner {
+    width: calc(100% - 1rem);
+    height: calc(100% - 1rem);
+    position: relative;
+    padding: 0.5rem;
+    font-weight: 300;
+    font-style: italic; }
   .ShippingDetail #ShippingDetailHide {
     position: absolute;
     top: 0.2rem;
