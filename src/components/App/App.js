@@ -104,7 +104,7 @@ class App extends Component {
         />
         {
           (() => {
-            if (errMsg) {
+            if (errMsg && user) {
               return (
                 <ErrorHandler
                   log={logErrs}
