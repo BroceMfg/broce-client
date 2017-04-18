@@ -181,6 +181,7 @@ class ShippingAddressForm extends React.Component {
               <div className="span-wrapper"><span>State</span></div>
               <div className="select-wrapper">
                 <select
+                  required
                   ref="shipping_state"
                   onChange={(e) => {
                     this.setState({
@@ -193,9 +194,9 @@ class ShippingAddressForm extends React.Component {
                   }}
                   id="state-select"
                   name="shipping_address_state"
-                  value={form.state || "none"}
+                  value={form.state || ""}
                 >
-                  <option value="none">Select A State</option>
+                  <option value="">Select a State</option>
                   {
                     this.props.statesList.map(state => (
                       <option
