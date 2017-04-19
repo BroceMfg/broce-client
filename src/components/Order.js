@@ -26,7 +26,9 @@ class Order extends React.Component {
       showAddAnotherPart: false,
       showDenyConfirmation: false,
       showArchiveConfirmation: false,
-      showFinalizeConfirmation: false,
+      showSplitOrder: false,
+      splitOrderDetailIds: [],
+      showSplitConfirmation: false,
       timestamp: Date.now()
     }
   }
@@ -109,7 +111,8 @@ class Order extends React.Component {
     this.setState({
       ...this.state,
       showDetails,
-      showAddAnotherPart: false
+      showAddAnotherPart: false,
+      showSplitOrder: false
     });
   }
 
@@ -466,7 +469,35 @@ class Order extends React.Component {
         this.props.toggleMessage('Error: Please try again.', 'error');
       }
     );
+  }
 
+  submitSplit() {
+    const orderDetailIds = this.state.splitOrderDetailIds;
+    this.request(
+      'POST',
+      `${this.props.apiUrl}/orders/${this.props.order.id}` +
+        `/details/${orderDetailIds.join(',')}/split`,
+      undefined,
+      (response) => {
+        const resp = JSON.parse(response);
+        if (resp.success) {
+          // success
+          // this.props.promoteOrder(this.props.order, this.props.statusType);
+          this.props.toggleMessage('Split order successfully.', 'success');
+          setTimeout(() => {
+            window.location = '/';
+          }, 1000);
+          console.log('resp');
+          console.log(resp);
+        } else {
+          // handle error
+          console.log('internal server error');
+        }
+      },
+      (errorResponse) => {
+        this.props.toggleMessage('Error: Please try again.', 'error');
+      }
+    );
   }
 
   addShippingDetail(form) {
@@ -708,7 +739,22 @@ class Order extends React.Component {
                           index={i}
                           admin={this.props.admin}
                           apiUrl={this.props.apiUrl}
-                          statusType={this.props.statusType}
+                          showSplitOrder={this.state.showSplitOrder}
+                          onSplitOrdersCheck={(e) => {
+                            const val = e.target.value;
+                            let newSplitOrders = this.state.splitOrderDetailIds;
+                            if (this.state.splitOrderDetailIds.includes(val)) {
+                              newSplitOrders = newSplitOrders.filter(s =>
+                                s !== val);
+                            } else {
+                              newSplitOrders.push(val);
+                            }
+                            this.setState({
+                              ...this.state,
+                              splitOrderDetailIds: newSplitOrders
+                            });
+                          }}
+                          statusType={this.props.statuType}
                           orderDetail={orderDetail}
                           updateOrderDetail={this.updateOrderDetail}
                           toggleMessage={this.props.toggleMessage}
@@ -788,10 +834,84 @@ class Order extends React.Component {
                         : null
                     }
                     {
-                      this.state.showAddAnotherPart
-                        ?
-                          this.renderAddAnoterPartForm()
-                        : null
+                      (() => {
+                        if (order.Order_Details.length > 1
+                          && order.status === 'quote') {
+                          if (this.state.showSplitOrder) {
+                            return (
+                              <div className="split-order-button-wrapper">
+                                {
+                                  this.state.showSplitConfirmation
+                                    ?
+                                      <Confirmation
+                                        cancel={() => {
+                                          this.setState({
+                                            ...this.state,
+                                            showSplitConfirmation: false
+                                          });
+                                        }}
+                                        message={'Are you sure you want to ' +
+                                          `split from #${
+                                            this.props.order.id
+                                          } into a new order?`
+                                        }
+                                        submit={this.submitSplit}
+                                      />
+                                    : null
+                                }
+                                <div className="split-order-camc-sub-wrapper">
+                                  <button
+                                    className="cancel"
+                                    onClick={() => {
+                                      this.setState({
+                                        ...this.state,
+                                        showSplitOrder: false
+                                      });
+                                    }}
+                                  >Cancel</button>
+                                  <span className="split-instructions">
+                                    {
+                                      'Select the parts to be split ' +
+                                      'into a new order then click "split"'
+                                    }
+                                  </span>
+                                  {
+                                    this.state.splitOrderDetailIds.length > 0
+                                      ?
+                                        <button
+                                          className="split"
+                                          onClick={() => {
+                                            this.setState({
+                                              ...this.state,
+                                              showSplitConfirmation: true
+                                            });
+                                          }}
+                                          title="Split into a new order"
+                                        >Split</button>
+                                      : null
+                                  }
+                                </div>
+                              </div>
+                            );
+                          }
+                          return (
+                            <div className="split-order-button-wrapper">
+                              <button
+                                className="split-order-button"
+                                onClick={() => {
+                                  this.setState({
+                                    ...this.state,
+                                    showSplitOrder: true
+                                  });
+                                }}
+                              >
+                                <span>Split Order</span>
+                              </button>
+                            </div>
+                          );
+                        }
+                        return null;
+                      })()
                     }
                   </div>
                 : null

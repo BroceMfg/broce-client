@@ -1,7 +1,6 @@
 import request from '../../middleware/request';
 
 module.exports = function logout() {
-  this.setStateVal({ user: undefined });
   request(
     'POST',
     `${this.state.apiUrl}/users/logout`,
@@ -10,6 +9,7 @@ module.exports = function logout() {
       localStorage.clear();
     },
     (err) => {
+      this.setStateVal({ user: undefined });
       this.setStateVal({ errMsg: err });
     }
   );

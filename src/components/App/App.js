@@ -104,14 +104,17 @@ class App extends Component {
         />
         {
           (() => {
-            if (errMsg && user) {
-              return (
-                <ErrorHandler
-                  log={logErrs}
-                  msg={errMsg}
-                  defErrMsg={defErrMsg}
-                />
-              );
+            if (errMsg) {
+              if (user) {
+                return (
+                  <ErrorHandler
+                    log={logErrs}
+                    msg={errMsg}
+                    defErrMsg={defErrMsg}
+                  />
+                );
+              }
+              return null;
             }
             return (
               <BrowserRouter>

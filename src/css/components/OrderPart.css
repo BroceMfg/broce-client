@@ -162,6 +162,16 @@
     .OrderParts-wrapper .OrderParts-total .final {
       background-color: #B9B9B9;
       width: calc(17.5% - 2px); }
+  .OrderParts-wrapper .split-order-button-wrapper {
+    position: relative; }
+    .OrderParts-wrapper .split-order-button-wrapper .Confirmation {
+      width: 20rem;
+      height: 100%; }
+      .OrderParts-wrapper .split-order-button-wrapper .Confirmation button {
+        border: none; }
+    .OrderParts-wrapper .split-order-button-wrapper .split-instructions {
+      font-weight: 300;
+      font-style: italic; }
 
 .OrderPart {
   outline: solid 1px transparent;

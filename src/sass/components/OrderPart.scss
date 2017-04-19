@@ -126,6 +126,20 @@
       // border-bottom-right-radius: 4px;
     }
   }
+  .split-order-button-wrapper {
+    position: relative;
+    .Confirmation {
+      width: 20rem;
+      height: 100%;
+      button {
+        border: none;
+      }
+    }
+    .split-instructions {
+      font-weight: 300;
+      font-style: italic;
+    }
+  }
 }
 
 .OrderPart {

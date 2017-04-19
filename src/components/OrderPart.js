@@ -86,7 +86,22 @@ class OrderPart extends React.Component {
               }
             </div>
             <div className="machine_serial_num">{orderDetail.machine_serial_num || '--'}</div>
-            <div className="part_num">{orderDetail.Part.number}</div>
+            <div className="part_num">
+              {
+                this.props.showSplitOrder
+                  ?
+                  <div className="checkbox-and-number-wrapper">
+                    <input
+                      id='part-num-checkbox'
+                      type="checkbox"
+                      value={orderDetail.id}
+                      onClick={this.props.onSplitOrdersCheck}
+                    />
+                    <span>{orderDetail.Part.number}</span>
+                  </div>
+                  : <span>{orderDetail.Part.number}</span>
+              }
+            </div>
             <div className="quantity">{orderDetail.quantity}</div>
             <div className="price-unit">
              {
