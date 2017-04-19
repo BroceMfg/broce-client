@@ -25,10 +25,11 @@ class OrderPart extends React.Component {
       alertTitle: undefined,
       func: undefined
     };
-
     if (this.props.admin) {
+      console.log(this.props.statusType);
       if (this.props.statusType === 'quote'
         && this.props.orderDetail.price === null) {
+        console.log('hello worldly people!!!!!');
         obj.buttonTitle = this.state.showAddPriceForm ? 'Cancel' : '+';
         obj.func = this.toggleAddPriceForm;
       } else if (this.props.statusType === 'quote' && this.props.orderDetail.price !== null) {

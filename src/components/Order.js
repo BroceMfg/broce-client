@@ -26,6 +26,7 @@ class Order extends React.Component {
       showAddAnotherPart: false,
       showDenyConfirmation: false,
       showArchiveConfirmation: false,
+      showFinalizeConfirmation: false,
       showSplitOrder: false,
       splitOrderDetailIds: [],
       showSplitConfirmation: false,
@@ -754,7 +755,7 @@ class Order extends React.Component {
                               splitOrderDetailIds: newSplitOrders
                             });
                           }}
-                          statusType={this.props.statuType}
+                          statusType={this.props.statusType}
                           orderDetail={orderDetail}
                           updateOrderDetail={this.updateOrderDetail}
                           toggleMessage={this.props.toggleMessage}
@@ -831,6 +832,11 @@ class Order extends React.Component {
                               }
                             </button>
                           </div>
+                        : null
+                    }
+                    {
+                      this.state.showAddAnotherPart
+                        ? this.renderAddAnoterPartForm()
                         : null
                     }
                     {
