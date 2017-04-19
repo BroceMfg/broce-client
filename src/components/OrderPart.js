@@ -81,7 +81,16 @@ class OrderPart extends React.Component {
                   : '--'
               }
             </div>
-            <div className="machine_serial_num">{orderDetail.machine_serial_num || '--'}</div>
+            <div className="machine_serial_num">{
+              (() => {
+                if (orderDetail.machine_serial_num
+                  && orderDetail.machine_serial_num !== '00000000') {
+                  return orderDetail.machine_serial_num;
+                } else {
+                  return '--';
+                }
+              })()
+            }</div>
             <div className="part_num">
               {
                 this.props.showSplitOrder
