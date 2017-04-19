@@ -25,7 +25,6 @@ class OrderPart extends React.Component {
       alertTitle: undefined,
       func: undefined
     };
-
     if (this.props.admin) {
       if (this.props.statusType === 'quote'
         && this.props.orderDetail.price === null) {
@@ -63,9 +62,6 @@ class OrderPart extends React.Component {
   render() {
     const showAddPriceForm = this.state.showAddPriceForm;
     const orderDetail = this.props.orderDetail;
-    console.log('(()))(@)#(@))!)@#(@');
-    console.log(orderDetail);
-    console.log('(()))(@)#(@))!)@#(@');
     const orderAction = this.getOrderAction();
     const shippingDetail = orderDetail.Shipping_Detail;
     return (
@@ -85,8 +81,32 @@ class OrderPart extends React.Component {
                   : '--'
               }
             </div>
-            <div className="machine_serial_num">{orderDetail.machine_serial_num || '--'}</div>
-            <div className="part_num">{orderDetail.Part.number}</div>
+            <div className="machine_serial_num">{
+              (() => {
+                if (orderDetail.machine_serial_num
+                  && orderDetail.machine_serial_num !== '00000000') {
+                  return orderDetail.machine_serial_num;
+                } else {
+                  return '--';
+                }
+              })()
+            }</div>
+            <div className="part_num">
+              {
+                this.props.showSplitOrder
+                  ?
+                  <div className="checkbox-and-number-wrapper">
+                    <input
+                      id='part-num-checkbox'
+                      type="checkbox"
+                      value={orderDetail.id}
+                      onClick={this.props.onSplitOrdersCheck}
+                    />
+                    <span>{orderDetail.Part.number}</span>
+                  </div>
+                  : <span>{orderDetail.Part.number}</span>
+              }
+            </div>
             <div className="quantity">{orderDetail.quantity}</div>
             <div className="price-unit">
              {

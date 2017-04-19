@@ -162,6 +162,18 @@
     .OrderParts-wrapper .OrderParts-total .final {
       background-color: #B9B9B9;
       width: calc(17.5% - 2px); }
+  .OrderParts-wrapper .split-order-button-wrapper {
+    position: relative; }
+    .OrderParts-wrapper .split-order-button-wrapper .Confirmation {
+      width: 20rem;
+      height: 100%; }
+      .OrderParts-wrapper .split-order-button-wrapper .Confirmation button {
+        border: none; }
+    .OrderParts-wrapper .split-order-button-wrapper .split-instructions {
+      font-weight: 300;
+      font-style: italic; }
+      .OrderParts-wrapper .split-order-button-wrapper .split-instructions .warning {
+        color: #E57373; }
 
 .OrderPart {
   outline: solid 1px transparent;
@@ -210,6 +222,12 @@
                 background-color: #64B5F6; }
         .OrderPart .content-wrapper .details div.machine_serial_num {
           width: calc(22% - 3px); }
+        .OrderPart .content-wrapper .details div.part_num .checkbox-and-number-wrapper {
+          display: flex;
+          position: relative;
+          align-items: center;
+          justify-content: center;
+          width: 100%; }
         .OrderPart .content-wrapper .details div.quantity {
           width: calc(15% - 3px); }
         .OrderPart .content-wrapper .details div.price-unit {
