@@ -250,7 +250,7 @@ class ShippingAddressForm extends React.Component {
             <button className="reset" onClick={this.reset}><span>Clear Form</span></button>
           </div>
         {
-          !showSelectExisting
+          !showSelectExisting && this.props.addresses.length > 0
             ?
               <div>
                 <button

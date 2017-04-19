@@ -348,7 +348,7 @@ class Order extends React.Component {
               msgPt1 +
               `Order #${this.props.order.id}.`,
              'success',
-             500
+             2000
             );
           } else {
             handleError();

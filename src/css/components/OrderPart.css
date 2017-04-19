@@ -220,6 +220,12 @@
                 background-color: #64B5F6; }
         .OrderPart .content-wrapper .details div.machine_serial_num {
           width: calc(22% - 3px); }
+        .OrderPart .content-wrapper .details div.part_num .checkbox-and-number-wrapper {
+          display: flex;
+          position: relative;
+          align-items: center;
+          justify-content: center;
+          width: 100%; }
         .OrderPart .content-wrapper .details div.quantity {
           width: calc(15% - 3px); }
         .OrderPart .content-wrapper .details div.price-unit {

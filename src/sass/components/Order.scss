@@ -265,10 +265,14 @@
                   width: 13.3625rem;
                   float: left;
                   select {
+                    border-radius: 2px;
                     float: left;
                     @include select(100%, 100%);
                     margin-left: 0.5em;
                     padding-left: 0.8em;
+                    &:focus {
+                      outline: solid 3px #8EC4F8;
+                    }
                   }
                 }
               }

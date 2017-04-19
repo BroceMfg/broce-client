@@ -406,6 +406,7 @@
                   .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div .select-wrapper:after {
                     clear: both; }
                   .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div .select-wrapper select {
+                    border-radius: 2px;
                     float: left;
                     margin-left: 0.5em;
                     padding-left: 0.8em; }
@@ -420,6 +421,8 @@
                       border: none; }
                     .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div .select-wrapper select:focus {
                       outline: none; }
+                    .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper form div .select-wrapper select:focus {
+                      outline: solid 3px #8EC4F8; }
             .Order .status-message.controls-wrapper.accept-controls .ShippingAddressForm .form-wrapper button {
               height: 3.5em;
               font-size: 14px;

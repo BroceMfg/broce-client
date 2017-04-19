@@ -196,6 +196,15 @@
         &.machine_serial_num {
           width: calc(22% - 3px);
         }
+        &.part_num {
+          .checkbox-and-number-wrapper {
+            display: flex;
+            position: relative;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+          }
+        }
         &.quantity {
           width: calc(15% - 3px);
         }
