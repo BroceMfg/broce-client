@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import autoBind from 'react-autobind';
+
 import Order from './Order';
 
 import '../css/components/OrderSubList.css';
@@ -7,9 +9,7 @@ import '../css/components/OrderSubList.css';
 class OrderSubList extends React.Component {
   constructor(props) {
     super(props);
-    this.toggleShowing = this.toggleShowing.bind(this);
-    this.showMore = this.showMore.bind(this);
-    this.showLess = this.showLess.bind(this);
+    autoBind(this);
     this.state = {
       showing: true,
       shownOrders: {}
@@ -17,6 +17,7 @@ class OrderSubList extends React.Component {
   }
 
   componentDidMount() {
+    console.log('OrderSubList did mount');
     this.showMore(5);
   }
 
@@ -55,7 +56,10 @@ class OrderSubList extends React.Component {
   render() {
     console.log(this.props.statusType);
     return (
-      <div className={`OrderSubList ${this.props.show ? 'shown' : 'hidden'}`}>
+      <div
+        key={this.props.orderListKey}
+        className={`OrderSubList ${this.props.show ? 'shown' : 'hidden'}`}
+      >
         {
           this.state.shownOrders && Object.keys(this.state.shownOrders).length > 0
             ?
@@ -65,7 +69,7 @@ class OrderSubList extends React.Component {
                     ?
                       <div>
                         {
-                          this.props.admin
+                          this.props.admin && !this.props.viewByActive
                             ? <h1 className="header status-type-header">
                                 <span>{this.props.statusType}</span>
                                 <div
@@ -96,7 +100,11 @@ class OrderSubList extends React.Component {
                 }
                 <ReactCSSTransitionGroup
                   className={
-                    `OrderSubList-transition-wrapper ${this.state.showing ? 'shown' : 'hidden'}`
+                    `OrderSubList-transition-wrapper ${
+                      this.state.showing || this.props.viewByActive
+                        ? 'shown'
+                        : 'hidden'
+                    }`
                   }
                   component="div"
                   transitionName="OrderSubList-transition"
@@ -104,7 +112,7 @@ class OrderSubList extends React.Component {
                   transitionLeaveTimeout={350}
                 >
                   {
-                    this.state.showing
+                    this.state.showing || this.props.viewByActive
                       ?
                         <ul>
                           {

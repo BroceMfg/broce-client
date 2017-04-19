@@ -80,6 +80,7 @@ class Landing extends Component {
             apiUrl={this.props.apiUrl}
             loading={this.props.loading}
             orders={this.props.orders}
+            orderListKey={this.props.orderListKey}
             setStateVal={this.props.setStateVal}
             statesList={this.props.statesList}
             statusTypes={this.props.statusTypes}
@@ -117,6 +118,7 @@ Landing.propTypes = {
   }).isRequired,
   notifs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   orders: PropTypes.shape({}).isRequired,
+  orderListKey: PropTypes.number.isRequired,
   setStateVal: PropTypes.func.isRequired,
   showOrderDetail: PropTypes.string,
   showOrderDetailStatus: PropTypes.string.isRequired,
