@@ -172,6 +172,8 @@
     .OrderParts-wrapper .split-order-button-wrapper .split-instructions {
       font-weight: 300;
       font-style: italic; }
+      .OrderParts-wrapper .split-order-button-wrapper .split-instructions .warning {
+        color: #E57373; }
 
 .OrderPart {
   outline: solid 1px transparent;

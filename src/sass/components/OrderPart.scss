@@ -138,6 +138,9 @@
     .split-instructions {
       font-weight: 300;
       font-style: italic;
+      .warning {
+        color: $error_red;
+      }
     }
   }
 }

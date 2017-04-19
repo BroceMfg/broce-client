@@ -875,14 +875,26 @@ class Order extends React.Component {
                                       });
                                     }}
                                   >Cancel</button>
-                                  <span className="split-instructions">
+                                  <div className="split-instructions">
                                     {
-                                      'Select the parts to be split ' +
-                                      'into a new order then click "split"'
+                                      (this.state.splitOrderDetailIds.length
+                                        !== order.Order_Details.length)
+                                        ?
+                                          <span>
+                                            Select the parts to be split
+                                            into a new order then click "split"'
+                                          </span>
+                                        :
+                                          <span className="warning">
+                                            You cannot split all parts.
+                                            Please unckeck at least one part.
+                                          </span>
                                     }
-                                  </span>
+                                  </div>
                                   {
                                     this.state.splitOrderDetailIds.length > 0
+                                      && (this.state.splitOrderDetailIds.length
+                                        !== order.Order_Details.length)
                                       ?
                                         <button
                                           className="split"
