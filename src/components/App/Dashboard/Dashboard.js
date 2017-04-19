@@ -69,7 +69,7 @@ const Dashboard = props => (
               className="button logout"
               title="logout"
             >
-              <span>Log Out</span>
+              <div>Log Out</div>
             </button>
           </div>
         </div>
