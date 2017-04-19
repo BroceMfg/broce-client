@@ -26,10 +26,8 @@ class OrderPart extends React.Component {
       func: undefined
     };
     if (this.props.admin) {
-      console.log(this.props.statusType);
       if (this.props.statusType === 'quote'
         && this.props.orderDetail.price === null) {
-        console.log('hello worldly people!!!!!');
         obj.buttonTitle = this.state.showAddPriceForm ? 'Cancel' : '+';
         obj.func = this.toggleAddPriceForm;
       } else if (this.props.statusType === 'quote' && this.props.orderDetail.price !== null) {
@@ -64,9 +62,6 @@ class OrderPart extends React.Component {
   render() {
     const showAddPriceForm = this.state.showAddPriceForm;
     const orderDetail = this.props.orderDetail;
-    console.log('(()))(@)#(@))!)@#(@');
-    console.log(orderDetail);
-    console.log('(()))(@)#(@))!)@#(@');
     const orderAction = this.getOrderAction();
     const shippingDetail = orderDetail.Shipping_Detail;
     return (
