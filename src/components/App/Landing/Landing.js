@@ -21,7 +21,6 @@ class Landing extends Component {
   }
 
   componentDidMount() {
-    console.log('Landing did mount');
     fetchOrders.call(this, this.props.loading);
     fetchNotifs.call(this, this.props.loading);
     fetchAddresses.call(this, this.props.loading);
