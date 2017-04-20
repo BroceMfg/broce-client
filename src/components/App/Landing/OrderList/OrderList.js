@@ -79,7 +79,9 @@ class OrderList extends React.Component {
             return (
               <OrderSubList
                 addresses={this.props.addresses}
-                key={keyCount++}
+                // user orderListKey in the OrderSubList key so we can force
+                // re-render when we re-render OrderlList
+                key={`${this.props.orderListKey}_${keyCount++}`}
                 admin={this.props.admin}
                 apiUrl={this.props.apiUrl}
                 loading={this.props.loading}
