@@ -196,6 +196,7 @@
         }
         .ShippingAddressForm {
           position: fixed;
+          overflow-y: scroll;
           top: 0;
           left: 0;
           z-index: 500;

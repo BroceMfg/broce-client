@@ -11,7 +11,7 @@ class OrderList extends React.Component {
     this.promoteOrder = this.promoteOrder.bind(this);
     this.renderSubLists = this.renderSubLists.bind(this);
     this.state = {
-      key: 1
+      key: this.props.orderListKey
     };
   }
 
@@ -58,10 +58,7 @@ class OrderList extends React.Component {
     }
     this.props.setStateVal({ orders });
     // force update
-    this.setState({
-      ...this.state,
-      key: this.state.key + 1
-    });
+    this.props.setStateVal({ orderListKey: this.props.orderListKey + 1 });
   }
 
   renderSubLists() {
@@ -82,11 +79,14 @@ class OrderList extends React.Component {
             return (
               <OrderSubList
                 addresses={this.props.addresses}
-                key={keyCount++}
+                // user orderListKey in the OrderSubList key so we can force
+                // re-render when we re-render OrderlList
+                key={`${this.props.orderListKey}_${keyCount++}`}
                 admin={this.props.admin}
                 apiUrl={this.props.apiUrl}
                 loading={this.props.loading}
                 orders={orders}
+                orderListKey={this.props.orderListKey}
                 updateOrder={this.updateOrder}
                 promoteOrder={this.promoteOrder}
                 statesList={this.props.statesList}
@@ -97,6 +97,7 @@ class OrderList extends React.Component {
                 showStockOrderForm={this.props.showStockOrderForm}
                 fetchOrders={this.props.fetchOrders}
                 show={this.props.viewBy === 'all' || this.props.viewBy === statusType}
+                viewByActive={this.props.viewBy === statusType}
                 header={this.props.header}
                 showDetails={this.props.showDetails}
               />

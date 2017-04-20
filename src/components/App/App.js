@@ -68,6 +68,7 @@ class App extends Component {
           loading={this.loading}
           notifs={this.state.notifs}
           orders={this.state.orders}
+          orderListKey={this.state.orderListKey}
           setStateVal={this.setStateVal}
           showStockOrderForm={this.state.showStockOrderForm}
           statesList={this.state.statesList}
