@@ -14,5 +14,7 @@ module.exports = function logout() {
     }
   );
   // refresh the broswer to unmount/remount our component
-  window.location = '/';
+  setTimeout(() => {
+    window.location = '/';
+  }, 100);
 };
